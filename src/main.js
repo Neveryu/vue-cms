@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 // 全局权限检查
 import './permission'
+// 全局图标
+import './icons'
 
 Vue.config.productionTip = false
 

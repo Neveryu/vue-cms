@@ -4,44 +4,103 @@
       <div slot="header">
         <h2 class="login-title">系统登录</h2>
       </div>
-      <el-form ref="form" label-width="60px">
-        <el-form-item label="账号">
-          <el-input prefix-icon="el-icon-date" type="text" v-model="loginForm.name" @keyup.enter.native="goToPwdInput"></el-input>
+      <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="60px">
+        <el-form-item label="账号" prop="username" style="position:relative">
+          <el-input type="text" v-model="loginForm.username" @keyup.enter.native="goToPwdInput"></el-input>
+          <span class="svg-container svg-container_user">
+            <icon-svg icon-class="user" />
+          </span>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input prefix-icon="el-icon-date" type="password" v-model="loginForm.pwd" ref="pwd"></el-input>
+        <el-form-item label="密码" prop="pwd">
+          <el-input type="password" v-model="loginForm.pwd" @keyup.enter.native="onLogin" ref="pwd"></el-input>
+          <span class="svg-container svg-container_password">
+            <icon-svg icon-class="password" />
+          </span>
         </el-form-item>
         <el-form-item label="记住密码" label-width="80px">
-          <el-switch v-model="loginForm.remember"></el-switch>
+          <el-switch v-model="remember"></el-switch>
         </el-form-item>
-        <el-button type="primary" @click="onSubmit">登录</el-button>
+        <el-button type="primary" @click="onLogin('loginForm')" :loading="loading">登录</el-button>
       </el-form>
     </el-card>
   </el-container>
 </template>
 <script>
+  import { isValidUsername } from '@/utils/validate'
   export default {
     data() {
-      return {
-        loginForm: {
-          name: 'admin',
-          pwd: '123456',
-          remember: true
+      // username 验证
+      const validateUsername = (rule, value, callback) => {
+        if (!isValidUsername(value)) {
+          callback(new Error('请输入正确的用户名'))
+        } else {
+          callback()
         }
       }
+      // pwd 验证
+      const validatePwd = (rule, value, callback) => {
+        if (value.length < 6) {
+          callback(new Error('密码不能小于6位'))
+        } else {
+          callback()
+        }
+      }
+      return {
+        loginForm: {
+          username: 'admin',
+          pwd: '123456'
+        },
+        remember: true,
+        loading: false,
+        rules: {
+          username: [
+            { required: true, message: '请输入账号', trigger: 'blur' },
+            { required: true, trigger: 'blur', validator: validateUsername }
+          ],
+          pwd: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { required: true, trigger: 'blur', validator: validatePwd }
+          ]
+        }
+      }
+    },
+    created() {
+      // if (localStorage.checkBoxValidation && localStorage.checkBoxValidation !== '') {
+      //   console.log('s')
+      //   this.loginForm.username = localStorage.username
+      //   this.loginForm.pwd = localStorage.password
+      //   this.remember = true
+      // } else {
+      //   console.log('zz')
+      //   this.loginForm.username = ''
+      //   this.loginForm.pwd = ''
+      //   this.remember = false
+      // }
     },
     methods: {
       // 用户名输入框回车后切换到密码输入框
       goToPwdInput() {
-        this.$refs.pwd.$el.focus()
+        this.$refs.pwd.$el.getElementsByTagName('input')[0].focus()
       },
-      onSubmit() {
-        console.log('submit!')
+      // 登录方法
+      onLogin() {
+        this.$refs.pwd.$el.getElementsByTagName('input')[0].blur()
+        this.$refs.loginForm.validate((valid) => {
+          if (valid) {
+            this.loading = true
+            this.$store.dispatch('login')
+            this.$router.push({ path: '/' })
+          } else {
+            // this.$message('账号或密码不符合规范')
+            return false
+          }
+        })
       }
     }
   }
 </script>
 <style scoped lang="scss">
+  $dark_gray:#889aa4;
   .login-container {
     position: absolute;
     width: 100%;
@@ -61,6 +120,22 @@
       .login-title {
         margin: 0;
         text-align: center;
+      }
+      .el-input /deep/ .el-input__inner {
+        text-indent: 12px;
+      }
+      .svg-container {
+        position: absolute;
+        top: 0;
+        left: 5px;
+        color: $dark_gray;
+        &_user {
+          font-size: 20px;
+        }
+        &_password {
+          left: 7px;
+          font-size: 16px;
+        }
       }
       .el-button--primary {
         width: 100%;
