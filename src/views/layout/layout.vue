@@ -1,7 +1,23 @@
 <template>
-  <div class="layout">layout</div>
+  <div class="app-wrapper">
+    <navbar></navbar>
+    <sidebar></sidebar>
+  </div>
 </template>
 <script>
-  export default {}
+  import Navbar from './navbar'
+  import Sidebar from './sidebar'
+  export default {
+    components: {
+      Navbar,
+      Sidebar
+    }
+  }
 </script>
-<style></style>
+<style scoped lang="scss">
+  // .app-wrapper {
+  //   position: relative;
+  //   width: 100%;
+  //   height: 100%;
+  // }
+</style>

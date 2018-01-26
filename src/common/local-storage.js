@@ -1,4 +1,4 @@
-export function saveToLocal(key, value) {
+function saveToLocal(key, value) {
   let vuecms = window.localStorage.__vuecms__
   if (!vuecms) {
     vuecms = {}
@@ -9,7 +9,7 @@ export function saveToLocal(key, value) {
   window.localStorage.__vuecms__ = JSON.stringify(vuecms)
 }
 
-export function loadFromLocal(key, def) {
+function loadFromLocal(key, def) {
   let vuecms = window.localStorage.__vuecms__
   if (!vuecms) {
     return def
@@ -21,3 +21,5 @@ export function loadFromLocal(key, def) {
   let result = vuecms[key]
   return result || def
 }
+
+export { saveToLocal, loadFromLocal }

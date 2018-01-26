@@ -1,8 +1,18 @@
 import Cookies from 'js-cookie'
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 
-const TokenKey = Mock.Random.id()
+const TokenKey = 'Vue-cms'
 
-export function getToken() {
+function getToken() {
   return Cookies.get(TokenKey)
 }
+
+function setToken(token) {
+  return Cookies.set(TokenKey, token)
+}
+
+function removeToken() {
+  return Cookies.remove(TokenKey)
+}
+
+export { getToken, setToken, removeToken }

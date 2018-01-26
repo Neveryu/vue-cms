@@ -27,6 +27,8 @@
 </template>
 <script>
   import { isValidUsername } from '@/utils/validate'
+  import { saveToLocal, loadFromLocal } from '@/common/local-storage'
+  import { mapActions } from 'vuex'
   export default {
     data() {
       // username 验证
@@ -65,33 +67,45 @@
       }
     },
     created() {
-      // if (localStorage.checkBoxValidation && localStorage.checkBoxValidation !== '') {
-      //   console.log('s')
-      //   this.loginForm.username = localStorage.username
-      //   this.loginForm.pwd = localStorage.password
-      //   this.remember = true
-      // } else {
-      //   console.log('zz')
-      //   this.loginForm.username = ''
-      //   this.loginForm.pwd = ''
-      //   this.remember = false
-      // }
+      // 初始化时读取localStorage用户信息
+      if (loadFromLocal('remember', false)) {
+        this.loginForm.username = loadFromLocal('username', '')
+        this.loginForm.pwd = loadFromLocal('password', '')
+      } else {
+        this.loginForm.username = ''
+        this.loginForm.pwd = ''
+      }
     },
     methods: {
+      ...mapActions([
+        'login'
+      ]),
       // 用户名输入框回车后切换到密码输入框
       goToPwdInput() {
         this.$refs.pwd.$el.getElementsByTagName('input')[0].focus()
       },
-      // 登录方法
+      // 登录操作
       onLogin() {
         this.$refs.pwd.$el.getElementsByTagName('input')[0].blur()
-        this.$refs.loginForm.validate((valid) => {
+        this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true
-            this.$store.dispatch('login')
-            this.$router.push({ path: '/' })
+            this.login(this.loginForm).then(() => {
+              // 保存账号
+              if (this.remember) {
+                saveToLocal('username', this.loginForm.username)
+                saveToLocal('password', this.loginForm.pwd)
+                saveToLocal('remember', true)
+              } else {
+                saveToLocal('username', '')
+                saveToLocal('password', '')
+                saveToLocal('remember', false)
+              }
+              this.$router.push({ path: '/' })
+            }).catch(() => {
+              this.loading = false
+            })
           } else {
-            // this.$message('账号或密码不符合规范')
             return false
           }
         })
@@ -110,9 +124,7 @@
     right: 0;
     bottom: 0;
     background: mix(#494166, #424b50);
-    // text-align: center;
     .el-card {
-      // position: relative;
       margin: 120px auto 0;
       width: 400px;
       height: 350px;

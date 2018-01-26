@@ -18,6 +18,7 @@ export default new Router({
       path: '/',
       name: '首页',
       component: Layout,
+      redirect: 'home',
       children: [
         { path: 'home', component: HomePage }
       ]
