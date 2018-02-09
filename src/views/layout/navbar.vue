@@ -1,6 +1,5 @@
 <template>
   <el-menu class="navbar" mode="horizontal" 
-    background-color="#545c64"
     text-color="#fff">
     <el-menu-item index="1">后台管理系统</el-menu-item>
     <el-dropdown class="avatar-container" trigger="click">
@@ -59,6 +58,17 @@
   }
 </script>
 <style scoped lang="scss">
+  .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background: {
+      image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
+      image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
+      image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
+      image: linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6);
+    }
+  }
   .avatar-container {
     position: absolute;
     top: 15px;
