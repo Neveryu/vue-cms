@@ -18,6 +18,5 @@
 <style scoped lang="scss">
   .main-app {
     padding: 5px;
-    background: pink;
   }
 </style>

@@ -1,7 +1,12 @@
 <template>
-  <el-menu class="navbar" mode="horizontal" 
-    text-color="#fff">
-    <el-menu-item index="1">后台管理系统</el-menu-item>
+  <el-menu
+    class="navbar"
+    mode="horizontal" 
+    text-color="#fff"
+    active-text-color="#fff">
+    <router-link to="/home">
+      <el-menu-item index="1">后台管理系统</el-menu-item>
+    </router-link>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img class="user-avatar" :src="avatar">
@@ -67,6 +72,14 @@
       image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
       image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
       image: linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6);
+    }
+  }
+  .navbar /deep/ .el-menu-item {
+    &:hover {
+      background-color: transparent;
+    }
+    &:focus {
+      background-color: transparent;
     }
   }
   .avatar-container {

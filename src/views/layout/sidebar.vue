@@ -4,27 +4,19 @@
            unique-opened
            @open="handleOpen"
            @close="handleClose"
+           background-color=""
            :collapse="isCollapse">
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group>
-        <template slot="title">分组二</template>
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
+    <router-link to="/introduction">
+      <el-menu-item index="1">
+        <i class="el-icon-question"></i>
+        <span>简述</span>
+      </el-menu-item>
+    </router-link>
 
     <el-submenu index="2">
       <template slot="title">
         <i class="el-icon-location"></i>
-        <span>导航二</span>
+        <span>导航一</span>
       </template>
       <el-menu-item-group>
         <template slot="title">分组一</template>
@@ -37,13 +29,29 @@
       </el-menu-item-group>
     </el-submenu>
 
-    <el-menu-item index="3">
+    <el-submenu index="3">
+      <template slot="title">
+        <i class="el-icon-location"></i>
+        <span>导航二</span>
+      </template>
+      <el-menu-item-group>
+        <template slot="title">分组一</template>
+        <el-menu-item index="3-1">选项1</el-menu-item>
+        <el-menu-item index="3-2">选项2</el-menu-item>
+      </el-menu-item-group>
+      <el-menu-item-group>
+        <template slot="title">分组二</template>
+        <el-menu-item index="3-3">选项3</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+
+    <el-menu-item index="4">
       <i class="el-icon-edit"></i><span>选项1</span>
     </el-menu-item>
-    <el-menu-item index="4">
+    <el-menu-item index="5">
       <i class="el-icon-share"></i><span>选项1</span>
     </el-menu-item>
-    <el-menu-item index="5">
+    <el-menu-item index="6">
       <i class="el-icon-menu"></i><span>选项1</span>
     </el-menu-item>
   </el-menu>
@@ -72,11 +80,11 @@
     width: 200px;
     height: 100%;
     min-height: 500px;
-    background: {
-      image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
-      image: -webkit-linear-gradient(left, #1278f6, #00b4aa);
-      image: -moz-linear-gradient(left, #1278f6, #00b4aa);
-      image: linear-gradient(to bottom, #f2f2f2, #f5f5f5);
-    }
+    // background: {
+    //   image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
+    //   image: -webkit-linear-gradient(left, #1278f6, #00b4aa);
+    //   image: -moz-linear-gradient(left, #1278f6, #00b4aa);
+    //   image: linear-gradient(to bottom, #f2f2f2, #f5f5f5);
+    // }
   }
 </style>
