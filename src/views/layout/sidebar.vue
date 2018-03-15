@@ -9,7 +9,7 @@
     <router-link to="/introduction">
       <el-menu-item index="1">
         <i class="el-icon-question"></i>
-        <span>简述</span>
+        <span>项目简述</span>
       </el-menu-item>
     </router-link>
 

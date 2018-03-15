@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "countup.js": "^1.9.3",
     "echarts": "^4.0.4",
     "element-ui": "^2.0.11",
     "js-cookie": "^2.2.0",
