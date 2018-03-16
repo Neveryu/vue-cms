@@ -9,13 +9,15 @@
         </div>
       </div>
     </div>
-    <el-row class="home-part2" :gutter="20">
+    <el-row class="home-part2" :gutter="0">
       <el-col :span="12">
         <div class="near-six-month">
           <div class="title">
-            <p>平台近6个月的交易记录</p>
+            <p class="title-value">平台近6个月的交易记录</p>
           </div>
-          <div class="content"></div>
+          <div class="content" ref="near-six-month-chart">
+            <near-six-month width="100%" height="100%"></near-six-month>
+          </div>
         </div>
       </el-col>
       <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
@@ -28,9 +30,11 @@
   import CountUp from 'countup.js'
   import {getHomeTotal} from '@/api/homepage'
   import ColorLine from '@/components/color-line'
+  import NearSixMonth from '@/views/homepage/near-six-month'
   export default {
     components: {
-      ColorLine
+      ColorLine,
+      NearSixMonth
     },
     data() {
       return {
@@ -46,10 +50,6 @@
           this.numAnim = new CountUp(this.$refs.countup[i], 0, this.$refs.countup[i].innerText, 2, 1.5)
           this.numAnim.start()
         }
-      },
-      formatData(v) {
-        // console.log(this.$refs.countup)
-        // return (v + '.00')
       }
     },
     created() {
@@ -58,6 +58,9 @@
       }).catch(() => {
         console.log('获取home-total出现异常')
       })
+    },
+    mounted() {
+      // console.log(this.$refs['near-six-month-chart'])
     },
     updated() {
       this.$nextTick(function() {
@@ -102,8 +105,35 @@
     }
   }
   .home-part2 {
-    border: 1px solid red;
+    margin: 0 !important;
+    .near-six-month {
+      border: 1px solid #000;
+      .title {
+        background: #dde3ef;
+        padding: 10px 0;
+        .title-value {
+          margin-left: 4px;
+          text-indent: 4px;
+          color: #666;
+          &:before {
+            display: inline-block;
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: purple;
+            margin-right: 4px;
+            border-radius: 4px;
+            vertical-align: middle;
+          }
+        }
+      }
+      .content {
+        width: 100%;
+        height: 400px;
+      }
+    }
   }
+
   .el-col {
     border-radius: 4px;
   }
