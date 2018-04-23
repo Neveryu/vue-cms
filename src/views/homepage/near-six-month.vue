@@ -6,7 +6,6 @@
   let echarts = require('echarts/lib/echarts')
   require('echarts/lib/chart/line')
   require('echarts/lib/component/tooltip')
-  // require('echarts/lib/conponent/tooltip')
   export default {
     name: 'near-six-month',
     props: {
