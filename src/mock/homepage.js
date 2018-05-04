@@ -60,7 +60,7 @@ for (let i = 0; i < count; i++) {
   rankList.push(Mock.mock({
     name: '@cname',
     value: '@natural(0, 9999999)',
-    avatar: ''
+    avatar: 'https://avatars.githubusercontent.com/u/' + '@natural(1000000, 9999999)'
   }))
 }
 export function getHomeInvestmentRank() {

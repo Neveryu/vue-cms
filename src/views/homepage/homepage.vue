@@ -36,10 +36,13 @@
             <p class="title-value">投资龙虎榜</p>
           </div>
           <div class="content" ref="rankContent">
-            <ul>
-              <li v-for="item of rankList">
-                <span>{{item.name}}</span>
-                <span>{{item.value}}</span>
+            <ul class="wrapper-user">
+              <li v-for="item of rankList" class="user-item">
+                <img class="avatar" :src="item.avatar" width="35" height="35" alt="">
+                <div class="user-info">
+                  <p class="name">{{item.name}}</p>
+                  <p class="value">{{item.value}}</p>
+                </div>
               </li>
             </ul>
           </div>
@@ -59,21 +62,53 @@
               <span class="title">投资金额比例</span>
               <investment-pie width="100%" height="50%"></investment-pie>
               <div class="detail">
-                <span class="detail-item">1万元以下</span>
-                <span class="detail-item">1万元以下</span>
-                <span class="detail-item">1万元以下</span>
-                <span class="detail-item">1万元以下</span>
+                <span class="detail-item">
+                  1万元以下
+                  <br>
+                  33.04%
+                </span>
+                <span class="detail-item">
+                  1-10万
+                  <br>
+                  30.57%
+                </span>
+                <span class="detail-item">
+                  10-40万
+                  <br>
+                  23.08%
+                </span>
+                <span class="detail-item">
+                  40万以上
+                  <br>
+                  13.31%
+                </span>
               </div>
             </div>
             <!-- 融资 -->
             <div class="financing">
               <span class="title">融资期限</span>
-              <investment-pie width="100%" height="50%"></investment-pie>
+              <financing-pie width="100%" height="50%"></financing-pie>
               <div class="detail">
-                <span>1万元以下</span>
-                <span>1万元以下</span>
-                <span>1万元以下</span>
-                <span>1万元以下</span>
+                <span class="detail-item">
+                  0-3个月
+                  <br>
+                  18.91%
+                </span>
+                <span class="detail-item">
+                  3-6个月
+                  <br>
+                  29.41%
+                </span>
+                <span class="detail-item">
+                  6-12个月
+                  <br>
+                  32.77%
+                </span>
+                <span class="detail-item">
+                  12个月以上
+                  <br>
+                  18.91%
+                </span>
               </div>
             </div>
           </div>
@@ -81,7 +116,47 @@
       </el-col>
 
       <el-col :span="12">
-
+        <div class="bad-debt">
+          <div class="title">
+            <p class="title-value">平台坏账及逾期情况</p>
+          </div>
+          <div class="content">
+            <div class="bad">
+              <div class="total">
+                <div class="total1">
+                  <p>坏账金额</p>
+                  <p><span class="num">0</span>元</p>
+                </div>
+                <div class="total2">
+                  <p>坏账比例</p>
+                  <p><span class="num">0</span>%</p>
+                </div>
+              </div>
+              <div class="chart">
+                <p class="title">本平台自2015年1月上线以来无坏账</p>
+                <p class="line"></p>
+                <p class="line"></p>
+              </div>
+            </div>
+            <div class="overdue">
+              <div class="total">
+                <div class="total1">
+                  <p>逾期金额</p>
+                  <p><span class="num">0</span>元</p>
+                </div>
+                <div class="total2">
+                  <p>逾期比例</p>
+                  <p><span class="num">0</span>%</p>
+                </div>
+              </div>
+              <div class="chart">
+                <p class="title">本平台自2015年1月上线以来无逾期</p>
+                <p class="line"></p>
+                <p class="line"></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </el-col>
     </el-row>
 
@@ -94,11 +169,13 @@
   import NearSixMonth from '@/views/homepage/near-six-month'
   import BScroll from 'better-scroll'
   import InvestmentPie from '@/views/homepage/investment-pie'
+  import FinancingPie from '@/views/homepage/financing-pie'
   export default {
     components: {
       ColorLine,
       NearSixMonth,
-      InvestmentPie
+      InvestmentPie,
+      FinancingPie
     },
     data() {
       return {
@@ -292,8 +369,30 @@
         width: 100%;
         height: 260px;
         overflow: hidden;
-        ul {
+        .wrapper-user {
           margin: 0;
+          list-style: none;
+          padding-left: 0;
+          .user-item {
+            height: 50px;
+            padding: 5px;
+            .avatar {
+              border: 1px solid #888;
+              border-radius: 100px;
+              vertical-align: bottom;
+            }
+            .user-info {
+              display: inline-block;
+              padding-left: 5px;
+              .name {
+                color: #999;
+                font-size: 14px;
+              }
+              .value {
+                color: red;
+              }
+            }
+          }
         }
       }
     }
@@ -336,11 +435,16 @@
             padding-top: 20px;
           }
           .detail {
+            margin-left: 10px;
             .detail-item {
-              display: block;
+              display: inline-block;
+              width: 40%;
+              margin: 5px;
+              padding-left: 5px;
+              border-left: 5px solid #ccc;
+              color: #666;
             }
           }
-          // background: deeppink;
         }
         .financing {
           height: 310px;
@@ -351,7 +455,135 @@
             background: transparent;
             padding-top: 20px;
           }
-          // background: #ccc;
+          .detail {
+            .detail-item {
+              display: inline-block;
+              width: 40%;
+              margin: 5px;
+              padding-left: 5px;
+              border-left: 5px solid #ccc;
+              color: #666;
+            }
+          }
+        }
+      }
+    }
+    .bad-debt {
+      border: 1px solid #eee;
+      height: 350px;
+      margin-left: 10px;
+      .title {
+        background: #dde3ef;
+        padding: 10px 0;
+        .title-value {
+          margin-left: 4px;
+          text-indent: 4px;
+          color: #666;
+          &:before {
+            display: inline-block;
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: purple;
+            margin-right: 4px;
+            border-radius: 4px;
+            vertical-align: middle;
+          }
+        }
+      }
+      .content {
+        height: inherit;
+        .bad {
+          height: 50%;
+          padding: 20px 30px;
+          .total {
+            display: inline-block;
+            width: 100px;
+            color: #666;
+            vertical-align: top;
+            .total1 {
+              text-align: center;
+              .num {
+                font-size: 24px;
+              }
+            }
+            .total2 {
+              text-align: center;
+              margin-top: 20px;
+              .num {
+                font-size: 24px;
+              }
+            }
+          }
+          .chart {
+            display: inline-block;
+            margin-left: 15px;
+            .title {
+              background: none;
+              border-bottom: 1px solid #ccc;
+            }
+            .line {
+              border-bottom: 1px solid #ccc;
+              padding-bottom: 30px;
+              &:last-child {
+                border-bottom-color: #000;
+              }
+            }
+            &:after {
+              content: '0';
+              position: relative;
+              font-size: 70px;
+              left: 20px;
+              top: -70px;
+              color: #ddd;
+            }
+          }
+        }
+        .overdue {
+          padding: 10px 30px;
+          height: 50%;
+          .total {
+            display: inline-block;
+            width: 100px;
+            color: #666;
+            vertical-align: top;
+            .total1 {
+              text-align: center;
+              .num {
+                font-size: 24px;
+              }
+            }
+            .total2 {
+              text-align: center;
+              margin-top: 20px;
+              .num {
+                font-size: 24px;
+              }
+            }
+          }
+          .chart {
+            display: inline-block;
+            margin-left: 15px;
+            .title {
+              background: none;
+              border-bottom: 1px solid #ccc;
+            }
+            .line {
+              border-bottom: 1px solid #ccc;
+              padding-bottom: 30px;
+              &:last-child {
+                border-bottom-color: #000;
+              }
+            }
+            &:after {
+              content: '0';
+              position: relative;
+              font-size: 70px;
+              left: 20px;
+              top: -70px;
+              color: #ddd;
+            }
+          }
         }
       }
     }
