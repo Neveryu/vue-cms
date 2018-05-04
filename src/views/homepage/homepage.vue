@@ -436,6 +436,7 @@
           }
           .detail {
             margin-left: 10px;
+            text-align: center;
             .detail-item {
               display: inline-block;
               width: 40%;
@@ -456,6 +457,8 @@
             padding-top: 20px;
           }
           .detail {
+            margin-left: 10px;
+            text-align: center;
             .detail-item {
               display: inline-block;
               width: 40%;
@@ -498,7 +501,7 @@
           padding: 20px 30px;
           .total {
             display: inline-block;
-            width: 100px;
+            width: 200px;
             color: #666;
             vertical-align: top;
             .total1 {
@@ -544,7 +547,7 @@
           height: 50%;
           .total {
             display: inline-block;
-            width: 100px;
+            width: 200px;
             color: #666;
             vertical-align: top;
             .total1 {

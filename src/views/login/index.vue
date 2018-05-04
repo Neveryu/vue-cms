@@ -52,7 +52,7 @@
           username: 'admin',
           pwd: '123456'
         },
-        remember: true,
+        remember: false,
         loading: false,
         rules: {
           username: [
