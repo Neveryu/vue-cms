@@ -472,9 +472,11 @@
       }
     }
     .bad-debt {
-      border: 1px solid #eee;
       height: 350px;
+      min-width: 540px;
       margin-left: 10px;
+      border: 1px solid #eee;
+
       .title {
         background: #dde3ef;
         padding: 10px 0;

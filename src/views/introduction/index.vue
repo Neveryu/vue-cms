@@ -1,5 +1,7 @@
 <template>
-  <div class="introduction"></div>
+  <div class="introduction">
+    {{$t('author.name')}}
+  </div>
 </template>
 <script>
   export default {}

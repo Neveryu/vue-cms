@@ -5,8 +5,11 @@
     text-color="#fff"
     active-text-color="#fff">
     <router-link to="/home">
-      <el-menu-item index="1">后台管理系统</el-menu-item>
+      <el-menu-item index="1">{{$t('navbar.title')}}</el-menu-item>
     </router-link>
+
+    <lang-select class="right-menu-item"></lang-select>
+
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img class="user-avatar" :src="avatar">
@@ -40,8 +43,12 @@
 </template>
 <script>
   import { mapGetters, mapActions } from 'vuex'
+  import LangSelect from '@/components/LangSelect'
   export default {
     name: '',
+    components: {
+      LangSelect
+    },
     computed: {
       ...mapGetters([
         'name',
@@ -81,6 +88,12 @@
     &:focus {
       background-color: transparent;
     }
+  }
+  .right-menu-item {
+    position: absolute;
+    top: 20px;
+    right: 150px;
+    color: #fff;
   }
   .avatar-container {
     position: absolute;

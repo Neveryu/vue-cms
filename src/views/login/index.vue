@@ -2,33 +2,37 @@
   <el-container class="login-container">
     <el-card>
       <div slot="header">
-        <h2 class="login-title">系统登录</h2>
+        <h2 class="login-title">{{$t('login.title')}}</h2>
       </div>
       <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="60px">
-        <el-form-item label="账号" prop="username" style="position:relative">
+        <el-form-item :label="$t('login.account')" prop="username" style="position:relative">
           <el-input type="text" v-model="loginForm.username" @keyup.enter.native="goToPwdInput"></el-input>
           <span class="svg-container svg-container_user">
             <icon-svg icon-class="user" />
           </span>
         </el-form-item>
-        <el-form-item label="密码" prop="pwd">
+        <el-form-item :label="$t('login.password')" prop="pwd">
           <el-input type="password" v-model="loginForm.pwd" @keyup.enter.native="onLogin" ref="pwd"></el-input>
           <span class="svg-container svg-container_password">
             <icon-svg icon-class="password" />
           </span>
         </el-form-item>
-        <el-form-item label="记住密码" label-width="80px">
+        <el-form-item :label="$t('login.remember')" label-width="80px">
           <el-switch v-model="remember"></el-switch>
         </el-form-item>
-        <el-button type="primary" @click="onLogin('loginForm')" :loading="loading">登录</el-button>
+        <el-button type="primary" @click="onLogin('loginForm')" :loading="loading">{{$t('login.login')}}</el-button>
       </el-form>
     </el-card>
+    <!-- particles.js container -->
+    <div id="particles"></div>
   </el-container>
 </template>
 <script>
   import { isValidUsername } from '@/utils/validate'
   import { saveToLocal, loadFromLocal } from '@/common/local-storage'
   import { mapActions } from 'vuex'
+  /* eslint-disable*/
+  import particles from 'particles.js'
   export default {
     data() {
       // username 验证
@@ -110,6 +114,11 @@
           }
         })
       }
+    },
+    mounted() {
+      particlesJS.load('particles', '/static/js/p.json', () => {
+        console.log('callback - particles.js config loaded')
+      })
     }
   }
 </script>
@@ -153,5 +162,17 @@
         width: 100%;
       }
     }
+  }
+  #particles {
+    width: 100%;
+    height: 100%;
+    /*background-color: #b61924;*/
+    /*background-color: #23ae88;*/
+    background-color: #39c;
+    background-image: url('');
+    /*background-image: url('../img/bg_particles.png');*/
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
   }
 </style>
