@@ -6,62 +6,45 @@
            @close="handleClose"
            background-color=""
            :collapse="isCollapse">
-    <router-link to="/introduction">
-      <el-menu-item index="1">
-        <i class="el-icon-question"></i>
-        <span>项目简述</span>
-      </el-menu-item>
-    </router-link>
+    <template v-for="router of routers" v-if="!router.hidden">
 
-    <el-submenu index="2">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group>
-        <template slot="title">分组二</template>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
+      <router-link v-if="hasOneShowingChildren(router.children) && !router.children[0].children && !router.alwaysShow" :to="router.path + '/' + router.children[0].path">
+        <el-menu-item :index="router.path + '/' + router.children[0].path">
+          <i :class="'el-icon-' + router.icon"></i>
+          <span>{{router.children[0].name}}</span>
+        </el-menu-item>
+      </router-link>
 
-    <el-submenu index="3">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航二</span>
-      </template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group>
-        <template slot="title">分组二</template>
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
+      <el-submenu v-else :index="router.path || router.name" :key="router.path">
+        <template slot="title">
+          <i :class="'el-icon-' + router.icon"></i>
+          <span>{{router.name}}</span>
+        </template>
 
-    <el-menu-item index="4">
-      <i class="el-icon-edit"></i><span>选项1</span>
-    </el-menu-item>
-    <el-menu-item index="5">
-      <i class="el-icon-share"></i><span>选项1</span>
-    </el-menu-item>
-    <el-menu-item index="6">
-      <i class="el-icon-menu"></i><span>选项1</span>
-    </el-menu-item>
+        <template v-for="child of router.children">
+          <router-link :to="router.path + '/' + child.path">
+            <el-menu-item :index="router.path + '/' + child.path">
+              <span>{{child.name}}</span>
+            </el-menu-item>
+          </router-link>
+        </template>
+      </el-submenu>
+      
+    </template>
   </el-menu>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
         isCollapse: false
       }
+    },
+    computed: {
+      ...mapGetters([
+        'routers'
+      ])
     },
     methods: {
       handleOpen(key, keyPath) {
@@ -69,6 +52,12 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath)
+      },
+      hasOneShowingChildren(children) {
+        if (children.length === 1) {
+          return true
+        }
+        return false
       }
     }
   }

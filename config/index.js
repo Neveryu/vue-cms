@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/api/getmoviepiaofang': {
+            target: 'http://dianying.nuomi.com/movie/boxrefresh',
+            secure: false,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api/getmoviepiaofang': ''
+            }
+        }
+    },
 
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST

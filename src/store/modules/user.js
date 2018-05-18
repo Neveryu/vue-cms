@@ -5,7 +5,7 @@ const SET_TOKEN = 'SET_TOKEN'
 const SET_NAME = 'SET_NAME'
 const SET_AGE = 'SET_AGE'
 const SET_AVATAR = 'SET_AVATAR'
-const SET_ROLE = 'SET_ROLE'
+const SET_PERMISSIONS = 'SET_PERMISSIONS'
 
 const user = {
   state: {
@@ -13,7 +13,7 @@ const user = {
     name: '',
     age: 0,
     avatar: '',
-    role: ''
+    permissions: ''
   },
   mutations: {
     [SET_TOKEN](state, token) {
@@ -28,8 +28,8 @@ const user = {
     [SET_AVATAR](state, avatar) {
       state.avatar = avatar
     },
-    [SET_ROLE](state, role) {
-      state.role = role
+    [SET_PERMISSIONS](state, permissions) {
+      state.permissions = permissions
     }
   },
   actions: {
@@ -40,6 +40,10 @@ const user = {
           let data = resp.data
           setToken(data.token)
           commit(SET_TOKEN, data.token)
+          // commit(SET_NAME, data.name)
+          // commit(SET_AGE, data.age)
+          // commit(SET_AVATAR, data.avatar)
+          // commit(SET_PERMISSIONS, data.permissions)
           return resolve()
         }).catch(err => {
           return reject(err)
@@ -54,7 +58,8 @@ const user = {
           commit(SET_NAME, data.name)
           commit(SET_AGE, data.age)
           commit(SET_AVATAR, data.avatar)
-          return resolve()
+          commit(SET_PERMISSIONS, data.permissions)
+          return resolve(data)
         }).catch(err => {
           return reject(err)
         })
@@ -79,7 +84,7 @@ const user = {
     name: state => state.name,
     age: state => state.age,
     avatar: state => state.avatar,
-    role: state => state.role
+    permissions: state => state.permissions
   }
 }
 
