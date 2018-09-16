@@ -5,28 +5,43 @@
            @open="handleOpen"
            @close="handleClose"
            background-color=""
-           :collapse="isCollapse">
+           :collapse="isCollapse"
+           :default-active="$route.path">
     <template v-for="router of routers" v-if="!router.hidden">
 
       <router-link v-if="hasOneShowingChildren(router.children) && !router.children[0].children && !router.alwaysShow" :to="router.path + '/' + router.children[0].path">
         <el-menu-item :index="router.path + '/' + router.children[0].path">
-          <i :class="'el-icon-' + router.icon"></i>
-          <span>{{router.children[0].name}}</span>
+          <i :class="'el-icon-' + router.meta.icon"></i>
+          <span>{{router.children[0].meta.title}}</span>
         </el-menu-item>
       </router-link>
 
-      <el-submenu v-else :index="router.path || router.name" :key="router.path">
+      <el-submenu v-else :index="router.path || router.meta.title" :key="router.path">
         <template slot="title">
-          <i :class="'el-icon-' + router.icon"></i>
-          <span>{{router.name}}</span>
+          <i :class="'el-icon-' + router.meta.icon"></i>
+          <span>{{router.meta.title}}</span>
         </template>
 
-        <template v-for="child of router.children">
-          <router-link :to="router.path + '/' + child.path">
+        <template v-for="child of router.children" v-if="!child.hidden">
+          <router-link :to="router.path + '/' + child.path" v-if="!child.children">
             <el-menu-item :index="router.path + '/' + child.path">
-              <span>{{child.name}}</span>
+              <span>{{child.meta.title}}</span>
             </el-menu-item>
           </router-link>
+
+          <el-submenu v-else :index="child.path || child.meta.title" :key="child.path">
+            <template slot="title">
+              <span>{{child.meta.title}}</span>
+            </template>
+            <template v-for="threechild of child.children" v-if="!threechild.hidden">
+              <router-link :to="router.path + '/' + child.path + '/' + threechild.path" v-if="!threechild.children">
+                <el-menu-item :index="router.path + '/' + child.path + '/' + threechild.path">
+                  <span>{{threechild.meta.title}}</span>
+                </el-menu-item>
+              </router-link>
+            </template>
+          </el-submenu>
+
         </template>
       </el-submenu>
       
@@ -36,6 +51,7 @@
 <script>
   import { mapGetters } from 'vuex'
   export default {
+    name: 'SideBar',
     data() {
       return {
         isCollapse: false

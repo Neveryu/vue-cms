@@ -1,7 +1,8 @@
 <template>
   <el-container class="login-container">
-    <el-card>
-      <div slot="header">
+    <el-card class="animated flipInY">
+      <div slot="header" class="el-card-header">
+        <img src="/static/image/login-logo.png" alt="">
         <h2 class="login-title">{{$t('login.title')}}</h2>
       </div>
       <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="60px">
@@ -222,6 +223,21 @@
           }
         }
       })
+      this.$notify({
+        title: '账号：admin',
+        dangerouslyUseHTMLString: true,
+        message: '<strong>密码：<i>123456</i></strong>',
+        type: 'success',
+        position: 'bottom-left'
+      })
+      this.$notify({
+        title: '账号：lucy',
+        dangerouslyUseHTMLString: true,
+        message: '<strong>密码：<i>123456</i></strong>',
+        type: 'success',
+        position: 'bottom-left',
+        offset: 80
+      })
     }
   }
 </script>
@@ -235,15 +251,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: mix(#494166, #424b50);
+    background: mix(#494166, #424b50) url('/static/image/login-bg.jpg') center no-repeat;
+    background-size: cover;
+    overflow: hidden;
     .el-card {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin: -220px 0 0 -200px;
+      margin: -300px 0 0 -200px;
       width: 400px;
-      height: 350px;
-      background: #d7ecf1;
+      height: 450px;
+      background: #fff;
+      .el-card-header {
+        text-align: center;
+      }
       .login-title {
         margin: 0;
         text-align: center;
@@ -274,8 +295,8 @@
     height: 100%;
     /*background-color: #b61924;*/
     /*background-color: #23ae88;*/
-    background-color: #39c;
-    background-image: url('');
+    background-color: transparent;
+    // background-image: url('/static/image/login-bg.jpg');
     /*background-image: url('../img/bg_particles.png');*/
     background-size: cover;
     background-position: 50% 50%;

@@ -18,7 +18,15 @@ module.exports = {
             pathRewrite: {
               '^/api/getmoviepiaofang': ''
             }
-        }
+        },
+        '/api/getMovieImage': {
+            target: 'http://dianying.nuomi.com/common/ranklist',
+            secure: false,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api/getMovieImage': ''
+            }
+        },
     },
 
     // Various Dev Server settings

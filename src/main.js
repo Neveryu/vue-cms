@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// animate动画库
+import 'animate.css'
 
 import App from './App'
 import router from './router'

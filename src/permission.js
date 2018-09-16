@@ -29,6 +29,7 @@ router.beforeEach((to, from, next) => {
             // console.log(to)
             // console.log({...to})
             // hack方法 确保addRoutes已完成，set the replace: true so the navigation will not leave a history record
+            // 这样我们就可以简单的通过 `next(to)` 巧妙的避开之前的那个问题了。这行代码重新进入 `router.beforeEach` 这个钩子，这时候再通过 `next()` 来释放钩子，就能确保所有的路由都已经挂载完成了。
             next({
               ...to,
               replace: true

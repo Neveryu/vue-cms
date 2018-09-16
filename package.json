@@ -11,8 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.17.1",
     "better-scroll": "^1.10.0",
+    "clipboard": "^2.0.1",
     "countup.js": "^1.9.3",
     "echarts": "^4.0.4",
     "element-ui": "^2.0.11",
@@ -23,12 +25,14 @@
     "normalize.css": "^7.0.0",
     "nprogress": "^0.2.0",
     "particles.js": "^2.0.0",
+    "screenfull": "^3.3.2",
     "script-load": "^0.1.0",
     "script-loader": "^0.7.2",
     "vue": "^2.5.2",
     "vue-i18n": "^7.6.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
+    "wired-elements": "^0.5.8",
     "xlsx": "^0.12.12"
   },
   "devDependencies": {

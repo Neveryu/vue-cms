@@ -22,11 +22,11 @@ export default {
   props: {
     stackinit: {
       type: Object,
-      default: []
+      default: {}
     },
     pages: {
       type: Array,
-      default: {}
+      default: []
     }
   },
   data () {
@@ -299,7 +299,7 @@ export default {
     padding: 0;
   }
   .stack-item{
-    ackground: #fff;
+    background: #fff;
     height: 100%;
     width: 100%;
     border-radius: 4px;

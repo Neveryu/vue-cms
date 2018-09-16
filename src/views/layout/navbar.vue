@@ -8,6 +8,10 @@
       <el-menu-item index="1">{{$t('navbar.title')}}</el-menu-item>
     </router-link>
 
+    <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
+      <screenfull class="screenfull right-menu-item"></screenfull>
+    </el-tooltip>
+
     <lang-select class="right-menu-item"></lang-select>
 
     <el-dropdown class="avatar-container" trigger="click">
@@ -43,11 +47,13 @@
 </template>
 <script>
   import { mapGetters, mapActions } from 'vuex'
-  import LangSelect from '@/components/LangSelect'
+  import LangSelect from '@/components/langselect'
+  import Screenfull from '@/components/screenfull'
   export default {
     name: '',
     components: {
-      LangSelect
+      LangSelect,
+      Screenfull
     },
     computed: {
       ...mapGetters([
@@ -88,6 +94,11 @@
     &:focus {
       background-color: transparent;
     }
+  }
+  .navbar /deep/ .screenfull {
+    position: absolute;
+    top: 20px;
+    right: 190px;
   }
   .right-menu-item {
     position: absolute;

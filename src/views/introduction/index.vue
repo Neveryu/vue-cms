@@ -1,11 +1,13 @@
 <template>
   <div class="introduction">
-    {{$t('author.name')}}：
-    I hope you can brave do your inneside
-    <br>
-    不会做...
+    
+    <wired-card>
+      {{$t('author.name')}}：
+      <ul>
+        <li>{{$t('introduction.item1')}}</li>
+      </ul>
+    </wired-card>
 
-    <hr>
     <div class="mid-center">
       <div class="stack-wrapper">
         <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
@@ -18,13 +20,17 @@
   </div>
 </template>
 <script>
+  import { getImage } from '@/api/introduction'
   import Stack from '@/components/tantan/stack'
+  /* eslint-disable no-unused-vars */
+  import { WiredCard, WiredTooltip } from 'wired-elements'
   export default {
     components: {
       Stack
     },
     data() {
       return {
+        imgUrl: [],
         someList: [],
         stackinit: {
           visible: 3
@@ -39,43 +45,35 @@
         this.$refs.stack.$emit('next')
       }
     },
+    created() {
+      getImage().then(resp => {
+        let movieData = resp.data.data.movies
+        movieData.forEach((v, i, _this) => {
+          // v.posterUrl.medium
+          this.imgUrl.push({
+            html: `<img src='${v.posterUrl.large}'>`
+          })
+        })
+      })
+    },
     mounted() {
-      let that = this
-      setTimeout(function () {
-        that.someList = [
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/1.png" alt="01">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/2.png" alt="02">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/3.png" alt="03">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/4.png" alt="04">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/5.png" alt="05">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/6.png" alt="06">'
-          },
-          {
-            html: '<img src="https://warpcgd.github.io/vue-tantan-stack/src/img/7.png" alt="07">'
-          }
-        ]
-      }, 2000)
+      this.$nextTick(() => {
+        this.someList = this.imgUrl
+      })
     }
   }
 </script>
-<style>
-  .stack-wrapper{
+<style scoped lang="scss">
+  .introduction {
+    padding-bottom: 300px;
+    overflow: hidden;
+  }
+  .stack-wrapper {
     margin: 0 auto;
     position: relative;
     z-index: 1000;
     width: 320px;
-    height: 320px;
+    height: 420px;
     padding: 0;
     list-style: none;
     pointer-events: none;
@@ -103,6 +101,7 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     border-radius: 50%;
     background: #fff;
+    outline: none;
   }
   .button .next{
     display: inline-block;
