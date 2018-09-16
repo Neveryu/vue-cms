@@ -1,5 +1,8 @@
 <template>
   <el-container class="login-container">
+    <el-switch v-model="toggleParticles"
+      inactive-color="#ff4949">
+    ></el-switch>
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
         <img src="/static/image/login-logo.png" alt="">
@@ -53,6 +56,8 @@
         }
       }
       return {
+        // 粒子开关
+        toggleParticles: false,
         loginForm: {
           username: 'admin',
           pwd: '123456'
@@ -62,11 +67,13 @@
         rules: {
           username: [
             { required: true, message: '请输入账号', trigger: 'blur' },
-            { required: true, trigger: 'blur', validator: validateUsername }
+            { required: true, trigger: 'blur', validator: validateUsername },
+            { required: true, trigger: 'change', validator: validateUsername }
           ],
           pwd: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { required: true, trigger: 'blur', validator: validatePwd }
+            { required: true, trigger: 'blur', validator: validatePwd },
+            { required: true, trigger: 'change', validator: validatePwd }
           ]
         }
       }
@@ -116,113 +123,122 @@
         })
       }
     },
-    mounted() {
-      particlesJS('particles', {
-        "particles": {
-          "number": {
-            "value": 15
-          },
-          "color": {
-            "value": "random"
-          },
-          "shape": {
-            "type": ["star", "image"],
-            "stroke": {
-              "width": 0,
-              "color": "yellow"
-            },
-            "polygon": {
-              "nb_sides": 5
-            },
-            "image": {
-              "src": "https://neveryu.github.io/avatar/avatar.png",
-              "width": 100,
-              "height": 100
-            }
-          },
-          "opacity": {
-            "value": 1,
-            "random": false,
-            "anim": {
-              "enable": true,
-              "speed": 1,
-              "opacity_min": 0.1,
-              "sync": false
-            }
-          },
-          "size": {
-            "value": 10,
-            "random": true,
-            "anim": {
-              "enable": true,
-              "speed": 10,
-              "size_min": 0.1,
-              "sync": false
-            }
-          },
-          "line_linked": {
-            "enable": false,
-            "distance": 150,
-            "color": "#ccc",
-            "opacity": 0.4,
-            "width": 1
-          },
-          "move": {
-            "enable": true,
-            "speed": 2,
-            "direction": "random",
-            "random": true,
-            "straight": false,
-            "out_mode": "out",
-            "attract": {
-              "enable": false,
-              "rotateX": 600,
-              "rotateY": 1200
-            }
-          }
-        },
-        "interactivity": {
-          // "detect_on": "canvas",
-          "detect_on": "window",
-          "events": {
-            "onhover": {
-              "enable": false,
-              // "mode": "repulse"
-              "mode": "grab"
-            },
-            "onclick": {
-              "enable": false,
-              "mode": "repulse"
-              // "mode": "push"
-            },
-            "resize": true
-          },
-          "modes": {
-            "grab": {
-              "distance": 400,
+    watch: {
+      toggleParticles(val) {
+        if(val) {
+          particlesJS('particles', {
+            "particles": {
+              "number": {
+                "value": 15
+              },
+              "color": {
+                "value": "random"
+              },
+              "shape": {
+                "type": ["star", "image"],
+                "stroke": {
+                  "width": 0,
+                  "color": "yellow"
+                },
+                "polygon": {
+                  "nb_sides": 5
+                },
+                "image": {
+                  "src": "https://neveryu.github.io/avatar/avatar.png",
+                  "width": 100,
+                  "height": 100
+                }
+              },
+              "opacity": {
+                "value": 1,
+                "random": false,
+                "anim": {
+                  "enable": true,
+                  "speed": 1,
+                  "opacity_min": 0.1,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 10,
+                "random": true,
+                "anim": {
+                  "enable": true,
+                  "speed": 10,
+                  "size_min": 0.1,
+                  "sync": false
+                }
+              },
               "line_linked": {
-                "opacity": 1
+                "enable": false,
+                "distance": 150,
+                "color": "#ccc",
+                "opacity": 0.4,
+                "width": 1
+              },
+              "move": {
+                "enable": true,
+                "speed": 2,
+                "direction": "random",
+                "random": true,
+                "straight": false,
+                "out_mode": "out",
+                "attract": {
+                  "enable": false,
+                  "rotateX": 600,
+                  "rotateY": 1200
+                }
               }
             },
-            "bubble": {
-              "distance": 400,
-              "size": 40,
-              "duration": 2,
-              "opacity": 8,
-              "speed": 3
-            },
-            "repulse": {
-              "distance": 200
-            },
-            "push": {
-              "particles_nb": 4
-            },
-            "remove": {
-              "particles_nb": 2
+            "interactivity": {
+              // "detect_on": "canvas",
+              "detect_on": "window",
+              "events": {
+                "onhover": {
+                  "enable": false,
+                  // "mode": "repulse"
+                  "mode": "grab"
+                },
+                "onclick": {
+                  "enable": false,
+                  "mode": "repulse"
+                  // "mode": "push"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 400,
+                  "line_linked": {
+                    "opacity": 1
+                  }
+                },
+                "bubble": {
+                  "distance": 400,
+                  "size": 40,
+                  "duration": 2,
+                  "opacity": 8,
+                  "speed": 3
+                },
+                "repulse": {
+                  "distance": 200
+                },
+                "push": {
+                  "particles_nb": 4
+                },
+                "remove": {
+                  "particles_nb": 2
+                }
+              }
             }
-          }
+          })
+        } else {
+          document.getElementById('particles').innerHTML = ''
         }
-      })
+      }
+    },
+    mounted() {
+      
       this.$notify({
         title: '账号：admin',
         dangerouslyUseHTMLString: true,
