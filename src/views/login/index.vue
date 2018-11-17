@@ -3,6 +3,7 @@
     <el-switch v-model="toggleParticles"
       inactive-color="#ff4949">
     ></el-switch>
+    <el-button class="show-account" type="text" @click="accountTip">提示帐号信息</el-button>
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
         <img src="/static/image/login-logo.png" alt="">
@@ -121,6 +122,23 @@
             return false
           }
         })
+      },
+      accountTip() {
+        this.$notify({
+          title: '账号：admin',
+          dangerouslyUseHTMLString: true,
+          message: '<strong>密码：<i>123456</i></strong>',
+          type: 'success',
+          position: 'bottom-left'
+        })
+        this.$notify({
+          title: '账号：lucy',
+          dangerouslyUseHTMLString: true,
+          message: '<strong>密码：<i>123456</i></strong>',
+          type: 'success',
+          position: 'bottom-left',
+          offset: 80
+        })
       }
     },
     watch: {
@@ -238,22 +256,7 @@
       }
     },
     mounted() {
-      
-      this.$notify({
-        title: '账号：admin',
-        dangerouslyUseHTMLString: true,
-        message: '<strong>密码：<i>123456</i></strong>',
-        type: 'success',
-        position: 'bottom-left'
-      })
-      this.$notify({
-        title: '账号：lucy',
-        dangerouslyUseHTMLString: true,
-        message: '<strong>密码：<i>123456</i></strong>',
-        type: 'success',
-        position: 'bottom-left',
-        offset: 80
-      })
+      this.accountTip()
     }
   }
 </script>
@@ -270,6 +273,12 @@
     background: mix(#494166, #424b50) url('/static/image/login-bg.jpg') center no-repeat;
     background-size: cover;
     overflow: hidden;
+    .show-account {
+      position: absolute;
+      left: 15px;
+      bottom: 20px;
+      color: red;
+    }
     .el-card {
       position: absolute;
       top: 50%;

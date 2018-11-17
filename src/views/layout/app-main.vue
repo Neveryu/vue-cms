@@ -11,14 +11,13 @@
     name: 'app-main',
     data() {
       return {
-        a: '测试'
+        a: '右侧主界面'
       }
     }
   }
 </script>
 
-<style scoped lang="scss">
-  .main-app {
-    padding: 5px;
-  }
+<style scoped lang="stylus">
+  .main-app
+    padding 5px
 </style>

@@ -3,11 +3,6 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Layout from '@/views/layout/layout'
-import HomePage from '@/views/homepage/homepage'
-import Introduction from '@/views/introduction/index'
-import ExportExcel from '@/views/excel/export-excel'
-import UploadExcel from '@/views/excel/upload-excel'
-import ClipBoard from '@/views/clipboard'
 
 Vue.use(Router)
 
@@ -35,25 +30,34 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/home',
     children: [
-      { path: 'home', component: HomePage, name: 'home', meta: { title: '首页' } }
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('@/views/homepage/homepage'),
+        meta: { title: '首页' }
+      }
     ]
   },
   {
     path: '/introduction',
-    name: 'introduction',
     component: Layout,
     redirect: '/introduction/index',
+    alwaysShow: true,
     meta: {
       icon: 'question',
       title: '简述'
     },
     children: [
-      { path: 'index', component: Introduction, meta: { title: '简述' } }
+      {
+        path: 'index',
+        name: 'introduction',
+        component: () => import('@/views/introduction/index'),
+        meta: { icon: 'warning', title: '简述' }
+      }
     ]
   },
   {
     path: '/nested',
-    name: 'nested',
     component: Layout,
     meta: {
       icon: 'question',
@@ -62,29 +66,27 @@ export const constantRouterMap = [
     children: [
       {
         path: 'menu1',
-        name: 'menu1',
-        component: Introduction,
-        meta: { title: 'menu1' },
+        meta: { icon: 'success', title: 'menu1' },
         children: [
           {
             path: 'menu1-1',
             name: 'menu1-1',
-            component: Introduction,
-            meta: { title: 'menu1-1' }
+            component: () => import('@/views/introduction/index'),
+            meta: { icon: 'error', title: 'menu1-1' }
           },
           {
             path: 'menu1-2',
             name: 'menu1-2',
-            component: Introduction,
-            meta: { title: 'menu1-2' }
+            component: () => import('@/views/introduction/index'),
+            meta: { icon: 'info', title: 'menu1-2' }
           }
         ]
       },
       {
         path: 'menu2',
         name: 'menu2',
-        meta: { title: 'menu2' },
-        component: Introduction
+        component: () => import('@/views/introduction/index'),
+        meta: { icon: 'back', title: 'menu2' }
       }
     ]
   }
@@ -99,7 +101,6 @@ export default new Router({
 export const asyncRouterMap = [
   {
     path: '/excel',
-    name: 'excel',
     component: Layout,
     redirect: '/excel/export-excel',
     alwaysShow: true,
@@ -108,8 +109,18 @@ export const asyncRouterMap = [
       icon: 'edit'
     },
     children: [
-      { path: 'export-excel', component: ExportExcel, name: '导出表格', meta: { title: 'exportExcel' } },
-      { path: 'upload-excel', component: UploadExcel, name: '上传表格', meta: { title: 'uploadExcel' } }
+      {
+        path: 'export-excel',
+        name: '导出表格',
+        component: () => import('@/views/excel/export-excel'),
+        meta: { icon: 'arrow-left', title: 'exportExcel' }
+      },
+      {
+        path: 'upload-excel',
+        name: '上传表格',
+        component: () => import('@/views/excel/upload-excel'),
+        meta: { icon: 'minus', title: 'uploadExcel' }
+      }
     ]
   },
   {
@@ -121,7 +132,12 @@ export const asyncRouterMap = [
       title: '剪切板'
     },
     children: [
-      { path: 'index', component: ClipBoard, name: 'clipBoard', meta: { title: '剪切板示例', icon: 'document' } }
+      {
+        path: 'index',
+        name: 'clipBoard',
+        component: () => import('@/views/clipboard'),
+        meta: { title: '剪切板示例', icon: 'document' }
+      }
     ]
   }
 ]

@@ -5,14 +5,13 @@
         <el-input v-model="inputData" placeholder="Please input" ref="input1" style='width:400px;'></el-input>
         <wired-button elevation="3" @click='handleCopy1'>copy</wired-button>
         <p class="title">粘贴一下：</p>
-        <wired-textarea placeholder="粘贴你的内容" rows="10" maxrows="30"></wired-textarea>
+        <el-input type="textarea" :rows="10" style="width: 400px;"></el-input>
       </el-tab-pane>
 
       <el-tab-pane label="用clipboard插件" name="directly" @click="console.log('s')">
         <el-input v-model="inputData" placeholder="Please input" ref="input2" style='width:400px;'></el-input>
         <el-button type="primary" @click='handleCopy2(inputData,$event)'>copy</el-button>
         <p class="title">粘贴一下：</p>
-        <!-- <wired-textarea placeholder="粘贴你的内容" rows="11" maxrows="30"></wired-textarea> -->
         <el-input type="textarea" :rows="10" style="width: 400px;"></el-input>
       </el-tab-pane>
 
@@ -65,8 +64,7 @@
   }
 </script>
 
-<style scoped lang="scss">
-  .title {
-    margin-top: 20px;
-  }
+<style scoped lang="stylus">
+  .title
+    margin-top 20px
 </style>

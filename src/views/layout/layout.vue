@@ -10,7 +10,7 @@
 </template>
 <script>
   import Navbar from './navbar'
-  import Sidebar from './sidebar'
+  import Sidebar from './sidebar/sidebar'
   import TabsView from './tabs-view'
   import AppMain from './app-main'
   export default {
