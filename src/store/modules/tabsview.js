@@ -10,11 +10,11 @@ const tabsview = {
       if (state.visitedTabsView.find((n) => n.path === view.path)) {
         return
       }
-      state.visitedTabsView.push({ name: view.name, path: view.path })
+      state.visitedTabsView.push({ name: view.meta.title, path: view.path })
     },
     [DEL_TABSVIEW](state, view) {
       for (let [i, v] of state.visitedTabsView.entries()) {
-        if (v.path === view.path || v.name === view.name) {
+        if (v.path === view.path || v.name === view.meta.title) {
           state.visitedTabsView.splice(i, 1)
         }
       }

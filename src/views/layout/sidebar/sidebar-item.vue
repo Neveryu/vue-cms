@@ -90,12 +90,12 @@
         return false
       },
       resolvePath(routePath) {
-        console.log(path.resolve(this.basePath, routePath))
+        // console.log(path.resolve(this.basePath, routePath))
         return path.resolve(this.basePath, routePath)
       }
     },
     created() {
-      console.log(this.basePath)
+      // console.log(this.basePath)
     }
   }
 </script>
