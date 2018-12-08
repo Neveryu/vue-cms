@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 import * as loginAPI from './login'
 import * as userAPI from './user'
 import * as homepageAPI from './homepage'
+import * as excel from './excel'
 
 Mock.setup({
   timeout: '300-600'
@@ -20,5 +21,8 @@ Mock.mock('/homepage/hometotal', 'post', homepageAPI.getHomeTotal)
 Mock.mock('/homepage/detailItem', 'post', homepageAPI.getHomeDetailItem)
 // 首页 investmentRank 接口
 Mock.mock('/homepage/investmentRank', 'post', homepageAPI.getHomeInvestmentRank)
+
+// 表格部分【导出表格中的票房数据】
+Mock.mock('/api/getmoviepiaofang-mock', 'post', excel.piaofang)
 
 export default Mock

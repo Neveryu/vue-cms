@@ -1,4 +1,4 @@
-export function debounce(func, wait, immediate) {
+function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
   const later = function() {
@@ -32,3 +32,10 @@ export function debounce(func, wait, immediate) {
     return result
   }
 }
+
+/**
+ * 获取当前运行环境
+ */
+const isDev = (process.env.NODE_ENV === 'development')
+
+export { debounce, isDev }

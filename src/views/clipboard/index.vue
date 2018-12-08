@@ -29,7 +29,7 @@
   import clip from '@/utils/clipboard'
   import clipboard from '@/directive/clipboard'
   /* eslint-disable no-unused-vars */
-  import { WiredButton, WiredTextarea } from 'wired-elements'
+  import { WiredButton } from 'wired-elements'
   export default {
     directives: {
       clipboard
@@ -67,4 +67,6 @@
 <style scoped lang="stylus">
   .title
     margin-top 20px
+  wired-button
+    background lightblue
 </style>

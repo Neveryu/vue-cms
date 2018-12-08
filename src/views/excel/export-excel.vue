@@ -90,6 +90,7 @@
   export default {
     data() {
       return {
+        isDev: null,
         downloadLoading: false,
         tableDataLoading: true,
         tableData: [],
@@ -102,6 +103,24 @@
       }
     },
     methods: {
+      _getTable() {
+        getTable().then(resp => {
+          if(this.isDev) {
+            let movieData = resp.data.real.data.detail
+            this.updateTime = resp.data.real.data.total.message
+            this.formatMovieData(movieData)
+            this.tableData = movieData
+            this.tableDataLoading = false
+          } else {
+            resp.data = JSON.parse(resp.data)
+            let movieData = resp.data.real.data.detail
+            this.updateTime = resp.data.real.data.total.message
+            this.formatMovieData(movieData)
+            this.tableData = movieData
+            this.tableDataLoading = false
+          }
+        })
+      },
       updateData() {
         this.refresh = false
         this.percentageNum = 0
@@ -115,18 +134,7 @@
           }
         }, 100)
         this.tableDataLoading = true
-        getTable().then(resp => {
-          let movieData = resp.data.real.data.detail
-          // console.log(movieData)
-          if (movieData && movieData.length > 0) {
-            this.updateTime = resp.data.real.data.total.message
-            this.formatMovieData(movieData)
-            this.tableData = movieData
-            this.tableDataLoading = false
-          } else {
-            this.tableDataLoading = false
-          }
-        })
+        this._getTable()
       },
       handleDownload() {
         this.downloadLoading = true
@@ -163,21 +171,9 @@
       }
     },
     created() {
+      this.isDev = process.env.NODE_ENV === 'development'
       this.tableDataLoading = true
-      getTable().then(resp => {
-        let movieData = resp.data.real.data.detail
-        this.updateTime = resp.data.real.data.total.message
-        this.formatMovieData(movieData)
-        this.tableData = movieData
-        this.tableDataLoading = false
-        // if (movieData && movieData.length > 0) {
-        //   this.formatMovieData(movieData)
-        //   this.tableData = movieData
-        //   this.tableDataLoading = false
-        // } else {
-        //   // window.location.reload()
-        // }
-      })
+      this._getTable()
     }
   }
 </script>

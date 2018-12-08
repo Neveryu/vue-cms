@@ -1,12 +1,10 @@
 <template>
   <div class="introduction">
-    
-    <wired-card>
-      {{$t('author.name')}}：
-      <ul>
-        <li>{{$t('introduction.item1')}}</li>
-      </ul>
-    </wired-card>
+  
+    {{$t('author.name')}}：
+    <ul>
+      <li>{{$t('introduction.item1')}}</li>
+    </ul>
 
     <div class="mid-center">
       <div class="stack-wrapper">
@@ -22,14 +20,14 @@
 <script>
   import { getImage } from '@/api/introduction'
   import Stack from '@/components/tantan/stack'
-  /* eslint-disable no-unused-vars */
-  import { WiredCard, WiredTooltip } from 'wired-elements'
   export default {
+    name: 'introduction',
     components: {
       Stack
     },
     data() {
       return {
+        isDev: null,
         imgUrl: [],
         someList: [],
         stackinit: {
@@ -46,14 +44,26 @@
       }
     },
     created() {
+      this.isDev = process.env.NODE_ENV === 'development'
       getImage().then(resp => {
-        let movieData = resp.data.data.movies
-        movieData.forEach((v, i, _this) => {
-          // v.posterUrl.medium
-          this.imgUrl.push({
-            html: `<img src='${v.posterUrl.large}'>`
+        let movieData
+        if(this.isDev) {
+          movieData = resp.data.data.movies
+          movieData.forEach((v, i, _this) => {
+            // v.posterUrl.medium
+            this.imgUrl.push({
+              html: `<img src='${v.posterUrl.large}'>`
+            })
           })
-        })
+        } else {
+          movieData = resp.subjects
+          movieData.forEach((v, i, _this) => {
+            // v.images.large
+            this.imgUrl.push({
+              html: `<img src='${v.images.large}'>`
+            })
+          })
+        }
       })
     },
     mounted() {
@@ -71,7 +81,7 @@
   .stack-wrapper {
     margin: 0 auto;
     position: relative;
-    z-index: 1000;
+    z-index: 1;
     width: 320px;
     height: 420px;
     padding: 0;

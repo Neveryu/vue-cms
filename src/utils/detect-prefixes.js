@@ -1,6 +1,9 @@
 /**
  * Detecting prefixes for saving time and bytes
  */
+/**
+ * css 兼容性前缀
+ */
 export default function detectPrefixes () {
   let transform
   let transition
