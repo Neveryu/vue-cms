@@ -6,7 +6,7 @@
     <el-button class="show-account" type="text" @click="accountTip">提示帐号信息</el-button>
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
-        <img src="/static/image/login-logo.png" alt="">
+        <img src="../../../static/image/login-logo.png" alt="">
         <h2 class="login-title">{{$t('login.title')}}</h2>
       </div>
       <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="60px">
@@ -269,7 +269,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: mix(#494166, #424b50) url('/static/image/login-bg.jpg') center no-repeat;
+    background: mix(#494166, #424b50) url('../../../static/image/login-bg.jpg') center no-repeat;
     background-size: cover;
     overflow: hidden;
     .show-account {
