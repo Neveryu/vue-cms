@@ -246,7 +246,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .home-total {
     width: 100%;
     min-width: 800px;

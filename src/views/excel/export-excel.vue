@@ -178,11 +178,10 @@
   }
 </script>
 
-<style scoped lang="scss">
-  .fresh {
-    float: right;
-    width: 350px;
-    text-align: right;
-    padding-right: 20px;
-  }
+<style scoped lang="stylus">
+  .fresh
+    float right
+    width 350px
+    text-align right
+    padding-right 20px
 </style>

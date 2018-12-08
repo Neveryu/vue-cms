@@ -78,7 +78,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .el-menu-vertical:not(.el-menu--collapse) {
     position: fixed;
     top: 61px;

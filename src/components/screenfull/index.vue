@@ -52,13 +52,13 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .screenfull-svg {
-    display: inline-block;
-    cursor: pointer;
-    fill: #fff;
-    width: 20px;
-    height: 20px;
-    vertical-align: 10px;
+    display inline-block
+    cursor pointer
+    fill #fff
+    width 20px
+    height 20px
+    vertical-align 10px
   }
 </style>

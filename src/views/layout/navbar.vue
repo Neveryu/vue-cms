@@ -75,17 +75,15 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .navbar {
     position: fixed;
     width: 100%;
     z-index: 10;
-    background: {
-      image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
-      image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
-      image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
-      image: linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6);
-    }
+    background-image -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa))
+    background-image -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6)
+    background-image -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6)
+    background-image linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6)
   }
   .navbar /deep/ .el-menu-item {
     &:hover {

@@ -70,7 +70,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .tabs-container {
     height: 40px;
     padding: 5px;

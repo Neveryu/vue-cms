@@ -89,7 +89,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .upload-demo {
     text-align: center;
   }

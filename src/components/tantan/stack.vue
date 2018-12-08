@@ -286,7 +286,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .stack {
     width: 100%;
     height: 100%;

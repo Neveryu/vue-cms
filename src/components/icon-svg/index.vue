@@ -21,12 +21,12 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .svg-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+    width 1em
+    height 1em
+    vertical-align -0.15em
+    fill currentColor
+    overflow hidden
   }
 </style>

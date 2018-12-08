@@ -73,7 +73,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .introduction {
     padding-bottom: 300px;
     overflow: hidden;

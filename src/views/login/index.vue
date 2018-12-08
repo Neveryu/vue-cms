@@ -260,8 +260,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
-  $dark_gray:#889aa4;
+<style scoped lang="stylus">
   .login-container {
     position: absolute;
     width: 100%;
@@ -301,7 +300,7 @@
         position: absolute;
         top: 0;
         left: 5px;
-        color: $dark_gray;
+        color: #889aa4;
         &_user {
           font-size: 20px;
         }

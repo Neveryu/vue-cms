@@ -40,9 +40,9 @@
 </script>
 <style scoped lang="stylus">
   .el-menu-vertical:not(.el-menu--collapse)
-    position: fixed;
-    top: 61px;
-    width: 200px;
-    height: 100%;
-    min-height: 500px;
+    position fixed
+    top 61px
+    width 200px
+    height 100%
+    min-height 500px
 </style>

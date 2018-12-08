@@ -22,7 +22,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style scoped lang="stylus">
   .app-wrapper {
     position: absolute;
     width: 100%;
