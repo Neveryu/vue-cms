@@ -47,7 +47,7 @@
 </template>
 <script>
   import { mapGetters, mapActions } from 'vuex'
-  import LangSelect from '@/components/langselect'
+  import LangSelect from '@/components/lang-select'
   import Screenfull from '@/components/screenfull'
   export default {
     name: '',
