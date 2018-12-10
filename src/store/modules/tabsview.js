@@ -14,7 +14,7 @@ const tabsview = {
     },
     [DEL_TABSVIEW](state, view) {
       for (let [i, v] of state.visitedTabsView.entries()) {
-        if (v.path === view.path || v.name === view.meta.title) {
+        if (v.path === view.path || v.name === view.name) {
           state.visitedTabsView.splice(i, 1)
         }
       }

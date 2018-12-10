@@ -34,7 +34,30 @@ export const constantRouterMap = [
         path: 'home',
         name: 'home',
         component: () => import('@/views/homepage/homepage'),
-        meta: { title: '首页' }
+        meta: {title: '首页'}
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: Layout,
+    hidden: true,
+    meta: {
+      icon: 'tickets',
+      title: '个人中心'
+    },
+    children: [
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/views/user/profile'),
+        meta: {icon: 'warning', title: '个人中心'}
+      },
+      {
+        path: 'avatar',
+        name: 'Avatar',
+        component: () => import('@/views/user/profile'),
+        meta: {icon: 'warning', title: '修改头像'}
       }
     ]
   },
@@ -52,7 +75,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'Introduction',
         component: () => import('@/views/introduction/index'),
-        meta: { icon: 'warning', title: '简述' }
+        meta: {icon: 'warning', title: '简述'}
       }
     ]
   },
@@ -73,20 +96,20 @@ export const constantRouterMap = [
             path: 'menu1-1',
             name: 'menu1-1',
             component: () => import('@/views/introduction/index'),
-            meta: { icon: 'error', title: 'menu1-1' }
+            meta: {icon: 'error', title: 'menu1-1'}
           },
           {
             path: 'menu1-2',
             name: 'menu1-2',
             component: () => import('@/views/nested/menu1/menu1-2/index'),
             alwaysShow: true,
-            meta: { icon: 'info', title: 'menu1-2' },
+            meta: {icon: 'info', title: 'menu1-2'},
             children: [
               {
                 path: 'menu1-2-1',
                 component: () => import('@/views/introduction/index'),
                 name: 'menu1-2-1',
-                meta: { icon: 'error', title: 'menu1-2-1' }
+                meta: {icon: 'error', title: 'menu1-2-1'}
               }
             ]
           }
@@ -96,7 +119,7 @@ export const constantRouterMap = [
         path: 'menu2',
         name: 'menu2',
         component: () => import('@/views/introduction/index'),
-        meta: { icon: 'back', title: 'menu2' }
+        meta: {icon: 'back', title: 'menu2'}
       }
     ]
   }
@@ -123,13 +146,13 @@ export const asyncRouterMap = [
         path: 'export-excel',
         name: '导出表格',
         component: () => import('@/views/excel/export-excel'),
-        meta: { icon: 'arrow-left', title: 'exportExcel' }
+        meta: {icon: 'arrow-left', title: 'exportExcel'}
       },
       {
         path: 'upload-excel',
         name: '上传表格',
         component: () => import('@/views/excel/upload-excel'),
-        meta: { icon: 'minus', title: 'uploadExcel' }
+        meta: {icon: 'minus', title: 'uploadExcel'}
       }
     ]
   },
@@ -146,7 +169,7 @@ export const asyncRouterMap = [
         path: 'index',
         name: 'clipBoard',
         component: () => import('@/views/clipboard'),
-        meta: { title: '剪切板示例', icon: 'document' }
+        meta: {title: '剪切板示例', icon: 'document'}
       }
     ]
   }

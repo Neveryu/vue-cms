@@ -28,7 +28,7 @@
             个人中心
           </el-dropdown-item>
         </router-link>
-        <router-link class='inlineBlock' to="/user/profile">
+        <router-link class='inlineBlock' to="/user/avatar">
           <el-dropdown-item>
             修改头像
           </el-dropdown-item>

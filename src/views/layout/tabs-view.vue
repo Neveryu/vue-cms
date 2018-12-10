@@ -48,13 +48,13 @@
       },
       handleClose(tag) {
         this.delVisitedTabsView(tag).then((tags) => {
+          // 如果关闭的是当前显示的页面，就去到前一个 tab-view 页面
           if (this.isActive(tag)) {
             const lastTag = tags.slice(-1)[0]
+            // 前一个 tab-view 页面存在，就跳；不存在就到首页
             if (lastTag) {
-              console.info(1)
               this.$router.push(lastTag.path)
             } else {
-              console.info(2)
               this.$router.push('/')
             }
           }
