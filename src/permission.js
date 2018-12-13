@@ -2,10 +2,10 @@
  * 全局权限检测
  * 包括1、路由的全局守卫
  */
-
 import router from './router'
 import store from './store'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'// progress bar style
 import { getToken } from '@/common/auth'
 
 NProgress.configure({ showSpinner: false })
@@ -13,11 +13,12 @@ NProgress.configure({ showSpinner: false })
 // 路由全局前置守卫
 const whiteList = ['/login']  // 白名单
 router.beforeEach((to, from, next) => {
+  NProgress.start() // start progress bar
   if (getToken()) {
     // 有token访问login页面，就跳到首页
     if (to.path === '/login') {
       next('/')
-      NProgress.done()
+      NProgress.done() // 这种情况不会触发router的后置钩子，所以这里需要单独处理
     } else {
       // 有token，没有permissions
       if (store.getters.permissions.length === 0) {
@@ -45,10 +46,15 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    if (whiteList.includes(to.path)) {
+    if (whiteList.includes(to.path)) { // 白名单，免密登录
       next()
-    } else {
+    } else { // 否则就跳动登录页面
       next('/login')
+      NProgress.done() // 这种情况不会触发router的后置钩子，所以这里需要单独处理
     }
   }
+})
+
+router.afterEach(() => {
+  NProgress.done() // finish progress bar
 })
