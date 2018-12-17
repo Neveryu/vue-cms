@@ -9,6 +9,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+// 自定义的全局组件
+import Notification from '@/components/notification'
+
 // 国际化
 import i18n from './lang'
 // 全局权限检查
@@ -24,6 +27,7 @@ Vue.use(ElementUI, {
   size: 'medium',
   i18n: (key, value) => i18n.t(key, value)
 })
+Vue.use(Notification)
 
 /* eslint-disable no-new */
 new Vue({

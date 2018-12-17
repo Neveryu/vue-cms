@@ -122,6 +122,23 @@ export const constantRouterMap = [
         meta: {icon: 'back', title: 'menu2'}
       }
     ]
+  },
+  {
+    path: '/custom-component',
+    component: Layout,
+    meta: {
+      icon: 'question',
+      title: '自定义组件'
+    },
+    redirect: '/custom-component/index',
+    children: [
+      {
+        path: 'index',
+        name: 'CustomComponent',
+        component: () => import('@/views/custom-component/index'),
+        meta: {icon: 'warning', title: '自定义组件1'}
+      }
+    ]
   }
 ]
 
