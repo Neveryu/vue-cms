@@ -136,7 +136,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'CustomComponent',
         component: () => import('@/views/custom-component/index'),
-        meta: {icon: 'warning', title: '自定义组件1'}
+        meta: {icon: 'warning', title: '自定义组件'}
       }
     ]
   }

@@ -1,6 +1,7 @@
 import Notification from './notification'
-// import notify from './function'
+import notify from './function'
 
 export default(Vue, options) => {
   Vue.component(Notification.name, Notification)
+  Vue.prototype.$notify = notify
 }
