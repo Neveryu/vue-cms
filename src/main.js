@@ -21,13 +21,13 @@ import './icons'
 // 全局 Mock 接口
 import './mock'
 
-Vue.config.productionTip = false
-
 Vue.use(ElementUI, {
   size: 'medium',
   i18n: (key, value) => i18n.t(key, value)
 })
 Vue.use(Notification)
+
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
