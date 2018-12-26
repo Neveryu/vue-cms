@@ -9,7 +9,7 @@
       @mouseenter="clearTimer"
       @mouseleave="createTimer"
     >
-      <span class="content">{{content}}</span>
+      <span class="content" v-html="content"></span>
       <a href="javascript:;" class="btn" @click="handleClose">{{btn}}</a>
     </div>
   </transition>
@@ -73,7 +73,7 @@ export default {
   background-color #303030
   color rgba(255, 255, 255, 1)
   align-items center
-  padding 20px
+  padding 18px 14px
   position fixed
   min-width 280px
   max-width 350px
@@ -83,6 +83,8 @@ export default {
   // transition all .5s
   .content
     padding 0
+    &:hover
+      color #42b983
   .btn
     color #ff4081
     padding-left 24px

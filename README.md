@@ -1,21 +1,22 @@
-# vue-cms
+<p align="center"><a href="https://blog.csdn.net/csdn_yudong/article/details/85250412"><img width="120" src="https://raw.githubusercontent.com/Neveryu/vue-cms/master/static/image/login-logo.png"></a></p>
 
 <p align="center">基于 Vue 和 ElementUI 构建的企业级后台管理项目</p>
 
 <p align="center">
-  <a href="https://github.com/vuejs/vue">
+  <a href="https://github.com/vuejs/vue" rel="nofollow">
     <img src="https://img.shields.io/badge/vue-2.5.2-brightgreen.svg" alt="vue">
   </a>
-  <a href="https://github.com/ElemeFE/element">
+  <a href="https://github.com/ElemeFE/element" rel="nofollow">
     <img src="https://img.shields.io/badge/element--ui-2.0.11-brightgreen.svg" alt="element-ui">
   </a>
-  <a href="" rel="nofollow">
-    <img src="https://travis-ci.org/PanJiaChen/vue-element-admin.svg?branch=master" alt="Build Status">
+  <a href="https://travis-ci.org/Neveryu/vue-cms" rel="nofollow">
+    <img src="https://travis-ci.org/Neveryu/vue-cms.svg?branch=master" alt="Build Status">
   </a>
-  <a href="">
+  <a href="https://github.com/Neveryu/vue-cms/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
   </a>
 </p>
+
 
 ## 简介
 `vue-cms` 是一个企业级管理后台项目，基于 Vue 和 ElementUI构建。它使用了最新的前端技术栈，内置了i18国际化解决方案，动态路由，权限验证等很多功能特性。

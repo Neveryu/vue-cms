@@ -43,7 +43,7 @@ export default {
     emitNotify(enterAnimated, leaveAnimated) {
       this.$my_notify({
         autoClose: 3000,
-        content: '请先说你好',
+        content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
         enterAnimated,
         leaveAnimated
       })
@@ -58,4 +58,8 @@ export default {
 <style scoped lang="stylus">
 .animate-wrapper
   margin-top 20px
+/deep/ .el-alert__title
+  font-size 1em
+/deep/ .el-alert__description
+  font-size 1em
 </style>
