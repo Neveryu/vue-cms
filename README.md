@@ -3,19 +3,19 @@
 <p align="center">基于 Vue 和 ElementUI 构建的企业级后台管理项目</p>
 
 <p align="center">
-  <a href="https://github.com/vuejs/vue" rel="nofollow">
+  <a href="https://github.com/vuejs/vue" rel="nofollow" target="_blank">
     <img src="https://img.shields.io/badge/vue-2.5.2-brightgreen.svg" alt="vue">
   </a>
-  <a href="https://github.com/ElemeFE/element" rel="nofollow">
+  <a href="https://github.com/ElemeFE/element" rel="nofollow" target="_blank">
     <img src="https://img.shields.io/badge/element--ui-2.0.11-brightgreen.svg" alt="element-ui">
   </a>
-  <a href="https://travis-ci.org/Neveryu/vue-cms" rel="nofollow">
+  <a href="https://travis-ci.org/Neveryu/vue-cms" rel="nofollow" target="_blank">
     <img src="https://travis-ci.org/Neveryu/vue-cms.svg?branch=master" alt="Build Status">
   </a>
   <a href="https://github.com/Neveryu/vue-cms/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
   </a>
-  <a href="">
+  <a href="https://neveryu.github.io/reward/index.html" target="_blank">
     <img src="https://img.shields.io/badge/%24-donate-ff69b4.svg" alt="donate">
   </a>
 </p>
@@ -95,7 +95,8 @@ npm run build --report
 ## Donate
 
 如果你觉得这个项目帮助到了你，你可以帮作者买一杯果汁表示鼓励 :tropical_drink:
-![donate]()
+
+<img src="https://neveryu.github.io/reward/wechat-alipay.png" alt="donate" width="650">
 
 
 ## Browsers support
