@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" class='international-icon' @command="handleSetLanguage">
     <div>
-      <icon-svg class-name='international-icon' icon-class="language"/>
+      <svg-icon class-name='international-icon' icon-class="language" />
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="zh" :disabled="language==='zh'">中文</el-dropdown-item>
@@ -20,13 +20,13 @@
       handleSetLanguage(lang) {
         this.$i18n.locale = lang
         this.$store.dispatch('setLanguage', lang)
-        this.$notify({
-          title: 'Info',
-          message: 'switch language success',
-          type: 'success',
-          offset: 100,
-          showClose: false
-        })
+        // this.$notify({
+        //   title: 'Info',
+        //   message: 'switch language success',
+        //   type: 'success',
+        //   offset: 100,
+        //   showClose: false
+        // })
       }
     }
   }

@@ -11,7 +11,7 @@
     name: 'app-main',
     data() {
       return {
-        a: '右侧主界面'
+        desc: '这里是右侧主界面'
       }
     }
   }

@@ -16,7 +16,14 @@
       const { icon, title } = context.props
       const vnodes = []
       if(icon) {
-        vnodes.push(<i class={'el-icon-' + icon}></i>)
+        // 在路由中，如果 `icon` 是以 `svg-` 开头的话，就加载 svg 图标
+        // 否则就默认使用 `Element-UI` 图标
+        if(icon.startsWith('svg-')) {
+          const _icon = icon.substr(4)
+          vnodes.push(<svg-icon class="sidebar-icon" icon-class={_icon}/>)
+        } else {
+          vnodes.push(<i class={'el-icon-' + icon}></i>)
+        }
       }
       if(title) {
         vnodes.push(<span slot="title">{(title)}</span>)
@@ -25,3 +32,10 @@
     }
   }
 </script>
+
+<style scoped lang="stylus">
+  .sidebar-icon
+    font-size 1.4em
+    margin-right 6px
+    vertical-align -.3em
+</style>

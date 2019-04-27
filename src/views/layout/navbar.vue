@@ -25,21 +25,21 @@
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class='inlineBlock' to="/user/profile">
           <el-dropdown-item>
-            个人中心
+            {{$t('navbar.profile')}}
           </el-dropdown-item>
         </router-link>
         <router-link class='inlineBlock' to="/user/avatar">
           <el-dropdown-item>
-            修改头像
+            {{$t('navbar.avatar')}}
           </el-dropdown-item>
         </router-link>
-        <!-- <a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
+        <a target='_blank' href="https://github.com/Neveryu/vue-cms">
           <el-dropdown-item>
-            项目地址
+            {{$t('navbar.github')}}
           </el-dropdown-item>
-        </a> -->
+        </a>
         <el-dropdown-item @click.native="logout">
-          <span style="display:block;">退出登录</span>
+          <span style="display:block;">{{$t('navbar.logOut')}}</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>

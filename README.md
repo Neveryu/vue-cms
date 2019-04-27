@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/vue-2.5.2-brightgreen.svg" alt="vue">
   </a>
   <a href="https://github.com/ElemeFE/element" rel="nofollow" target="_blank">
-    <img src="https://img.shields.io/badge/element--ui-2.0.11-brightgreen.svg" alt="element-ui">
+    <img src="https://img.shields.io/badge/element--ui-2.8.2-brightgreen.svg" alt="element-ui">
   </a>
   <a href="https://travis-ci.org/Neveryu/vue-cms" rel="nofollow" target="_blank">
     <img src="https://travis-ci.org/Neveryu/vue-cms.svg?branch=master" alt="Build Status">

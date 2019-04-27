@@ -6,6 +6,8 @@
     <el-button class="show-account" type="text" @click="accountTip">提示帐号信息</el-button>
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
+        <lang-select class="lang-select"></lang-select>
+        <div style="clear: both;"></div>
         <img src="../../../static/image/login-logo.png" alt="">
         <h2 class="login-title">{{$t('login.title')}}</h2>
       </div>
@@ -13,13 +15,13 @@
         <el-form-item :label="$t('login.account')" prop="username" style="position:relative">
           <el-input type="text" v-model="loginForm.username" @keyup.enter.native="goToPwdInput"></el-input>
           <span class="svg-container svg-container_user">
-            <icon-svg icon-class="user" />
+            <svg-icon icon-class="user" />
           </span>
         </el-form-item>
         <el-form-item :label="$t('login.password')" prop="pwd">
           <el-input type="password" v-model="loginForm.pwd" @keyup.enter.native="onLogin" ref="pwd"></el-input>
           <span class="svg-container svg-container_password">
-            <icon-svg icon-class="password" />
+            <svg-icon icon-class="password" />
           </span>
         </el-form-item>
         <el-form-item :label="$t('login.remember')" label-width="80px">
@@ -34,11 +36,15 @@
 </template>
 <script>
   import { isValidUsername } from '@/utils/validate'
+  import LangSelect from '@/components/lang-select'
   import { saveToLocal, loadFromLocal } from '@/common/local-storage'
   import { mapActions } from 'vuex'
   /* eslint-disable*/
   import particles from 'particles.js'
   export default {
+    components: {
+      LangSelect
+    },
     data() {
       // username 验证
       const validateUsername = (rule, value, callback) => {
@@ -287,7 +293,10 @@
       height: 450px;
       background: #fff;
       .el-card-header {
-        text-align: center;
+        text-align: center
+        .lang-select {
+          float right
+        }
       }
       .login-title {
         margin: 0;

@@ -67,7 +67,7 @@ export const constantRouterMap = [
     redirect: '/introduction/index',
     // alwaysShow: true,
     meta: {
-      icon: 'question',
+      icon: 'svg-user',
       title: '简述'
     },
     children: [
@@ -75,7 +75,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'Introduction',
         component: () => import('@/views/introduction/index'),
-        meta: {icon: 'warning', title: '简述'}
+        meta: {icon: 'question', title: '简述'}
       }
     ]
   },
