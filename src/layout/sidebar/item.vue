@@ -35,7 +35,7 @@
 
 <style scoped lang="stylus">
   .sidebar-icon
-    font-size 1.4em
-    margin-right 6px
+    font-size 1.2em
+    margin-right 8px
     vertical-align -.3em
 </style>

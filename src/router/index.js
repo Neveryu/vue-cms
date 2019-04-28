@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '@/views/login'
-import Layout from '@/views/layout/layout'
+import Layout from '@/layout/layout'
 
 Vue.use(Router)
 
@@ -33,7 +33,7 @@ export const constantRouterMap = [
       {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/homepage/homepage'),
+        component: () => import('@/views/homepage'),
         meta: {title: '首页'}
       }
     ]
@@ -67,7 +67,7 @@ export const constantRouterMap = [
     redirect: '/introduction/index',
     // alwaysShow: true,
     meta: {
-      icon: 'svg-user',
+      icon: 'svg-aperture',
       title: '简述'
     },
     children: [

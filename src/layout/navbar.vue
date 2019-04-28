@@ -14,6 +14,23 @@
 
     <lang-select class="right-menu-item"></lang-select>
 
+    <!-- <el-dropdown class="" @command="handleCommand" trigger="click">
+      <div class="">
+        <img class="user-avatar" :src="avatar">
+      </div>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item class="clearfix" command="sutraBlue">
+          经典蓝
+        </el-dropdown-item>
+        <el-dropdown-item class="clearfix" command='scienceBlue'>
+          科技蓝
+        </el-dropdown-item>
+        <el-dropdown-item class="clearfix" command='deepBlue'>
+          深沉蓝
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown> -->
+
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img class="user-avatar" :src="avatar">

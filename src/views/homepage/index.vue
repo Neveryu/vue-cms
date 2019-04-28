@@ -5,7 +5,7 @@
       <div class="home-total-item" v-for="(item, index) of homeTotalData">
         <div class="wrapper-item">
           <p class="title">{{item.title}}</p>
-          <p class="value" ref="countup">{{item.value}}</p>
+          <p class="value digital-number" ref="countup">{{item.value}}</p>
           <color-line :id='"main"+index' :color="item.color" :optionData="item.data" width="180px" height="70px"></color-line>
         </div>
       </div>
@@ -270,8 +270,9 @@
           margin: 0px 0;
         }
         .value {
-          margin: 5px 0;
-          font-size: 26px;
+          margin 5px 0
+          font-size 32px
+          color #0e8a16
         }
       }
       &:last-child {
