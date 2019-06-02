@@ -38,7 +38,7 @@
           <div class="content" ref="rankContent">
             <ul class="wrapper-user">
               <li v-for="item of rankList" class="user-item">
-                <img class="avatar" :src="item.avatar" width="35" height="35" alt="">
+                <img class="avatar" :src="item.avatar" width="35" height="35" loading="lazy" alt="">
                 <div class="user-info">
                   <p class="name">{{item.name}}</p>
                   <p class="value">{{item.value}}</p>
@@ -272,7 +272,7 @@
         .value {
           margin 5px 0
           font-size 32px
-          color #0e8a16
+          color: #ffc107
         }
       }
       &:last-child {

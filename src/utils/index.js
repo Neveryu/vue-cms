@@ -1,3 +1,9 @@
+/**
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return {*}
+ */
 function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
@@ -34,8 +40,30 @@ function debounce(func, wait, immediate) {
 }
 
 /**
+ * This is just a simple version of deep copy
+ * Has a lot of edge cases bug
+ * If you want to use a perfect deep copy, use lodash's _.cloneDeep
+ * @param {Object} source
+ * @returns {Object}
+ */
+function deepClone(source) {
+  if (!source && typeof source !== 'object') {
+    throw new Error('error arguments', 'deepClone')
+  }
+  const targetObj = source.constructor === Array ? [] : {}
+  Object.keys(source).forEach(keys => {
+    if (source[keys] && typeof source[keys] === 'object') {
+      targetObj[keys] = deepClone(source[keys])
+    } else {
+      targetObj[keys] = source[keys]
+    }
+  })
+  return targetObj
+}
+
+/**
  * 获取当前运行环境
  */
 const isDev = (process.env.NODE_ENV === 'development')
 
-export { debounce, isDev }
+export { debounce, isDev, deepClone }

@@ -75,7 +75,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'Introduction',
         component: () => import('@/views/introduction/index'),
-        meta: {icon: 'question', title: '简述'}
+        meta: {icon: 'svg-aperture', title: '简述'}
       }
     ]
   },
@@ -83,7 +83,7 @@ export const constantRouterMap = [
     path: '/nested',
     component: Layout,
     meta: {
-      icon: 'question',
+      icon: 'svg-layers',
       title: '路由嵌套'
     },
     children: [
@@ -137,6 +137,24 @@ export const constantRouterMap = [
         name: 'CustomComponent',
         component: () => import('@/views/custom-component/index'),
         meta: {icon: 'warning', title: '自定义组件'}
+      }
+    ]
+  },
+  {
+    path: '/echarts',
+    component: Layout,
+    redirect: 'index',
+    alwaysShow: true,
+    meta: {
+      title: '可视化',
+      icon: 'svg-droplet'
+    },
+    children: [
+      {
+        path: 'index',
+        name: '数量统计',
+        component: () => import('@/views/echarts'),
+        meta: {title: '数量统计', icon: 'svg-heart'}
       }
     ]
   }
