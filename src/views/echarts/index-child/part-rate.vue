@@ -51,8 +51,8 @@ export default {
         // tooltip: {},
         // color: ['#61a8ff'],
         grid: {
-          left: 1,
-          right: 1,
+          left: 10,
+          right: 10,
           bottom: 1,
           top: 1,
           containLabel: true
@@ -73,7 +73,7 @@ export default {
             data: this.yData,
             axisLabel: {
               color: '#fff',
-              fontSize: 14
+              fontSize: 16
             },
             axisLine: {
               show: false
@@ -85,7 +85,7 @@ export default {
             data: this.xData,
             axisLabel: {
               color: '#fff',
-              fontSize: 14,
+              fontSize: 16,
               formatter: '{value}%'
             },
             axisLine: {
@@ -119,7 +119,7 @@ export default {
                 },
                 position: 'right',
                 fontStyle: {
-                  fontSize: 14
+                  fontSize: 16
                 },
                 formatter: '{c}%'
               }

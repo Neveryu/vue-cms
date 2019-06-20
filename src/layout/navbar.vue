@@ -5,31 +5,16 @@
     text-color="#fff"
     active-text-color="#fff">
     <router-link to="/home">
-      <el-menu-item index="1">{{$t('navbar.title')}}</el-menu-item>
+      <el-menu-item index="1" class="title-name">{{$t('navbar.title')}}</el-menu-item>
     </router-link>
+    
+    <change-theme class="theme-container"></change-theme>
 
     <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
       <screenfull class="screenfull right-menu-item"></screenfull>
     </el-tooltip>
 
     <lang-select class="right-menu-item"></lang-select>
-
-    <!-- <el-dropdown class="" @command="handleCommand" trigger="click">
-      <div class="">
-        <img class="user-avatar" :src="avatar">
-      </div>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item class="clearfix" command="sutraBlue">
-          经典蓝
-        </el-dropdown-item>
-        <el-dropdown-item class="clearfix" command='scienceBlue'>
-          科技蓝
-        </el-dropdown-item>
-        <el-dropdown-item class="clearfix" command='deepBlue'>
-          深沉蓝
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown> -->
 
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
@@ -66,11 +51,13 @@
   import { mapGetters, mapActions } from 'vuex'
   import LangSelect from '@/components/lang-select'
   import Screenfull from '@/components/screenfull'
+  import ChangeTheme from '@/components/theme'
   export default {
     name: '',
     components: {
       LangSelect,
-      Screenfull
+      Screenfull,
+      ChangeTheme
     },
     computed: {
       ...mapGetters([
@@ -92,7 +79,7 @@
     }
   }
 </script>
-<style scoped lang="stylus">
+<style lang="stylus">
   .navbar {
     position fixed
     width 100%
@@ -103,12 +90,22 @@
     background-image linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6)
   }
   .navbar /deep/ .el-menu-item {
+    font-size 20px
     &:hover {
       background-color: transparent;
     }
     &:focus {
       background-color: transparent;
     }
+  }
+  .theme-container {
+    position absolute
+    top 15px
+    right 225px
+    color #fff
+    font-size 24px
+    cursor pointer
+    // background-image linear-gradient(red, blue)
   }
   .navbar /deep/ .screenfull {
     position: absolute;
@@ -117,7 +114,7 @@
   }
   .right-menu-item {
     position: absolute;
-    top: 20px;
+    top: 18px;
     right: 150px;
     color: #fff;
   }

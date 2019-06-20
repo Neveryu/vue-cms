@@ -34,22 +34,22 @@ export function getHomeDetailItem() {
     {
       name: '注册用户数',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#8499b6'
+      color: '#ec407a'
     },
     {
       name: '活跃用户数',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#6976a2'
+      color: '#ab47bc'
     },
     {
       name: '人均投资金额',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#7e8ec2'
+      color: '#2196f3'
     },
     {
       name: '网站日均访问量',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#837e9e'
+      color: '#009688'
     }
   ]
 }

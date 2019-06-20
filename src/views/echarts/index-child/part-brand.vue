@@ -1,10 +1,10 @@
 <template>
   <div class="part-brand-wrapper">
     <ul class="data-wrapper">
-      <li class="item" style="text-align: center; font-size: 16px" v-if="false">
-        <span class=""></span>
-        <span style="text-align: left" class="name">地方</span>
-        <span class="value">总数量</span>
+      <li class="item">
+        <span class="index" style="visibility: hidden"></span>
+        <span class="name">地区</span>
+        <span class="value">总数</span>
         <span class="done-value">完成数</span>
         <span class="rate">完成率</span>
       </li>
@@ -64,21 +64,20 @@ export default {
       width 96%
       height 100%
       margin 0 auto
-      padding-top 2px
       list-style none
       padding-left 0
       .item
         font-size 16px
         // margin-top 4px
         cursor pointer
-        height 30px
-        line-height 30px
+        height 28px
+        line-height 28px
         &:hover
           background-color rgba(18,245,255,0.1)
         .index
           color #fff
           display inline-block
-          font-size 12px
+          font-size 14px
           width 18px
           height 18px
           line-height 18px
@@ -96,7 +95,7 @@ export default {
         .name
           display inline-block
           width 30%
-          font-size 14px
+          font-size 16px
           overflow hidden
           text-overflow ellipsis
           white-space nowrap

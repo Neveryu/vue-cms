@@ -40,7 +40,7 @@ export default {
       // 计算label宽度时需要额外polyfill一点宽度
       polyfillWidth: 30,
       vData: [],
-      pieColorArr: ['#29A3E7', '#42D9FF', '#F8A05B', '#FBBA63', '#D75694', '#F573A1', '#C855DD', '#626CF6', '#4932DB', '#4B3AFF']
+      pieColorArr: ['#29A3E7', '#42D9FF', '#F8A05B', '#FBBA63', '#D75694', '#F573A1', '#C855DD', '#626CF6', '#6be6c1', '#c4ebad', '#f2d643', '#ebdba4', '#ffccbc', '#ff6d00', '#4932DB', '#4B3AFF']
     }
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
           orient: 'vertical',
           textStyle: {
             color: '#E7ECF0',
-            fontSize: 14
+            fontSize: 16
           },
           tooltip: {
             show: true,
@@ -101,6 +101,8 @@ export default {
           center: ['72%', '50%'], // 饼图的中心（圆心）坐标
           radius: ['70%', '80%'], // 饼图的半径
           avoidLabelOverlap: true, // 是否启用防止标签重叠
+          hoverOffset: 6,
+          selectedMode: 'single',
           itemStyle: { // 图形样式
             normal: {
               label: { // 标签的位置
@@ -205,7 +207,25 @@ export default {
       itemDetail.forEach((v, i, _this) => {
         legendArr.push(v.quesName)
         valArr.push(
-          /* {
+          {
+            value: v.all,
+            name: v.quesName,
+            itemStyle: {
+              normal: {
+                // borderWidth: 8,
+                shadowBlur: 100,
+                shadowColor: 'rgba(142, 152, 241, 0.6)',
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                  offset: 0,
+                  color: this.pieColorArr[2 * (i % 10)]
+                }, {
+                  offset: 1,
+                  color: this.pieColorArr[2 * (i % 10) + 1]
+                }])
+              }
+            }
+          },
+          {
             value: 0,
             name: ' ',
             tooltip: {
@@ -226,23 +246,6 @@ export default {
                 color: 'rgba(0, 0, 0, 0)',
                 borderColor: 'rgba(0, 0, 0, 0)',
                 borderWidth: 0
-              }
-            }
-          }, */ {
-            value: v.all,
-            name: v.quesName,
-            itemStyle: {
-              normal: {
-                // borderWidth: 8,
-                shadowBlur: 10,
-                shadowColor: 'rgba(142, 152, 241, 0.6)',
-                color: new echarts.graphic.LinearGradient(0, 0.5, 1, 0.5, [{
-                  offset: 0,
-                  color: this.pieColorArr[2 * (i % 4)]
-                }, {
-                  offset: 1,
-                  color: this.pieColorArr[2 * (i % 4) + 1]
-                }])
               }
             }
           }
@@ -326,7 +329,7 @@ export default {
         display inline-block
         height 30px
         line-height 30px
-        font-size 14px
+        font-size 16px
         color #fff
         padding 0 5px
         cursor pointer

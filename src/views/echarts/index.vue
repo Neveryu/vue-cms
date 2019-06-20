@@ -8,7 +8,7 @@
         <span class="name">数据分布</span>
       </div>
       <div class="brand-wrapper">
-        <catelog-brand width="100%" height="100%" :x-data="catelogXData" :y-data="catelogYData"></catelog-brand>
+        <catelog-brand width="100%" height="100%" :x-data="catelogXData" :y-data="catelogYData" @gotoList="handlerToList"></catelog-brand>
       </div>
       <!-- 数量统计-细分类别数据 -->
       <el-row class="details-wrapper" :gutter="30">
@@ -50,6 +50,11 @@
 
       </el-row>
     </div>
+    <!-- 数据列表-->
+    <data-list v-if="showFlag === 2"
+      :p-id="pId"
+      :ques-id="quesId"
+      :dept-id="deptId" @backFromList="_backFromList"></data-list>
   </div>
 </template>
 <script>
@@ -59,13 +64,15 @@ import CatelogBrand from './index-child/catelog-brand'
 import DetailLabel from './index-child/detail-label'
 import PartBrand from './index-child/part-brand'
 import PartRate from './index-child/part-rate'
+import DataList from './index-child/data-list'
 export default {
   name: 'echarts',
   components: {
     CatelogBrand,
     DetailLabel,
     PartBrand,
-    PartRate
+    PartRate,
+    DataList
   },
   data() {
     return {
@@ -83,6 +90,10 @@ export default {
     }
   },
   methods: {
+    // 列表显示
+    handlerToList(pid) {
+      console.log(pid)
+    },
     // 获取数量以及详情数据
     _getCateData() {
       getData().then(resp => {
@@ -155,7 +166,7 @@ export default {
     height 300px
   .details-wrapper
     height auto
-    margin-top 15px
+    margin-top 25px
     padding-bottom 20px
     .rate-top10
       .content

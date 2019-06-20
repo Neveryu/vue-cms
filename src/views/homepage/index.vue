@@ -247,10 +247,13 @@
   }
 </script>
 <style scoped lang="stylus">
+  .homepage-container
+    min-width 800px
+
   .home-total {
     width: 100%;
     min-width: 800px;
-    height: 150px;
+    height: 160px;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin: 0 0 15px 0;
@@ -271,7 +274,7 @@
         }
         .value {
           margin 5px 0
-          font-size 32px
+          font-size 34px
           color: #ffc107
         }
       }
@@ -312,8 +315,8 @@
       }
     }
     .detail-item-wrapper {
-      display: flex;
-      height: 300px;
+      display: flex
+      height: 300px
       overflow: hidden;
       flex-wrap: wrap;
       flex-flow: row wrap;
@@ -322,11 +325,14 @@
       padding: 0 10px;
       color: #fff;
       .home-detail-item {
-        flex: 0 0 48%;
-        // display: inline-block;
-        // width: 150px;
-        height: 145px;
-        border: 1px solid #eee;
+        flex: 0 0 48%
+        height: 145px
+        border: 1px solid #eee
+        background-image linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .3)) !important
+        cursor pointer
+      }
+      .home-detail-item:hover {
+        background-image none !important
       }
       .home-detail-item:nth-child(3), .home-detail-item:nth-child(4) {
         margin-top: 10px;

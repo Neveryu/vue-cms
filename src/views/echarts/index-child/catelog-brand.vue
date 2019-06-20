@@ -38,8 +38,8 @@ export default {
   methods: {
     // 点击事件
     _click(e) {
-      let _pid = this.xData[e.dataIndex].id
-      console.log(_pid)
+      let pid = this.xData[e.dataIndex].id
+      this.$emit('gotoList', pid)
     },
     // 初始化，绘制图表
     initChart() {
@@ -57,9 +57,9 @@ export default {
           }
         },
         grid: {
-          left: '40px',
+          left: '50px',
           right: '10px',
-          bottom: '23px',
+          bottom: '25px',
           top: '30px'
         },
         xAxis: {
@@ -69,7 +69,7 @@ export default {
           // 刻度标签文字颜色
           axisLabel: {
             color: '#fff',
-            fontSize: 14,
+            fontSize: 16,
             interval: 0,
             rotate: 0
           },
@@ -88,12 +88,12 @@ export default {
             // 单位字体大小
             nameTextStyle: {
               color: '#fff',
-              fontSize: 14
+              fontSize: 16
             },
             // 刻度标签文字颜色
             axisLabel: {
               color: '#fff',
-              fontSize: 14,
+              fontSize: 16,
               formatter: '{value}'
             },
             // 横轴线颜色
