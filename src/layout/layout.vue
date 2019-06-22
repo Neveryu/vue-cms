@@ -23,13 +23,13 @@
   }
 </script>
 <style scoped lang="stylus">
-  .app-wrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    .main-container {
-      padding-left: 201px;
-      padding-top: 61px;
-    }
+.app-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .main-container {
+    padding-left: 201px;
+    padding-top: 61px;
   }
+}
 </style>

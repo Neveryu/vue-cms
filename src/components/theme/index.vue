@@ -10,6 +10,7 @@
       <el-dropdown-item class="clearfix" command='science-blue'>
         深空蓝
       </el-dropdown-item>
+      <!-- <el-color-picker v-model="color"></el-color-picker> -->
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -17,6 +18,11 @@
 <script>
 import '@/assets/custom-theme/science-blue.css' // the theme changed version element-ui css
 export default {
+  data() {
+    return {
+      color: 'rgba(255, 69, 0, 0.68)'
+    }
+  },
   methods: {
     // change theme - 换肤
     changeTheme(command) {

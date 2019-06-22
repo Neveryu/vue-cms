@@ -1,7 +1,7 @@
 <template>
   <el-menu
     mode="vertical"
-    class="el-menu-vertical"
+    class="left-sidebar"
     unique-opened
     @open="handleOpen"
     @close="handleClose"
@@ -38,11 +38,11 @@
     }
   }
 </script>
-<style scoped lang="stylus">
-  .el-menu-vertical:not(.el-menu--collapse)
-    position fixed
-    top 61px
-    width 200px
-    height 100%
-    min-height 500px
+<style lang="stylus">
+.left-sidebar
+  position fixed
+  top 56px
+  width 200px
+  height 100%
+  min-height 500px
 </style>

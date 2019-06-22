@@ -34,9 +34,9 @@
 </script>
 
 <style scoped lang="stylus">
-  .sidebar-icon
-    font-size 1.1em
-    margin-right 8px
-    margin-left 4px
-    vertical-align -.3em
+.sidebar-icon
+  font-size 1.1em
+  margin-right 8px
+  margin-left 4px
+  vertical-align -.3em
 </style>
