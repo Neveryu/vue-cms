@@ -89,27 +89,27 @@ export const constantRouterMap = [
     children: [
       {
         path: 'menu1',
-        meta: { icon: 'success', title: 'menu1' },
+        meta: { icon: 'share', title: '嵌套路由1' },
         component: () => import('@/views/nested/menu1/index'),
         children: [
           {
             path: 'menu1-1',
             name: 'menu1-1',
             component: () => import('@/views/introduction/index'),
-            meta: {icon: 'error', title: 'menu1-1'}
+            meta: {icon: 'success', title: '嵌套路由1-1'}
           },
           {
             path: 'menu1-2',
             name: 'menu1-2',
             component: () => import('@/views/nested/menu1/menu1-2/index'),
             alwaysShow: true,
-            meta: {icon: 'info', title: 'menu1-2'},
+            meta: {icon: 'error', title: '嵌套路由1-2'},
             children: [
               {
                 path: 'menu1-2-1',
                 component: () => import('@/views/introduction/index'),
                 name: 'menu1-2-1',
-                meta: {icon: 'error', title: 'menu1-2-1'}
+                meta: {icon: 'warning', title: '嵌套路由1-2-1'}
               }
             ]
           }
@@ -119,7 +119,7 @@ export const constantRouterMap = [
         path: 'menu2',
         name: 'menu2',
         component: () => import('@/views/introduction/index'),
-        meta: {icon: 'back', title: 'menu2'}
+        meta: {icon: 'star-on', title: '嵌套路由2'}
       }
     ]
   },

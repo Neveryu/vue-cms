@@ -10,7 +10,9 @@
       <el-dropdown-item class="clearfix" command='science-blue'>
         深空蓝
       </el-dropdown-item>
-      <!-- <el-color-picker v-model="color"></el-color-picker> -->
+      <el-dropdown-item divided>
+        <!-- <el-color-picker v-model="color"></el-color-picker> -->
+      </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>

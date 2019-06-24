@@ -4,7 +4,7 @@
     mode="horizontal" 
     text-color="#fff"
     active-text-color="#fff">
-    <router-link to="/home">
+    <router-link to="/home" style="display: table;">
       <el-menu-item index="1" class="title-name">{{$t('navbar.title')}}</el-menu-item>
     </router-link>
     
