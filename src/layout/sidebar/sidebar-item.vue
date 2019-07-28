@@ -5,9 +5,10 @@
       <!-- 除非这个路由对象有属性 alwaysShow: true 这个属性 -->
       <!-- 所以这里的意思是：这个只有一个子路由，子路由没有children，这个路由没有属性 alwaysShow: true -->
       <!-- 那么就将他的唯一子路由放到一级菜单来 -->
+      <!-- 20190707 note: 那么这里的icon和title就用子路由的吧 -->
       <router-link v-if="hasOneShowingChildren(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChild) && !item.alwaysShow" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="item.path">
-          <item :icon="item.meta.icon" :title="item.meta.title"></item>
+          <item :icon="item.children[0].meta.icon" :title="item.children[0].meta.title"></item>
         </el-menu-item>
       </router-link>
 

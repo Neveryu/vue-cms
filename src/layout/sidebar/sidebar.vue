@@ -1,14 +1,15 @@
 <template>
-  <el-menu
-    mode="vertical"
-    class="left-sidebar"
-    unique-opened
-    @open="handleOpen"
-    @close="handleClose"
-    background-color=""
-    :collapse="isCollapse">
-    <sidebar-item v-for="router of routers" :key="router.path" :item="router" :base-path="router.path"></sidebar-item>
-  </el-menu>
+  <div class="left-sidebar">
+    <el-menu
+      mode="vertical"
+      unique-opened
+      @open="handleOpen"
+      @close="handleClose"
+      background-color=""
+      :collapse="isCollapse">
+      <sidebar-item v-for="router of routers" :key="router.path" :item="router" :base-path="router.path"></sidebar-item>
+    </el-menu>
+  </div>  
 </template>
 <script>
   import { mapGetters } from 'vuex'
@@ -38,7 +39,7 @@
     }
   }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 .left-sidebar
   position fixed
   top 56px

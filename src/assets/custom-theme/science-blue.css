@@ -3,8 +3,8 @@
 /*
  * 1、顶部navbar颜色
  */
-.science-blue .top-navbar {
-  background-image: url('../../../static/image/science-blue-header.jpg');
+.science-blue .top-navbar .el-menu {
+  background-image: url('../../../static/image/science-blue-header.jpg') !important;
 }
 
 /*

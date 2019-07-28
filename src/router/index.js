@@ -25,6 +25,11 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
     path: '/',
     hidden: true,
     component: Layout,
@@ -207,5 +212,22 @@ export const asyncRouterMap = [
         meta: {title: '剪切板示例', icon: 'document'}
       }
     ]
-  }
+  },
+  {
+    path: '/theme',
+    component: Layout,
+    meta: {
+      icon: 'document',
+      title: 'theme'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/theme/index'),
+        name: 'Theme',
+        meta: { title: '主题', icon: 'svg-pifu' }
+      }
+    ]
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]

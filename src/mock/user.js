@@ -9,14 +9,14 @@ const userMap = {
     token: 'admin',
     name: 'Admin',
     age: 10,
-    permissions: '/excel,/clipboard',
+    permissions: '/excel,/clipboard,/theme',
     avatar: './static/image/avatar/0.jpg'
   },
   lucy: {
     token: 'lucy',
     name: 'Lucy',
     age: 12,
-    permissions: '/excel',
+    permissions: '/excel,/theme',
     avatar: './static/image/avatar/1.jpg'
   }
 }
