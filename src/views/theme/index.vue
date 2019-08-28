@@ -8,10 +8,18 @@
       <div class="box-item">
         <!-- <span class="field-label">换肤 : </span> -->
         <!-- <el-switch v-model="theme" /> -->
-        <el-radio v-model="theme" :label="1" border>默认</el-radio>
-        <el-radio v-model="theme" :label="2" border>夏日心情</el-radio>
+        <el-radio v-model="themeModel" :label="1" border>默认(可定制)</el-radio>
+
+        <el-radio v-model="themeModel" :label="2" border>夏日心情</el-radio>
         <aside style="margin-top:15px;">Tips: 它与 navbar 中的更换皮肤有明显的区别，他们是两种不同的换肤方法，各自有不同的应用场景，具体请参考文档。</aside>
       </div>
+
+      <el-color-picker
+        v-show="showColorPicker"
+        class="color-picker"
+        v-model="color"
+        :predefine="predefineColors">
+      </el-color-picker>
     </el-card>
 
     <div class="block">
@@ -132,12 +140,17 @@
 <script>
 import { toggleClass } from '@/utils'
 import('@/assets/custom-theme/theme-summer.css')
+const version = require('element-ui/package.json').version // element-ui version from node_modules
+const ORIGINAL_THEME = '#409EFF' // default color (blue)
 export default {
   name: 'Theme',
   data() {
     return {
-      showColorPicker: false,
-      theme: 1,
+      chalk: '',  // 当前是否已经获取过css样式文件内容，如果获取过，这里会有值，避免多次获取
+      showColorPicker: true,
+      color: '#409EFF',
+      predefineColors: ['#409EFF', '#1890ff', '#304156', '#212121', '#11a983', '#13c2c2', '#6959CD', '#f5222d'],
+      themeModel: 1,
       tags: [
         { name: 'Tag One', type: '' },
         { name: 'Tag Two', type: 'info' },
@@ -152,11 +165,133 @@ export default {
     }
   },
   watch: {
-    theme(val) {
+    themeModel(val) {
       toggleClass(document.body, 'theme-summer')
       if(val === 1) {
         this.showColorPicker = true
+      } else {
+        this.showColorPicker = false
       }
+    },
+    async color(val) {
+      // 如果存在chalk，oldVal就是当前颜色(颜色选择器中选取的就是新颜色)
+      // 否则，oldVal就是element-ui默认的蓝色
+      const oldVal = this.chalk ? this.color : ORIGINAL_THEME
+      if (typeof val !== 'string') return
+
+      const themeCluster = this.getThemeCluster(val.replace('#', ''))
+      const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
+
+      const getHandler = (variable, id) => {
+        return () => {
+          const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
+          const newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
+
+          let styleTag = document.getElementById(id)
+          if (!styleTag) {
+            styleTag = document.createElement('style')
+            styleTag.setAttribute('id', id)
+            document.head.appendChild(styleTag)
+          }
+          styleTag.innerText = newStyle
+        }
+      }
+
+      // 如果没有chalk就是第一次换颜色，就远程获取css文件
+      if (!this.chalk) {
+        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+        await this.getCSSString(url, 'chalk')
+      }
+
+      const chalkHandler = getHandler('chalk', 'chalk-style')
+      chalkHandler()
+
+      // 过滤当前整个页面的样式文件，找到含有 oldVal 颜色的样式文件
+      const styles = [].slice.call(document.querySelectorAll('style'))
+        .filter(style => {
+          const text = style.innerText
+          return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+        })
+      // 然后，将其中oldVal的颜色，全部换成我们颜色选择器中选择的新的颜色
+      styles.forEach(style => {
+        const { innerText } = style
+        if (typeof innerText !== 'string') return
+        style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
+      })
+    }
+  },
+  methods: {
+    /* 更新样式 - 使用新的颜色变量替换之前的 */
+    updateStyle(style, oldCluster, newCluster) {
+      let newStyle = style
+      oldCluster.forEach((color, index) => {
+        newStyle = newStyle.replace(new RegExp(color, 'ig'), newCluster[index])
+      })
+      return newStyle
+    },
+    // 创建xhr，远程获取css文件，并给 chalk赋值
+    getCSSString(url, variable) {
+      return new Promise(resolve => {
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+            resolve()
+          }
+        }
+        xhr.open('GET', url)
+        xhr.send()
+      })
+    },
+    /**
+     * 传入一个颜色的HEX，得到这个颜色的深浅颜色数组
+     * 我们知道，我们默认的主色调蓝色，在实际使用中，还需要对应的浅蓝和深蓝
+     * @param  {[string]]} theme [color]
+     * @return {[array]}       [对应的深浅颜色数组]
+     */
+    getThemeCluster(theme) {
+      const tintColor = (color, tint) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        if (tint === 0) { // when primary color is in its rgb space
+          return [red, green, blue].join(',')
+        } else {
+          red += Math.round(tint * (255 - red))
+          green += Math.round(tint * (255 - green))
+          blue += Math.round(tint * (255 - blue))
+
+          red = red.toString(16)
+          green = green.toString(16)
+          blue = blue.toString(16)
+
+          return `#${red}${green}${blue}`
+        }
+      }
+
+      const shadeColor = (color, shade) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        red = Math.round((1 - shade) * red)
+        green = Math.round((1 - shade) * green)
+        blue = Math.round((1 - shade) * blue)
+
+        red = red.toString(16)
+        green = green.toString(16)
+        blue = blue.toString(16)
+
+        return `#${red}${green}${blue}`
+      }
+
+      const clusters = [theme]
+      for (let i = 0; i <= 9; i++) {
+        clusters.push(tintColor(theme, Number((i / 10).toFixed(2))))
+      }
+      clusters.push(shadeColor(theme, 0.1))
+      return clusters
     }
   }
 }
@@ -167,9 +302,11 @@ export default {
   vertical-align: middle;
 }
 .box-card {
+  position: relative;
   width: 400px;
   max-width: 100%;
   margin: 20px auto;
+  overflow: unset;
 }
 
 .block {
@@ -186,5 +323,11 @@ export default {
 }
 .item-alert {
   margin-bottom: 10px !important;
+}
+
+.app-container /deep/ .color-picker {
+  position: absolute;
+  left: -36px;
+  top: 75px;
 }
 </style>

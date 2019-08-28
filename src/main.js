@@ -2,8 +2,7 @@ import Vue from 'vue'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
-// import '@/assets/custom-theme/custom-one.css' // the theme changed version element-ui css
+// import './element-variables.scss'
 
 // animate动画库
 import 'animate.css'
