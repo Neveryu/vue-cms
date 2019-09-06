@@ -142,7 +142,8 @@ export default {
 <style scoped lang="stylus">
 .container
   padding 20px
-  background #0d47a1 url('../../../static/image/echarts/bg.jpg')
+  background-color: #03285c
+  // background #0d47a1 url('../../../static/image/echarts/bg.jpg')
   background-position center
   background-repeat no-repeat
   background-size cover

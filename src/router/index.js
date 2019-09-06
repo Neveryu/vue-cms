@@ -141,7 +141,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'CustomComponent',
         component: () => import('@/views/custom-component/index'),
-        meta: {icon: 'warning', title: '自定义组件'}
+        meta: {icon: 'guide', title: '自定义组件'}
       }
     ]
   },
@@ -179,20 +179,20 @@ export const asyncRouterMap = [
     alwaysShow: true,
     meta: {
       title: '表格',
-      icon: 'edit'
+      icon: 'date'
     },
     children: [
       {
         path: 'export-excel',
         name: '导出表格',
         component: () => import('@/views/excel/export-excel'),
-        meta: {icon: 'arrow-left', title: 'exportExcel'}
+        meta: {icon: 'download', title: '导出表格'}
       },
       {
         path: 'upload-excel',
         name: '上传表格',
         component: () => import('@/views/excel/upload-excel'),
-        meta: {icon: 'minus', title: 'uploadExcel'}
+        meta: {icon: 'upload', title: '上传表格'}
       }
     ]
   },

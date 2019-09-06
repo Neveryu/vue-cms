@@ -3,7 +3,8 @@
     <el-card class="box-card" shadow="hover">
       <div slot="header">
         <span>换主题</span>
-        <el-button style="float: right; padding: 3px 0" type="text">更换主题文档</el-button>
+        <!-- <el-button style="float: right; padding: 3px 0" type="text">更换主题文档</el-button> -->
+        <el-link type="primary" style="float: right;" href="https://blog.csdn.net/csdn_yudong/article/details/97621471" target="_blank">更换文档主题</el-link>
       </div>
       <div class="box-item">
         <!-- <span class="field-label">换肤 : </span> -->
@@ -11,12 +12,13 @@
         <el-radio v-model="themeModel" :label="1" border>默认(可定制)</el-radio>
 
         <el-radio v-model="themeModel" :label="2" border>夏日心情</el-radio>
-        <aside style="margin-top:15px;">Tips: 它与 navbar 中的更换皮肤有明显的区别，他们是两种不同的换肤方法，各自有不同的应用场景，具体请参考文档。</aside>
+        <aside style="margin-top:15px;">Tips: 这里与 navbar 中的更换皮肤有明显的区别，它们是两种不同的换肤方法，各自有不同的应用场景；这里主要是对ElementUI的颜色做一些改变以及自定义，详情请参考文档。</aside>
       </div>
 
       <el-color-picker
         v-show="showColorPicker"
         class="color-picker"
+        popper-class="theme-picker-dropdown"
         v-model="color"
         :predefine="predefineColors">
       </el-color-picker>
@@ -197,7 +199,8 @@ export default {
         }
       }
 
-      // 如果没有chalk就是第一次换颜色，就远程获取css文件
+      // 如果没有chalk就是第一次换颜色，需要远程获取css文件
+      // 后面的换色，就不用再次远程获取了
       if (!this.chalk) {
         const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
         await this.getCSSString(url, 'chalk')
@@ -206,7 +209,7 @@ export default {
       const chalkHandler = getHandler('chalk', 'chalk-style')
       chalkHandler()
 
-      // 过滤当前整个页面的样式文件，找到含有 oldVal 颜色的样式文件
+      // 过滤当前整个页面的样式文件，找到含有oldVal颜色的样式文件
       const styles = [].slice.call(document.querySelectorAll('style'))
         .filter(style => {
           const text = style.innerText
@@ -229,7 +232,7 @@ export default {
       })
       return newStyle
     },
-    // 创建xhr，远程获取css文件，并给 chalk赋值
+    // 创建xhr，远程获取css文件，并给chalk赋值
     getCSSString(url, variable) {
       return new Promise(resolve => {
         const xhr = new XMLHttpRequest()
@@ -329,5 +332,11 @@ export default {
   position: absolute;
   left: -36px;
   top: 75px;
+}
+</style>
+
+<style>
+.theme-picker-dropdown .el-color-dropdown__link-btn {
+  display: none;
 }
 </style>
