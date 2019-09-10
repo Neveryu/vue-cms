@@ -162,6 +162,24 @@ export const constantRouterMap = [
         meta: {title: '数量统计', icon: 'svg-heart'}
       }
     ]
+  },
+  {
+    path: '/rich-editor',
+    component: Layout,
+    alwaysShow: true,
+    meta: {
+      icon: 's-order',
+      title: '富文本'
+    },
+    redirect: 'quill',
+    children: [
+      {
+        path: 'quill',
+        name: 'QuillEditor',
+        component: () => import('@/views/rich-editor/quill'),
+        meta: {icon: 's-order', title: 'quill'}
+      }
+    ]
   }
 ]
 
