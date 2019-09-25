@@ -26,6 +26,34 @@
       </el-select>
       <el-button type="danger" plain @click="emitNotify(enterAnimated, leaveAnimated)">触发</el-button>
     </el-row>
+
+    <div class="split">
+      <el-divider><i class="el-icon-eleme"></i></el-divider>
+    </div>
+
+    <div style="margin-top: 20px">
+      <el-button type="primary" plain @click="doNotify">弹出通知叠加</el-button>
+      <i class="el-icon-question" slot="reference"></i>
+
+      <el-button type="success" plain @click="usePromise">promise弹出不叠加的通知</el-button>
+      <el-button type="success" plain @click="useSetTimeout">setTimeout弹出不叠加的通知</el-button>
+    </div>
+
+    <div class="split">
+      <el-divider><i class="el-icon-eleme"></i></el-divider>
+    </div>
+
+    <el-calendar>
+      <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+      <template
+        slot="dateCell"
+        slot-scope="{date, data}">
+        <p :class="data.isSelected ? 'is-selected' : ''">
+          {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
+        </p>
+      </template>
+    </el-calendar>
+
   </div>
 </template>
 
@@ -36,10 +64,13 @@ export default {
   data() {
     return {
       enterAnimated: '',
-      leaveAnimated: ''
+      leaveAnimated: '',
+      notifyPromise: Promise.resolve(),
+      timer: null
     }
   },
   methods: {
+    // 触发自定义通知
     emitNotify(enterAnimated, leaveAnimated) {
       this.$my_notify({
         autoClose: 3000,
@@ -47,6 +78,40 @@ export default {
         enterAnimated,
         leaveAnimated
       })
+    },
+    useSetTimeout() {
+      for(let i = 0; i < 3; i++) {
+        this.timer = window.setTimeout(() => {
+          this.$notify({
+            type: 'success',
+            title: '自定义位置',
+            message: '右下角弹出的消息 - 使用 setTimeout 解决',
+            position: 'bottom-right'
+          })
+        }, 0)
+      }
+    },
+    usePromise() {
+      for(let i = 0; i < 3; i++) {
+        this.notifyPromise = this.notifyPromise.then(() => {
+          this.$notify({
+            type: 'info',
+            title: '自定义位置',
+            message: '右下角弹出的消息 - 使用 Promise 解决',
+            position: 'bottom-right'
+          })
+        })
+      }
+    },
+    // 正常调用通知（三次）
+    doNotify() {
+      for(let i = 0; i < 3; i++) {
+        this.$notify({
+          title: '我的通知呀',
+          message: '右下角弹出的消息',
+          position: 'bottom-left'
+        })
+      }
     }
   },
   created() {
@@ -62,4 +127,8 @@ export default {
   font-size 1em
 /deep/ .el-alert__description
   font-size 1em
+.split
+  margin 50px 0
+  .el-icon-eleme
+    font-size 30px
 </style>
