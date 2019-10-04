@@ -38,8 +38,10 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import Quill from 'quill'
 import ImageResize from 'quill-image-resize-module'
+import { ImageDrop } from 'quill-image-drop-module'
 
 Quill.register('modules/imageResize', ImageResize)
+Quill.register('modules/imageDrop', ImageDrop)
 
 export default {
   // 富文本工具栏配置
@@ -144,6 +146,7 @@ export default {
               'custom': this.quillCustomFunction
             }
           },
+          imageDrop: true,
           imageResize: {
             modules: ['Resize', 'DisplaySize', 'Toolbar'],
             handleStyles: {

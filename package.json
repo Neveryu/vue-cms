@@ -26,6 +26,7 @@
     "nprogress": "^0.2.0",
     "particles.js": "^2.0.0",
     "quill": "^1.3.7",
+    "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module": "^3.0.0",
     "screenfull": "^3.3.2",
     "script-load": "^0.1.0",

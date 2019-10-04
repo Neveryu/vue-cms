@@ -33,10 +33,34 @@
 
     <div style="margin-top: 20px">
       <el-button type="primary" plain @click="doNotify">弹出通知叠加</el-button>
-      <i class="el-icon-question" slot="reference"></i>
+      <el-popover
+        :tabindex="-1"
+        placement="top-start"
+        width="200"
+        trigger="hover"
+        content="正常情况下，在一次事件中调用多次通知，会出现重叠">
+        <i class="el-icon-question" slot="reference" style="margin-right: 20px; color: #409EFF; font-size: 20px; cursor: pointer;"></i>
+      </el-popover>
 
       <el-button type="success" plain @click="usePromise">promise弹出不叠加的通知</el-button>
+      <el-popover
+        :tabindex="-1"
+        placement="top-start"
+        width="200"
+        trigger="hover"
+        content="使用 Promise 来解决这个问题">
+        <i class="el-icon-question" slot="reference" style="margin-right: 20px; color: #409EFF; font-size: 20px; cursor: pointer;"></i>
+      </el-popover>
+
       <el-button type="success" plain @click="useSetTimeout">setTimeout弹出不叠加的通知</el-button>
+      <el-popover
+        :tabindex="-1"
+        placement="top-start"
+        width="200"
+        trigger="hover"
+        content="使用 setTimeout 来解决这个问题">
+        <i class="el-icon-question" slot="reference" style="margin-right: 20px; color: #409EFF; font-size: 20px; cursor: pointer;"></i>
+      </el-popover>
     </div>
 
     <div class="split">
