@@ -123,7 +123,7 @@ export const constantRouterMap = [
       {
         path: 'menu2',
         name: 'menu2',
-        component: () => import('@/views/introduction/index'),
+        component: () => import('@/views/user/add'),
         meta: {icon: 'star-on', title: '嵌套路由2'}
       }
     ]
@@ -178,8 +178,17 @@ export const constantRouterMap = [
         name: 'QuillEditor',
         component: () => import('@/views/rich-editor/quill'),
         meta: {icon: 's-order', title: 'quill'}
+      },
+      {
+        path: 'tinymce',
+        name: 'TinyMCE',
+        component: () => import('@/views/rich-editor/tinymce'),
+        meta: {icon: 's-order', title: 'tinymce'}
       }
     ]
+  },
+  {
+    path: '/'
   }
 ]
 
@@ -211,6 +220,12 @@ export const asyncRouterMap = [
         name: '上传表格',
         component: () => import('@/views/excel/upload-excel'),
         meta: {icon: 'upload', title: '上传表格'}
+      },
+      {
+        path: 'merge-count',
+        name: '合并&统计',
+        component: () => import('@/views/excel/merge-count'),
+        meta: {icon: 'upload', title: '合并&统计'}
       }
     ]
   },

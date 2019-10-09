@@ -1,8 +1,10 @@
 <template>
   <div class="main-app">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
+      <keep-alive>
+        <router-view :key="key"></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
@@ -12,6 +14,11 @@
     data() {
       return {
         desc: '这里是右侧主界面'
+      }
+    },
+    computed: {
+      key() {
+        return this.$route.path
       }
     }
   }

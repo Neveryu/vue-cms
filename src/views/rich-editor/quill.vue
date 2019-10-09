@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrapper">
+  <div class="components-container main-container">
     
     <div class="tips">
       <el-link class="font" type="primary" href="https://quilljs.com/docs/configuration/" target="_blank">quill</el-link>
@@ -192,11 +192,11 @@ export default {
 </script>
 
 <style scoped>
-.content-wrapper {
+.main-container {
   max-width: 80%;
   min-width: 800px;
-  margin: 0 auto;
-  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .tips {
   width: 600px;
