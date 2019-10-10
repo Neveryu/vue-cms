@@ -1,5 +1,5 @@
 <template>
-  <div class="components-container">
+  <div class="components-container main-container">
     <h2>新增内容</h2>
     <div>
       <textarea id="tinymceId" :value="content" class="tinymce-textarea"/>
@@ -10,6 +10,8 @@
     <div class="editor-content" v-html="content" />
 
     <div style="height: 50px;"></div>
+
+    <el-divider content-position="center">End</el-divider>
   </div>
 </template>
 
@@ -36,8 +38,7 @@ export default {
         'zh': 'zh_CN'
       },
       // 富文本内容
-      content:
-      `<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><img title="TinyMCE Logo" src="https://raw.githubusercontent.com/Neveryu/prerender-website/master/src/assets/logo1.png" alt="TinyMCE Logo" width="120" /><p>请书写你的内容</p>`
+      content: '<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><a href="//shang.qq.com/wpa/qunwpa?idkey=32da7a18744756b0d8ffdd05b84999afecb5265dbad0fb119033e122abe803f3" target="_blank" rel="noopener"><img title="TinyMCE Logo" src="https://raw.githubusercontent.com/Neveryu/prerender-website/master/src/assets/logo1.png" alt="TinyMCE Logo" width="120" /></a></p><p>请书写你的内容</p>'
     }
   },
   watch: {
@@ -124,6 +125,10 @@ export default {
 </script>
 
 <style scoped>
+.main-container {
+  max-width: 80%;
+  min-width: 800px;
+}
 .tinymce-container {
   position: relative;
   line-height: normal;

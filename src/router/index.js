@@ -183,7 +183,7 @@ export const constantRouterMap = [
         path: 'tinymce',
         name: 'TinyMCE',
         component: () => import('@/views/rich-editor/tinymce'),
-        meta: {icon: 's-order', title: 'tinymce'}
+        meta: {icon: 'svg-type', title: 'tinymce'}
       }
     ]
   },

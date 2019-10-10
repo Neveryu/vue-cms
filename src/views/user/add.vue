@@ -6,7 +6,7 @@
         <el-tab-pane label="基本信息" name="first">
           <h3 class="title">基本信息</h3>
           <!-- 基本信息-表单内容 -->
-          <el-form class="basic-form" ref="basicForm" :model="basicForm" :rules="rules1" label-width="100px">
+          <el-form class="basic-form" ref="basicForm" :model="basicForm" :rules="rules" label-width="100px">
             <el-form-item label="客户名称" prop="name">
               <el-input v-model="basicForm.name"></el-input>
             </el-form-item>
@@ -78,13 +78,13 @@
             <div>
               <el-select v-model="value" placeholder="部门类型选择">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in departOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
                 </el-option>
               </el-select>
-              <el-input v-model="input" width="auto" placeholder="请输入内容"></el-input>
+              <el-input v-model="content" width="auto" placeholder="请输入内容"></el-input>
             </div>
           </el-col>
         </el-tab-pane>
@@ -154,8 +154,13 @@ export default {
         children: 'children',
         label: 'label'
       },
+      departOptions: [{
+        label: '我们',
+        value: 1
+      }],
+      content: '',
       // 基本信息验证规则
-      rules1: {
+      rules: {
         name: [
           { required: true, message: '请输入客户名称', trigger: 'blur' },
           { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
@@ -254,7 +259,7 @@ export default {
     },
     // 取消提交
     cancel() {
-      this.$basicForm.reset()
+      this.$refs['basicForm'].resetFields()
     },
     // tab切换点击事件
     handleClick(tab, e) {
@@ -264,7 +269,6 @@ export default {
     }
   },
   created() {
-    console.log(provinceAndCityData)
     this.basicForm.region1List = provinceAndCityData
   }
 
