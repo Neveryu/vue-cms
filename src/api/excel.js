@@ -20,3 +20,11 @@ export function getTable() {
     // return axios.post('/api/getmoviepiaofang-mock')
   }
 }
+
+// 合并&统计 - 表格内容
+export function getMergeTable() {
+  return axios({
+    method: 'post',
+    url: '/excel/getMergeTableData'
+  })
+}

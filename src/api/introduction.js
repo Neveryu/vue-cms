@@ -12,7 +12,7 @@ export function getImage() {
     // return axios.get('http://dianying.nuomi.com/common/ranklist')
   } else {
     // 【没有代理的话】
-    let url = 'https://api.douban.com/v2/movie/in_theaters'
+    let url = 'https://douban.uieee.com/v2/movie/in_theaters'
     let option = {
       param: 'callback'
     }

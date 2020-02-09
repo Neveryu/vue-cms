@@ -76,7 +76,7 @@
           <!-- 右侧内容 -->
           <el-col :span="16">
             <div>
-              <el-select v-model="value" placeholder="部门类型选择">
+              <el-select v-model="departType" placeholder="部门类型选择">
                 <el-option
                   v-for="item in departOptions"
                   :key="item.value"
@@ -154,6 +154,7 @@ export default {
         children: 'children',
         label: 'label'
       },
+      departType: '',
       departOptions: [{
         label: '我们',
         value: 1

@@ -188,7 +188,21 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/'
+    path: '/futures',
+    component: Layout,
+    alwaysShow: true,
+    meta: {
+      icon: 's-grid',
+      title: '更多功能'
+    },
+    children: [
+      {
+        path: 'draggable',
+        name: 'draggable',
+        component: () => import('@/views/futures/draggable'),
+        meta: {icon: 'thumb', title: '拖拽'}
+      }
+    ]
   }
 ]
 
@@ -259,6 +273,22 @@ export const asyncRouterMap = [
         component: () => import('@/views/theme/index'),
         name: 'Theme',
         meta: { title: '主题', icon: 'svg-pifu' }
+      }
+    ]
+  },
+  {
+    path: '/test',
+    component: Layout,
+    meta: {
+      icon: 'document',
+      title: '测试用例'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/test/index'),
+        name: 'Test',
+        meta: { title: '测试', icon: 'document' }
       }
     ]
   },
