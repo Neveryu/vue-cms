@@ -35,9 +35,9 @@
           <div class="size-wrapper">
             <span class="size-value">导演： {{file.directors[0].name}}</span>
           </div>
-          <!-- 上传日期 -->
+          <!-- 上映日期 -->
           <div class="date-wrapper">
-            <span class="date-value">上传日期： {{file.mainland_pubdate}}</span>
+            <span class="date-value">上映日期： {{file.mainland_pubdate}}</span>
           </div>
 
         </div>
@@ -179,7 +179,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.3)'
       })
       getFileList().then(res => {
-        let respData = res.subjects
+        let respData = [...res[0].subjects, ...res[1].subjects]
         this.dataList = respData
         // 执行预加载(延迟3s再预加载，以免影响主屏的缩略图加载)
         if(respData.length > 0) {
@@ -302,10 +302,10 @@ export default {
 .one-item {
   box-sizing: border-box;
   display: inline-block;
-  width: 14.5vh;
-  min-width: 180px;
-  height: 30vh;
-  min-height: 300px;
+  width: 12vw;
+  min-width: 160px;
+  height: 22vw;
+  min-height: 280px;
   margin-bottom: 3vh;
   color: #fff;
   text-align: center;

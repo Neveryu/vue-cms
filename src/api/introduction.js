@@ -12,7 +12,10 @@ export function getImage() {
     // return axios.get('http://dianying.nuomi.com/common/ranklist')
   } else {
     // 【没有代理的话】
+    // 正在热映
     let url = 'https://douban.uieee.com/v2/movie/in_theaters'
+    // 即将上映
+    let url2 = 'https://douban.uieee.com/v2/movie/coming_soon'
     let option = {
       param: 'callback'
     }
@@ -21,6 +24,6 @@ export function getImage() {
       count: 10, // 单页条数
       city: '深圳' // 城市
     }
-    return jsonp(url, data, option)
+    return Promise.all([jsonp(url, data, option), jsonp(url2, data, option)])
   }
 }
