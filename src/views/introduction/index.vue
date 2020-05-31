@@ -1,9 +1,17 @@
 <template>
   <div class="introduction">
-  
     {{$t('author.name')}}：
     <ul>
       <li>{{$t('introduction.item1')}}</li>
+      <li>{{$t('introduction.item2')}}</li>
+      <li>{{$t('introduction.item3')}}</li>
+      <li>{{$t('introduction.item4.title')}}</li>
+        <ul>
+          <li>{{$t('introduction.item4.contents[0]')}}</li>
+          <li>{{$t('introduction.item4.contents[1]')}}</li>
+        </ul>
+      <li>{{$t('introduction.item5')}}</li>
+      <li>{{$t('introduction.item6')}}</li>
     </ul>
 
     <div class="mid-center">
@@ -47,23 +55,13 @@ export default {
     this.isDev = process.env.NODE_ENV === 'development'
     getImage().then(resp => {
       let movieData
-      if(this.isDev) {
-        movieData = resp.data.data.movies
-        movieData.forEach((v, i, _this) => {
-          // v.posterUrl.medium
-          this.imgUrl.push({
-            html: `<img src='${v.posterUrl.large}'>`
-          })
+      movieData = [...resp[0].subjects, ...resp[1].subjects]
+      movieData.forEach((v, i, _this) => {
+        // v.images.large
+        this.imgUrl.push({
+          html: `<img src='${v.images.large}'>`
         })
-      } else {
-        movieData = [...resp[0].subjects, ...resp[1].subjects]
-        movieData.forEach((v, i, _this) => {
-          // v.images.large
-          this.imgUrl.push({
-            html: `<img src='${v.images.large}'>`
-          })
-        })
-      }
+      })
     })
   },
   mounted() {
