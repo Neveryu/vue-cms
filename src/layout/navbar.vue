@@ -53,36 +53,41 @@
   </div>
 </template>
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-  import LangSelect from '@/components/lang-select'
-  import Screenfull from '@/components/screenfull'
-  import ChangeTheme from '@/components/theme'
-  export default {
-    name: '',
-    components: {
-      LangSelect,
-      Screenfull,
-      ChangeTheme
-    },
-    computed: {
-      ...mapGetters([
-        'name',
-        'avatar'
-      ])
-    },
-    methods: {
-      ...mapActions({
-        userLogout: 'logout'
-      }),
-      logout() {
-        this.userLogout().then(() => {
-          location.reload()// 为了重新实例化vue-router对象 避免bug
-        }).catch(err => {
-          console.log(err)
-        })
-      }
+import { confirm } from '@/decorator/confirm'
+import { mapGetters, mapActions } from 'vuex'
+import LangSelect from '@/components/lang-select'
+import Screenfull from '@/components/screenfull'
+import ChangeTheme from '@/components/theme'
+export default {
+  name: '',
+  components: {
+    LangSelect,
+    Screenfull,
+    ChangeTheme
+  },
+  computed: {
+    ...mapGetters([
+      'name',
+      'avatar'
+    ])
+  },
+  methods: {
+    ...mapActions({
+      userLogout: 'logout'
+    }),
+    @confirm('退出系统？', '提示', () => {
+      console.log('取消退出系统操作')
+    })
+    logout() {
+      this.userLogout().then(() => {
+        // 为了重新实例化vue-router对象 避免bug
+        location.reload()
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
+}
 </script>
 <style lang="stylus" scoped>
 .top-navbar

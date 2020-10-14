@@ -220,7 +220,7 @@ export default {
       this.basicForm.region1 = val
       this.basicForm.region2 = ''
       let _provinceList = this.basicForm.region1List
-      for(var provinceItem of _provinceList) {
+      for(let provinceItem of _provinceList) {
         if(val === provinceItem.value) {
           this.basicForm.region2List = provinceItem.children
           break

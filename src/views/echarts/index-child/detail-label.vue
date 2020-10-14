@@ -53,6 +53,7 @@ export default {
         tooltip: {
           trigger: 'item',
           position: ['72%', '50%'],
+          // eslint-disable-next-line 
           formatter: `<div style="transform: translate3d(-50%, -50%, 0); text-align: center"><span class="digital-number" style="font-size: 28px;">{d}%</span><br/><span class="digital-number">{c}件</span></div>`,
           backgroundColor: 'transparent',
           textStyle: {
@@ -189,7 +190,7 @@ export default {
       }
       let selectQuesName = e.name
       let _currentItem = this.itemDetail
-      for(var i = 0; i < _currentItem.length; i++) {
+      for(let i = 0; i < _currentItem.length; i++) {
         if(_currentItem[i].quesName === selectQuesName) {
           this.selectQuesId = _currentItem[i].quesId
           break

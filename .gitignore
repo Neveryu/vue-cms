@@ -16,3 +16,4 @@ yarn-error.log*
 *.local
 
 package-lock.json
+yarn.lock
