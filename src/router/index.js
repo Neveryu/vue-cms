@@ -7,13 +7,21 @@ import Layout from '@/layout/layout'
 Vue.use(Router)
 
 /**
- * alwaysShow: true           if set true, will always show the root menu, whatever its child routes length
- *                            if not set alwaysShow, only more than ont route under the children
- *                            it will becomes nested mode, otherwise not show the root menu
- * alwaysShow: true           如果设置为true,它将总是现在在根目录。如果不设置的话，当它只有1个子路由的时候，会把
- *                            它的唯一子路由放到跟目录上来，而不显示它自己本身。
+ * 关于 route 的配置属性说明：
+ *
+ * alwaysShow: true       // if set true, will always show the root menu, whatever its child routes length
+ *                        // if not set alwaysShow, only more than ont route under the children
+ *                        // it will becomes nested mode, otherwise not show the root menu
+ *                        // 如果设置为true,它将总是出现在根目录。如果不设置的话，当它只有1个子路由的时候，会把
+ *                        // 它的唯一子路由放到跟目录上来，而不显示它自己本身。
+ *
+ * hidden: true           // if set ture, 将不会出现在左侧菜单栏中
  */
 
+/**
+ * 基础路由： 任何角色都包含的路由
+ * @type {Array}
+ */
 export const constantRouterMap = [
   {
     path: '/login',
@@ -31,7 +39,7 @@ export const constantRouterMap = [
   },
   {
     path: '/',
-    hidden: true,
+    // hidden: true,
     component: Layout,
     redirect: '/home',
     children: [
@@ -39,7 +47,7 @@ export const constantRouterMap = [
         path: 'home',
         name: 'home',
         component: () => import('@/views/homepage'),
-        meta: {title: '首页'}
+        meta: {icon: 's-home', title: '首页'}
       }
     ]
   },
@@ -201,6 +209,12 @@ export const constantRouterMap = [
         name: 'draggable',
         component: () => import('@/views/futures/draggable'),
         meta: {icon: 'thumb', title: '拖拽'}
+      },
+      {
+        path: '/clipboard',
+        name: 'clipBoard',
+        component: () => import('@/views/clipboard'),
+        meta: {title: '剪切板示例', icon: 'document'}
       }
     ]
   }
@@ -212,6 +226,10 @@ export default new Router({
   routes: constantRouterMap
 })
 
+/**
+ * 动态路由： 根据用户角色
+ * @type {Array}
+ */
 export const asyncRouterMap = [
   {
     path: '/excel',
@@ -240,23 +258,6 @@ export const asyncRouterMap = [
         name: '合并&统计',
         component: () => import('@/views/excel/merge-count'),
         meta: {icon: 'upload', title: '合并&统计'}
-      }
-    ]
-  },
-  {
-    path: '/clipboard',
-    component: Layout,
-    redirect: 'index',
-    meta: {
-      icon: 'document',
-      title: '剪切板'
-    },
-    children: [
-      {
-        path: 'index',
-        name: 'clipBoard',
-        component: () => import('@/views/clipboard'),
-        meta: {title: '剪切板示例', icon: 'document'}
       }
     ]
   },

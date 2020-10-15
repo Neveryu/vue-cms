@@ -75,15 +75,18 @@ export default {
     ...mapActions({
       userLogout: 'logout'
     }),
-    @confirm('退出系统？', '提示', () => {
-      console.log('取消退出系统操作')
-    })
+    @confirm('退出系统？')
     logout() {
+      const loading = this.$loading({
+        lock: true
+      })
       this.userLogout().then(() => {
         // 为了重新实例化vue-router对象 避免bug
         location.reload()
       }).catch(err => {
         console.log(err)
+      }).finally(() => {
+        loading.close()
       })
     }
   }

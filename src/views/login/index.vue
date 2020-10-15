@@ -125,7 +125,7 @@ export default {
               saveToLocal('password', '')
               saveToLocal('remember', false)
             }
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/home' })
           }).catch(() => {
             this.loading = false
           })
