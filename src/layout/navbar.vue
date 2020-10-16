@@ -33,11 +33,6 @@
                 {{$t('navbar.profile')}}
               </el-dropdown-item>
             </router-link>
-            <router-link class='inlineBlock' to="/user/avatar">
-              <el-dropdown-item>
-                {{$t('navbar.avatar')}}
-              </el-dropdown-item>
-            </router-link>
             <a target='_blank' href="https://github.com/Neveryu/vue-cms">
               <el-dropdown-item>
                 {{$t('navbar.github')}}

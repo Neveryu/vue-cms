@@ -65,12 +65,6 @@ export const constantRouterMap = [
         name: 'Profile',
         component: () => import('@/views/user/profile'),
         meta: {icon: 'warning', title: '个人中心'}
-      },
-      {
-        path: 'avatar',
-        name: 'Avatar',
-        component: () => import('@/views/user/profile'),
-        meta: {icon: 'warning', title: '修改头像'}
       }
     ]
   },

@@ -41,6 +41,8 @@ module.exports = {
         before: true,
         after: true
       }
-    ]
+    ],
+    // 文件末尾空行
+    'eol-last': ["error", "always"]
   }
 }

@@ -1,18 +1,18 @@
 <template>
   <div class="homepage-container">
 
-    <div class="home-total">
-      <div class="home-total-item" v-for="(item, index) of homeTotalData">
+    <el-row class="home-total">
+      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6" class="home-total-item" v-for="(item, index) of homeTotalData" :key="'line-' + index">
         <div class="wrapper-item">
           <p class="title">{{item.title}}</p>
           <p class="value digital-number" ref="countup">{{item.value}}</p>
           <color-line :id='"main"+index' :color="item.color" :optionData="item.data" width="180px" height="70px"></color-line>
         </div>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
 
     <el-row class="home-part1" :gutter="0">
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="near-six-month">
           <div class="title">
             <p class="title-value">平台近6个月的交易记录</p>
@@ -22,7 +22,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="8" class="detail-item-wrapper">
+      <el-col class="detail-item-wrapper" :xs="16" :sm="16" :md="16" :lg="8" :xl="8">
         <div class="home-detail-item" :style="{ background: item.color}" v-for="(item, index) of homeDetailItem">
           <div class="name">{{item.name}}</div>
           <div class="value">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="4">
+      <el-col :xs="8" :sm="8" :md="8" :lg="4" :xl="4">
         <div class="rank">
           <div class="title">
             <p class="title-value">投资龙虎榜</p>
@@ -248,11 +248,10 @@
 </script>
 <style scoped lang="stylus">
 .homepage-container
-  min-width 800px
+  min-width 580px
 
 .home-total {
   width: 100%;
-  min-width: 800px;
   height: 160px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -260,7 +259,6 @@
   .home-total-item {
     box-sizing: border-box;
     display: inline-block;
-    width: 25%;
     height: 100%;
     padding: 15px 0;
     vertical-align: top;
@@ -480,7 +478,6 @@
   }
   .bad-debt {
     height: 350px;
-    min-width: 540px;
     margin-left: 10px;
     border: 1px solid #eee;
 
@@ -507,10 +504,10 @@
       height: inherit;
       .bad {
         height: 50%;
-        padding: 20px 30px;
+        padding: 20px 15px;
         .total {
           display: inline-block;
-          width: 200px;
+          width: 30%
           color: #666;
           vertical-align: top;
           .total1 {
@@ -529,7 +526,7 @@
         }
         .chart {
           display: inline-block;
-          margin-left: 15px;
+          width: 68%;
           .title {
             background: none;
             border-bottom: 1px solid #ccc;
@@ -552,11 +549,11 @@
         }
       }
       .overdue {
-        padding: 10px 30px;
+        padding: 20px 15px;
         height: 50%;
         .total {
           display: inline-block;
-          width: 200px;
+          width: 30%
           color: #666;
           vertical-align: top;
           .total1 {
@@ -575,7 +572,7 @@
         }
         .chart {
           display: inline-block;
-          margin-left: 15px;
+          width: 68%
           .title {
             background: none;
             border-bottom: 1px solid #ccc;

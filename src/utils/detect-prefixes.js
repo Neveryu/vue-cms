@@ -1,8 +1,9 @@
 /**
  * Detecting prefixes for saving time and bytes
- */
-/**
  * css 兼容性前缀
+ * @Author   Author
+ * @DateTime 2020-10-16T13:19:44+0800
+ * @return   {[type]}                 [description]
  */
 export default function detectPrefixes () {
   let transform
