@@ -110,7 +110,7 @@ export default {
             lock: true
           })
           // 调用保存api
-          this.doUpdateUser().then(() => {
+          this.doUpdateUser(this.form).then(() => {
             this.$message.success('修改成功')
           }).finally(() => {
             loading.close()

@@ -10,6 +10,7 @@ const SET_AVATAR = 'SET_AVATAR'
 const SET_PERMISSIONS = 'SET_PERMISSIONS'
 const SET_TYPE = 'SET_TYPE'
 const SET_DESC = 'SET_DESC'
+const SET_ALL = 'SET_ALL'
 
 const user = {
   state: {
@@ -50,6 +51,9 @@ const user = {
     },
     [SET_DESC](state, desc) {
       state.desc = desc
+    },
+    [SET_ALL](state, userInfo) {
+      state = Object.assign(state, userInfo)
     }
   },
   actions: {
@@ -115,8 +119,9 @@ const user = {
      * 更新用户信息
      * userInfo: 用户信息表对象
      */
-    doUpdateUser(context, userInfo) {
+    doUpdateUser({ commit }, userInfo) {
       return new Promise(resolve => {
+        commit(SET_ALL, userInfo)
         setTimeout(() => {
           resolve()
         }, 1000)
