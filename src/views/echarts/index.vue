@@ -127,7 +127,7 @@ export default {
         })
         _respData2.forEach((v, i, _this) => {
           this.rateYData.push(v.deptName)
-          var _percentage = (v.done * 100 / v.all).toFixed(2)
+          let _percentage = (v.done * 100 / v.all).toFixed(2)
           this.rateXData.push({'value': _percentage, 'id': v.deptId})
         })
       })

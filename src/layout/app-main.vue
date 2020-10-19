@@ -9,19 +9,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'app-main',
-    data() {
-      return {
-        desc: '这里是右侧主界面'
-      }
-    },
-    computed: {
-      key() {
-        return this.$route.path
-      }
+export default {
+  name: 'app-main',
+  data() {
+    return {
+      desc: '这里是右侧主界面'
+    }
+  },
+  computed: {
+    key() {
+      return this.$route.path
     }
   }
+}
 </script>
 
 <style scoped lang="stylus">

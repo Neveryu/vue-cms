@@ -1,21 +1,33 @@
 import { login, userInfo, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/auth'
 
+const SET_ACCOUNT = 'SET_ACCOUNT'
 const SET_TOKEN = 'SET_TOKEN'
 const SET_NAME = 'SET_NAME'
 const SET_AGE = 'SET_AGE'
+const SET_SEX = 'SET_AEX'
 const SET_AVATAR = 'SET_AVATAR'
 const SET_PERMISSIONS = 'SET_PERMISSIONS'
+const SET_TYPE = 'SET_TYPE'
+const SET_DESC = 'SET_DESC'
+const SET_ALL = 'SET_ALL'
 
 const user = {
   state: {
     token: getToken(),
+    account: '',
     name: '',
     age: 0,
+    sex: '',
     avatar: '',
-    permissions: ''
+    permissions: '',
+    type: [],
+    desc: ''
   },
   mutations: {
+    [SET_ACCOUNT](state, account) {
+      state.account = account
+    },
     [SET_TOKEN](state, token) {
       state.token = token
     },
@@ -25,11 +37,23 @@ const user = {
     [SET_AGE](state, age) {
       state.age = age
     },
+    [SET_SEX](state, sex) {
+      state.sex = sex
+    },
     [SET_AVATAR](state, avatar) {
       state.avatar = avatar
     },
     [SET_PERMISSIONS](state, permissions) {
       state.permissions = permissions
+    },
+    [SET_TYPE](state, type) {
+      state.type = type
+    },
+    [SET_DESC](state, desc) {
+      state.desc = desc
+    },
+    [SET_ALL](state, userInfo) {
+      state = Object.assign(state, userInfo)
     }
   },
   actions: {
@@ -55,10 +79,14 @@ const user = {
       return new Promise((resolve, reject) => {
         userInfo().then(resp => {
           let data = resp.data
+          commit(SET_ACCOUNT, data.account)
           commit(SET_NAME, data.name)
           commit(SET_AGE, data.age)
+          commit(SET_SEX, data.sex)
           commit(SET_AVATAR, data.avatar)
           commit(SET_PERMISSIONS, data.permissions)
+          commit(SET_TYPE, data.type)
+          commit(SET_DESC, data.desc)
           return resolve(data)
         }).catch(err => {
           return reject(err)
@@ -77,6 +105,27 @@ const user = {
           return reject(err)
         })
       })
+    },
+    // 头像更新
+    doUpdateAvatar({ commit }, imgFile) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          commit(SET_AVATAR, imgFile)
+          resolve()
+        }, 1000)
+      })
+    },
+    /**
+     * 更新用户信息
+     * userInfo: 用户信息表对象
+     */
+    doUpdateUser({ commit }, userInfo) {
+      return new Promise(resolve => {
+        commit(SET_ALL, userInfo)
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
     }
   },
   getters: {
@@ -84,7 +133,8 @@ const user = {
     name: state => state.name,
     age: state => state.age,
     avatar: state => state.avatar,
-    permissions: state => state.permissions
+    permissions: state => state.permissions,
+    allInfo: state => state
   }
 }
 

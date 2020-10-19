@@ -237,9 +237,9 @@ export default {
       detailForm: {},
       tableData: this.tableDatas,
       multipleSelection: this.selectionArr,
-      /*编辑单个*/
+      /* 编辑单个 */
       showEditDialog: false,
-      /*编辑*/
+      /* 编辑 */
       editFormData: {
         id: 0,
         name: '',
@@ -265,7 +265,7 @@ export default {
           { required: true, message: '请输入文件名称', trigger: 'blur' }
         ]
       },
-      /*显示图片弹窗*/
+      /* 显示图片弹窗 */
       showImgDialog: false,
       imgIdDialog: 0,
       imgDialogSrc: ''
@@ -327,7 +327,7 @@ export default {
     downloadOne(id) {
       this.$emit('downloadOne', id)
     },
-    /*勾选项同步*/
+    /* 勾选项同步 */
     toggleSelection(rows) {
       if(rows && rows.length > 0) {
         rows.forEach(row => {
@@ -408,7 +408,7 @@ export default {
       if(row.materialType === 0) {
         this.$emit('goFolder', row)
       } else if(row.materialType === 3) { // 如果是图片
-        let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.')+1)
+        let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.') + 1)
         _ext = _ext.toLowerCase()
         if(_ext == 'tif' || _ext == 'tiff' || _ext == 'wbmp') {
           this.imgDialogSrc = row.thumbnailUrl
@@ -425,7 +425,7 @@ export default {
         // 显示详情
         // this.detailForm = row
         // this.showDetailDialog = true
-        return
+
       }
     }
   },

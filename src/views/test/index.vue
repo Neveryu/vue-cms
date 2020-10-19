@@ -63,7 +63,7 @@ export default {
         type: 'warning'
       }).then(() => {
         let index
-        for(var i=0; i<this.fileList.length; i++) {
+        for(let i = 0; i < this.fileList.length; i++) {
           if(this.fileList[i].id === id) {
             index = i
             break

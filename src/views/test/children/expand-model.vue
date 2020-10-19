@@ -235,9 +235,9 @@ export default {
       checkAll: false,
       tableData: this.tableDatas,
       multipleSelection: this.selectionArr,
-      /*编辑单个*/
+      /* 编辑单个 */
       showEditDialog: false,
-      /*编辑*/
+      /* 编辑 */
       editFormData: {
         id: 0,
         name: '',
@@ -254,7 +254,7 @@ export default {
         ]
       },
 
-      /*显示图片弹窗*/
+      /* 显示图片弹窗 */
       showImgDialog: false,
       imgDialogSrc: '',
       imgDialogId: 0,
@@ -272,7 +272,7 @@ export default {
         name: [
           { required: true, message: '请输入文件名称', trigger: 'blur' }
         ]
-      },
+      }
     }
   },
   watch: {
@@ -303,7 +303,7 @@ export default {
       })
     },
     editOne(row) {
-      /*重置树*/
+      /* 重置树 */
       this.shareOrgArr = []
       this.getOrgList()
       if(row.materialType === 0) {
@@ -325,10 +325,10 @@ export default {
           this.editFormData.selectedValue.push({
             id,
             org_name: shareOrgNamesArr[index]
-          }) 
-        })        
+          })
+        })
       }
-      
+
       this.showEditDialog = true
       this.showDetailDialog = false
     },
@@ -372,7 +372,7 @@ export default {
 
         if(res.headers.errorcode && res.headers.errorcode === '-1') {
           let errorMsg = res.headers.errormessage
-          if (explorer.indexOf("MSIE") >= 0 || explorer.indexOf("Chrome") >= 0) {  //IE和google浏览器
+          if (explorer.indexOf('MSIE') >= 0 || explorer.indexOf('Chrome') >= 0) {  // IE和google浏览器
             errorMsg = decodeURI(escape(errorMsg))
           } else {
             errorMsg = decodeURI(escape(errorMsg))
@@ -384,7 +384,7 @@ export default {
         }
 
         let fileName = res.headers.filename
-        if (explorer.indexOf("MSIE") >= 0 || explorer.indexOf("Chrome") >= 0) {  //IE和google浏览器
+        if (explorer.indexOf('MSIE') >= 0 || explorer.indexOf('Chrome') >= 0) {  // IE和google浏览器
           fileName = decodeURI(escape(fileName))
         } else {
           fileName = decodeURI(escape(fileName))
@@ -406,10 +406,9 @@ export default {
         this.$message.closeAll()
         this.$message.error(err.message)
       })
-
     },
     showImg(row) {
-      let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.')+1)
+      let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.') + 1)
       _ext = _ext.toLowerCase()
       if(_ext == 'tif' || _ext == 'tiff' || _ext == 'wbmp') {
         this.imgDialogSrc = row.thumbnailUrl
@@ -450,7 +449,6 @@ export default {
         })
         this.checkAll = false
         // this.allChange(false)
-
       } else {
         this.tableData.unshift({
           fileName: '新建文件夹',
@@ -460,7 +458,6 @@ export default {
           nameEdit: true
         })
       }
-
     },
     cancelAddFolder() {
       if(this.tableData[0].nameEdit) {
@@ -502,7 +499,7 @@ export default {
         this.showDetailDialog = true
       }
     },
-    /*单个勾选框的点击，切换*/
+    /* 单个勾选框的点击，切换 */
     toggleItem(item) {
       let _selected = []
       this.tableData.forEach((v, i, _this) => {
@@ -521,7 +518,7 @@ export default {
 
       this.$forceUpdate()
     },
-    /*勾选项同步*/
+    /* 勾选项同步 */
     toggleSelection(rows) {
       this.tableData.forEach((v, i, _this) => {
         v.hasChecked = false
