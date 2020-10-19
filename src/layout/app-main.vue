@@ -26,5 +26,5 @@
 
 <style scoped lang="stylus">
 .main-app
-  padding 5px
+  padding 10px
 </style>

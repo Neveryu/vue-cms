@@ -43,9 +43,14 @@
 .left-sidebar
   position fixed
   top 56px
-  width 200px
+  width 210px
   height 100%
   min-height 500px
+  background-color #fff
+  padding-bottom 60px
+  z-index 2
+  // border-right 1px solid #e6e6e6
 .el-menu
   height 100%
+  overflow-y scroll
 </style>

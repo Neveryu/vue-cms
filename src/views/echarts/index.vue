@@ -169,6 +169,7 @@ export default {
     height auto
     margin-top 25px
     padding-bottom 20px
+    min-width 1100px
     .rate-top10
       .content
         width 100%

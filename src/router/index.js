@@ -224,6 +224,12 @@ export const asyncRouterMap = [
     },
     children: [
       {
+        path: 'dynamic-table',
+        component: () => import('@/views/excel/dynamic-table/index'),
+        name: 'DynamicTable',
+        meta: { icon: 'set-up', title: '动态表格' }
+      },
+      {
         path: 'export-excel',
         name: '导出表格',
         component: () => import('@/views/excel/export-excel'),

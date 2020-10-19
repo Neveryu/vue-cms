@@ -4,6 +4,7 @@ import * as userAPI from './user'
 import * as homepageAPI from './homepage'
 import * as excel from './excel'
 import * as echarts from './echarts'
+import * as test from './test'
 
 Mock.setup({
   timeout: '300-600'
@@ -30,5 +31,8 @@ Mock.mock('/excel/getMergeTableData', 'post', excel.mergeTableData)
 // echarts菜单
 Mock.mock('/echarts/getCateData', 'get', echarts.getCateData)
 Mock.mock('/echarts/getDepartTop', 'post', echarts.getDepartTop)
+
+// test
+Mock.mock('/test/getFiles', 'post', test.getFileList)
 
 export default Mock

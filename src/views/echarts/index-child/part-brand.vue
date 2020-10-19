@@ -53,63 +53,64 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-  .part-brand-wrapper
-    height 200px
-    background-image url('/static/part-brand.png')
-    background-repeat no-repeat
-    background-size 100% 100%
-    .data-wrapper
-      font-size 0
-      color #E7ECF0
-      width 96%
-      height 100%
-      margin 0 auto
-      list-style none
-      padding-left 0
-      .item
+.part-brand-wrapper
+  height 200px
+  background-image url('/static/part-brand.png')
+  background-repeat no-repeat
+  background-size 100% 100%
+  .data-wrapper
+    font-size 0
+    color #E7ECF0
+    width 96%
+    height 100%
+    margin 0 auto
+    list-style none
+    padding-left 0
+    .item
+      font-size 16px
+      // margin-top 4px
+      cursor pointer
+      height 28px
+      line-height 28px
+      min-width 360px
+      &:hover
+        background-color rgba(18,245,255,0.1)
+      .index
+        color #fff
+        display inline-block
+        font-size 14px
+        width 18px
+        height 18px
+        line-height 18px
+        text-align center
+        border-radius 50%
+        background-color #037fa7
+        text-align center
+        vertical-align middle
+        &.first
+          background-color #ac4c5d
+        &.second
+          background-color #af8233
+        &.thrid
+          background-color #b49c3f
+      .name
+        display inline-block
+        width 30%
         font-size 16px
-        // margin-top 4px
-        cursor pointer
-        height 28px
-        line-height 28px
-        &:hover
-          background-color rgba(18,245,255,0.1)
-        .index
-          color #fff
-          display inline-block
-          font-size 14px
-          width 18px
-          height 18px
-          line-height 18px
-          text-align center
-          border-radius 50%
-          background-color #037fa7
-          text-align center
-          vertical-align middle
-          &.first
-            background-color #ac4c5d
-          &.second
-            background-color #af8233
-          &.thrid
-            background-color #b49c3f
-        .name
-          display inline-block
-          width 30%
-          font-size 16px
-          overflow hidden
-          text-overflow ellipsis
-          white-space nowrap
-          vertical-align middle
-        .value
-          display inline-block
-          width 20%
-          text-align center
-        .done-value
-          display inline-block
-          width 20%
-          text-align center
-        .rate
-          display inline-block
-          width 20%
-          text-align right
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+        vertical-align middle
+      .value
+        display inline-block
+        width 20%
+        text-align center
+      .done-value
+        display inline-block
+        width 20%
+        text-align center
+      .rate
+        display inline-block
+        width 20%
+        text-align right
 </style>
