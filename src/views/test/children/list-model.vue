@@ -76,18 +76,12 @@
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <!-- 共享素材只有下载/查看 -->
-      <el-table-column v-if="this.$parent.$options.moduleType === 3" align="center" width="120" label="操作">
-        <template slot-scope="scope" v-if="scope.row.operate !== 'no'">
-          <el-button plain v-if="scope.row.materialType === 4" @click="clickFileName(scope.row)">查看</el-button>
-          <el-button plain v-else @click="downloadOne(scope.row.id)">下载</el-button>
-        </template>
-      </el-table-column>
-      <el-table-column v-else align="center" width="180" label="操作">
-        <template slot-scope="scope" v-if="scope.row.operate !== 'no'">
+      <!-- 可操作 -->
+      <el-table-column align="center" width="220" label="操作">
+        <template slot-scope="scope">
+          <el-button plain size="mini" @click="clickFileName(scope.row)">查看</el-button>
+          <el-button plain size="mini" @click="downloadOne(scope.row.id)">下载</el-button>
           <el-button plain size="mini" @click="delOne(scope.row)">删除</el-button>
-          <el-button plain size="mini" v-if="scope.row.materialType === 4" @click="clickFileName(scope.row)">查看</el-button>
-          <el-button plain size="mini" v-else @click="downloadOne(scope.row.id)">下载</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -130,36 +124,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="">
-        <el-button type="primary">编 辑</el-button>
         <el-button @click="">下 载</el-button>
-        <el-button @click="">删 除</el-button>
-      </div>
-    </el-dialog>
-
-    <!-- 编辑单个 -->
-    <el-dialog title="编辑素材"
-      class="edit-dialog"
-      :visible.sync="showEditDialog"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false">
-        <el-form class="" label-width="130px" :model="editFormData" ref="editFormData" :rules="editFormrules">
-          <el-form-item label="素材名称：" prop="name">
-            <el-input v-model.trim="editFormData.name" maxlength="50" show-word-limit></el-input>
-          </el-form-item>
-          <el-form-item label="素材主题：" prop="checkList">
-            <div class="share-theme topnav_box">
-              <el-checkbox-group v-model="editFormData.checkList">
-                <el-checkbox :label="item.id" v-for="item of themeArr" :key="item.id">{{item.name}}</el-checkbox>
-              </el-checkbox-group>
-            </div>
-          </el-form-item>
-          <el-form-item label="">
-            <span style="color: red;">*所有上传素材将默认共享至管理员</span>
-          </el-form-item>
-        </el-form>
-      <div slot="footer" class="">
-        <el-button type="primary" @click="submitEditList('editFormData')">确 定</el-button>
-        <el-button @click="showEditDialog = !showEditDialog">取 消</el-button>
+        <el-button @click="delOne()">删 除</el-button>
       </div>
     </el-dialog>
 
@@ -175,12 +141,12 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="">
-        <el-button type="primary" @click="updateFolderName('editFolderDialog')">确 定</el-button>
+        <el-button type="primary" @click="doUpdateFolderName('editFolderDialog')">确 定</el-button>
         <el-button @click="showEditFolderDialog = !showEditFolderDialog">取 消</el-button>
       </div>
     </el-dialog>
 
-    <!-- 图片大图弹窗 -->
+    <!-- 图片查看，大图弹窗 -->
     <el-dialog
       class="img-dialog"
       title="图片详情"
@@ -208,10 +174,7 @@
 </template>
 
 <script>
-// import { addFolder, updateFolderName } from '@/api/xc/material-management'
-import { mixin } from './_mixin'
 export default {
-  mixins: [mixin],
   props: {
     nowPid: {},
     nowLevel: {},
@@ -299,7 +262,7 @@ export default {
       this.showImgDialog = false
       this.downloadOne(this.imgIdDialog)
     },
-    updateFolderName(formName) {
+    doUpdateFolderName(formName) {
       this.$refs[formName].validate((valid) => {
         if(valid) {
           let params = {
@@ -403,29 +366,17 @@ export default {
     },
     // 点击文件名
     clickFileName(row) {
-      // console.log(id, type)
       // 如果是目录
       if(row.materialType === 0) {
         this.$emit('goFolder', row)
       } else if(row.materialType === 3) { // 如果是图片
-        let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.') + 1)
-        _ext = _ext.toLowerCase()
-        if(_ext == 'tif' || _ext == 'tiff' || _ext == 'wbmp') {
-          this.imgDialogSrc = row.thumbnailUrl
-        } else {
-          this.imgDialogSrc = row.imgUrl
-        }
+        this.imgDialogSrc = row.thumbnailUrl
         this.imgIdDialog = row.id
         this.showImgDialog = true
-      } else if(row.materialType === 4) { // 如果是新闻稿
-        let currentUrl = window.location.href.split('#')
-        window.open(currentUrl[0] + '#/' + 'xcNewsDetail?m=' + this.$parent.$options.moduleType + '&id=' + row.id)
-        // this.$router.push({ path: 'xcNewsDetail', query: { id: `${row.id}` } })
       } else {
         // 显示详情
-        // this.detailForm = row
-        // this.showDetailDialog = true
-
+        this.detailForm = row
+        this.showDetailDialog = true
       }
     }
   },
@@ -458,32 +409,32 @@ export default {
   background-size: 100% 100%;
 }
 .file-img.folder {
-  background-image: url('../../../assets/images/test/icon_folder_24_35.png');
+  background-image: url('~@/assets/images/test/icon_folder_24_35.png');
 }
 .file-img.video {
-  background-image: url('../../../assets/images/test/icon_video_24_94.png');
+  background-image: url('~@/assets/images/test/icon_video_24_94.png');
 }
 .file-img.word {
-  background-image: url('../../../assets/images/test/icon_text.png');
+  background-image: url('~@/assets/images/test/icon_text.png');
 }
 .file-img.word.pdf {
   background-position: 0 0;
   background-size: auto 100%;
-  background-image: url('../../../assets/images/test/icon_pdf_24_92.png');
+  background-image: url('~@/assets/images/test/icon_pdf_24_92.png');
 }
 .file-img.word.code {
   background-position: 0 0;
   background-size: auto 100%;
-  background-image: url('../../../assets/images/test/icon_code.png');
+  background-image: url('~@/assets/images/test/icon_code.png');
 }
 
 .file-img.img {
-  background-image: url('../../../assets/images/test/icon_picture_24_94.png')
+  background-image: url('~@/assets/images/test/icon_picture_24_94.png')
 }
 .file-img.news {
   background-position: 0 0;
   background-size: auto 100%;
-  background-image: url('../../../assets/images/test/icon_misc.png');
+  background-image: url('~@/assets/images/test/icon_misc.png');
 }
 .btns {
   width: 22px;

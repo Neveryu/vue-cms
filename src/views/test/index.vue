@@ -5,7 +5,6 @@
       <el-button type="primary" plain size="mini" icon="el-icon-download" @click="handlerDown">下载</el-button>
       <el-button type="primary" plain size="mini" icon="el-icon-edit" @click="handlerEdit">编辑</el-button>
       <el-button type="primary" plain size="mini" icon="el-icon-delete" @click="handlerDel">删除</el-button>
-      <el-button type="primary" plain size="mini" icon="el-icon-rank" @click="handlerMove">移动</el-button>
 
       <el-button-group style="float: right;">
         <el-button class="model-change" plain size="mini" :class="{ active: showModel === 'list' }" icon="el-icon-tickets" @click="changeModel('list')">列表</el-button>
@@ -14,12 +13,30 @@
     </div>
 
     <!-- 列表模式 -->
-    <list-model v-if="showModel === 'list'" ref="listModel" :tableDatas="fileList"
+    <list-model v-if="showModel === 'list'" ref="listModel"
+      :tableDatas="fileList"
       :selectionArr="checkList"
       @downloadOne="downloadFunc"
-      @delOne="delFunc"></list-model>
+      @delOne="delFunc">
+    </list-model>
+
     <!-- 精简模式 -->
-    <expand-model v-if="showModel === 'expand'" ref="expandModel" :tableDatas="fileList"></expand-model>
+    <expand-model v-if="showModel === 'expand'" ref="expandModel"
+      :tableDatas="fileList">
+    </expand-model>
+
+    <!-- 删除素材时的弹窗 -->
+    <el-dialog title="删除"
+      class="del-dialog"
+      :visible.sync="showDelDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false">
+      <p class="del-tips">确认删除选中的素材？</p>
+      <div slot="footer" class="">
+        <el-button type="primary" @click="submitDel">确 定</el-button>
+        <el-button @click="cancelDel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -38,7 +55,9 @@ export default {
       showModel: 'list',
       fileList: [],
       // 当前勾选中的
-      checkList: []
+      checkList: [],
+      // 删除弹窗是否显示
+      showDelDialog: false
     }
   },
   methods: {
@@ -46,17 +65,47 @@ export default {
       this.showModel = model
     },
     handlerDown() {
-
+      if(this.checkList.length < 1) {
+        this.$message.warning('请勾选你要下载的内容')
+      }
     },
     handlerEdit() {},
-    handlerMove() {},
-    handlerDel() {},
+    /* 顶部删除按钮 */
+    handlerDel() {
+      if(this.checkList.length <= 0) {
+        this.$message.closeAll()
+        this.$message.info('请选择你要删除的素材')
+        return
+      }
+      this.showDelDialog = true
+    },
+    // 确定删除
+    submitDel() {
+      let _ids = []
+      if(this.checkList.length > 0) {
+        this.checkList.forEach(item => {
+          _ids.push(item.id)
+        })
+      }
+      delMaterial(_ids).then(res => {
+        this.$message.success('删除成功')
+        this.showLeftTime = false
+        this.phoneDialogForm.code = ''
+        this.isCheckPhoneCode = false
+        this.getDataList()
+      }).catch(err => {
+        console.log('删除', err)
+      })
+    },
+    // 取消删除
+    cancelDel() {
+      this.showDelDialog = false
+    },
     // 下载功能
     downloadFunc(id) {
       console.log(`你要下载的文件id是：${id}`)
     },
     delFunc(id) {
-      console.log(id)
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -86,90 +135,24 @@ export default {
 }
 </script>
 
-<style scoped>
-.btns-group {
-  padding: 6px 20px 6px 0;
-}
-.tool-bar .txt {
-  font-size: 15px;
-  font-weight: 500;
-}
-.tool-bar {
-  margin-bottom: 2px;
-}
-.overflow-bar {
-  margin-top: 5px;
-}
-.file-path {
-  padding: 0 20px 0 15px;
-  font-size: 14px;
-}
-.model-change.active {
-  color: #3a8ee6;
-  font-weight: bold;
-  border-color: #3a8ee6;
-  z-index: 1;
-}
-
-/* 移动时的弹窗*/
-.move-dialog /deep/ .el-dialog {
-  max-width: 500px;
-  border-radius: 4px;
-}
-.move-dialog /deep/ .el-dialog__header {
-  padding: 5px 10px;
-  background: -moz-linear-gradient(#F8F9FD 0%, #DEE0E1 100%);
-  background: -webkit-linear-gradient(#F8F9FD 0%, #DEE0E1 100%);
-  background: -o-linear-gradient(#F8F9FD 0%, #DEE0E1 100%);
-  background: -ms-linear-gradient(#F8F9FD 0%, #DEE0E1 100%);
-  background: linear-gradient(#F8F9FD 0%, #DEE0E1 100%);
-  border-radius: 4px;
-}
-.move-dialog /deep/ .el-dialog__body {
-  padding: 15px 15px;
-}
-.move-dialog /deep/ .el-dialog__title {
-  font-size: 14px;
-  font-weight: bold;
-}
-.move-dialog /deep/ .el-dialog__close {
-  position: relative;
-  top: -10px;
-  background-color: #409EFF;
-  color: #fff;
-  border-radius: 2px;
-  padding: 1px;
-}
-.move-dialog /deep/ .el-dialog__footer {
-  height: 50px;
-  padding: 6px 0;
-  background-color: #fafafa;
-  border-top: 1px solid #eee;
-  text-align: center;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.tree-body {
-  border: 1px solid #dedede;
-  border-radius: 4px;
-  padding: 5px;
-  height: 250px;
-  overflow-y: auto;
-}
-.tree-body /deep/ .el-tree-node__label {
-  padding-left: 20px;
-  background-image: url('/static/img/xc/img_folder.png');
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 15px 15px;
-}
-.tree-body /deep/ .el-tree-node:focus>.el-tree-node__content {
-  background-color: #e3f2fd;
-}
-.tree-body /deep/ .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-  background-color: #e3f2fd; 
-}
-
+<style scoped lang="stylus">
+.btns-group
+  padding 5px 20px 5px 0
+.tool-bar
+  margin-bottom: 2px
+  .txt
+    font-size 15px
+    font-weight 500
+.overflow-bar
+  margin-top 5px
+.file-path
+  padding 0 20px 0 15px
+  font-size 14px
+.model-change.active
+  color #3a8ee6
+  font-weight bold
+  border-color #3a8ee6
+  z-index 1
 
 /*删除时的弹窗*/
 .del-dialog /deep/ .el-dialog {
@@ -366,41 +349,5 @@ export default {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #a5d6a7;
-}
-
-/*tree 新建文件夹*/
-.tree-body /deep/ .el-input__inner {
-  height: 26px;
-  line-height: 26px;
-  padding: 0 8px;
-}
-.tree-body /deep/ .btns {
-  width: 22px;
-  height: 25px;
-  border-color: #409EFF;
-  color: #409EFF;
-  padding: 0 !important;
-  margin-left: 4px;
-}
-.btns.cancel {
-  margin-left: 4px;
-}
-
-/*tree 新建文件夹*/
-.tree-body /deep/ .el-input__inner {
-  height: 26px;
-  line-height: 26px;
-  padding: 0 8px;
-}
-.tree-body /deep/ .btns {
-  width: 22px;
-  height: 25px;
-  border-color: #409EFF;
-  color: #409EFF;
-  padding: 0 !important;
-  margin-left: 5px;
-}
-.btns.cancel {
-  margin-left: 5px;
 }
 </style>

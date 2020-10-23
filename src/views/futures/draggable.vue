@@ -29,11 +29,11 @@
 
           <!-- 文件大小 -->
           <div class="size-wrapper">
-            <span class="size-value">时长： {{file.durations[0]}}</span>
+            <span class="size-value">时长： {{file.durations}}</span>
           </div>
           <!-- 导演 -->
           <div class="size-wrapper">
-            <span class="size-value">导演： {{file.directors[0].name}}</span>
+            <span class="size-value">导演： {{file.directors}}</span>
           </div>
           <!-- 上映日期 -->
           <div class="date-wrapper">
@@ -179,7 +179,10 @@ export default {
         background: 'rgba(0, 0, 0, 0.3)'
       })
       getFileList().then(res => {
-        let respData = [...res[0].subjects, ...res[1].subjects]
+        console.log(res)
+        // 使用 getFileListOld 接口时，才使用下面这个解析方法
+        // let respData = [...res[0].subjects, ...res[1].subjects]
+        let respData = res.data
         this.dataList = respData
         // 执行预加载(延迟3s再预加载，以免影响主屏的缩略图加载)
         if(respData.length > 0) {

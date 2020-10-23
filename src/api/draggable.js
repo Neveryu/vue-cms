@@ -1,6 +1,14 @@
+import axios from 'axios'
 import jsonp from '@/common/jsonp'
 
-function getFileList() {
+/**
+ * 获取电影资料
+ * 已失效，无法使用
+ * @Author   Author
+ * @DateTime 2020-10-23T15:42:19+0800
+ * @return   {[type]}                 [description]
+ */
+function getFileListOld() {
   // 【没有代理的话】
   // 正在热映
   let url = 'https://douban.uieee.com/v2/movie/in_theaters'
@@ -17,4 +25,11 @@ function getFileList() {
   return Promise.all([jsonp(url, data, option), jsonp(url2, data, option)])
 }
 
-export { getFileList }
+function getFileList() {
+  return axios({
+    method: 'post',
+    url: '/draggable/getFiles'
+  })
+}
+
+export { getFileListOld, getFileList }

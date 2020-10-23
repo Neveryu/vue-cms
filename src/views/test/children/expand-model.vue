@@ -210,9 +210,7 @@
 
 <script>
 // import { addFolder, downloadMaterial, updateFolderName } from '@/api/xc/material-management'
-// import { mixin } from './_mixin'
 export default {
-  // mixins: [mixin],
   props: {
     nowPid: {},
     nowLevel: {},
@@ -408,13 +406,7 @@ export default {
       })
     },
     showImg(row) {
-      let _ext = row.imgUrl.substr(row.imgUrl.lastIndexOf('.') + 1)
-      _ext = _ext.toLowerCase()
-      if(_ext == 'tif' || _ext == 'tiff' || _ext == 'wbmp') {
-        this.imgDialogSrc = row.thumbnailUrl
-      } else {
-        this.imgDialogSrc = row.imgUrl
-      }
+      this.imgDialogSrc = row.thumbnailUrl
       this.imgDialogId = row.id
       this.showImgDialog = true
     },
@@ -474,7 +466,7 @@ export default {
         addFolder(params).then(res => {
           this.$message.success('新建文件夹成功')
           this.$emit('addSuccess')
-        }).catch(err => {
+        }).catch(() => {
           this.$message.error('新建文件夹失败')
         })
       } else {

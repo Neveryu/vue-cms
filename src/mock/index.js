@@ -5,6 +5,7 @@ import * as homepageAPI from './homepage'
 import * as excel from './excel'
 import * as echarts from './echarts'
 import * as test from './test'
+import * as draggable from './draggable'
 
 Mock.setup({
   timeout: '300-600'
@@ -31,6 +32,9 @@ Mock.mock('/excel/getMergeTableData', 'post', excel.mergeTableData)
 // echarts菜单
 Mock.mock('/echarts/getCateData', 'get', echarts.getCateData)
 Mock.mock('/echarts/getDepartTop', 'post', echarts.getDepartTop)
+
+// 拖拽
+Mock.mock('/draggable/getFiles', 'post', draggable.getFileList)
 
 // test
 Mock.mock('/test/getFiles', 'post', test.getFileList)
