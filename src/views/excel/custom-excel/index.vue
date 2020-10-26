@@ -43,7 +43,7 @@
 
 <script>
 import { confirm } from '@/decorator/confirm'
-import { getFiles, delFiles } from '@/api/test'
+import { getFiles, delFiles } from '@/api/excel'
 import ListModel from './children/list-model'
 import ExpandModel from './children/expand-model'
 export default {

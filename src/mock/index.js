@@ -4,7 +4,6 @@ import * as userAPI from './user'
 import * as homepageAPI from './homepage'
 import * as excel from './excel'
 import * as echarts from './echarts'
-import * as test from './test'
 import * as draggable from './draggable'
 
 Mock.setup({
@@ -28,6 +27,9 @@ Mock.mock('/homepage/investmentRank', 'post', homepageAPI.getHomeInvestmentRank)
 // 表格部分【导出表格中的票房数据】
 Mock.mock('/api/getmoviepiaofang-mock', 'post', excel.piaofang)
 Mock.mock('/excel/getMergeTableData', 'post', excel.mergeTableData)
+// 自定义表格
+Mock.mock('/excel/getFiles', 'post', excel.getFileList)
+Mock.mock('/excel/delFiles', 'post', excel.delFiles)
 
 // echarts菜单
 Mock.mock('/echarts/getCateData', 'get', echarts.getCateData)
@@ -35,8 +37,5 @@ Mock.mock('/echarts/getDepartTop', 'post', echarts.getDepartTop)
 
 // 拖拽
 Mock.mock('/draggable/getFiles', 'post', draggable.getFileList)
-
-// test
-Mock.mock('/test/getFiles', 'post', test.getFileList)
 
 export default Mock

@@ -258,6 +258,12 @@ export const asyncRouterMap = [
         name: '合并&统计',
         component: () => import('@/views/excel/merge-count'),
         meta: {icon: 'upload', title: '合并&统计'}
+      },
+      {
+        path: 'custom-design',
+        name: '自定义表格',
+        component: () => import('@/views/excel/custom-excel'),
+        meta: {icon: 's-promotion', title: '自定义表格'}
       }
     ]
   },
@@ -274,22 +280,6 @@ export const asyncRouterMap = [
         component: () => import('@/views/theme/index'),
         name: 'Theme',
         meta: { title: '主题', icon: 'svg-pifu' }
-      }
-    ]
-  },
-  {
-    path: '/test',
-    component: Layout,
-    meta: {
-      icon: 'document',
-      title: '测试用例'
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/test/index'),
-        name: 'Test',
-        meta: { title: '测试', icon: 'document' }
       }
     ]
   },

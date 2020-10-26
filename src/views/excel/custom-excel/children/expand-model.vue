@@ -150,7 +150,6 @@
 </template>
 
 <script>
-// import { downloadMaterial } from '@/api/xc/material-management'
 export default {
   props: {
     nowPid: {},

@@ -13,15 +13,18 @@ const count = 30
 const fileList = []
 for(let i = 0; i < count; i++) {
   fileList.push(Mock.mock({
-    'id|+1': 1001,
+    'id': i + 1,
     title: '@ctitle(4, 8)',
     'images|1': images,
-    durations: '@natural(0, 4)',
+    durations: formatDuration(Mock.Random.natural(4000, 7000)),
     directors: '@cname()',
-    mainland_pubdate: '@datetime()'
+    mainland_pubdate: '@date()'
   }))
 }
 
+function formatDuration(second) {
+  return `${Math.floor(second / 3600)}时${Math.ceil(second % 3600 % 60)}分`
+}
 function getFileList() {
   return fileList
 }

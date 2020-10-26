@@ -3,45 +3,48 @@
     <!-- content -->
     <draggable tag="div" class="content my_scrollbar"
       :list="dataList"
+      v-bind="dragOptions"
       handle=".handle"
       @end="onEnd">
+      <transition-group type="transition" :name="'flip-list'">
     <!-- <div class="content my_scrollbar"> -->
-      <div class="one-item" v-for="(file, index) of dataList" :key="file.id">
-        <!-- <el-image class="img" src="">
-          <div slot="placeholder" class="image-slot">
-            加载中<span class="dot">...</span>
-          </div>
-        </el-image> -->
+        <div class="one-item" v-for="(file, index) of dataList" :key="file.id">
+          <!-- <el-image class="img" src="">
+            <div slot="placeholder" class="image-slot">
+              加载中<span class="dot">...</span>
+            </div>
+          </el-image> -->
 
-        <div class="img handle" @click.stop="showViewer(index)" :style="{ backgroundImage: 'url(' + file.images.large + ')' }">
-          <div class="black-cover"></div>
+          <div class="img handle" @click.stop="showViewer(index)" :style="{ backgroundImage: 'url(' + file.images + ')' }">
+            <div class="black-cover"></div>
+          </div>
+
+          <!-- <div class="img" @click.stop="showViewer" :style="{ backgroundImage: 'url(https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg)' }"></div> -->
+
+          <div class="item-control">
+            <!-- 原始的文件信息 -->
+            <div class="origin">
+              <!-- `checked` 为 true 或 false -->
+              <el-checkbox class="checkbox" v-model="file.isChecked" @change="handleCheckbox"></el-checkbox>
+              <span class="file-name" :title="file.title">{{file.title}}</span>
+            </div>
+
+            <!-- 文件大小 -->
+            <div class="size-wrapper">
+              <span class="size-value">时长： {{file.durations}}</span>
+            </div>
+            <!-- 导演 -->
+            <div class="size-wrapper">
+              <span class="size-value">导演： {{file.directors}}</span>
+            </div>
+            <!-- 上映日期 -->
+            <div class="date-wrapper">
+              <span class="date-value">上映日期： {{file.mainland_pubdate}}</span>
+            </div>
+
+          </div>
         </div>
-
-        <!-- <div class="img" @click.stop="showViewer" :style="{ backgroundImage: 'url(https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg)' }"></div> -->
-
-        <div class="item-control">
-          <!-- 原始的文件信息 -->
-          <div class="origin">
-            <!-- `checked` 为 true 或 false -->
-            <el-checkbox class="checkbox" v-model="file.isChecked" @change="handleCheckbox"></el-checkbox>
-            <span class="file-name" :title="file.title">{{file.title}}</span>
-          </div>
-
-          <!-- 文件大小 -->
-          <div class="size-wrapper">
-            <span class="size-value">时长： {{file.durations}}</span>
-          </div>
-          <!-- 导演 -->
-          <div class="size-wrapper">
-            <span class="size-value">导演： {{file.directors}}</span>
-          </div>
-          <!-- 上映日期 -->
-          <div class="date-wrapper">
-            <span class="date-value">上映日期： {{file.mainland_pubdate}}</span>
-          </div>
-
-        </div>
-      </div>
+      </transition-group>
     <!-- </div> -->
     </draggable>
 
@@ -87,6 +90,11 @@ export default {
       isPlay: false,
       currentViewerIndex: '',
       currentViewerImg: '',
+      // 拖拽
+      dragOptions: {
+        animation: 0,
+        ghostClass: 'ghost'
+      },
       // 播放
       timer: null,
       // 预加载
@@ -97,7 +105,7 @@ export default {
     currentViewerIndex(index) {
       index = index || 0
       let _data = this.dataList[index]
-      this.currentViewerImg = _data.images.large
+      this.currentViewerImg = _data.images
     }
   },
   methods: {
@@ -179,7 +187,6 @@ export default {
         background: 'rgba(0, 0, 0, 0.3)'
       })
       getFileList().then(res => {
-        console.log(res)
         // 使用 getFileListOld 接口时，才使用下面这个解析方法
         // let respData = [...res[0].subjects, ...res[1].subjects]
         let respData = res.data
@@ -343,6 +350,18 @@ export default {
   left: 0;
   border-radius: 6px;
   background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* 拖拽 */
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 
 
