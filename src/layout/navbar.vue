@@ -11,7 +11,7 @@
       <change-theme class="theme-container"></change-theme>
 
       <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
-        <screenfull class="screenfull right-menu-item"></screenfull>
+        <screenfull class="screenfull"></screenfull>
       </el-tooltip>
 
       <div class="lang-select">

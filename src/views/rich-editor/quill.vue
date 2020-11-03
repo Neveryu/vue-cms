@@ -47,14 +47,14 @@ export default {
   // 富文本工具栏配置
   toolbarOptions: [
     [{ 'size': ['small', false, 'large', 'huge'] }], // 字体大小
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],     // 几级标题
-    ['bold', 'italic', 'underline', 'strike'],    // 加粗，斜体，下划线，删除线
-    [{ 'indent': '-1' }, { 'indent': '+1' }],     // 缩进
-    [{ 'color': [] }, { 'background': [] }],     // 字体颜色，字体背景颜色
-    [{ 'align': [] }],    // 对齐方式
-    ['clean'],    // 清除字体样式
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }], // 几级标题
+    ['bold', 'italic', 'underline', 'strike'], // 加粗，斜体，下划线，删除线
+    [{ 'indent': '-1' }, { 'indent': '+1' }], // 缩进
+    [{ 'color': [] }, { 'background': [] }], // 字体颜色，字体背景颜色
+    [{ 'align': [] }], // 对齐方式
+    ['clean'], // 清除字体样式
     ['image'],
-    ['custom']  // 添加一个自定义功能
+    ['custom'] // 添加一个自定义功能
   ],
   // 自定义富文本的图片上传
   imageFunction(val) {
@@ -141,7 +141,7 @@ export default {
         modules: {
           toolbar: {
             container: this.$options.toolbarOptions,
-            handlers: {  // 自定义功能
+            handlers: { // 自定义功能
               'image': this.$options.imageFunction,
               'custom': this.quillCustomFunction
             }

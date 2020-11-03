@@ -1,5 +1,4 @@
 // https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -43,6 +42,7 @@ module.exports = {
       }
     ],
     // 文件末尾空行
-    'eol-last': ["error", "always"]
+    'eol-last': ["error", "always"],
+    'no-unused-vars': 0
   }
 }

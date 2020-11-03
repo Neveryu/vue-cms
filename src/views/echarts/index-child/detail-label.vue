@@ -53,7 +53,7 @@ export default {
         tooltip: {
           trigger: 'item',
           position: ['72%', '50%'],
-          // eslint-disable-next-line 
+          // eslint-disable-next-line
           formatter: `<div style="transform: translate3d(-50%, -50%, 0); text-align: center"><span class="digital-number" style="font-size: 28px;">{d}%</span><br/><span class="digital-number">{c}件</span></div>`,
           backgroundColor: 'transparent',
           textStyle: {

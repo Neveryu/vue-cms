@@ -148,7 +148,7 @@ export default {
   name: 'Theme',
   data() {
     return {
-      chalk: '',  // 当前是否已经获取过css样式文件内容，如果获取过，这里会有值，避免多次获取
+      chalk: '', // 当前是否已经获取过css样式文件内容，如果获取过，这里会有值，避免多次获取
       showColorPicker: true,
       color: '#409EFF',
       predefineColors: ['#409EFF', '#1890ff', '#304156', '#212121', '#11a983', '#13c2c2', '#6959CD', '#f5222d'],

@@ -211,7 +211,7 @@ export default {
       // 系统标识-标准
       if(val === '1') {
         this.basicForm.sysMark = '.tencent.com'
-      } else if(val === '2') {  // 系统标识-个性
+      } else if(val === '2') { // 系统标识-个性
         this.basicForm.sysMark = ''
       }
     },

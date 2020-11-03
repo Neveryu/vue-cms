@@ -12,7 +12,7 @@
     </div>
 
     <!-- 列表模式 -->
-    <list-model v-if="showModel === 'list'" ref="listModel"
+    <list-model v-if="showModel === 'list'"
       :tableDatas="fileList"
       :selectionArr="checkList"
       @downloadOne="downloadFunc"
@@ -20,7 +20,7 @@
     </list-model>
 
     <!-- 精简模式 -->
-    <expand-model v-if="showModel === 'expand'" ref="expandModel"
+    <expand-model v-if="showModel === 'expand'"
       :tableDatas="fileList"
       :selectionArr="checkList"
       @delOne="delFunc">
