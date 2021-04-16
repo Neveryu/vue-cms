@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install --registry=https://registry.npm.taobao.org
+npm install
 ```
 
 ### Compiles and hot-reloads for development
@@ -15,9 +15,9 @@ npm run serve
 npm run build
 ```
 
-### Run your end-to-end tests
+### Run your unit tests
 ```
-npm run test:e2e
+npm run test:unit
 ```
 
 ### Lints and fixes files
