@@ -9,7 +9,9 @@
     </el-dropdown-menu>
   </el-dropdown>
 </template>
+
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'LangSelect',
   computed: {
@@ -18,16 +20,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      setLanguage: 'language/setLanguage'
+    }),
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
-      this.$store.dispatch('setLanguage', lang)
-      // this.$notify({
-      //   title: 'Info',
-      //   message: 'switch language success',
-      //   type: 'success',
-      //   offset: 100,
-      //   showClose: false
-      // })
+      this.setLanguage(lang)
     }
   }
 }

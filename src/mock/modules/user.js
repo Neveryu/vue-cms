@@ -22,11 +22,32 @@ const userMap = {
       type: ['Vue', '小程序'],
       desc: '我是admin账号'
     },
-    permissions: [{
-      address: '/excel',
-    }, {
-      address: '/theme'
-    }]
+    permissions: [
+      {
+        type: 2,
+        address: '/excel'
+      },
+      {
+        type: 2,
+        address: '/theme'
+      },
+      {
+        type: 1,
+        address: '/introduction'
+      },
+      {
+        type: 2,
+        address: '/introduction/index'
+      },
+      {
+        type: 1,
+        address: '/user'
+      },
+      {
+        type: 2,
+        address: '/user/profile'
+      }
+    ]
   },
   lucy: {
     account: 'lucy',
@@ -52,7 +73,7 @@ export default {
     url: '/user/getInfo',
     method: 'post',
     result: () => {
-      userMap[getToken()]
+      return userMap[getToken()]
     }
   }
 }

@@ -96,9 +96,9 @@ export default {
     this.accountTip()
   },
   methods: {
-    ...mapActions([
-      'login'
-    ]),
+    ...mapActions({
+      login:'user/login'
+    }),
     // 用户名输入框回车后切换到密码输入框
     goToPwdInput() {
       this.$refs.pwd.$el.getElementsByTagName('input')[0].focus()

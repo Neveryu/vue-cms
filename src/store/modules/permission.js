@@ -1,3 +1,7 @@
+/**
+ * 这是权限板块，设计包含：路由、菜单、页面、按钮
+ */
+
 import { asyncRoutes, constantRoutes, endBasicRoutes } from '@/router'
 
 const state = {
@@ -12,7 +16,7 @@ const state = {
 /**
  * 前端动态路由是否在后端返回的路由权限中
  * @param routes - 前端动态路由表
- * @param route -前端静态配置的路由表具体路由对象
+ * @param route -前端配置的路由表具体路由对象
  */
 function hasPermission(routes, route) {
   // 后端返回的菜单路由必须要有address
@@ -27,7 +31,7 @@ function hasPermission(routes, route) {
 
 /**
  * Filter asynchronous routing tables by recursion
- * @param asyncRoutes 端静态配置的动态路由表
+ * @param asyncRoutes 前端配置的动态路由表
  * @param routes 接口返回的有权限的路由
  * 两者做一个匹配
  */
@@ -96,28 +100,28 @@ function getPermissionOfAsyncRoutes(asyncRoutes, id) {
 export function filterAsyncRoutes2(asyncRoutes, routes) {
   for (let index = 0; index < routes.length; index++) {
     let route = routes[index]
-    let aRoute = getPermissionOfAsyncRoutes(asyncRoutes, route.purviewId)
-    if (aRoute) {
-      aRoute.order = route.order
-      aRoute.supId = route.supId
-      aRoute.path = route.address
-      if (aRoute.meta && route.name) {
-        aRoute.meta.title = route.name
+    let hasRoute = getPermissionOfAsyncRoutes(asyncRoutes, route)
+    if (hasRoute) {
+      hasRoute.order = route.order
+      hasRoute.supId = route.supId
+      hasRoute.path = route.address
+      if (hasRoute.meta && route.name) {
+        hasRoute.meta.title = route.name
       }
-      routes[index] = aRoute
+      routes[index] = hasRoute
     } else {
       routes.splice(index, 1)
       index--
     }
   }
-  routes.forEach(aRoute => {
-    aRoute.children = null
+  routes.forEach(route => {
+    route.children = null
   })
 
   // 菜单排序
-  routes.sort((a, b) => {
-    return a.order - b.order
-  })
+  // routes.sort((a, b) => {
+  //   return a.order - b.order
+  // })
 
   // 有数据
   let res = formatTree(routes, 'id', 'supId', 'qyai')
@@ -140,25 +144,25 @@ const actions = {
    * @param {routes} 接口返回的路由
    */
   generateRoutes({ commit }, routes) {
-    // 菜单路由（type为1或者2的是路由/页面菜单权限）
+    // 过滤出菜单路由（type为1或者2的是路由/页面菜单权限）
     let menuRoles = routes.filter(item => {
       return item.type == '1' || item.type == '2'
     })
 
-    // 按钮权限表（type为3的代表可以显示的按钮权限）
+    // 过滤出按钮权限表（type为3的代表可以显示的按钮权限）
     let btnPermissions = routes.filter(item => {
       return item.type == '3'
     })
+
     let btns = []
     if (btnPermissions && btnPermissions.length > 0) {
       btnPermissions.forEach(item => {
         btns.push(item.value)
       })
     }
-    commit('SET_BUTTONS', btns)
 
     return new Promise(resolve => {
-      let accessedRoutes = filterAsyncRoutes2(asyncRoutes, menuRoles)
+      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
       accessedRoutes.push(...endBasicRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)

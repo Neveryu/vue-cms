@@ -22,7 +22,7 @@ Vue.use(Router)
  * 基础路由： 任何角色都包含的路由
  * @type {Array}
  */
-export const constantRouterMap = [
+export const constantRoutes = [
   {
     path: '/login',
     name: 'login',
@@ -76,7 +76,7 @@ export const endBasicRoutes = [
  * 动态路由： 根据用户角色
  * @type {Array}
  */
-export const asyncRouterMap = []
+export const asyncRoutes = []
 
 /**
  * 如果系统页面模块比较多，也可以分模块写
@@ -84,17 +84,17 @@ export const asyncRouterMap = []
 /**
  * 自动扫描 modules 里面的路由模块，路由模块请根据业务自行拆分
  * modules 里面只能存放动态路由（需要根据权限来选择的路由）
- * 插入到 asyncRouterMap 中
- * 基础路由全部写到constantRouterMap中
+ * 插入到 asyncRoutes 中
+ * 基础路由全部写到constantRoutes中
  */
 const files = require.context('./modules', false, /\.js$/)
 files.keys().forEach(key => {
   const file = files(key).default
   // 根据导出的内容判断是否数组，如果数组需使用扩展运算符
   if (Array.isArray(file)) {
-    asyncRouterMap.push(...file)
+    asyncRoutes.push(...file)
   } else {
-    asyncRouterMap.push(file)
+    asyncRoutes.push(file)
   }
 })
 
@@ -102,7 +102,7 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
+    routes: constantRoutes
   })
 
 const router = createRouter()

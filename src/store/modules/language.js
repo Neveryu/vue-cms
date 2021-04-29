@@ -2,24 +2,25 @@ import { getLang, setLang } from '@/common/lang'
 
 const SET_LANG = 'SET_LANG'
 
-const language = {
-  state: {
-    language: getLang() || 'zh'
-  },
-  mutations: {
-    [SET_LANG](state, language) {
-      state.language = language
-      setLang(language)
-    }
-  },
-  actions: {
-    setLanguage({ commit }, language) {
-      commit(SET_LANG, language)
-    }
-  },
-  getters: {
-    language: state => state.language
+
+const state = {
+  language: getLang() || 'zh'
+}
+const mutations = {
+  [SET_LANG](state, language) {
+    state.language = language
+    setLang(language)
+  }
+}
+const actions = {
+  setLanguage({ commit }, language) {
+    commit(SET_LANG, language)
   }
 }
 
-export default language
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions
+}

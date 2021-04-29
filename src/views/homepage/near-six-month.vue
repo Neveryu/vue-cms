@@ -3,9 +3,11 @@
 </template>
 <script>
 import { debounce } from '@/utils'
-let echarts = require('echarts/lib/echarts')
+const echarts = require('echarts/lib/echarts')
 require('echarts/lib/chart/line')
 require('echarts/lib/component/tooltip')
+require('echarts/lib/component/grid')
+require('echarts/lib/component/legend')
 export default {
   name: 'near-six-month',
   props: {

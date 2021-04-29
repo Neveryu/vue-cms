@@ -10,4 +10,8 @@ function logout() {
   return 'success'
 }
 
-export { login, logout }
+function userInfo(token) {
+	console.log(token, 999)
+  return userMap[token]
+}
+export { login, logout, userInfo }

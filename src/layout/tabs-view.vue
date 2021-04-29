@@ -31,7 +31,10 @@ export default {
     ...mapGetters(['visitedTabsView'])
   },
   methods: {
-    ...mapActions(['addVisitedTabsView', 'delVisitedTabsView']),
+    ...mapActions({
+      addVisitedTabsView: 'tabsview/addVisitedTabsView',
+      delVisitedTabsView: 'tabsview/delVisitedTabsView'
+    }),
     addTabsView() {
       const route = this.generateRoute()
       if (!route) {
