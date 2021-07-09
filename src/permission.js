@@ -13,7 +13,6 @@ import getPageTitle from '@/utils/get-page-title'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
-
 NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login'] // 白名单
@@ -22,7 +21,6 @@ const whiteList = ['/login'] // 白名单
 router.beforeEach(async (to, from, next) => {
   // set page title
   document.title = getPageTitle(to.meta.title)
-
   NProgress.start() // start progress bar
   if (getToken()) {
     // 有token访问login页面，就跳到首页
@@ -32,15 +30,15 @@ router.beforeEach(async (to, from, next) => {
         await store.dispatch('user/resetToken')
         next(`/login?redirect=${to.path}`)
         NProgress.done()
-        return
       } else {
         next({ path: '/', replace: true })
         NProgress.done() // 这种情况不会触发router的后置钩子，所以这里需要单独处理
       }
+      return
     } else {
       console.log('1-2')
       // 有token，如果动态路由存在，则直接next
-      if (store.getters.add_routes.length > 0) {
+      if (store.getters.addRoutes && store.getters.addRoutes.length > 0) {
         next()
       } else {
         // 再次尝试动态生成路由
@@ -51,6 +49,8 @@ router.beforeEach(async (to, from, next) => {
           return
         }
         try {
+          // 回填用户基本信息
+          store.commit('user/SET_ALL', loadFromSession('userInfo', {}))
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', loadFromSession('userRoutes') || [])
           // dynamically add accessible routes
@@ -62,8 +62,9 @@ router.beforeEach(async (to, from, next) => {
           // remove token and go to login page to re-login
           // 退出登录
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          Message.error('generate router has Error')
           next(`/login?redirect=${to.path}`)
+          NProgress.done()
         }
       }
     }
@@ -75,7 +76,7 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else {
       console.log('2-2')
-      // 否则就跳动登录页面
+      // 否则就跳到登录页面
       next('/login')
       NProgress.done() // 这种情况不会触发router的后置钩子，所以这里需要单独处理
     }

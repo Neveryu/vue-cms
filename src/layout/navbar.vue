@@ -51,7 +51,6 @@ import LangSelect from '@/components/lang-select'
 import Screenfull from '@/components/screenfull'
 // import ChangeTheme from '@/components/theme'
 export default {
-  name: '',
   components: {
     LangSelect,
     Screenfull
@@ -62,7 +61,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      userLogout: 'logout'
+      userLogout: 'user/logout'
     }),
     @confirm('退出系统？')
     logout() {

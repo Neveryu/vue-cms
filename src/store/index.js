@@ -33,7 +33,7 @@ const getters = {
   // 语言
   language: state => state.language.language,
   // add_routes 是动态遍历出来，添加上去的路由
-  add_routes: state => state.permission.addRoutes,
+  addRoutes: state => state.permission.addRoutes,
   // 用户的原始permissions数据
   permissions: state => state.user.permissions,
   // 用户的路由菜单权限（完整的）

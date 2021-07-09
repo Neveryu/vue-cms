@@ -22,7 +22,7 @@ const state = {
     desc: ''
   },
   // 原始的用户permissions数据
-  permissions: ''
+  permissions: []
 }
 
 const mutations = {
@@ -55,9 +55,10 @@ const actions = {
         .then(resp => {
           let data = resp.data
           setToken(data.token)
-          // 存路由按钮权限
+          // 存路由&按钮权限
           saveToSession('userRoutes', data.permissions)
-
+          // 存用户信息
+          saveToSession('userInfo', data.userInfo)
           commit(SET_TOKEN, data.token)
           commit(SET_INFO, data.userInfo)
           commit(SET_PERMISSIONS, data.permissions)
@@ -68,6 +69,7 @@ const actions = {
         })
     })
   },
+
   // 拉取用户信息
   pullUserInfo() {
     return new Promise((resolve, reject) => {
@@ -81,8 +83,10 @@ const actions = {
         })
     })
   },
+
   // 用户退出登录
   logout({ commit }) {
+    console.log(11)
     return new Promise((resolve, reject) => {
       logout()
         .then(() => {
@@ -90,6 +94,9 @@ const actions = {
           commit(SET_TOKEN, '')
           commit(SET_INFO, {})
           commit(SET_PERMISSIONS, [])
+          // sessionStorage里面存储的是跟用户本次登录的一次性数据，每次退出时都要清除
+          window.sessionStorage.clear()
+          // localStorage里面存储的是持久化数据，不清除
           resolve()
         })
         .catch(err => {
@@ -97,6 +104,7 @@ const actions = {
         })
     })
   },
+
   // 头像更新
   doUpdateAvatar({ commit }, imgFile) {
     return new Promise(resolve => {
@@ -106,6 +114,7 @@ const actions = {
       }, 1000)
     })
   },
+
   /**
    * 更新用户信息
    * userInfo: 用户信息表对象
@@ -118,14 +127,14 @@ const actions = {
       }, 1000)
     })
   },
+
   // remove token
   resetToken({ commit }) {
     console.log('resetToken')
     return new Promise(resolve => {
       removeToken()
-      sessionStorage.clear()
       commit('SET_TOKEN', '')
-
+      window.sessionStorage.clear()
       resetRouter()
       resolve()
     })

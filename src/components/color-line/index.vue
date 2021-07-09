@@ -76,7 +76,7 @@
   }
 </script>
 <style scoped lang="stylus">
-  .color-line
-    .wrapper
-      margin 0 auto
+.color-line
+  .wrapper
+    margin 0 auto
 </style>

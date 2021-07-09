@@ -15,7 +15,7 @@ Vue.use(Router)
  *                        // 如果设置为true,它将总是出现在根目录。如果不设置的话，当它只有1个子路由的时候，会把
  *                        // 它的唯一子路由放到跟目录上来，而不显示它自己本身。
  *
- * hidden: true           // if set ture, 将不会出现在左侧菜单栏中
+ * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中
  */
 
 /**
@@ -39,7 +39,7 @@ export const constantRoutes = [
     redirect: '/home',
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: () => import('@/views/homepage'),
         meta: { icon: 's-home', title: '首页' }
@@ -52,6 +52,15 @@ export const constantRoutes = [
  * 总是需要在VueRouter最末尾的路由，添加到动态路由的后面
  */
 export const endBasicRoutes = [
+  // 404页面
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/error-page/404'),
+    meta: {
+      title: '404'
+    }
+  },
   // 无权限页面
   {
     path: '/no-permission',
@@ -94,6 +103,7 @@ files.keys().forEach(key => {
   if (Array.isArray(file)) {
     asyncRoutes.push(...file)
   } else {
+    console.log(file, '99999999999')
     asyncRoutes.push(file)
   }
 })

@@ -138,6 +138,12 @@ export default {
       this.doUpdateAvatar(imgDataUrl).finally(() => {
         loading.close()
       })
+    },
+    cropUploadSuccess(resData, field, ki) {
+      this.$message.success('上次成功')
+    },
+    cropUploadFail(ts, field, ki) {
+      this.$message.error('上次失败')
     }
   }
 }

@@ -7,7 +7,7 @@ import { getToken } from '@/common/auth'
  */
 const userMap = {
   // 键名和token保持一致
-  // permissions 是用户的权限
+  // permissions 是用户的权限，包括菜单、页面、按钮权限，3类
   // 相比于用role来做权限，permissions这样可以定制每一个用户的权限
   // permissions不能为空，最少
   admin: {
@@ -22,15 +22,8 @@ const userMap = {
       type: ['Vue', '小程序'],
       desc: '我是admin账号'
     },
+    // address里面请填写完整的路径
     permissions: [
-      {
-        type: 2,
-        address: '/excel'
-      },
-      {
-        type: 2,
-        address: '/theme'
-      },
       {
         type: 1,
         address: '/introduction'
@@ -46,6 +39,22 @@ const userMap = {
       {
         type: 2,
         address: '/user/profile'
+      },
+      {
+        type: 1,
+        address: '/custom-component'
+      },
+      {
+        type: 2,
+        address: '/custom-component/index'
+      },
+      {
+        type: 2,
+        address: '/excel'
+      },
+      {
+        type: 2,
+        address: '/theme'
       }
     ]
   },

@@ -54,6 +54,7 @@ export default {
   created() {
     this.isDev = process.env.NODE_ENV === 'development'
     getImage().then(resp => {
+      console.log(resp, '*********')
       let movieData
       movieData = [...resp[0].subjects, ...resp[1].subjects]
       movieData.forEach((v, i, _this) => {

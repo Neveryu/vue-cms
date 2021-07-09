@@ -1,13 +1,12 @@
 /**
  * 这是权限板块，设计包含：路由、菜单、页面、按钮
  */
-
 import { asyncRoutes, constantRoutes, endBasicRoutes } from '@/router'
 
 const state = {
   // 按钮权限
   btns: [],
-  // 路由
+  // 最后生成的总的路由
   routes: constantRoutes,
   // 动态添加进来的路由
   addRoutes: []
@@ -36,17 +35,19 @@ function hasPermission(routes, route) {
  * 两者做一个匹配
  */
 export function filterAsyncRoutes(asyncRoutes, routes) {
+  console.log(asyncRoutes, '---')
   let res = []
   asyncRoutes.forEach(route => {
-    let isHasPermission = hasPermission(routes, route)
-    if (route.children) {
-      route.children = filterAsyncRoutes(route.children, routes)
-    }
-    if (isHasPermission || (route.children && route.children.length > 0)) {
-      res.push(route)
+    if(route) {
+      let isHasPermission = hasPermission(routes, route)
+      if (route.children) {
+        route.children = filterAsyncRoutes(route.children, routes)
+      }
+      if (isHasPermission || (route.children && route.children.length > 0)) {
+        res.push(route)
+      }  
     }
   })
-  // console.log('匹配后的路由', res)
   return res
 }
 
@@ -91,43 +92,6 @@ function getPermissionOfAsyncRoutes(asyncRoutes, id) {
   return null
 }
 
-/**
- * Filter asynchronous routing tables by recursion
- * @param asyncRoutes 端静态配置的动态路由表
- * @param routes 接口返回的有权限的路由
- * 两者做一个匹配
- */
-export function filterAsyncRoutes2(asyncRoutes, routes) {
-  for (let index = 0; index < routes.length; index++) {
-    let route = routes[index]
-    let hasRoute = getPermissionOfAsyncRoutes(asyncRoutes, route)
-    if (hasRoute) {
-      hasRoute.order = route.order
-      hasRoute.supId = route.supId
-      hasRoute.path = route.address
-      if (hasRoute.meta && route.name) {
-        hasRoute.meta.title = route.name
-      }
-      routes[index] = hasRoute
-    } else {
-      routes.splice(index, 1)
-      index--
-    }
-  }
-  routes.forEach(route => {
-    route.children = null
-  })
-
-  // 菜单排序
-  // routes.sort((a, b) => {
-  //   return a.order - b.order
-  // })
-
-  // 有数据
-  let res = formatTree(routes, 'id', 'supId', 'qyai')
-
-  return res
-}
 
 const mutations = {
   SET_ROUTES: (state, routes) => {
@@ -154,15 +118,21 @@ const actions = {
       return item.type == '3'
     })
 
+    // 生成按钮权限的数据(数组)
     let btns = []
     if (btnPermissions && btnPermissions.length > 0) {
       btnPermissions.forEach(item => {
-        btns.push(item.value)
+        btns.push(item.address || null)
       })
     }
+    commit('SET_BUTTONS', btns)
 
     return new Promise(resolve => {
+      // 从动态路由中筛选出用户有的路由页面/菜单
+      
+      console.log(asyncRoutes, 'wmmmmmmmmmm')
       let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
+      // 然后把endRoutes添加到最后面
       accessedRoutes.push(...endBasicRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
