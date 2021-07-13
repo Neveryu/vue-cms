@@ -35,7 +35,6 @@ function hasPermission(routes, route) {
  * 两者做一个匹配
  */
 export function filterAsyncRoutes(asyncRoutes, routes) {
-  console.log(asyncRoutes, '---')
   let res = []
   asyncRoutes.forEach(route => {
     if(route) {
@@ -129,8 +128,6 @@ const actions = {
 
     return new Promise(resolve => {
       // 从动态路由中筛选出用户有的路由页面/菜单
-      
-      console.log(asyncRoutes, 'wmmmmmmmmmm')
       let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
       // 然后把endRoutes添加到最后面
       accessedRoutes.push(...endBasicRoutes)

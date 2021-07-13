@@ -5,27 +5,31 @@
       type="success"
       description="自定义的通知组件支持在全局使用 <notification /> 以及使用 api 的形式来调用">
     </el-alert>
-    <el-row class="animate-wrapper">
-      进入动画：
-      <el-select v-model="enterAnimated" filterable placeholder="请选择(可搜索)">
-        <el-option
-          v-for="item of options"
-          :key="item"
-          :label="item"
-          :value="item">
-        </el-option>
-      </el-select>
-      离开动画：
-      <el-select v-model="leaveAnimated" filterable placeholder="请选择(可搜索)">
-        <el-option
-          v-for="item of options"
-          :key="item"
-          :label="item"
-          :value="item">
-        </el-option>
-      </el-select>
-      <el-button type="danger" plain @click="emitNotify(enterAnimated, leaveAnimated)">触发</el-button>
-    </el-row>
+    <el-form :inline="true">
+      <el-form-item label="进入动画：">
+        <el-select v-model="enterAnimated" filterable placeholder="请选择(可搜索)">
+            <el-option
+              v-for="item of options"
+              :key="item"
+              :label="item"
+              :value="item">
+            </el-option>
+          </el-select>
+      </el-form-item>
+      <el-form-item label="离开动画：">
+        <el-select v-model="leaveAnimated" filterable placeholder="请选择(可搜索)">
+          <el-option
+            v-for="item of options"
+            :key="item"
+            :label="item"
+            :value="item">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="danger" plain @click="emitNotify(enterAnimated, leaveAnimated)">触发</el-button>
+      </el-form-item>
+    </el-form>
 
     <div class="split">
       <el-divider><i class="el-icon-eleme"></i></el-divider>
@@ -96,6 +100,12 @@ export default {
   methods: {
     // 触发自定义通知
     emitNotify(enterAnimated, leaveAnimated) {
+      console.log({
+        autoClose: 3000,
+        content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
+        enterAnimated,
+        leaveAnimated
+      })
       this.$my_notify({
         autoClose: 3000,
         content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
@@ -145,8 +155,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.animate-wrapper
-  margin-top 20px
 /deep/ .el-alert__title
   font-size 1em
 /deep/ .el-alert__description

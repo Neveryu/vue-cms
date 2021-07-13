@@ -31,7 +31,7 @@ function formatDuration(second) {
 export default {
   getFileList: {
     state: true,
-    url: '/homepage/hometotal',
+    url: '/draggable/getFile',
     method: 'post',
     result: () => {
       return fileList

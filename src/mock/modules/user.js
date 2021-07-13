@@ -49,8 +49,84 @@ const userMap = {
         address: '/custom-component/index'
       },
       {
+        type: 1,
+        address: '/echarts'
+      },
+      {
         type: 2,
+        address: '/echarts/index'
+      },
+      {
+        type: 1,
         address: '/excel'
+      },
+      {
+        type: 2,
+        address: '/excel/dynamic-table'
+      },
+      {
+        type: 2,
+        address: '/excel/export-excel'
+      },
+      {
+        type: 2,
+        address: '/excel/upload-excel'
+      },
+      {
+        type: 2,
+        address: '/excel/merge-count'
+      },
+      {
+        type: 2,
+        address: '/excel/custom-design'
+      },
+      {
+        type: 1,
+        address: '/futures'
+      },
+      {
+        type: 2,
+        address: '/futures/draggable'
+      },
+      {
+        type: 2,
+        address: '/clipboard'
+      },
+      {
+        type: 1,
+        address: '/nested'
+      },
+      {
+        type: 2,
+        address: '/nested/menu1'
+      },
+      {
+        type: 2,
+        address: '/nested/menu1/menu1-1'
+      },
+      {
+        type: 2,
+        address: '/nested/menu1/menu1-2'
+      },
+      {
+        type: 2,
+        address: '/nested/menu1/menu1-2/menu1-2-1'
+      },
+      {
+        type: 2,
+        address: '/nested/menu2'
+      },
+      {
+        type: 1,
+        address: '/rich-editor'
+      },
+      {
+        type: 2,
+        address: '/rich-editor/quill'
+      },
+      {
+        type: 2,
+        address: '/rich-editor/tinymce'
       },
       {
         type: 2,

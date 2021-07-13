@@ -103,7 +103,6 @@ files.keys().forEach(key => {
   if (Array.isArray(file)) {
     asyncRoutes.push(...file)
   } else {
-    console.log(file, '99999999999')
     asyncRoutes.push(file)
   }
 })

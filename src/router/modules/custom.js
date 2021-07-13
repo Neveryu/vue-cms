@@ -10,7 +10,7 @@ const custom = {
   },
   children: [
     {
-      path: 'index',
+      path: '/custom-component/index',
       name: 'CustomComponent',
       meta: {icon: 'guide', title: '自定义组件'},
       component: () => import('@/views/custom-component/index')

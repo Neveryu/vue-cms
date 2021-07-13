@@ -27,7 +27,7 @@ import axios from 'axios'
 function getFileList() {
   return axios({
     method: 'post',
-    url: '/draggable/getFiles'
+    url: '/draggable/getFile'
   })
 }
 

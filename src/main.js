@@ -14,6 +14,9 @@ import store from './store'
 import router from './router'
 
 
+// 自定义的全局组件
+import Notification from '@/components/notification'
+
 // 全局图标
 import './icons'
 // 国际化
@@ -27,6 +30,7 @@ Vue.use(ElementUI, {
 	size: Cookies.get('size') || 'small',
   i18n: (key, value) => i18n.t(key, value)
 })
+Vue.use(Notification)
 
 Vue.config.productionTip = false
 
