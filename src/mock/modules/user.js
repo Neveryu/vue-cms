@@ -129,9 +129,13 @@ const userMap = {
         address: '/rich-editor/tinymce'
       },
       {
-        type: 2,
+        type: 1,
         address: '/theme'
-      }
+      },
+      {
+        type: 2,
+        address: '/theme/index'
+      },
     ]
   },
   lucy: {

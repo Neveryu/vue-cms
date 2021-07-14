@@ -14,7 +14,7 @@
     "better-scroll": "^2.2.0",
     "clipboard": "^2.0.1",
     "core-js": "^3.6.5",
-    "countup.js": "^2.0.7",
+    "countup.js": "^1.9.3",
     "echarts": "^4.0.4",
     "element-china-area-data": "^5.0.2",
     "element-ui": "^2.15.0",

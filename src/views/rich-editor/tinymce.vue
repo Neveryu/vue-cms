@@ -38,7 +38,7 @@ export default {
         'zh': 'zh_CN'
       },
       // 富文本内容
-      content: '<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><a href="//shang.qq.com/wpa/qunwpa?idkey=32da7a18744756b0d8ffdd05b84999afecb5265dbad0fb119033e122abe803f3" target="_blank" rel="noopener"><img title="TinyMCE Logo" src="https://raw.githubusercontent.com/Neveryu/prerender-website/master/src/assets/logo1.png" alt="TinyMCE Logo" width="120" /></a></p><p>请书写你的内容</p>'
+      content: '<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><a href="//shang.qq.com/wpa/qunwpa?idkey=32da7a18744756b0d8ffdd05b84999afecb5265dbad0fb119033e122abe803f3" target="_blank" rel="noopener"><img title="TinyMCE Logo" src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" alt="TinyMCE Logo" width="120" /></a></p><p>请书写你的内容</p>'
     }
   },
   watch: {

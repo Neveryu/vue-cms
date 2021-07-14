@@ -177,7 +177,7 @@
   </div>
 </template>
 <script>
-import { CountUp } from 'countup.js'
+import CountUp from 'countup.js'
 import { getHomeTotal, getHomeDetailItem, getRank } from '@/api/homepage'
 import ColorLine from '@/components/color-line'
 import NearSixMonth from '@/views/homepage/near-six-month'

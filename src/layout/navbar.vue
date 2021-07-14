@@ -5,7 +5,7 @@
         <el-menu-item index="1" class="title-name">{{ $t('navbar.title') }}</el-menu-item>
       </router-link>
 
-      <!-- <change-theme class="theme-container"></change-theme> -->
+      <change-theme class="theme-container"></change-theme>
 
       <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
         <screenfull class="screenfull"></screenfull>
@@ -49,12 +49,12 @@ import { confirm } from '@/decorator/confirm'
 import { mapGetters, mapActions } from 'vuex'
 import LangSelect from '@/components/lang-select'
 import Screenfull from '@/components/screenfull'
-// import ChangeTheme from '@/components/theme'
+import ChangeTheme from '@/components/theme'
 export default {
   components: {
     LangSelect,
-    Screenfull
-    // ChangeTheme
+    Screenfull,
+    ChangeTheme
   },
   computed: {
     ...mapGetters(['name', 'avatar'])
