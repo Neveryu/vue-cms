@@ -1,6 +1,6 @@
 <p align="center"><a href="https://blog.csdn.net/csdn_yudong/article/details/85250412"><img width="120" src="https://raw.githubusercontent.com/Neveryu/vue-cms/master/static/image/login-logo.png"></a></p>
 
-<p align="center">基于 Vue 和 ElementUI 构建的企业级后台管理项目</p>
+<p align="center">基于 Vue 和 antd design vue 3.x 构建的企业级后台管理项目</p>
 
 <p align="center">
   <a href="https://github.com/vuejs/vue" rel="nofollow" target="_blank">
@@ -24,6 +24,11 @@
 在线体验：[https://git.io/fp9UM](https://neveryu.github.io/vue-cms/index.html)
 
 ## 简介
+
+
+// todo
+
+
 `vue-cms` 是一个企业级管理后台项目，基于 `Vue` 和 `ElementUI` 构建。它使用了最新的前端技术栈，内置了 `i18n` 国际化解决方案，支持多语言，路由嵌套，动态路由，权限验证等很多功能特性。
 
 同时，它也提供了首页的数据图表展示，个人中心，主题换肤，表单表格，数据统计等常用的页面模块；
