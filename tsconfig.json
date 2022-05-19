@@ -1,4 +1,5 @@
 {
+  "_desc": "【官方解释】当目录中出现了 tsconfig.json 文件，则说明该目录是 TypeScript 项目的根目录。tsconfig.json 文件指定了编译项目所需的根目录下的文件以及编译选项。",
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
@@ -6,13 +7,30 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "baseUrl": ".",
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "skipLibCheck": true
+    "types": [
+      "vite/client"
+    ],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
+    "skipLibCheck": true,
+    "paths": {
+      "/@/*": [
+        "src/*"
+      ],
+      "/#/*": [
+        "types/*"
+      ]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "_about_references": "前端项目和后端node项目在同一目录下开发，两个项目依赖同一个配置文件，但我们希望前后端项目进行灵活的分别打包，那么我们可以配置references。"
 }
