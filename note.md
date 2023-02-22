@@ -112,3 +112,29 @@ export default {
 ```
 
 【总结：】如果确实想要使用按需加载的话，借助 `babel-plugin-import` 是一个很好的方案吧，但还是那句话，样式还是全量引入吧。
+
+## 四、useRouter, useRoute？？
+
+因为我们在 setup 里面没有访问 this，所以我们不能再直接访问 this.$router 或 this.$route。作为替代，我们使用 useRouter 函数：
+
+```
+import { useRouter, useRoute } from 'vue-router'
+
+export default {
+  setup() {
+    const router = useRouter()
+    const route = useRoute()
+
+    function pushWithQuery(query) {
+      router.push({
+        name: 'search',
+        query: {
+          ...route.query,
+        },
+      })
+    }
+  },
+}
+```
+
+请注意，在模板中我们仍然可以访问 $router 和 $route，所以不需要在 setup 中返回 router 或 route。

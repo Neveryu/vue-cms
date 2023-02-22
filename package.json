@@ -3,6 +3,7 @@
   "private": true,
   "version": "3.0.0",
   "scripts": {
+    "start": "npm run serve",
     "serve": "npm run dev",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

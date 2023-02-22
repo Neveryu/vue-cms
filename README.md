@@ -1,6 +1,6 @@
 <p align="center"><a href="https://blog.csdn.net/csdn_yudong/article/details/85250412"><img width="120" src="https://raw.githubusercontent.com/Neveryu/vue-cms/master/static/image/login-logo.png"></a></p>
 
-<p align="center">基于 Vue 和 antd design vue 3.x 构建的企业级后台管理项目</p>
+<p align="center">基于 Vue3.x 和 antd design vue 3.x 构建的企业级后台管理项目</p>
 
 <p align="center">
   <a href="https://github.com/vuejs/vue" rel="nofollow" target="_blank">
@@ -25,8 +25,7 @@
 
 ## 简介
 
-
-// todo
+> 本分支是基于[vue3.x + antd design vue 3.x]为核心构建的企业级后台管理项目.
 
 
 `vue-cms` 是一个企业级管理后台项目，基于 `Vue` 和 `ElementUI` 构建。它使用了最新的前端技术栈，内置了 `i18n` 国际化解决方案，支持多语言，路由嵌套，动态路由，权限验证等很多功能特性。
@@ -61,7 +60,7 @@ npm start
 
 浏览器访问 [http://localhost:8080](http://localhost:8080)
 
-## 构建发布
+## 构建，发布
 
 ```
 # build for production with minification
@@ -94,15 +93,14 @@ npm run build --report
 - 富文本
 ```
 
-## 截图
-![](./resource/screenhot3.png)
-![](./resource/screenhot1.png)
-![](./resource/screenhot2.png)
-![](./resource/screenhot4.png)
+## 快照|snapshot
 
-## Online Demo
+// todo
 
-[在线 Demo](https://neveryu.github.io/vue-cms/index.html)
+
+## Online demo
+
+[在线 Demo 演示](https://neveryu.github.io/vue-cms/index.html)
 
 ## Donate
 
@@ -113,7 +111,7 @@ npm run build --report
 
 ## Browsers support
 
-Modern browsers and Internet Explorer 10+.
+Modern browsers and Internet Explorer 11+.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | --------- | --------- | --------- | --------- |
@@ -123,4 +121,4 @@ Modern browsers and Internet Explorer 10+.
 
 [MIT](https://github.com/Neveryu/vue-cms/blob/master/LICENSE)
 
-Copyright (c) 2017-present NeverYu
+Copyright (c) 2017-present, [NeverYu](https://github.com/Neveryu)

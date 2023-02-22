@@ -51,6 +51,11 @@ export interface RouteMeta {
   isLink?: boolean
 }
 
+
+/**
+ * Omit<K,T>类型让我们可以从另一个对象类型中剔除某些属性，并创建一个新的对象类型
+ * 怎么剔除多个属性？Omit<K,"T|L|Q">
+ */
 // @ts-ignore
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   name: string
