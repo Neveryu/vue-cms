@@ -1,0 +1,48 @@
+/*自定义蓝色主题-皮肤*/
+
+/*
+ * 1、顶部navbar颜色
+ */
+.science-blue .top-navbar .el-menu {
+  background-image: url('../../../static/image/science-blue-header.jpg') !important;
+}
+
+/*
+ * 2、侧边栏
+ */
+.science-blue .left-sidebar {
+  background-color: #2a68c9;
+}
+.science-blue .left-sidebar .el-menu {
+  background-color: #2a68c9;
+}
+.science-blue .left-sidebar .el-menu-item i {
+  color: #fff;
+}
+.science-blue .left-sidebar .el-menu-item:hover,
+.science-blue .left-sidebar .el-menu-item:focus,
+.science-blue .left-sidebar .el-submenu__title:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.science-blue .left-sidebar .el-submenu__title {
+  color: #fff;
+}
+.science-blue .left-sidebar .el-submenu__title i {
+  color: #fff;
+}
+.science-blue .left-sidebar .el-menu-item {
+  color: #fff;
+}
+.science-blue .left-sidebar .el-menu-item.is-active {
+  color: #eeff41;
+}
+.science-blue .left-sidebar .el-menu-item.is-active i{
+  color: #eeff41;
+}
+
+/**
+ * 3、tabs-view
+ */
+.science-blue .tabs-view-container .tags-view-item.active .el-tag {
+  background-color: #2a68c9;
+}
