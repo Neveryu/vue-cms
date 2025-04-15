@@ -10,20 +10,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/getmoviepiaofang': {
-        target: 'http://dianying.nuomi.com/movie/boxrefresh',
+      '/introduction/getVertical': {
+        target: 'http://service.picasso.adesk.com/v1/vertical/vertical',
         secure: false,
         changeOrigin: true,
         pathRewrite: {
-          '^/api/getmoviepiaofang': ''
-        }
-      },
-      '/api/getVertical': {
-        target: 'http://service.picasso.adesk.com/v1/vertical/vertical?limit=30&skip=180&adult=false&first=0&order=hot',
-        secure: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api/getVertical': ''
+          '^/introduction/getVertical': ''
         }
       }
     },

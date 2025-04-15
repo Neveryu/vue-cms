@@ -19,8 +19,8 @@
         <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
       </div>
       <div class="controls">
-        <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
-        <button @click="next" class="button"><i class="next"></i><span class="text-hidden">next</span></button>
+        <button title="不喜欢" @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
+        <button title="喜欢" @click="next" class="button"><i class="next"></i><span class="text-hidden">next</span></button>
       </div>
     </div>
   </div>
@@ -35,6 +35,8 @@ export default {
   },
   data() {
     return {
+      count: 0,
+      pageSize: 30,
       isDev: null,
       imgUrl: [],
       someList: [],
@@ -43,26 +45,46 @@ export default {
       }
     }
   },
+  watch: {
+    count(newVal, oldVal) {
+      if (newVal >= 30) {
+        this.count = 0
+        this.getImageList()
+      }
+    }
+  },
   methods: {
     prev () {
       this.$refs.stack.$emit('prev')
+      this.count++
     },
     next () {
       this.$refs.stack.$emit('next')
+      this.count++
+    },
+    getImageList() {
+      let params = {
+        limit: this.pageSize,
+        skip: 180,
+        adult: false,
+        first: 0,
+        order: 'hot'
+      }
+      getImage(params).then(resp => {
+        let resultData
+        resultData = resp.data.res.vertical
+        resultData.forEach((v, i, _this) => {
+          // v.images.large
+          this.imgUrl.push({
+            html: `<img src='${v.thumb}'>`
+          })
+        })
+      })
     }
   },
   created() {
     this.isDev = process.env.NODE_ENV === 'development'
-    getImage().then(resp => {
-      let resultData
-      resultData = resp.data.res.vertical
-      resultData.forEach((v, i, _this) => {
-        // v.images.large
-        this.imgUrl.push({
-          html: `<img src='${v.thumb}'>`
-        })
-      })
-    })
+    this.getImageList()
   },
   mounted() {
     this.$nextTick(() => {
@@ -75,6 +97,9 @@ export default {
 .introduction {
   padding-bottom: 300px
   overflow: hidden
+  font-size: 16px
+  color: #333
+  line-height: 1.2
 }
 .stack-wrapper {
   margin: 0 auto

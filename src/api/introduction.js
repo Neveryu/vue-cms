@@ -6,11 +6,12 @@ import jsonp from '@/common/jsonp'
 // const isDev = getEnviroument()
 
 // 不是jsonp接口
-export function getImage() {
+export function getImage(params) {
   // 正在热映
   return axios({
     method: 'get',
-    url: '/api/getVertical'
+    url: '/introduction/getVertical',
+    params
   })
 }
 

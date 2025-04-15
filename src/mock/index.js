@@ -5,6 +5,7 @@ import * as homepageAPI from './homepage'
 import * as excel from './excel'
 import * as echarts from './echarts'
 import * as draggable from './draggable'
+import * as introductionAPI from './introduction'
 
 Mock.setup({
   timeout: '300-600'
@@ -23,6 +24,10 @@ Mock.mock('/homepage/hometotal', 'post', homepageAPI.getHomeTotal)
 Mock.mock('/homepage/detailItem', 'post', homepageAPI.getHomeDetailItem)
 // 首页 investmentRank 接口
 Mock.mock('/homepage/investmentRank', 'post', homepageAPI.getHomeInvestmentRank)
+
+// 简述 图片 相关的接口
+// 通配符语法，可以匹配带有参数的 GET 请求（如 '/introduction/getVertical?page=1'）
+Mock.mock(RegExp('/introduction/getVertical.*'), 'get', introductionAPI.getVerticalList)
 
 // 表格部分【导出表格中的票房数据】
 Mock.mock('/api/getmoviepiaofang-mock', 'post', excel.piaofang)

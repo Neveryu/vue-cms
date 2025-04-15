@@ -105,20 +105,12 @@
     methods: {
       _getTable() {
         getTable().then(resp => {
-          if(this.isDev) {
-            let movieData = resp.data.real.data.detail
-            this.updateTime = resp.data.real.data.total.message
-            this.formatMovieData(movieData)
-            this.tableData = movieData
-            this.tableDataLoading = false
-          } else {
-            resp.data = JSON.parse(resp.data)
-            let movieData = resp.data.real.data.detail
-            this.updateTime = resp.data.real.data.total.message
-            this.formatMovieData(movieData)
-            this.tableData = movieData
-            this.tableDataLoading = false
-          }
+          resp.data = JSON.parse(resp.data)
+          let movieData = resp.data.real.data.detail
+          this.updateTime = resp.data.real.data.total.message
+          this.formatMovieData(movieData)
+          this.tableData = movieData
+          this.tableDataLoading = false
         })
       },
       updateData() {

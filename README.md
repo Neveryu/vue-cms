@@ -85,6 +85,9 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# 发布
+bash ./deploy.sh
 ```
 
 ## 功能

@@ -1,0 +1,21 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  "files.associations": {
+    "*.js": "javascript",
+    "*.vue": "vue"
+  },
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": ".eslintrc.js"
+  },
+  "prettier.requireConfig": true,
+  "prettier.configPath": ".prettierrc",
+  "prettier.semi": false
+}
