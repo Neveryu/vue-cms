@@ -17,6 +17,14 @@ module.exports = {
         pathRewrite: {
           '^/api/getmoviepiaofang': ''
         }
+      },
+      '/api/getVertical': {
+        target: 'http://service.picasso.adesk.com/v1/vertical/vertical?limit=30&skip=180&adult=false&first=0&order=hot',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/getVertical': ''
+        }
       }
     },
 

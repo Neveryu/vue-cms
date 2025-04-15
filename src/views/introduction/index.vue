@@ -54,12 +54,12 @@ export default {
   created() {
     this.isDev = process.env.NODE_ENV === 'development'
     getImage().then(resp => {
-      let movieData
-      movieData = [...resp[0].subjects, ...resp[1].subjects]
-      movieData.forEach((v, i, _this) => {
+      let resultData
+      resultData = resp.data.res.vertical
+      resultData.forEach((v, i, _this) => {
         // v.images.large
         this.imgUrl.push({
-          html: `<img src='${v.images.large}'>`
+          html: `<img src='${v.thumb}'>`
         })
       })
     })

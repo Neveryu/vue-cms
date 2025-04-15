@@ -1,22 +1,32 @@
-// import axios from 'axios'
+import axios from 'axios'
 import jsonp from '@/common/jsonp'
 // import { isDev } from '@/utils'
 
 // 获取当前运行环境
 // const isDev = getEnviroument()
 
+// 不是jsonp接口
 export function getImage() {
   // 正在热映
-  let url = 'https://douban.uieee.com/v2/movie/in_theaters'
-  // 即将上映
-  let url2 = 'https://douban.uieee.com/v2/movie/coming_soon'
-  let option = {
-    param: 'callback'
-  }
-  let data = {
-    start: 0, // 数据的开始项
-    count: 10, // 单页条数
-    city: '深圳' // 城市
-  }
-  return Promise.all([jsonp(url, data, option), jsonp(url2, data, option)])
+  return axios({
+    method: 'get',
+    url: '/api/getVertical'
+  })
 }
+
+// jsonp
+// export function getImage() {
+//   console.log(11, '------')
+//   // 正在热映
+//   let url = 'http://service.picasso.adesk.com/v1/vertical/vertical'
+//   let option = {
+//     param: 'callback'
+//   }
+//   let data = {
+//     limit: 30, // 数据的开始项
+//     adult: 'false',
+//     first: 0,
+//     order: 'hot' // 城市
+//   }
+//   return Promise.all([jsonp(url, data, option)])
+// }

@@ -2,8 +2,18 @@
   "name": "vue-cms",
   "version": "1.0.0",
   "description": "用vue做的一个内容管理系统",
-  "author": "yu",
+  "author": {
+    "name": "Never Yu",
+    "email": "never_yu@qq.com",
+    "url": "https://github.com/NeverYu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeverYu/vue-cms.git"
+  },
   "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/NeverYu/vue-cms#readme",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --colors --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -12,7 +22,7 @@
   },
   "dependencies": {
     "animate.css": "3.7.2",
-    "axios": "^0.17.1",
+    "axios": "0.17.1",
     "better-scroll": "1.15.2",
     "clipboard": "2.0.11",
     "countup.js": "1.9.3",
@@ -52,7 +62,7 @@
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-plugin-transform-vue-jsx": "3.7.0",
     "babel-preset-env": "1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-2": "6.24.1",
     "chalk": "2.4.2",
     "copy-webpack-plugin": "4.6.0",
     "css-loader": "0.28.11",
@@ -67,7 +77,7 @@
     "eslint-plugin-standard": "3.1.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.11",
-    "friendly-errors-webpack-plugin": "^1.7.0",
+    "friendly-errors-webpack-plugin": "1.7.0",
     "html-webpack-plugin": "2.30.1",
     "node-notifier": "5.4.5",
     "optimize-css-assets-webpack-plugin": "3.2.1",

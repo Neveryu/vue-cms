@@ -1,6 +1,7 @@
 <template>
   <ul class="stack">
     <li class="stack-item" v-for="(item, index) in pages"
+    :key="index"
     :style="[transformIndex(index),transform(index)]"
     @touchmove.stop.capture.prevent="touchmove"
     @touchstart.stop.capture.prevent="touchstart"
