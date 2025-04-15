@@ -1,15 +1,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
+  // 【parserOptions】扩展 ESLint 对 JavaScript 新语法和实验性特性的支持
   parserOptions: {
-    parser: 'babel-eslint',
-    ecmaFeatures:{
+    parser: "babel-eslint",
+    ecmaFeatures: {
       // 支持装饰器
-      legacyDecorators: true
-    }
+      legacyDecorators: true,
+    },
   },
   /* prettier的配置说明 */
   // "prettier.printWidth": 100, // 超过最大值换行
@@ -33,8 +34,8 @@ module.exports = {
   // "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
   // "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
   rules: {
-    'prettier/prettier': [
-      'error',
+    "prettier/prettier": [
+      "error",
       {
         semi: false,
         singleQuote: true,
@@ -49,54 +50,55 @@ module.exports = {
         quoteProps: "as-needed",
         requirePragma: false,
         trailingComma: "none",
-        useTabs: false
-      }
+        useTabs: false,
+      },
     ],
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     // 使用2个空格缩进
     indent: [
-      'error',
+      "error",
       2,
       {
         SwitchCase: 1,
-        flatTernaryExpressions: true
-      }
+        flatTernaryExpressions: true,
+      },
     ],
     // 代码后不使用分号
-    semi: ['error', 'never'],
+    semi: ["error", "never"],
     // 注释 // 或 /* 之后必须有一个空格
-    'spaced-comment': ['error', 'always'],
+    "spaced-comment": ["error", "always"],
     // 必须使用let 或 const, 不能使用var
-    'no-var': 'error',
+    "no-var": "error",
     quotes: [
-      'warn',
-      'single',
+      "warn",
+      "single",
       {
         avoidEscape: true,
-        allowTemplateLiterals: true
-      }
+        allowTemplateLiterals: true,
+      },
     ],
     // 禁止重复导入模块，对于同一模块内内容，应一次导入
-    'no-duplicate-imports': 'error',
+    "no-duplicate-imports": "error",
     // 箭头函数前后必须要有空格
-    'arrow-spacing': [
-      'error',
+    "arrow-spacing": [
+      "error",
       {
         before: true,
-        after: true
-      }
-    ]
+        after: true,
+      },
+    ],
   },
+  // overrides 字段的作用是为特定文件或目录定义独立的规则，允许你对不同文件类型或路径应用不同的代码检查规则
   overrides: [
     {
       files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)",
       ],
       env: {
-        jest: true
-      }
-    }
-  ]
-}
+        jest: true,
+      },
+    },
+  ],
+};

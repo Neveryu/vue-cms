@@ -39,7 +39,7 @@ module.exports = {
     plugins: [
       new webpack.ProvidePlugin({
         'window.Quill': 'quill/dist/quill.js',
-        'Quill': 'quill/dist/quill.js'
+        Quill: 'quill/dist/quill.js'
       })
     ]
   },
@@ -56,14 +56,11 @@ module.exports = {
       }
     ])
 
-
     // config.plugin('provide').use(webpack.ProvidePlugin, [{
     //   'window.Quill': 'quill/dist/quill.js',
     //   'Quill': 'quill/dist/quill.js'
     // }])
 
-
-    
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
 
