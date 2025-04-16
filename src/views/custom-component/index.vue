@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import animatedNames from '@/utils/animated-name'
+import animatedNames from '@/config/animated-name'
 export default {
   name: 'CustomComponent',
   data() {

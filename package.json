@@ -1,7 +1,26 @@
 {
   "name": "vue-cms",
   "version": "2.0.0",
-  "private": true,
+  "description": "用vue做的一个内容管理系统",
+  "author": {
+    "name": "Never Yu",
+    "email": "never_yu@qq.com",
+    "url": "https://github.com/NeverYu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeverYu/vue-cms.git"
+  },
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/NeverYu/vue-cms#readme",
+  "keywords": [
+    "vue",
+    "vue-cms",
+    "vue-element-admin",
+    "element-ui",
+    "management-system"
+  ],
   "scripts": {
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
@@ -16,9 +35,9 @@
     "clipboard": "^2.0.1",
     "core-js": "^3.6.5",
     "countup.js": "^1.9.3",
-    "echarts": "^4.0.4",
-    "element-china-area-data": "^5.0.2",
-    "element-ui": "^2.15.0",
+    "echarts": "4.9.0",
+    "element-china-area-data": "5.0.2",
+    "element-ui": "2.15.14",
     "file-saver": "^1.3.8",
     "js-cookie": "^2.2.1",
     "jsonp": "^0.2.1",
@@ -32,11 +51,11 @@
     "screenfull": "^3.3.2",
     "script-load": "^0.1.0",
     "script-loader": "^0.7.2",
-    "vue": "^2.6.11",
-    "vue-i18n": "^7.6.0",
-    "vue-image-crop-upload": "^3.0.3",
-    "vue-router": "^3.2.0",
-    "vuedraggable": "^2.23.0",
+    "vue": "2.7.16",
+    "vue-i18n": "7.8.1",
+    "vue-image-crop-upload": "3.0.3",
+    "vue-router": "3.6.5",
+    "vuedraggable": "2.24.3",
     "vuex": "^3.4.0",
     "wired-elements": "^0.5.8",
     "xlsx": "^0.12.12"
@@ -60,5 +79,16 @@
     "svg-sprite-loader": "^5.0.0",
     "vue-loader": "^15.9.6",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8",
+    "not dead"
+  ],
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

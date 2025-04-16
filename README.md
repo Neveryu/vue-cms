@@ -1,13 +1,13 @@
 <p align="center"><a href="https://blog.csdn.net/csdn_yudong/article/details/85250412"><img width="120" src="https://github.com/Neveryu/vue-cms/blob/vue-cli2/static/image/login-logo.png?raw=true"></a></p>
 
-<p align="center">基于 Vue 和 ElementUI 构建的企业级后台管理项目</p>
+<p align="center">基于 Vue 和 ElementUI 构建的企业级后台管理系统</p>
 
 <p align="center">
   <a href="https://github.com/vuejs/vue" rel="nofollow" target="_blank">
-    <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
+    <img src="https://img.shields.io/badge/vue-2.7.16-brightgreen.svg" alt="vue">
   </a>
   <a href="https://github.com/ElemeFE/element" rel="nofollow" target="_blank">
-    <img src="https://img.shields.io/badge/element--ui-2.9.2-brightgreen.svg" alt="element-ui">
+    <img src="https://img.shields.io/badge/element--ui-2.15.14-brightgreen.svg" alt="element-ui">
   </a>
   <a href="https://github.com/Neveryu/vue-cms/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
@@ -17,13 +17,13 @@
   </a>
 </p>
 
-> 本分支是基于 vue-cli 4.x 以及 vue 2.6.11 来进行开发的；你也可以切换到其它老版本或者新版的分支
+> 本分支是基于 vue-cli 4.x 的脚手架以及 vue 2.7.16 来进行开发的。
 
 > **【声明：本分支将不再更新与维护】**
 
 ## 预览
 
-在线体验：[https://git.io/fp9UM](https://neveryu.github.io/vue-cms/index.html)
+在线体验：[https://neveryu.github.io/vue-cms/](https://neveryu.github.io/vue-cms/)
 
 ## 简介
 
@@ -48,7 +48,7 @@ git clone https://github.com/Neveryu/vue-cms.git
 cd vue-cms
 
 # install dependencies
-yarn install --registry https://registry.npm.taobao.org
+yarn install --ignore-engines
 
 // or
 # 建议不要用 cnpm 安装 会有各种诡异的bug 可以通过如下操作解决 npm 下载速度慢的问题
@@ -68,6 +68,9 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# 发布
+bash ./deploy.sh
 ```
 
 ## 功能
@@ -103,7 +106,7 @@ npm run build --report
 
 ## Online Demo
 
-[在线 Demo](https://neveryu.github.io/vue-cms/index.html)
+[点击即在线体验项目：https://neveryu.github.io/vue-cms/](https://neveryu.github.io/vue-cms/)
 
 ## Donate
 
