@@ -12,9 +12,9 @@ module.exports = {
       legacyDecorators: true,
     },
   },
-  /* prettier的配置说明 */
-  // "prettier.printWidth": 100, // 超过最大值换行
-  // "prettier.tabWidth": 4, // 缩进字节数
+  /* prettier的配置说明 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+  // "prettier.printWidth": 120, // 超过最大值换行
+  // "prettier.tabWidth": 2, // 缩进字节数
   // "prettier.useTabs": false, // 缩进不使用tab，使用空格
   // "prettier.semi": true, // 句尾添加分号
   // "prettier.singleQuote": true, // 使用单引号代替双引号
@@ -33,6 +33,8 @@ module.exports = {
   // "prettier.stylelintIntegration": false, //不让prettier使用stylelint的代码格式进行校验
   // "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
   // "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
+  /* prettier的配置说明 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
   rules: {
     "prettier/prettier": [
       "error",
@@ -101,4 +103,4 @@ module.exports = {
       },
     },
   ],
-};
+}   

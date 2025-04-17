@@ -1,0 +1,28 @@
+// .vscode/settings.json
+{
+  // 启用保存时自动格式化
+  "editor.formatOnSave": true,
+
+  // 指定全局默认格式化工具为 Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 针对特定语言强制使用 Prettier（可选）
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

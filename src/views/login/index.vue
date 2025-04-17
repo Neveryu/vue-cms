@@ -1,5 +1,5 @@
 <template>
-  <el-container class="login-container">
+<el-container    class="login-container">
     <el-switch v-model="toggleParticles" inactive-color="#ff4949"></el-switch>
     <el-button class="show-account animate__animated animate__flash animate__infinite	" type="text" @click="accountTip"
       >提示帐号信息</el-button
