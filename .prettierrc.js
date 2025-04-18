@@ -13,6 +13,9 @@
 module.exports = {
   semi: false,
   singleQuote: true,
+  printWidth: 120,
+  htmlWhitespaceSensitivity: 'ignore',
+  bracketSameLine: true, // 用于控制HTML元素的闭合括号是否与最后一行的内容在同一行
   // 动态条件示例
   tabWidth: process.env.ENV === 'development' ? 2 : 2,
   // 通过 overrides 针对特定文件配置
