@@ -19,6 +19,8 @@
 
 > 本分支（`vue-cli2`）是使用**比较老的脚手架工具**`vue-cli 2.x` 来创建的项目，所以目录结构、运行方式、webpack 的配置方式、vue 的配置方式等等都与现在的配置方式有很大的差异。你也可以切换到其它新版本的分支。
 
+> **【声明：本分支将不再更新与维护】**
+
 ## 预览
 
 在线体验：[https://neveryu.github.io/vue-cms/](https://neveryu.github.io/vue-cms/)
