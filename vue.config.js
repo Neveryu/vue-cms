@@ -1,4 +1,5 @@
 'use strict'
+const { defineConfig } = require('@vue/cli-service') // 你也可以使用 @vue/cli-service 提供的 defineConfig 帮手函数，以获得更好的类型提示
 const webpack = require('webpack')
 const path = require('path')
 
@@ -9,7 +10,8 @@ function resolve(dir) {
 const port = process.env.PORT || 8888 // 端口
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
-module.exports = {
+// 你也可以使用 @vue/cli-service 提供的 defineConfig 帮手函数，以获得更好的类型提示
+module.exports = defineConfig({
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
    * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
@@ -60,15 +62,17 @@ module.exports = {
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
-    config.plugin('preload').tap(() => [
-      {
-        rel: 'preload',
-        // to ignore runtime.js
+    // 通过 preload 预加载关键资源，让浏览器提前下载首屏所需的核心文件（如主 JS、CSS），减少用户等待时间
+    config.plugin('preload').tap((options) => {
+      options[0] = {
+        rel: 'preload', // 预加载类型
+        // to ignore runtime.js （// 排除不需要预加载的文件）
         // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
         fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
-        include: 'initial',
-      },
-    ])
+        include: 'initial', // 仅预加载"初始块"（首屏关键资源）
+      }
+      return options
+    })
 
     // config.plugin('provide').use(webpack.ProvidePlugin, [{
     //   'window.Quill': 'quill/dist/quill.js',
@@ -130,4 +134,4 @@ module.exports = {
       config.optimization.runtimeChunk('single')
     })
   },
-}
+})
