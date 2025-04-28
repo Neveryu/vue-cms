@@ -19,8 +19,6 @@
 
 > 本分支是基于 vue-cli 4.x 的脚手架以及 vue 2.7.16 来进行开发的。
 
-> **【声明：本分支将不再更新与维护】**
-
 ## 预览
 
 在线体验：[https://neveryu.github.io/vue-cms/](https://neveryu.github.io/vue-cms/)
