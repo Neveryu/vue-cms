@@ -95,6 +95,42 @@ bash ./deploy.sh
 - 富文本
 ```
 
+## 目录结构说明
+
+```
+vue-cms/  项目名称
+|-- node_modules         #存放第三方依赖包（例如，执行npm i安装的依赖包）
+|-- public/              #静态资源目录
+|   |-- favicon.ico      #网站图标
+|   |-- index.html       #项目的入口文件
+|-- src/                 #项目的源代码目录
+|   |-- assets/          #静态资源目录，如图片、字体等
+|   |-- components/      #可复用的 Vue 组件
+|   |-- router/          #Vue Router 的路由配置
+|   |   |-- index.js     #路由的主文件
+|   |-- store/           #Vuex 的状态管理
+|   |   |-- index.js     #状态管理的主文件
+|   |-- views/           #页面目录
+|   |   |-- About.vue    #关于页面
+|   |   |-- Home.vue     #首页
+|   |-- App.vue          #根组件
+|   |-- main.js          #项目的入口文件
+|-- tests/               #测试文件
+|-- .env                 #环境变量（在所有的环境中被载入）
+|-- .env.development     #环境变量（仅开发环境）
+|-- .env.production      #环境变量（仅生成环境（构建打包的时候））
+|-- .eslintrc.js         #ESLint 配置
+|-- .eslintignore        #ESLint 忽略的文件
+|-- .gitignore           #Git 忽略的文件
+|-- .prettierrc.js       #prettier 配置
+|-- babel.config.js      #Babel 插件的配置文件
+|-- jest.config.js       #jest 配置
+|-- package-lock.json    #npm 依赖的锁定文件
+|-- package.json         #项目的元数据文件和 npm 脚本
+|-- README.md            #项目的说明文件
+|-- vue.config.js        #Vue CLI 配置文件，比如配置alias、devServer和configure Webpack等
+```
+
 ## 截图
 
 ![](./resource/screenhot3.png)

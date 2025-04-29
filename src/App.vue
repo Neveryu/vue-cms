@@ -6,13 +6,12 @@
 
 <script>
 export default {
-	watch: {
-		$route(to) {
-			if(to.path.indexOf('/login') === -1) {
-				
-			}
-		}
-	}
+  watch: {
+    $route(to) {
+      if (to.path.indexOf('/login') === -1) {
+      }
+    },
+  },
 }
 </script>
 

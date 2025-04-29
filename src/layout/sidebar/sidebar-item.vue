@@ -9,16 +9,12 @@
       <router-link
         v-if="
           hasOneShowingChildren(item.children, item) &&
-            (!onlyOneChild.children || onlyOneChild.noShowingChild) &&
-            !item.alwaysShow
+          (!onlyOneChild.children || onlyOneChild.noShowingChild) &&
+          !item.alwaysShow
         "
-        :to="resolvePath(onlyOneChild.path)"
-      >
+        :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="item.path">
-          <item
-            :icon="item.children[0].meta.icon"
-            :title="item.children[0].meta.title"
-          ></item>
+          <item :icon="item.children[0].meta.icon" :title="item.children[0].meta.title"></item>
         </el-menu-item>
       </router-link>
 
@@ -32,8 +28,7 @@
             :item="child"
             :base-path="resolvePath(child.path)"
             :key="child.path"
-            v-if="!child.hidden && child.children && child.children.length > 0"
-          />
+            v-if="!child.hidden && child.children && child.children.length > 0" />
 
           <router-link v-else :to="resolvePath(child.path)" :key="child.path">
             <el-menu-item :index="child.path">
@@ -46,27 +41,26 @@
   </div>
 </template>
 <script>
-import path from 'path'
 import Item from './item'
 export default {
   name: 'sidebar-item',
   components: {
-    Item
+    Item,
   },
   props: {
     // 一级路由对象
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     basePath: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      onlyOneChild: null
+      onlyOneChild: null,
     }
   },
   methods: {
@@ -75,7 +69,7 @@ export default {
       // 1、后面要来判断，children 里面是不是只有一个
       // 2、亦或者没有 【比如 '/login' 这个 route 就没有 children】
       // 3、亦或者 children 里面的子路由大于1个
-      const showingChildren = children.filter(item => {
+      const showingChildren = children.filter((item) => {
         if (item.hidden) {
           return false
         } else {
@@ -94,7 +88,7 @@ export default {
         this.onlyOneChild = {
           ...parent,
           path: '',
-          noShowingChild: true
+          noShowingChild: true,
         }
         return true
       }
@@ -103,11 +97,11 @@ export default {
     },
     resolvePath(routePath) {
       // console.log(path.resolve(this.basePath, routePath))
-      return path.resolve(this.basePath, routePath)
-    }
+      return this.basePath + routePath
+    },
   },
   created() {
     // console.log(this.basePath)
-  }
+  },
 }
 </script>

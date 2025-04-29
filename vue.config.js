@@ -39,10 +39,13 @@ module.exports = defineConfig({
         },
       },
     },
-    disableHostCheck: true,
-    overlay: {
-      warnings: false,
-      errors: true,
+    allowedHosts: 'all',
+    // 客户端配置
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
     },
   },
   configureWebpack: {
@@ -63,16 +66,17 @@ module.exports = defineConfig({
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
     // 通过 preload 预加载关键资源，让浏览器提前下载首屏所需的核心文件（如主 JS、CSS），减少用户等待时间
-    config.plugin('preload').tap((options) => {
-      options[0] = {
-        rel: 'preload', // 预加载类型
-        // to ignore runtime.js （// 排除不需要预加载的文件）
-        // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
-        fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
-        include: 'initial', // 仅预加载"初始块"（首屏关键资源）
-      }
-      return options
-    })
+    // config.plugin('preload-pc').tap(() => [
+    //   {
+    //     rel: 'preload', // 预加载类型
+    //     // to ignore runtime.js （// 排除不需要预加载的文件）
+    //     // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
+    //     fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
+    //     include: 'initial', // 仅预加载"初始块"（首屏关键资源）
+    //   },
+    // ])
+
+    config.plugins.delete('preload')
 
     // config.plugin('provide').use(webpack.ProvidePlugin, [{
     //   'window.Quill': 'quill/dist/quill.js',
@@ -84,6 +88,7 @@ module.exports = defineConfig({
 
     // set svg-sprite-loader
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()
+
     config.module
       .rule('icons')
       .test(/\.svg$/)

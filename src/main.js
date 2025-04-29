@@ -13,7 +13,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-
 // 自定义的全局组件
 import Notification from '@/components/notification'
 
@@ -27,8 +26,8 @@ import './permission'
 import './mock/index2'
 
 Vue.use(ElementUI, {
-	size: Cookies.get('size') || 'small',
-  i18n: (key, value) => i18n.t(key, value)
+  size: Cookies.get('size') || 'small',
+  i18n: (key, value) => i18n.t(key, value),
 })
 Vue.use(Notification)
 
@@ -38,5 +37,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')

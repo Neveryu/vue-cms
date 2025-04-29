@@ -3,10 +3,11 @@ module.exports = {
   env: {
     node: true,
   },
+  // extends 字段表示 继承一组预定义的 ESLint 规则配置
   extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
   // 【parserOptions】扩展 ESLint 对 JavaScript 新语法和实验性特性的支持
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     ecmaFeatures: {
       // 支持装饰器
       legacyDecorators: true,
@@ -37,35 +38,26 @@ module.exports = {
 
   rules: {
     'prettier/prettier': [
+      // 使用eslint-plugin-prettier可以让Prettier规则作为ESLint的一部分运行，这样可以在代码检查时同时处理格式问题，简化工作流。
+      // 'prettier/prettier'：表示该规则由 eslint-plugin-prettier 插件提供，用于将 Prettier 的格式化规则作为 ESLint 规则运行。
       'error',
       {
         semi: false,
         singleQuote: true,
         tabWidth: 2,
-        printWidth: 120,
         arrowParens: 'avoid',
         bracketSpacing: true,
         insertPragma: false,
-        jsxBracketSameLine: false,
         jsxSingleQuote: false,
         proseWrap: 'preserve',
         quoteProps: 'as-needed',
         requirePragma: false,
         trailingComma: 'none',
-        useTabs: false,
+        useTabs: false, // 禁止使用 Tab 缩进，强制使用空格
       },
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    // 使用2个空格缩进
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-        flatTernaryExpressions: true,
-      },
-    ],
     // 代码后不使用分号
     semi: ['error', 'never'],
     // 注释 // 或 /* 之后必须有一个空格
