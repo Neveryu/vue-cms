@@ -51,7 +51,7 @@
     "screenfull": "^3.3.2",
     "script-load": "^0.1.0",
     "script-loader": "^0.7.2",
-    "vue": "2.7.16",
+    "vue": "3.0.0",
     "vue-i18n": "7.8.1",
     "vue-image-crop-upload": "3.0.3",
     "vue-router": "3.6.5",
