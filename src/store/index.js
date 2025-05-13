@@ -23,24 +23,24 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
  */
 const getters = {
   // tabsview
-  visitedTabsView: state => state.tabsview.visitedTabsView,
+  visitedTabsView: (state) => state.tabsview.visitedTabsView,
   // 用户信息
-  allInfo: state => state.user.userInfo,
+  allInfo: (state) => state.user.userInfo,
   // 用户名
-  name: state => state.user.userInfo.name,
+  name: (state) => state.user.userInfo.name,
   // 头像
-  avatar: state => state.user.userInfo.avatar,
+  avatar: (state) => state.user.userInfo.avatar,
   // 语言
-  language: state => state.language.language,
+  language: (state) => state.language.language,
   // add_routes 是动态遍历出来，添加上去的路由
-  addRoutes: state => state.permission.addRoutes,
+  addRoutes: (state) => state.permission.addRoutes,
   // 用户的原始permissions数据
-  permissions: state => state.user.permissions,
+  permissions: (state) => state.user.permissions,
   // 用户的路由菜单权限（完整的）
-  routers: state => state.permission.routes
+  routers: (state) => state.permission.routes,
 }
 
 export default new Vuex.Store({
   modules,
-  getters
+  getters,
 })

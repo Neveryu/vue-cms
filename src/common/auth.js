@@ -1,17 +1,17 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Vue-cms'
+const key = process.env.VUE_APP_Cookie_Key
 
 function getToken() {
-  return Cookies.get(TokenKey)
+  return Cookies.get(key)
 }
 
 function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return Cookies.set(key, token)
 }
 
 function removeToken() {
-  return Cookies.remove(TokenKey)
+  return Cookies.remove(key)
 }
 
 export { getToken, setToken, removeToken }

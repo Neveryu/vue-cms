@@ -75,7 +75,7 @@ let animatedNames = [
   'hinge',
   'jackInTheBox',
   'rollIn',
-  'rollOut'
+  'rollOut',
 ]
 
 export default animatedNames

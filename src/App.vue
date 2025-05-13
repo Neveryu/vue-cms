@@ -9,6 +9,7 @@ export default {
   watch: {
     $route(to) {
       if (to.path.indexOf('/login') === -1) {
+        // todo
       }
     },
   },
@@ -16,5 +17,5 @@ export default {
 </script>
 
 <style>
-@import '~@/assets/style/index.css';
+/* @import '~@/assets/style/index.css'; */
 </style>

@@ -16,18 +16,18 @@ export default {
   name: 'LangSelect',
   computed: {
     ...mapGetters({
-      language: 'language'
-    })
+      language: 'language',
+    }),
   },
   methods: {
     ...mapActions({
-      setLanguage: 'language/setLanguage'
+      setLanguage: 'language/setLanguage',
     }),
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.setLanguage(lang)
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

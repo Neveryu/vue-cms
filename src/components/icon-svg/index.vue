@@ -10,23 +10,23 @@ export default {
   props: {
     iconClass: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     iconName() {
       return `#icon-${this.iconClass}`
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
 .svg-icon {
-  width 1.1em
-  height 1.1em
-  vertical-align -.2em
-  fill currentColor
-  overflow hidden
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

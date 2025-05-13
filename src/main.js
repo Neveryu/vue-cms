@@ -2,35 +2,30 @@ import Cookies from 'js-cookie'
 
 import Vue from 'vue'
 
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+// 处理/解决浏览器默认样式不一致的问题
 import 'normalize.css/normalize.css'
+import './assets/style/index.css'
 // animate动画库
 import 'animate.css'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import App from './App.vue'
-import store from './store'
-import router from './router'
-
-// 自定义的全局组件
-import Notification from '@/components/notification'
-
 // 全局图标
 import './icons'
 // 国际化
-import i18n from './lang'
-// 全局权限检查
-import './permission'
-// 全局 Mock 接口
-import './mock/index2'
+import i18n from './language'
 
 Vue.use(ElementUI, {
   size: Cookies.get('size') || 'small',
   i18n: (key, value) => i18n.t(key, value),
 })
-Vue.use(Notification)
 
+// 全局配置，它的作用是禁止 Vue 在启动时生成生产环境提示。
 Vue.config.productionTip = false
 
 new Vue({

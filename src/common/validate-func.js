@@ -99,7 +99,7 @@ export const checkMailBox = async (rule, value, callback) => {
     } else {
       // let res = await checkUserMailBox(value)
       let res = {
-        data: 1
+        data: 1,
       }
       if (eval(res.data)) {
         return callback(new Error('邮箱被占用，请重新输入'))

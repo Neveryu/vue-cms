@@ -1,9 +1,15 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true, // 告诉eslint，代码将在node.js环境中运行，因此eslint应该启用所有与node.js相关的规则。因此可以访问node.js提供的全局变量和模块，如__dirname，process,require,module等。
+    // browser: true, // 告诉 ESLint，代码在浏览器环境中运行，因此可以访问浏览器提供的全局变量和对象，如 window, document 等。
+    // es6: true // 允许 ESLint 使用 ECMAScript 2015（也称为 ES6）的语法特性。即使你设置了这个选项，你仍然需要在 parserOptions 中指定一个支持 ES6 语法的解析器（通常是 Babel 或 @babel/eslint-parser），除非你的 ESLint 版本已经默认支持 ES6。
   },
   // extends 字段表示 继承一组预定义的 ESLint 规则配置
+  // 'plugin:vue/essential'用的包是：eslint-plugin-vue，作用是：Vue 基础规则
+  // 'eslint:recommended'用的包收：eslint，作用是：ESLint 推荐规则
+  // '@vue/prettier'用的包是：@vue/eslint-config-prettier，作用是：关闭 ESLint 与 Prettier 的冲突规则（ESLint 和 Prettier 都有各自的格式规则（比如缩进、引号），直接同时使用会导致重复报错。）
+  // 'plugin:prettier/recommended'用的包是：eslint-config-prettier，作用是：再启用 Prettier 规则
   extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
   // 【parserOptions】扩展 ESLint 对 JavaScript 新语法和实验性特性的支持
   parserOptions: {
@@ -13,49 +19,9 @@ module.exports = {
       legacyDecorators: true,
     },
   },
-  /* prettier的配置说明 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
-  // "prettier.printWidth": 120, // 超过最大值换行
-  // "prettier.tabWidth": 2, // 缩进字节数
-  // "prettier.useTabs": false, // 缩进不使用tab，使用空格
-  // "prettier.semi": true, // 句尾添加分号
-  // "prettier.singleQuote": true, // 使用单引号代替双引号
-  // "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
-  // "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
-  // "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
-  // "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
-  // "prettier.endOfLine": "auto", // 结尾是 \n \r \n\r auto
-  // "prettier.eslintIntegration": false, //不让prettier使用eslint的代码格式进行校验
-  // "prettier.htmlWhitespaceSensitivity": "ignore",
-  // "prettier.ignorePath": ".prettierignore", // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
-  // "prettier.jsxBracketSameLine": false, // 在jsx中把'>' 是否单独放一行
-  // "prettier.jsxSingleQuote": false, // 在jsx中使用单引号代替双引号
-  // "prettier.parser": "babylon", // 格式化的解析器，默认是babylon
-  // "prettier.requireConfig": false, // Require a 'prettierconfig' to format prettier
-  // "prettier.stylelintIntegration": false, //不让prettier使用stylelint的代码格式进行校验
-  // "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
-  // "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
-  /* prettier的配置说明 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
 
   rules: {
-    'prettier/prettier': [
-      // 使用eslint-plugin-prettier可以让Prettier规则作为ESLint的一部分运行，这样可以在代码检查时同时处理格式问题，简化工作流。
-      // 'prettier/prettier'：表示该规则由 eslint-plugin-prettier 插件提供，用于将 Prettier 的格式化规则作为 ESLint 规则运行。
-      'error',
-      {
-        semi: false,
-        singleQuote: true,
-        tabWidth: 2,
-        arrowParens: 'avoid',
-        bracketSpacing: true,
-        insertPragma: false,
-        jsxSingleQuote: false,
-        proseWrap: 'preserve',
-        quoteProps: 'as-needed',
-        requirePragma: false,
-        trailingComma: 'none',
-        useTabs: false, // 禁止使用 Tab 缩进，强制使用空格
-      },
-    ],
+    'no-unused-vars': 'warn', // 声明了变量、函数或导入模块但未使用
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // 代码后不使用分号
@@ -80,6 +46,12 @@ module.exports = {
       {
         before: true,
         after: true,
+      },
+    ],
+    'vue/multi-word-component-names': [
+      'error',
+      {
+        ignores: ['index'], // Vue 官方风格指南建议组件名使用多个单词，这里忽略名为 index 的组件
       },
     ],
   },

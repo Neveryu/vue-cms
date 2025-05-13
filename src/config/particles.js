@@ -1,25 +1,25 @@
 export const particlesConfig = {
   particles: {
     number: {
-      value: 15
+      value: 15,
     },
     color: {
-      value: 'random'
+      value: 'random',
     },
     shape: {
       type: ['star', 'image'],
       stroke: {
         width: 0,
-        color: 'yellow'
+        color: 'yellow',
       },
       polygon: {
-        nb_sides: 5
+        nb_sides: 5,
       },
       image: {
         src: 'https://neveryu.github.io/avatar/avatar.png',
         width: 100,
-        height: 100
-      }
+        height: 100,
+      },
     },
     opacity: {
       value: 1,
@@ -28,8 +28,8 @@ export const particlesConfig = {
         enable: true,
         speed: 1,
         opacity_min: 0.1,
-        sync: false
-      }
+        sync: false,
+      },
     },
     size: {
       value: 10,
@@ -38,15 +38,15 @@ export const particlesConfig = {
         enable: true,
         speed: 10,
         size_min: 0.1,
-        sync: false
-      }
+        sync: false,
+      },
     },
     line_linked: {
       enable: false,
       distance: 150,
       color: '#ccc',
       opacity: 0.4,
-      width: 1
+      width: 1,
     },
     move: {
       enable: true,
@@ -58,9 +58,9 @@ export const particlesConfig = {
       attract: {
         enable: false,
         rotateX: 600,
-        rotateY: 1200
-      }
-    }
+        rotateY: 1200,
+      },
+    },
   },
   interactivity: {
     // "detect_on": "canvas",
@@ -69,38 +69,38 @@ export const particlesConfig = {
       onhover: {
         enable: false,
         // "mode": "repulse"
-        mode: 'grab'
+        mode: 'grab',
       },
       onclick: {
         enable: false,
-        mode: 'repulse'
+        mode: 'repulse',
         // "mode": "push"
       },
-      resize: true
+      resize: true,
     },
     modes: {
       grab: {
         distance: 400,
         line_linked: {
-          opacity: 1
-        }
+          opacity: 1,
+        },
       },
       bubble: {
         distance: 400,
         size: 40,
         duration: 2,
         opacity: 8,
-        speed: 3
+        speed: 3,
       },
       repulse: {
-        distance: 200
+        distance: 200,
       },
       push: {
-        particles_nb: 4
+        particles_nb: 4,
       },
       remove: {
-        particles_nb: 2
-      }
-    }
-  }
+        particles_nb: 2,
+      },
+    },
+  },
 }

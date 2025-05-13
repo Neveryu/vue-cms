@@ -19,10 +19,10 @@ const state = {
     sex: 1,
     avatar: '',
     type: [],
-    desc: ''
+    desc: '',
   },
   // 原始的用户permissions数据
-  permissions: []
+  permissions: [],
 }
 
 const mutations = {
@@ -44,7 +44,7 @@ const mutations = {
   },
   [SET_INFO](state, userInfo) {
     state.userInfo = userInfo
-  }
+  },
 }
 
 const actions = {
@@ -52,7 +52,7 @@ const actions = {
   login({ commit }, data) {
     return new Promise((resolve, reject) => {
       login(data)
-        .then(resp => {
+        .then((resp) => {
           let data = resp.data
           setToken(data.token)
           // 存路由&按钮权限
@@ -64,7 +64,7 @@ const actions = {
           commit(SET_PERMISSIONS, data.permissions)
           resolve()
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err)
         })
     })
@@ -74,11 +74,11 @@ const actions = {
   pullUserInfo() {
     return new Promise((resolve, reject) => {
       userInfo()
-        .then(resp => {
+        .then((resp) => {
           let data = resp.data
           resolve(data)
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err)
         })
     })
@@ -99,7 +99,7 @@ const actions = {
           // localStorage里面存储的是持久化数据，不清除
           resolve()
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err)
         })
     })
@@ -107,7 +107,7 @@ const actions = {
 
   // 头像更新
   doUpdateAvatar({ commit }, imgFile) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         commit(SET_AVATAR, imgFile)
         resolve()
@@ -120,7 +120,7 @@ const actions = {
    * userInfo: 用户信息表对象
    */
   doUpdateUser({ commit }, userInfo) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       commit(SET_ALL, userInfo)
       setTimeout(() => {
         resolve()
@@ -131,19 +131,19 @@ const actions = {
   // remove token
   resetToken({ commit }) {
     console.log('resetToken')
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       removeToken()
       commit('SET_TOKEN', '')
       window.sessionStorage.clear()
       resetRouter()
       resolve()
     })
-  }
+  },
 }
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
 }

@@ -1,16 +1,8 @@
 <template>
-  <transition
-    :enter-active-class="enterActiveClass"
-    :leave-active-class="leaveActiveClass"
-    @after-leave="afterLeave"
-    @after-enter="afterEnter"
-  >
-    <div class="notification" :style="style" v-show="visible"
-      @mouseenter="clearTimer"
-      @mouseleave="createTimer"
-    >
+  <transition :enter-active-class="enterActiveClass" :leave-active-class="leaveActiveClass" @after-leave="afterLeave" @after-enter="afterEnter">
+    <div class="notification" :style="style" v-show="visible" @mouseenter="clearTimer" @mouseleave="createTimer">
       <span class="content" v-html="content"></span>
-      <a href="javascript:;" class="btn" @click="handleClose">{{btn}}</a>
+      <a href="javascript:;" class="btn" @click="handleClose">{{ btn }}</a>
     </div>
   </transition>
 </template>
@@ -20,26 +12,26 @@ export default {
   name: 'Notification',
   data() {
     return {
-      visible: true
+      visible: true,
     }
   },
   props: {
     content: {
       type: String,
-      required: true
+      required: true,
     },
     btn: {
       type: String,
-      default: '关闭'
+      default: '关闭',
     },
     enterAnimated: {
       type: String,
-      default: ''
+      default: '',
     },
     leaveAnimated: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     style() {
@@ -50,7 +42,7 @@ export default {
     },
     leaveActiveClass() {
       return `animate__animated animate__${this.leaveAnimated}`
-    }
+    },
   },
   methods: {
     handleClose(e) {
@@ -62,8 +54,8 @@ export default {
     },
     afterEnter() {},
     clearTimer() {},
-    createTimer() {}
-  }
+    createTimer() {},
+  },
 }
 </script>
 
