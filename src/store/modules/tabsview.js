@@ -2,11 +2,11 @@ const SET_TABSVIEW = 'SET_TABSVIEW'
 const DEL_TABSVIEW = 'DEL_TABSVIEW'
 
 const state = {
-	visitedTabsView: []
+  visitedTabsView: [],
 }
 
 const mutations = {
-	[SET_TABSVIEW](state, view) {
+  [SET_TABSVIEW](state, view) {
     if (state.visitedTabsView.find((n) => n.path === view.path)) {
       return
     }
@@ -18,11 +18,11 @@ const mutations = {
         state.visitedTabsView.splice(i, 1)
       }
     }
-  }
+  },
 }
 
 const actions = {
-	// 添加一个新的tabsView
+  // 添加一个新的tabsView
   addVisitedTabsView({ commit }, view) {
     commit(SET_TABSVIEW, view)
   },
@@ -32,12 +32,12 @@ const actions = {
       commit(DEL_TABSVIEW, view)
       resolve([...state.visitedTabsView])
     })
-  }
+  },
 }
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
 }

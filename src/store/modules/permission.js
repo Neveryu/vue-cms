@@ -9,7 +9,7 @@ const state = {
   // 最后生成的总的路由
   routes: constantRoutes,
   // 动态添加进来的路由
-  addRoutes: []
+  addRoutes: [],
 }
 
 /**
@@ -19,10 +19,10 @@ const state = {
  */
 function hasPermission(routes, route) {
   // 后端返回的菜单路由必须要有address
-  routes = routes.filter(d => d.address)
+  routes = routes.filter((d) => d.address)
   if (routes && routes.length > 0) {
     // return routes.some(item => item.address.includes(route.path))
-    return routes.some(d => d.address == route.path)
+    return routes.some((d) => d.address == route.path)
   } else {
     return false
   }
@@ -36,15 +36,15 @@ function hasPermission(routes, route) {
  */
 export function filterAsyncRoutes(asyncRoutes, routes) {
   let res = []
-  asyncRoutes.forEach(route => {
-    if(route) {
+  asyncRoutes.forEach((route) => {
+    if (route) {
       let isHasPermission = hasPermission(routes, route)
       if (route.children) {
         route.children = filterAsyncRoutes(route.children, routes)
       }
       if (isHasPermission || (route.children && route.children.length > 0)) {
         res.push(route)
-      }  
+      }
     }
   })
   return res
@@ -59,8 +59,8 @@ export function filterAsyncRoutes(asyncRoutes, routes) {
  * @returns {*}
  */
 function formatTree(list, key, pKey, topPKeyValue) {
-  return list.filter(parent => {
-    let findChildren = list.filter(child => {
+  return list.filter((parent) => {
+    let findChildren = list.filter((child) => {
       // console.log(parent[key], child[pKey], key)
       return parent[key] === child[pKey]
     })
@@ -91,7 +91,6 @@ function getPermissionOfAsyncRoutes(asyncRoutes, id) {
   return null
 }
 
-
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
@@ -99,7 +98,7 @@ const mutations = {
   },
   SET_BUTTONS: (state, btns) => {
     state.btns = btns
-  }
+  },
 }
 
 const actions = {
@@ -108,25 +107,25 @@ const actions = {
    */
   generateRoutes({ commit }, routes) {
     // 过滤出菜单路由（type为1或者2的是路由/页面菜单权限）
-    let menuRoles = routes.filter(item => {
+    let menuRoles = routes.filter((item) => {
       return item.type == '1' || item.type == '2'
     })
 
     // 过滤出按钮权限表（type为3的代表可以显示的按钮权限）
-    let btnPermissions = routes.filter(item => {
+    let btnPermissions = routes.filter((item) => {
       return item.type == '3'
     })
 
     // 生成按钮权限的数据(数组)
     let btns = []
     if (btnPermissions && btnPermissions.length > 0) {
-      btnPermissions.forEach(item => {
+      btnPermissions.forEach((item) => {
         btns.push(item.address || null)
       })
     }
     commit('SET_BUTTONS', btns)
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       // 从动态路由中筛选出用户有的路由页面/菜单
       let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
       // 然后把endRoutes添加到最后面
@@ -134,12 +133,12 @@ const actions = {
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
-  }
+  },
 }
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
 }

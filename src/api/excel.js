@@ -5,7 +5,7 @@ import { isDev } from '@/utils'
 export function getTable() {
   return axios({
     method: 'post',
-    url: '/excel/getmoviepiaofang-mock'
+    url: '/excel/getmoviepiaofang-mock',
   })
 }
 
@@ -13,7 +13,7 @@ export function getTable() {
 export function getMergeTable() {
   return axios({
     method: 'post',
-    url: '/excel/getMergeTableData'
+    url: '/excel/getMergeTableData',
   })
 }
 
@@ -24,7 +24,7 @@ export function getMergeTable() {
 export function getFiles() {
   return axios({
     method: 'post',
-    url: '/excel/getFiles'
+    url: '/excel/getFiles',
   })
 }
 
@@ -32,6 +32,6 @@ export function getFiles() {
 export function delFiles(ids) {
   return axios({
     method: 'post',
-    url: '/excel/delFiles'
+    url: '/excel/delFiles',
   })
 }

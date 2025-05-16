@@ -20,6 +20,13 @@ import './icons'
 // 国际化
 import i18n from './language'
 
+import './permission' // permission control
+
+// 开发环境引入mock，如果开发环境要连接真实接口，注释掉下面三行即可。
+if (process.env.NODE_ENV === 'development') {
+  require('@/mock/index2.js')
+}
+
 Vue.use(ElementUI, {
   size: Cookies.get('size') || 'small',
   i18n: (key, value) => i18n.t(key, value),

@@ -1,3 +1,4 @@
+# 确认编辑器是否支持.editorconfig。比如，VS Code需要安装EditorConfig扩展才能识别该文件。
 # 告诉EditorConfig插件，这是根文件，不用继续往上查找
 root = true
 

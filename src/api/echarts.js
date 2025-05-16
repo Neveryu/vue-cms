@@ -5,14 +5,14 @@ import axios from 'axios'
 function getData() {
   return axios({
     method: 'get',
-    url: '/echarts/getCateData'
+    url: '/echarts/getCateData',
   })
 }
 
 function getDepartTop() {
   return axios({
     method: 'post',
-    url: '/echarts/getDepartTop'
+    url: '/echarts/getDepartTop',
   })
 }
 

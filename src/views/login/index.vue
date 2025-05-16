@@ -7,7 +7,7 @@
       <div slot="header" class="el-card-header">
         <lang-select class="lang-select"></lang-select>
         <div style="clear: both"></div>
-        <img :src="loginImg" alt="" />
+        <img :src="require('@/assets/image/login-logo.png')" alt="" />
         <h2 class="login-title">{{ $t('login.title') }}</h2>
       </div>
       <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="80px">
@@ -51,7 +51,6 @@ export default {
     return {
       // 粒子开关
       toggleParticles: false,
-      loginImg: require('@/assets/image/login-logo.png'),
       loginForm: {
         username: '',
         pwd: '',
@@ -60,12 +59,12 @@ export default {
       loading: false,
       rules: {
         username: [
-          { required: true, message: '请输入账号', trigger: 'blur' },
+          // { required: true, message: '请输入账号', trigger: 'blur' },
           { required: true, trigger: 'blur', validator: validateUsername },
           { required: true, trigger: 'change', validator: validateUsername },
         ],
         pwd: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
+          // { required: true, message: '请输入密码', trigger: 'blur' },
           { required: true, trigger: 'blur', validator: validatePwd },
           { required: true, trigger: 'change', validator: validatePwd },
         ],
@@ -154,6 +153,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'sass:color';
 .login-container {
   position: absolute;
   width: 100%;
@@ -162,7 +162,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: mix(#044289, #494166) url('~@/assets/image/login-bg.svg') center no-repeat;
+  background: color.mix(#044289, #494166) url('~@/assets/image/login-bg.svg') center no-repeat;
   background-size: cover;
   overflow: hidden;
   .show-account {
@@ -192,7 +192,7 @@ export default {
       text-align: center;
     }
 
-    .el-input /deep/ .el-input__inner {
+    ::v-deep .el-input__inner {
       text-indent: 12px;
     }
 
