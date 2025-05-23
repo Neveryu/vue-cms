@@ -19,12 +19,12 @@ mockList.forEach((b) => {
   for (let key in b) {
     let { state, url, method, result } = b[key]
     if (state) {
-      // Mock.mock(RegExp(url + '??.*'), method, {
-      //   code: 200,
-      //   message: 'success',
-      //   data: result,
-      // })
-      Mock.mock(RegExp(url + '??.*'), method, result)
+      Mock.mock(RegExp(url + '??.*'), method, {
+        code: 200,
+        message: 'success',
+        data: result,
+      })
+      // Mock.mock(RegExp(url + '??.*'), method, result)
     }
   }
 })

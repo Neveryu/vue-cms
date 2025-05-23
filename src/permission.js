@@ -30,23 +30,11 @@ router.beforeEach(async (to, from, next) => {
 
   if (hasToken) {
     if (to.path === '/login') {
-      /* ↓↓↓↓↓↓↓↓↓↓↓这一段要不要？↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
-      // if (loadFromSession('userRoutes', []).length < 1) {
-      //   // 路由权限表不存在
-      //   // 退出登录
-      //   await store.dispatch('user/resetToken')
-      //   next(`/login?redirect=${to.path}`)
-      //   return
-      // }
-      /* ↑↑↑↑↑↑↑↑↑↑↑这一段要不要？↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
-
-      // if is logged in, redirect to the home page
+      // if is logged in, redirect to the home page     // 有token访问login页面，就跳到首页
       next({ path: '/', replace: true })
-    } else if (whiteList.indexOf(to.path !== -1)) {
-      next()
     } else {
       // 如果动态路由存在，则直接next
-      if (store.getters.add_routes.length > 0) {
+      if (store.getters.roles.length > 0) {
         next()
       } else {
         // 否则，再次尝试动态生成路由
