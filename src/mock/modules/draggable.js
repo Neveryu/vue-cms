@@ -7,7 +7,7 @@ const images = [
   'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
   'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
   'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'
+  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
 ]
 const count = 30
 const fileList = []
@@ -19,7 +19,7 @@ for (let i = 0; i < count; i++) {
       'images|1': images,
       durations: formatDuration(Mock.Random.natural(4000, 7000)),
       directors: '@cname()',
-      mainland_pubdate: '@date()'
+      mainland_pubdate: '@date()',
     })
   )
 }
@@ -35,6 +35,6 @@ export default {
     method: 'post',
     result: () => {
       return fileList
-    }
-  }
+    },
+  },
 }

@@ -1,3 +1,4 @@
+// .vscode/extensions.json
 {
   "recommendations": ["esbenp.prettier-vscode"]
 }

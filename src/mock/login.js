@@ -11,7 +11,7 @@ function logout() {
 }
 
 function userInfo(token) {
-	console.log(token, 999)
+  console.log(token, 999)
   return userMap[token]
 }
 export { login, logout, userInfo }

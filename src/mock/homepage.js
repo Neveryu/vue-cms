@@ -13,8 +13,8 @@ export function getHomeTotal() {
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
-        Mock.mock('@integer(1, 120)')
-      ]
+        Mock.mock('@integer(1, 120)'),
+      ],
     },
     {
       title: '已为投资人赚取',
@@ -27,8 +27,8 @@ export function getHomeTotal() {
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
-        Mock.mock('@integer(1, 120)')
-      ]
+        Mock.mock('@integer(1, 120)'),
+      ],
     },
     {
       title: '待回收金额',
@@ -41,8 +41,8 @@ export function getHomeTotal() {
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
-        Mock.mock('@integer(1, 120)')
-      ]
+        Mock.mock('@integer(1, 120)'),
+      ],
     },
     {
       title: '已回收金额',
@@ -55,9 +55,9 @@ export function getHomeTotal() {
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
         Mock.mock('@integer(1, 120)'),
-        Mock.mock('@integer(1, 120)')
-      ]
-    }
+        Mock.mock('@integer(1, 120)'),
+      ],
+    },
   ]
 }
 
@@ -66,23 +66,23 @@ export function getHomeDetailItem() {
     {
       name: '注册用户数',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#ec407a'
+      color: '#ec407a',
     },
     {
       name: '活跃用户数',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#ab47bc'
+      color: '#ab47bc',
     },
     {
       name: '人均投资金额',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#2196f3'
+      color: '#2196f3',
     },
     {
       name: '网站日均访问量',
       value: Mock.mock('@natural(0, 999999)'),
-      color: '#009688'
-    }
+      color: '#009688',
+    },
   ]
 }
 
@@ -93,7 +93,7 @@ for (let i = 0; i < count; i++) {
     Mock.mock({
       name: '@cname',
       value: '@natural(0, 9999999)',
-      avatar: 'https://avatars.githubusercontent.com/u/' + '@natural(1000000, 9999999)'
+      avatar: 'https://avatars.githubusercontent.com/u/' + '@natural(1000000, 9999999)',
     })
   )
 }

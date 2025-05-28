@@ -20,123 +20,123 @@ const userMap = {
       // 绝对地址
       avatar: './static/image/avatar/0.jpg',
       type: ['Vue', '小程序'],
-      desc: '我是admin账号'
+      desc: '我是admin账号',
     },
     // address里面请填写完整的路径
     permissions: [
       {
         type: 1,
-        address: '/introduction'
+        address: '/introduction',
       },
       {
         type: 2,
-        address: '/introduction/index'
+        address: '/introduction/index',
       },
       {
         type: 1,
-        address: '/user'
+        address: '/user',
       },
       {
         type: 2,
-        address: '/user/profile'
+        address: '/user/profile',
       },
       {
         type: 1,
-        address: '/custom-component'
+        address: '/custom-component',
       },
       {
         type: 2,
-        address: '/custom-component/index'
+        address: '/custom-component/index',
       },
       {
         type: 1,
-        address: '/echarts'
+        address: '/echarts',
       },
       {
         type: 2,
-        address: '/echarts/index'
+        address: '/echarts/index',
       },
       {
         type: 1,
-        address: '/excel'
+        address: '/excel',
       },
       {
         type: 2,
-        address: '/excel/dynamic-table'
+        address: '/excel/dynamic-table',
       },
       {
         type: 2,
-        address: '/excel/export-excel'
+        address: '/excel/export-excel',
       },
       {
         type: 2,
-        address: '/excel/upload-excel'
+        address: '/excel/upload-excel',
       },
       {
         type: 2,
-        address: '/excel/merge-count'
+        address: '/excel/merge-count',
       },
       {
         type: 2,
-        address: '/excel/custom-design'
+        address: '/excel/custom-design',
       },
       {
         type: 1,
-        address: '/futures'
+        address: '/futures',
       },
       {
         type: 2,
-        address: '/futures/draggable'
+        address: '/futures/draggable',
       },
       {
         type: 2,
-        address: '/clipboard'
+        address: '/clipboard',
       },
       {
         type: 1,
-        address: '/nested'
+        address: '/nested',
       },
       {
         type: 2,
-        address: '/nested/menu1'
+        address: '/nested/menu1',
       },
       {
         type: 2,
-        address: '/nested/menu1/menu1-1'
+        address: '/nested/menu1/menu1-1',
       },
       {
         type: 2,
-        address: '/nested/menu1/menu1-2'
+        address: '/nested/menu1/menu1-2',
       },
       {
         type: 2,
-        address: '/nested/menu1/menu1-2/menu1-2-1'
+        address: '/nested/menu1/menu1-2/menu1-2-1',
       },
       {
         type: 2,
-        address: '/nested/menu2'
+        address: '/nested/menu2',
       },
       {
         type: 1,
-        address: '/rich-editor'
+        address: '/rich-editor',
       },
       {
         type: 2,
-        address: '/rich-editor/quill'
+        address: '/rich-editor/quill',
       },
       {
         type: 2,
-        address: '/rich-editor/tinymce'
+        address: '/rich-editor/tinymce',
       },
       {
         type: 1,
-        address: '/theme'
+        address: '/theme',
       },
       {
         type: 2,
-        address: '/theme/index'
+        address: '/theme/index',
       },
-    ]
+    ],
   },
   lucy: {
     account: 'lucy',
@@ -148,10 +148,10 @@ const userMap = {
       // 绝对地址
       avatar: './static/image/avatar/1.jpg',
       type: ['Vue', 'React'],
-      desc: '我是lucy'
+      desc: '我是lucy',
     },
-    permissions: '/excel,/theme'
-  }
+    permissions: '/excel,/theme',
+  },
 }
 
 export { userMap }
@@ -163,6 +163,6 @@ export default {
     method: 'post',
     result: () => {
       return userMap[getToken()]
-    }
-  }
+    },
+  },
 }

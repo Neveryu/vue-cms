@@ -4,6 +4,15 @@
  */
 import Mock from 'mockjs'
 
+// 定义一个通用的响应格式
+const responseFormat = (data) => {
+  return {
+    code: 200,
+    message: 'success',
+    data: data,
+  }
+}
+
 Mock.setup({
   timeout: '300-600', // 响应延时
 })
@@ -19,12 +28,10 @@ mockList.forEach((b) => {
   for (let key in b) {
     let { state, url, method, result } = b[key]
     if (state) {
+      // 将 result 包装为统一的响应格式
       Mock.mock(RegExp(url + '??.*'), method, {
-        code: 200,
-        message: 'success',
-        data: result,
+        data: result(),
       })
-      // Mock.mock(RegExp(url + '??.*'), method, result)
     }
   }
 })

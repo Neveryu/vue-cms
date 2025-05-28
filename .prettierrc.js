@@ -44,4 +44,5 @@ module.exports = {
   tabWidth: process.env.ENV === 'development' ? 2 : 2,
   // 通过 overrides 针对特定文件配置
   overrides: [],
+  endOfLine: 'auto',
 }

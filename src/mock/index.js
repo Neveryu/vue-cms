@@ -10,7 +10,7 @@ import * as echarts from './echarts'
 import * as draggable from './draggable'
 
 Mock.setup({
-  timeout: '300-600'
+  timeout: '300-600',
 })
 
 // 登录相关接口

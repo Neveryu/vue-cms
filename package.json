@@ -27,7 +27,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "lint-fix": "vue-cli-service lint --fix"
+    "lint-fix": "vue-cli-service lint --fix",
+    "prettier-fix": "npx prettier --write ."
   },
   "dependencies": {
     "animate.css": "^4.1.1",

@@ -6,10 +6,10 @@ export default {
     state: true,
     url: '/login/login',
     method: 'post',
-    result: userInfo => {
+    result: (userInfo) => {
       let { username } = JSON.parse(userInfo.body)
       return userMap[username]
-    }
+    },
   },
   logout: {
     state: true,
@@ -17,6 +17,6 @@ export default {
     method: 'post',
     result: () => {
       return 'success'
-    }
-  }
+    },
+  },
 }
