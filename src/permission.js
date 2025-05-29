@@ -33,9 +33,10 @@ router.beforeEach(async (to, from, next) => {
       // if is logged in, redirect to the home page     // 有token访问login页面，就跳到首页
       next({ path: '/', replace: true })
     } else {
-      // 如果动态路由存在，则直接next
-      if (store.getters.roles.length > 0) {
-        next()
+      // 如果动态路由不存在
+      if (store.getters.addRoutes.length === 0) {
+        // 再次尝试加载动态路由
+        // next()
       } else {
         // 否则，再次尝试动态生成路由
         if (loadFromSession('userRoutes', []).length < 1) {

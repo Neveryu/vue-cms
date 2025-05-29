@@ -1,4 +1,5 @@
 // import Mock from 'mockjs'
+import { responseFormat } from '@/mock/index2'
 import { userMap } from './user'
 
 export default {
@@ -8,7 +9,7 @@ export default {
     method: 'post',
     result: (userInfo) => {
       let { username } = JSON.parse(userInfo.body)
-      return userMap[username]
+      return responseFormat(userMap[username])
     },
   },
   logout: {
@@ -16,7 +17,7 @@ export default {
     url: '/login/logout',
     method: 'post',
     result: () => {
-      return 'success'
+      return responseFormat()
     },
   },
 }

@@ -29,11 +29,10 @@ mockList.forEach((b) => {
     let { state, url, method, result } = b[key]
     if (state) {
       // 将 result 包装为统一的响应格式
-      Mock.mock(RegExp(url + '??.*'), method, {
-        data: result(),
-      })
+      Mock.mock(RegExp(url + '??.*'), method, result)
     }
   }
 })
 
+export { responseFormat }
 export default Mock
