@@ -10,7 +10,7 @@ module.exports = {
   // 'eslint:recommended'用的包收：eslint，作用是：ESLint 推荐规则
   // '@vue/prettier'用的包是：@vue/eslint-config-prettier，作用是：关闭 ESLint 与 Prettier 的冲突规则（ESLint 和 Prettier 都有各自的格式规则（比如缩进、引号），直接同时使用会导致重复报错。）
   // 'plugin:prettier/recommended'用的包是：eslint-config-prettier，作用是：再启用 Prettier 规则
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: ['plugin:vue/essential', 'eslint:recommended'],
   // 【parserOptions】扩展 ESLint 对 JavaScript 新语法和实验性特性的支持
   parserOptions: {
     parser: '@babel/eslint-parser',

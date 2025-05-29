@@ -36,6 +36,12 @@ router.beforeEach(async (to, from, next) => {
       // 如果动态路由不存在
       if (store.getters.addRoutes.length === 0) {
         // 再次尝试加载动态路由
+        if (loadFromSession('userRoutes', []).length < 1) {
+          // session中存储的路由权限表不存在，可能有问题，退出登录，让用户重新登录
+          await store.dispatch('user/resetToken')
+          next(`/login?redirect=${to.path}`)
+          return
+        }
         // next()
       } else {
         // 否则，再次尝试动态生成路由
