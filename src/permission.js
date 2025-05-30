@@ -42,16 +42,6 @@ router.beforeEach(async (to, from, next) => {
           next(`/login?redirect=${to.path}`)
           return
         }
-        // next()
-      } else {
-        // 否则，再次尝试动态生成路由
-        if (loadFromSession('userRoutes', []).length < 1) {
-          // 路由权限表不存在
-          // 退出登录
-          await store.dispatch('user/resetToken')
-          next(`/login?redirect=${to.path}`)
-          return
-        }
         try {
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', loadFromSession('userRoutes') || [])
@@ -68,6 +58,8 @@ router.beforeEach(async (to, from, next) => {
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
         }
+      } else {
+        next()
       }
     }
   } else {

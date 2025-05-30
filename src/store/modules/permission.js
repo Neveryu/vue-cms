@@ -6,9 +6,9 @@ import { asyncRoutes, constantRoutes, endBasicRoutes } from '@/router'
 const state = {
   // 按钮权限
   btns: [],
-  // 最后生成的总的路由
+  // 最后生成的完整路由
   routes: constantRoutes,
-  // 动态添加进来的路由
+  // 动态添加进来的属于用户的权限路由
   addRoutes: [],
 }
 

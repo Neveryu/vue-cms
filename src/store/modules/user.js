@@ -130,7 +130,7 @@ const actions = {
 
   // remove token
   resetToken({ commit }) {
-    console.log('resetToken')
+    console.log('store/modules/user/resetToken')
     return new Promise((resolve) => {
       removeToken()
       commit('SET_TOKEN', '')

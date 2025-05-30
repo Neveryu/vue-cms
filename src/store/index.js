@@ -22,7 +22,7 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
  * （PS：至于state，mutations，actions就由每个modules文件夹里面的文件，自己去管理和实现）
  */
 const getters = {
-  // tabsview
+  // tabsview-页面标签
   visitedTabsView: (state) => state.tabsview.visitedTabsView,
   // 用户信息
   allInfo: (state) => state.user.userInfo,

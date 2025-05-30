@@ -65,7 +65,7 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data
-    console.log(response, 22222222222)
+    console.log(response, '---http请求的返回')
 
     // 下载文件就直接通过
     if (res instanceof Blob || res instanceof ArrayBuffer) {

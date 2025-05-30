@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from '@/views/login'
-
 Vue.use(Router)
 
 /**
@@ -14,7 +12,7 @@ Vue.use(Router)
  *                        // 如果设置为true,它将总是出现在根目录。如果不设置的话，当它只有1个子路由的时候，会把
  *                        // 它的唯一子路由放到跟目录上来，而不显示它自己本身。
  *
- * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中
+ * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中（如：401，403，login等页面）
  */
 
 /**
@@ -24,10 +22,21 @@ Vue.use(Router)
  */
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: (resolve) => require(['@/views/redirect'], resolve),
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'login',
     hidden: true,
-    component: Login,
+    component: () => import('@/views/login/index'),
     meta: {
       title: '登录',
     },
