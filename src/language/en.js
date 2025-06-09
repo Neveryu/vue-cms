@@ -5,7 +5,7 @@ export default {
   login: {
     title: 'Content Manage System',
     account: 'Account',
-    password: 'Pwd',
+    password: 'Password',
     remember: 'Remember',
     login: 'Login',
   },

@@ -17,7 +17,7 @@ import 'nprogress/nprogress.css' // progress bar style
 NProgress.configure({ showSpinner: false })
 
 // 白名单
-const whiteList = ['/login', '/auth-redirect', '/singleLogion', '/portal', '/files'] // no redirect whitelist
+const whiteList = ['/login', '/auth-redirect', '/singleLogion', '/files'] // no redirect whitelist
 
 // 路由全局前置守卫
 router.beforeEach(async (to, from, next) => {
@@ -29,6 +29,7 @@ router.beforeEach(async (to, from, next) => {
   let hasToken = getToken()
 
   if (hasToken) {
+    console.log('1-有token，处于登录态')
     if (to.path === '/login') {
       // if is logged in, redirect to the home page     // 有token访问login页面，就跳到首页
       next({ path: '/', replace: true })
@@ -43,8 +44,11 @@ router.beforeEach(async (to, from, next) => {
           return
         }
         try {
+          console.log(loadFromSession('userRoutes', []), 1111)
+
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', loadFromSession('userRoutes') || [])
+          const accessRoutes = await store.dispatch('permission/generateRoutes', loadFromSession('userRoutes', []))
+
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
 
@@ -59,16 +63,18 @@ router.beforeEach(async (to, from, next) => {
           next(`/login?redirect=${to.path}`)
         }
       } else {
+        console.log(2222)
         next()
       }
     }
   } else {
-    console.log('has no token')
+    console.log('2 - has no token')
     /* has no token*/
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
     } else {
+      console.log('2 - 跳转')
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login?redirect=${encodeURIComponent(to.fullPath)}`) // 否则全部重定向到登录页
     }

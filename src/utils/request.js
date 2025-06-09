@@ -48,7 +48,7 @@ service.interceptors.request.use(
     // do something with request error
     console.log(error) // for debug
     return Promise.reject(error)
-  }
+  },
 )
 
 // response interceptor
@@ -132,7 +132,7 @@ service.interceptors.response.use(
       duration: 5 * 1000,
     })
     return Promise.reject(error.response?.data?.msg ?? error.message)
-  }
+  },
 )
 
 export default service

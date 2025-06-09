@@ -1,6 +1,6 @@
 import { login, userInfo, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/auth'
-import { saveToSession } from '@/common/session-storage'
+import { saveToSession, loadFromSession } from '@/common/session-storage'
 import { resetRouter } from '@/router'
 
 const SET_ACCOUNT = 'SET_ACCOUNT'

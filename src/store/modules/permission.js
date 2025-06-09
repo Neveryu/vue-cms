@@ -2,6 +2,7 @@
  * 这是权限板块，设计包含：路由、菜单、页面、按钮
  */
 import { asyncRoutes, constantRoutes, endBasicRoutes } from '@/router'
+import { isMenuPermissionByType, isBtnPermissionByType } from '@/utils/validate'
 
 const state = {
   // 按钮权限
@@ -108,12 +109,12 @@ const actions = {
   generateRoutes({ commit }, routes) {
     // 过滤出菜单路由（type为1或者2的是路由/页面菜单权限）
     let menuRoles = routes.filter((item) => {
-      return item.type == '1' || item.type == '2'
+      return isMenuPermissionByType(item.type)
     })
 
     // 过滤出按钮权限表（type为3的代表可以显示的按钮权限）
     let btnPermissions = routes.filter((item) => {
-      return item.type == '3'
+      return isBtnPermissionByType(item.type)
     })
 
     // 生成按钮权限的数据(数组)
@@ -126,8 +127,11 @@ const actions = {
     commit('SET_BUTTONS', btns)
 
     return new Promise((resolve) => {
+      console.log(asyncRoutes, 11111111)
       // 从动态路由中筛选出用户有的路由页面/菜单
       let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
+      console.log(accessedRoutes, '---accessedRoutes')
+
       // 然后把endRoutes添加到最后面
       accessedRoutes.push(...endBasicRoutes)
       commit('SET_ROUTES', accessedRoutes)

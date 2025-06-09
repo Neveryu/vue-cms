@@ -93,59 +93,61 @@ export default {
     background-image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
     background-image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
     background-image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
-    background-image: linear-gradient(45deg,#1278f6,#00b4aa 50%, #1278f6);
+    background-image: linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
     .lang-select {
       position: absolute;
       top: 18px;
       right: 150px;
     }
-    .lang-select /deep/ .el-dropdown {
+    .lang-select ::v-deep .el-dropdown {
       font-size: 20px;
       color: #fff;
     }
 
-    .avatar-container
-      position absolute
-      top 15px
-      right 40px
-      .avatar-wrapper
-        cursor pointer
-    .avatar-container /deep/ .user-avatar
-          width 30px
-          height 30px
-          border-radius 50%
-          vertical-align middle
-      .username-wrapper
-        display inline-block
-        height 30px
-        line-height 30px
-        color #fff
+    .avatar-container {
+      position: absolute;
+      top: 15px;
+      right: 40px;
+      .avatar-wrapper {
+        cursor: pointer;
+      }
+      ::v-deep .user-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        vertical-align: middle;
+        .username-wrapper {
+          display: inline-block;
+          height: 30px;
+          line-height: 30px;
+          color: #fff;
+        }
+      }
+    }
   }
 }
 
-
-
-.top-navbar /deep/ .el-menu-item {
-  font-size 20px
+.top-navbar ::v-deep .el-menu-item {
+  font-size: 20px;
   &:hover {
-    background-color: transparent
+    background-color: transparent;
   }
   &:focus {
-    background-color: transparent
+    background-color: transparent;
   }
 }
-.top-navbar /deep/ .theme-container {
-  position absolute
-  top 15px
-  right 225px
-  color #fff
-  font-size 24px
-  cursor pointer
+.top-navbar ::v-deep .theme-container {
+  position: absolute;
+  top: 15px;
+  right: 225px;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
   // background-image linear-gradient(red, blue)
 }
 .top-navbar .screenfull {
-  position: absolute
-  top: 20px
-  right: 190px
+  position: absolute;
+  top: 20px;
+  right: 190px;
 }
 </style>

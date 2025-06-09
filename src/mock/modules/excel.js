@@ -17,7 +17,7 @@ for (let i = 0; i < count; i++) {
       voertime: '@natural(1, 100)',
       getover: '@natural(100, 200)',
       implementRatio: '',
-    })
+    }),
   )
 }
 
@@ -48,7 +48,7 @@ for (let i = 0; i < fileCount; i++) {
       updateTime: '@datetime()',
       updateUserName: '@cname()',
       downloadCount: '@natural(10, 100)',
-    })
+    }),
   )
 }
 

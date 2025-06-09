@@ -7,11 +7,7 @@
       <!-- 那么就将他的唯一子路由放到一级菜单来 -->
       <!-- 20190707 note: 那么这里的icon和title就用子路由的吧 -->
       <router-link
-        v-if="
-          hasOneShowingChildren(item.children, item) &&
-          (!onlyOneChild.children || onlyOneChild.noShowingChild) &&
-          !item.alwaysShow
-        "
+        v-if="hasOneShowingChildren(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChild) && !item.alwaysShow"
         :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="item.path">
           <item :icon="item.children[0].meta.icon" :title="item.children[0].meta.title"></item>

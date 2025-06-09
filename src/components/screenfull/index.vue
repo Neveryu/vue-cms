@@ -65,13 +65,13 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
 .screenfull-svg {
-  display inline-block
-  cursor pointer
-  fill #fff
-  width 20px
-  height 20px
-  vertical-align 10px
+  display: inline-block;
+  cursor: pointer;
+  fill: #fff;
+  width: 20px;
+  height: 20px;
+  vertical-align: 10px;
 }
 </style>

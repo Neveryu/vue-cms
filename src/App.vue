@@ -16,6 +16,12 @@ export default {
 }
 </script>
 
-<style>
-/* @import '~@/assets/style/index.css'; */
+<style scoped lang="scss">
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 </style>

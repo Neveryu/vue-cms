@@ -1,19 +1,7 @@
 <template>
   <div class="left-sidebar">
-    <el-menu
-      mode="vertical"
-      unique-opened
-      @open="handleOpen"
-      @close="handleClose"
-      background-color=""
-      :collapse="isCollapse"
-    >
-      <sidebar-item
-        v-for="router of routers"
-        :key="router.path"
-        :item="router"
-        :base-path="router.path"
-      ></sidebar-item>
+    <el-menu mode="vertical" unique-opened @open="handleOpen" @close="handleClose" background-color="" :collapse="isCollapse">
+      <sidebar-item v-for="router of routers" :key="router.path" :item="router" :base-path="router.path"></sidebar-item>
     </el-menu>
   </div>
 </template>
@@ -23,15 +11,15 @@ import SidebarItem from './sidebar-item'
 export default {
   name: 'SideBar',
   components: {
-    SidebarItem
+    SidebarItem,
   },
   data() {
     return {
-      isCollapse: false
+      isCollapse: false,
     }
   },
   computed: {
-    ...mapGetters(['routers'])
+    ...mapGetters(['routers']),
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -39,19 +27,22 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log('handleClose', key, keyPath)
-    }
-  }
+    },
+  },
 }
 </script>
-<style lang="stylus" scoped>
-.left-sidebar
-  position fixed
-  top 56px
-  width 210px
-  height 100%
-  min-height 500px
-  z-index 2
-.el-menu
-  height 100%
-  background-color var(--light)
+<style lang="scss" scoped>
+.left-sidebar {
+  position: fixed;
+  top: 56px;
+  width: 210px;
+  height: 100%;
+  min-height: 500px;
+  z-index: 2;
+}
+
+.el-menu {
+  height: 100%;
+  background-color: var(--light);
+}
 </style>

@@ -1,7 +1,13 @@
 <template>
   <el-container class="login-container">
-    <el-switch v-model="toggleParticles" inactive-color="#ff4949"></el-switch>
-    <el-button class="show-account animate__animated animate__flash animate__infinite" type="text" @click="accountTip">提示帐号信息</el-button>
+    <el-switch
+      class="bg-switch"
+      v-model="toggleParticles"
+      active-text="粒子背景"
+      active-color="#13ce66"
+      inactive-text="关闭"
+      inactive-color="#ff4949"></el-switch>
+    <el-button class="show-account-info animate__animated animate__flash animate__infinite" type="text" @click="accountTip">提示帐号信息</el-button>
 
     <el-card class="animated flipInY">
       <div slot="header" class="el-card-header">
@@ -34,6 +40,7 @@
     <div id="particles"></div>
   </el-container>
 </template>
+
 <script>
 import { particlesConfig } from '@/config/particles'
 import { validateUsername, validatePwd } from '@/common/validate-func'
@@ -119,11 +126,20 @@ export default {
                 saveToLocal('password', '')
                 saveToLocal('remember', false)
               }
-              this.$router.push({ path: '/home' }).catch(() => {
-                console.log('登录成功，跳转... ')
-              })
+              this.$router
+                .push({ path: '/' })
+                .then(() => {
+                  console.log('[登陆页面]登录成功，跳转... ')
+                })
+                .catch(() => {
+                  console.error('[登陆页面]登录失败... ')
+                })
             })
-            .catch(() => {
+            .catch((error) => {
+              // 接口错误信息会在封装的request.js中提示，所以这里就打印一下错误信息，便于调试。
+              console.log('登录时的错误信息：', error)
+            })
+            .finally(() => {
               this.loading = false
             })
         } else {
@@ -165,11 +181,15 @@ export default {
   background: color.mix(#044289, #494166) url('~@/assets/image/login-bg.svg') center no-repeat;
   background-size: cover;
   overflow: hidden;
-  .show-account {
+  .bg-switch {
+    width: 180px;
+    margin: 10px;
+  }
+  .show-account-info {
     position: absolute;
     left: 15px;
     bottom: 20px;
-    color: var(--red);
+    color: var(--teal);
     font-weight: 500;
   }
   .el-card {

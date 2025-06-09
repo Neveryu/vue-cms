@@ -5,12 +5,12 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   render(h, context) {
     const { icon, title } = context.props
@@ -29,14 +29,15 @@ export default {
       vnodes.push(<span slot="title">{title}</span>)
     }
     return vnodes
-  }
+  },
 }
 </script>
 
-<style scoped lang="stylus">
-.sidebar-icon
-  font-size 1.1em
-  margin-right 8px
-  margin-left 4px
-  vertical-align -.3em
+<style scoped lang="scss">
+.sidebar-icon {
+  font-size: 1.1em;
+  margin-right: 8px;
+  margin-left: 4px;
+  vertical-align: -0.3em;
+}
 </style>
