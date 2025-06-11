@@ -51,6 +51,7 @@ import LangSelect from '@/components/lang-select'
 import Screenfull from '@/components/screenfull'
 import ChangeTheme from '@/components/theme'
 export default {
+  name: 'NavBar',
   components: {
     LangSelect,
     Screenfull,

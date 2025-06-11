@@ -22,7 +22,7 @@ const userMap = {
       type: ['Vue', '小程序'],
       desc: '我是admin账号',
     },
-    // address里面请填写完整的路径
+    // address里面请填写完整的菜单/页面/路由路径
     permissions: [
       {
         type: 1,
@@ -150,7 +150,40 @@ const userMap = {
       type: ['Vue', 'React'],
       desc: '我是lucy',
     },
-    permissions: '/excel,/theme',
+    permissions: [
+      {
+        type: 1,
+        address: '/excel',
+      },
+      {
+        type: 2,
+        address: '/excel/dynamic-table',
+      },
+      {
+        type: 2,
+        address: '/excel/export-excel',
+      },
+      {
+        type: 2,
+        address: '/excel/upload-excel',
+      },
+      {
+        type: 2,
+        address: '/excel/merge-count',
+      },
+      {
+        type: 2,
+        address: '/excel/custom-design',
+      },
+      {
+        type: 1,
+        address: '/theme',
+      },
+      {
+        type: 2,
+        address: '/theme/index',
+      },
+    ],
   },
 }
 

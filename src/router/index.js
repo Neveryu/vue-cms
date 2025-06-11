@@ -10,6 +10,7 @@ Vue.use(Router)
 
 /**
  * 关于 route 的配置属性说明：
+ * 不管是父路由，还是子路由，path字段必须是完整的路径
  *
  * alwaysShow: true       // if set true, will always show the root menu, whatever its child routes length
  *                        // if not set alwaysShow, only more than ont route under the children
@@ -18,6 +19,9 @@ Vue.use(Router)
  *                        // 它的唯一子路由放到跟目录上来，而不显示它自己本身。
  *
  * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中（如：401，403，login等页面）
+ *
+ * meta: { icon: '', title: ''} // 如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
+ *
  */
 
 /**
@@ -29,7 +33,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: () => import('@/layout/main-layout'),
-    redirect: '/home',
+    redirect: 'home',
     children: [
       {
         path: '/home',
@@ -55,9 +59,7 @@ export const constantRoutes = [
     name: 'login',
     hidden: true,
     component: () => import('@/views/login/index'),
-    meta: {
-      title: '登录',
-    },
+    meta: { title: '登录' },
   },
 ]
 
@@ -69,6 +71,7 @@ export const endBasicRoutes = [
   {
     path: '/404',
     name: '404',
+    hidden: true,
     component: () => import('@/views/error-page/404'),
     meta: {
       title: '404',
@@ -78,6 +81,7 @@ export const endBasicRoutes = [
   {
     path: '/no-permission',
     name: 'NoPermission',
+    hidden: true,
     component: () => import('@/views/error-page/no-permission'),
     meta: {
       title: '访问无权限',
@@ -87,6 +91,7 @@ export const endBasicRoutes = [
   {
     path: '*',
     name: 'NotFound',
+    hidden: true,
     component: () => import('@/views/error-page/404'),
     meta: {
       title: '页面走丢了',
@@ -105,10 +110,7 @@ export const asyncRoutes = [
     path: '/custom-component',
     name: 'custom-component',
     component: () => import('@/layout/main-layout'),
-    meta: {
-      icon: 'question',
-      title: '自定义组件',
-    },
+    meta: { icon: 'question', title: '自定义组件' },
     redirect: 'index',
     children: [
       {
@@ -120,64 +122,64 @@ export const asyncRoutes = [
     ],
   },
   // echarts、图表、可视化
-  {
-    path: '/echarts',
-    component: () => import('@/layout/main-layout'),
-    redirect: 'index',
-    alwaysShow: true,
-    meta: {
-      title: '可视化',
-      icon: 'svg-droplet',
-    },
-    children: [
-      {
-        path: '/echarts/index',
-        name: '数量统计',
-        component: () => import('@/views/echarts'),
-        meta: { title: '数量统计', icon: 'svg-heart' },
-      },
-    ],
-  },
-  // 表格菜单
-  {
-    path: '/excel',
-    component: () => import('@/layout/main-layout'),
-    redirect: '/excel/export-excel',
-    alwaysShow: true,
-    meta: { title: '表格', icon: 'date' },
-    children: [
-      {
-        path: '/excel/dynamic-table',
-        name: 'DynamicTable',
-        component: () => import('@/views/excel/dynamic-table/index'),
-        meta: { icon: 'set-up', title: '动态表格' },
-      },
-      {
-        path: '/excel/export-excel',
-        name: '导出表格',
-        component: () => import('@/views/excel/export-excel'),
-        meta: { icon: 'download', title: '导出表格' },
-      },
-      {
-        path: '/excel/upload-excel',
-        name: '上传表格',
-        component: () => import('@/views/excel/upload-excel'),
-        meta: { icon: 'upload', title: '上传表格' },
-      },
-      {
-        path: '/excel/merge-count',
-        name: '合并&统计',
-        component: () => import('@/views/excel/merge-count'),
-        meta: { icon: 'upload', title: '合并&统计' },
-      },
-      {
-        path: '/excel/custom-design',
-        name: '自定义表格',
-        component: () => import('@/views/excel/custom-excel'),
-        meta: { icon: 's-promotion', title: '自定义表格' },
-      },
-    ],
-  },
+  // {
+  //   path: '/echarts',
+  //   component: () => import('@/layout/main-layout'),
+  //   redirect: 'index',
+  //   alwaysShow: true,
+  //   meta: {
+  //     title: '可视化',
+  //     icon: 'svg-droplet',
+  //   },
+  //   children: [
+  //     {
+  //       path: '/index',
+  //       name: '数量统计',
+  //       component: () => import('@/views/echarts'),
+  //       meta: { title: '数量统计', icon: 'svg-heart' },
+  //     },
+  //   ],
+  // },
+  // // 表格菜单
+  // {
+  //   path: '/excel',
+  //   component: () => import('@/layout/main-layout'),
+  //   redirect: 'export-excel',
+  //   alwaysShow: true,
+  //   meta: { title: '表格', icon: 'date' },
+  //   children: [
+  //     {
+  //       path: '/dynamic-table',
+  //       name: 'DynamicTable',
+  //       component: () => import('@/views/excel/dynamic-table/index'),
+  //       meta: { icon: 'set-up', title: '动态表格' },
+  //     },
+  //     {
+  //       path: '/export-excel',
+  //       name: '导出表格',
+  //       component: () => import('@/views/excel/export-excel'),
+  //       meta: { icon: 'download', title: '导出表格' },
+  //     },
+  //     {
+  //       path: '/upload-excel',
+  //       name: '上传表格',
+  //       component: () => import('@/views/excel/upload-excel'),
+  //       meta: { icon: 'upload', title: '上传表格' },
+  //     },
+  //     {
+  //       path: '/merge-count',
+  //       name: '合并&统计',
+  //       component: () => import('@/views/excel/merge-count'),
+  //       meta: { icon: 'upload', title: '合并&统计' },
+  //     },
+  //     {
+  //       path: '/custom-design',
+  //       name: '自定义表格',
+  //       component: () => import('@/views/excel/custom-excel'),
+  //       meta: { icon: 's-promotion', title: '自定义表格' },
+  //     },
+  //   ],
+  // },
   // 更多功能
   /**
   {

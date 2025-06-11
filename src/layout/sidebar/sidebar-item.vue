@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item.children && !item.hidden">
+  <div v-if="!item.hidden">
     <template>
       <!-- 这个路由对象 item 只有一个子路由的时候，会把子路由放到一级菜单来 -->
       <!-- 除非这个路由对象有属性 alwaysShow: true 这个属性 -->
@@ -14,7 +14,7 @@
         </el-menu-item>
       </router-link>
 
-      <el-submenu v-else :index="item.path">
+      <!-- <el-submenu v-else :index="item.path">
         <template slot="title">
           <item :icon="item.meta.icon" :title="item.meta.title"></item>
         </template>
@@ -32,12 +32,14 @@
             </el-menu-item>
           </router-link>
         </template>
-      </el-submenu>
+      </el-submenu> -->
     </template>
   </div>
 </template>
 
 <script>
+// @vue/cli@5.x默认使用的是Webpack 5，Webpack 5不再自动包含Node.js核心模块，而path模块是Node.js的核心模块，不能在浏览器中直接使用。
+// import path from 'path'
 import Item from './item'
 export default {
   name: 'sidebar-item',
@@ -62,6 +64,7 @@ export default {
   },
   methods: {
     hasOneShowingChildren(children, parent) {
+      console.log(children, parent, 111)
       // 把 children 里面没有 hidden 属性的元素，收集起来，看看有哪些
       // 1、后面要来判断，children 里面是不是只有一个
       // 2、亦或者没有 【比如 '/login' 这个 route 就没有 children】
@@ -93,12 +96,13 @@ export default {
       return false
     },
     resolvePath(routePath) {
-      // console.log(path.resolve(this.basePath, routePath))
+      // return path.resolve(this.basePath, routePath)
       return this.basePath + routePath
     },
   },
   created() {
     // console.log(this.basePath)
   },
+  mounted() {},
 }
 </script>

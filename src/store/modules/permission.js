@@ -15,7 +15,7 @@ const state = {
 
 /**
  * 前端动态路由是否在后端返回的路由权限中
- * @param routes - 前端动态路由表
+ * @param routes - 接口返回的有权限的路由
  * @param route -前端配置的路由表具体路由对象
  */
 function hasPermission(routes, route) {

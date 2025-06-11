@@ -23,10 +23,10 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log('handleOpen', key, keyPath)
+      console.log('handle menu Open', key, keyPath)
     },
     handleClose(key, keyPath) {
-      console.log('handleClose', key, keyPath)
+      console.log('handle menu Close', key, keyPath)
     },
   },
 }
