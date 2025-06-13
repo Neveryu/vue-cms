@@ -74,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
       // in the free login whitelist, go directly
       next()
     } else {
-      console.log('2 - 跳转')
+      console.log('2 - 跳转到登录页面重新登录')
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login?redirect=${encodeURIComponent(to.fullPath)}`) // 否则全部重定向到登录页
     }

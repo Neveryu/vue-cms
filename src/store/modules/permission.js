@@ -17,13 +17,14 @@ const state = {
  * 前端动态路由是否在后端返回的路由权限中
  * @param routes - 接口返回的有权限的路由
  * @param route -前端配置的路由表具体路由对象
+ * @param basePath - 二级/三级route是需要配置上basePath，才能与接口返回的路由表进行匹配
  */
-function hasPermission(routes, route) {
+function hasPermission(routes, route, basePath) {
   // 后端返回的菜单路由必须要有address
   routes = routes.filter((d) => d.address)
   if (routes && routes.length > 0) {
     // return routes.some(item => item.address.includes(route.path))
-    return routes.some((d) => d.address == route.path)
+    return routes.some((d) => d.address == (basePath == '' ? route.path : `${basePath}/${route.path}`))
   } else {
     return false
   }
@@ -33,19 +34,19 @@ function hasPermission(routes, route) {
  * Filter asynchronous routing tables by recursion
  * @param asyncRoutes 前端配置的动态路由表
  * @param routes 接口返回的有权限的路由
+ * @param basePath - basePath
  * 两者做一个匹配
  */
-export function filterAsyncRoutes(asyncRoutes, routes) {
+export function filterAsyncRoutes(asyncRoutes, routes, basePath = '') {
   let res = []
   asyncRoutes.forEach((route) => {
-    if (route) {
-      let isHasPermission = hasPermission(routes, route)
-      if (route.children) {
-        route.children = filterAsyncRoutes(route.children, routes)
-      }
-      if (isHasPermission || (route.children && route.children.length > 0)) {
-        res.push(route)
-      }
+    let isHasPermission = hasPermission(routes, route, basePath)
+    if (route.children) {
+      route.children = filterAsyncRoutes(route.children, routes, basePath + route.path)
+    }
+    if (isHasPermission || (route.children && route.children.length > 0)) {
+      console.log(route, '过滤出来的路由')
+      res.push(route)
     }
   })
   return res
@@ -56,7 +57,7 @@ export function filterAsyncRoutes(asyncRoutes, routes) {
  * @param {Array} list
  * @param {String} key 树节点的主键字段名称，如id
  * @param {String} pKey 树节点的父级外键字段名称，如pId
- * @param {String} topPKeyValue 顶级节点的父级外键的值，如'',默认用空
+ * @param {String} topPKeyValue 顶级节点的父级外键的值，如''，默认用空
  * @returns {*}
  */
 function formatTree(list, key, pKey, topPKeyValue) {
@@ -129,7 +130,7 @@ const actions = {
     return new Promise((resolve) => {
       console.log(asyncRoutes, 11111111)
       // 从动态路由中筛选出用户有的路由页面/菜单
-      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
+      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles, '')
       console.log(accessedRoutes, '---accessedRoutes')
 
       // 然后把endRoutes添加到最后面

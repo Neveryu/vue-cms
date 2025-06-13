@@ -14,25 +14,25 @@
         </el-menu-item>
       </router-link>
 
-      <!-- <el-submenu v-else :index="item.path">
+      <el-submenu v-else :index="item.path">
         <template slot="title">
           <item :icon="item.meta.icon" :title="item.meta.title"></item>
         </template>
 
         <template v-for="child of item.children">
           <sidebar-item
+            v-if="!child.hidden && child.children && child.children.length > 0"
             :item="child"
             :base-path="resolvePath(child.path)"
-            :key="child.path"
-            v-if="!child.hidden && child.children && child.children.length > 0" />
+            :key="child.path" />
 
-          <router-link v-else :to="resolvePath(child.path)" :key="child.path">
+          <!-- <router-link v-else :to="resolvePath(child.path)" :key="child.path">
             <el-menu-item :index="child.path">
               <item :icon="child.meta.icon" :title="child.meta.title"></item>
             </el-menu-item>
-          </router-link>
+          </router-link> -->
         </template>
-      </el-submenu> -->
+      </el-submenu>
     </template>
   </div>
 </template>
@@ -97,7 +97,7 @@ export default {
     },
     resolvePath(routePath) {
       // return path.resolve(this.basePath, routePath)
-      return this.basePath + routePath
+      return this.basePath == '/' ? this.basePath + routePath : this.basePath + '/' + routePath
     },
   },
   created() {

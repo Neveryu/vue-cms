@@ -20,7 +20,11 @@ Vue.use(Router)
  *
  * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中（如：401，403，login等页面）
  *
- * meta: { icon: '', title: ''} // 如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
+ * meta: {。
+ *  noCache: true         // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+ *  icon: '',             // 设置该路由的图标，如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
+ *  title: ''             // 设置该路由在侧边栏和面包屑中展示的名字
+ * }
  *
  */
 
@@ -36,7 +40,7 @@ export const constantRoutes = [
     redirect: 'home',
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'home',
         component: () => import('@/views/homepage'),
         meta: { icon: 's-home', title: '首页' },
@@ -114,7 +118,7 @@ export const asyncRoutes = [
     redirect: 'index',
     children: [
       {
-        path: '/custom-component/index',
+        path: 'index',
         name: 'CustomComponent',
         meta: { icon: 'guide', title: '自定义组件' },
         component: () => import('@/views/custom-component/index'),
@@ -122,66 +126,62 @@ export const asyncRoutes = [
     ],
   },
   // echarts、图表、可视化
-  // {
-  //   path: '/echarts',
-  //   component: () => import('@/layout/main-layout'),
-  //   redirect: 'index',
-  //   alwaysShow: true,
-  //   meta: {
-  //     title: '可视化',
-  //     icon: 'svg-droplet',
-  //   },
-  //   children: [
-  //     {
-  //       path: '/index',
-  //       name: '数量统计',
-  //       component: () => import('@/views/echarts'),
-  //       meta: { title: '数量统计', icon: 'svg-heart' },
-  //     },
-  //   ],
-  // },
-  // // 表格菜单
-  // {
-  //   path: '/excel',
-  //   component: () => import('@/layout/main-layout'),
-  //   redirect: 'export-excel',
-  //   alwaysShow: true,
-  //   meta: { title: '表格', icon: 'date' },
-  //   children: [
-  //     {
-  //       path: '/dynamic-table',
-  //       name: 'DynamicTable',
-  //       component: () => import('@/views/excel/dynamic-table/index'),
-  //       meta: { icon: 'set-up', title: '动态表格' },
-  //     },
-  //     {
-  //       path: '/export-excel',
-  //       name: '导出表格',
-  //       component: () => import('@/views/excel/export-excel'),
-  //       meta: { icon: 'download', title: '导出表格' },
-  //     },
-  //     {
-  //       path: '/upload-excel',
-  //       name: '上传表格',
-  //       component: () => import('@/views/excel/upload-excel'),
-  //       meta: { icon: 'upload', title: '上传表格' },
-  //     },
-  //     {
-  //       path: '/merge-count',
-  //       name: '合并&统计',
-  //       component: () => import('@/views/excel/merge-count'),
-  //       meta: { icon: 'upload', title: '合并&统计' },
-  //     },
-  //     {
-  //       path: '/custom-design',
-  //       name: '自定义表格',
-  //       component: () => import('@/views/excel/custom-excel'),
-  //       meta: { icon: 's-promotion', title: '自定义表格' },
-  //     },
-  //   ],
-  // },
+  {
+    path: '/echarts',
+    component: () => import('@/layout/main-layout'),
+    redirect: 'index',
+    alwaysShow: true,
+    meta: { title: '可视化', icon: 'svg-droplet' },
+    children: [
+      {
+        path: 'index',
+        name: '数量统计',
+        component: () => import('@/views/echarts'),
+        meta: { title: '数量统计', icon: 'svg-heart' },
+      },
+    ],
+  },
+  // 表格菜单
+  {
+    path: '/excel',
+    component: () => import('@/layout/main-layout'),
+    redirect: 'export-excel',
+    alwaysShow: true,
+    meta: { title: '表格', icon: 'date' },
+    children: [
+      {
+        path: 'dynamic-table',
+        name: 'DynamicTable',
+        component: () => import('@/views/excel/dynamic-table/index'),
+        meta: { icon: 'set-up', title: '动态表格' },
+      },
+      {
+        path: 'export-excel',
+        name: '导出表格',
+        component: () => import('@/views/excel/export-excel'),
+        meta: { icon: 'download', title: '导出表格' },
+      },
+      {
+        path: 'upload-excel',
+        name: '上传表格',
+        component: () => import('@/views/excel/upload-excel'),
+        meta: { icon: 'upload', title: '上传表格' },
+      },
+      {
+        path: 'merge-count',
+        name: '合并&统计',
+        component: () => import('@/views/excel/merge-count'),
+        meta: { icon: 'upload', title: '合并&统计' },
+      },
+      {
+        path: 'custom-design',
+        name: '自定义表格',
+        component: () => import('@/views/excel/custom-excel'),
+        meta: { icon: 's-promotion', title: '自定义表格' },
+      },
+    ],
+  },
   // 更多功能
-  /**
   {
     path: '/futures',
     component: () => import('@/layout/main-layout'),
@@ -189,13 +189,13 @@ export const asyncRoutes = [
     meta: { icon: 's-grid', title: '更多功能' },
     children: [
       {
-        path: '/futures/draggable',
+        path: 'draggable',
         name: 'draggable',
         meta: { icon: 'thumb', title: '拖拽' },
         component: () => import('@/views/futures/draggable'),
       },
       {
-        path: '/clipboard',
+        path: 'clipboard',
         name: 'clipBoard',
         meta: { title: '剪切板示例', icon: 'document' },
         component: () => import('@/views/clipboard'),
@@ -206,14 +206,10 @@ export const asyncRoutes = [
   {
     path: '/introduction',
     component: () => import('@/layout/main-layout'),
-
-    meta: {
-      icon: 'svg-aperture',
-      title: '简述',
-    },
+    meta: { icon: 'svg-aperture', title: '简述' },
     children: [
       {
-        path: '/introduction/index',
+        path: '/index',
         name: 'Introduction',
         component: () => import('@/views/introduction/index'),
         meta: { icon: 'svg-aperture', title: '简述' },
@@ -223,33 +219,30 @@ export const asyncRoutes = [
   // 路由嵌套菜单
   {
     path: '/nested',
-    meta: {
-      icon: 'svg-layers',
-      title: '路由嵌套',
-    },
+    meta: { icon: 'svg-layers', title: '路由嵌套' },
     component: () => import('@/layout/main-layout'),
     children: [
       {
-        path: '/nested/menu1',
+        path: 'menu1',
         name: 'Menu1',
         meta: { icon: 'share', title: '嵌套路由1' },
         component: () => import('@/views/nested/menu1/index'),
         children: [
           {
-            path: '/nested/menu1/menu1-1',
+            path: 'menu1-1',
             name: 'Menu1-1',
             meta: { icon: 'success', title: '嵌套路由1-1' },
             component: () => import('@/views/introduction/index'),
           },
           {
-            path: '/nested/menu1/menu1-2',
+            path: 'menu1-2',
             name: 'Menu1-2',
             alwaysShow: true,
             meta: { icon: 'error', title: '嵌套路由1-2' },
             component: () => import('@/views/nested/menu1/menu1-2/index'),
             children: [
               {
-                path: '/nested/menu1/menu1-2/menu1-2-1',
+                path: 'menu1-2-1',
                 name: 'Menu1-2-1',
                 meta: { icon: 'warning', title: '嵌套路由1-2-1' },
                 component: () => import('@/views/introduction/index'),
@@ -259,7 +252,7 @@ export const asyncRoutes = [
         ],
       },
       {
-        path: '/nested/menu2',
+        path: 'menu2',
         name: 'Menu2',
         meta: { icon: 'star-on', title: '嵌套路由2' },
         component: () => import('@/views/user/add'),
@@ -271,20 +264,17 @@ export const asyncRoutes = [
     path: '/rich-editor',
     component: () => import('@/layout/main-layout'),
     alwaysShow: true,
-    meta: {
-      icon: 's-order',
-      title: '富文本',
-    },
+    meta: { icon: 's-order', title: '富文本' },
     redirect: 'quill',
     children: [
       {
-        path: '/rich-editor/quill',
+        path: 'quill',
         name: 'QuillEditor',
         meta: { icon: 's-order', title: 'quill' },
         component: () => import('@/views/rich-editor/quill'),
       },
       {
-        path: '/rich-editor/tinymce',
+        path: 'tinymce',
         name: 'TinyMCE',
         meta: { icon: 'svg-type', title: 'tinymce' },
         component: () => import('@/views/rich-editor/tinymce'),
@@ -294,14 +284,11 @@ export const asyncRoutes = [
   // 改变主题
   {
     path: '/theme',
-    meta: {
-      icon: 'document',
-      title: 'theme',
-    },
+    meta: { icon: 'document', title: 'theme' },
     component: () => import('@/layout/main-layout'),
     children: [
       {
-        path: '/theme/index',
+        path: 'index',
         name: 'Theme',
         meta: { title: '主题', icon: 'svg-pifu' },
         component: () => import('@/views/theme/index'),
@@ -312,26 +299,22 @@ export const asyncRoutes = [
   {
     path: '/user',
     hidden: true,
-    meta: {
-      icon: 'tickets',
-      title: '个人中心',
-    },
+    meta: { icon: 'tickets', title: '个人中心' },
     component: () => import('@/layout/main-layout'),
     children: [
       {
-        path: '/user/profile',
+        path: 'profile',
         name: 'Profile',
         meta: { icon: 'warning', title: '个人中心' },
         component: () => import('@/views/user/profile'),
       },
     ],
   },
-  */
 ]
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support
+    // mode: 'history', // require service support（去掉url中的#）
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes,
   })

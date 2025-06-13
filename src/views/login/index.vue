@@ -131,13 +131,11 @@ export default {
                 .then(() => {
                   console.log('[登陆页面]登录成功，跳转... ')
                 })
-                .catch(() => {
-                  console.error('[登陆页面]登录失败... 这里有问题吗？')
-                })
+                .catch(() => {})
             })
             .catch((error) => {
               // 接口错误信息会在封装的request.js中提示，所以这里就打印一下错误信息，便于调试。
-              console.log('登录时的错误信息：', error)
+              console.log('[登陆页面]登录时的错误信息：', error)
             })
             .finally(() => {
               this.loading = false
