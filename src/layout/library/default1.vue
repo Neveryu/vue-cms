@@ -1,6 +1,6 @@
 <!-- 
   【这是组件级别的注释：可以描述组件的功能、作者、创建时间等信息】
-  main-layout.vue文件是系统主要内容页面的布局组件
+  default.vue文件是系统默认的布局样式
 -->
 <template>
   <div class="app-layout">
@@ -15,10 +15,10 @@
   </div>
 </template>
 <script>
-import Navbar from './navbar'
-import Sidebar from './sidebar/sidebar'
-import TabsView from './tabs-view'
-import MainContainer from './main-container'
+import Navbar from '../navbar'
+import Sidebar from '../sidebar/sidebar'
+import TabsView from '../tabs-view'
+import MainContainer from '../main-container'
 export default {
   components: {
     Navbar,

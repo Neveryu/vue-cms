@@ -19,12 +19,13 @@ const state = {
  * @param route -前端配置的路由表具体路由对象
  * @param basePath - 二级/三级route是需要配置上basePath，才能与接口返回的路由表进行匹配
  */
-function hasPermission(routes, route, basePath) {
+function hasPermission(routes, route) {
   // 后端返回的菜单路由必须要有address
   routes = routes.filter((d) => d.address)
+  // console.log(basePath == '' ? route.path : `${basePath}/${route.path}`, '-9874')
   if (routes && routes.length > 0) {
     // return routes.some(item => item.address.includes(route.path))
-    return routes.some((d) => d.address == (basePath == '' ? route.path : `${basePath}/${route.path}`))
+    return routes.some((d) => d.address == route.path)
   } else {
     return false
   }
@@ -37,20 +38,54 @@ function hasPermission(routes, route, basePath) {
  * @param basePath - basePath
  * 两者做一个匹配
  */
-export function filterAsyncRoutes(asyncRoutes, routes, basePath = '') {
+export function filterAsyncRoutes(asyncRoutes, routes) {
   let res = []
   asyncRoutes.forEach((route) => {
-    let isHasPermission = hasPermission(routes, route, basePath)
+    let isHasPermission = hasPermission(routes, route)
     if (route.children) {
-      route.children = filterAsyncRoutes(route.children, routes, basePath + route.path)
+      route.children = filterAsyncRoutes(route.children, routes)
     }
     if (isHasPermission || (route.children && route.children.length > 0)) {
-      console.log(route, '过滤出来的路由')
+      // console.log(route, '过滤出来的路由')
       res.push(route)
     }
   })
   return res
 }
+
+// function hasPermission(routes, route, basePath) {
+//   // 后端返回的菜单路由必须要有address
+//   routes = routes.filter((d) => d.address)
+//   // console.log(basePath == '' ? route.path : `${basePath}/${route.path}`, '-9874')
+//   if (routes && routes.length > 0) {
+//     // return routes.some(item => item.address.includes(route.path))
+//     return routes.some((d) => d.address == (basePath == '' ? route.path : `${basePath}/${route.path}`))
+//   } else {
+//     return false
+//   }
+// }
+
+// /**
+//  * Filter asynchronous routing tables by recursion
+//  * @param asyncRoutes 前端配置的动态路由表
+//  * @param routes 接口返回的有权限的路由
+//  * @param basePath - basePath
+//  * 两者做一个匹配
+//  */
+// export function filterAsyncRoutes(asyncRoutes, routes, basePath = '') {
+//   let res = []
+//   asyncRoutes.forEach((route) => {
+//     let isHasPermission = hasPermission(routes, route, basePath)
+//     if (route.children) {
+//       route.children = filterAsyncRoutes(route.children, routes, basePath == '' ? basePath + route.path : basePath + '/' + route.path)
+//     }
+//     if (isHasPermission || (route.children && route.children.length > 0)) {
+//       // console.log(route, '过滤出来的路由')
+//       res.push(route)
+//     }
+//   })
+//   return res
+// }
 
 /**
  * @summary 扁平化数据转tree
@@ -128,10 +163,10 @@ const actions = {
     commit('SET_BUTTONS', btns)
 
     return new Promise((resolve) => {
-      console.log(asyncRoutes, 11111111)
+      console.log(asyncRoutes, '---前端路由表中的路由')
       // 从动态路由中筛选出用户有的路由页面/菜单
-      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles, '')
-      console.log(accessedRoutes, '---accessedRoutes')
+      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menuRoles)
+      console.log(accessedRoutes, '---从前端路由表中过滤出来的用户路由')
 
       // 然后把endRoutes添加到最后面
       accessedRoutes.push(...endBasicRoutes)

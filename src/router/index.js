@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// 系统主要内容页面布局Layout（支持布局结构调整）
+import MainLayout from '@/layout/index'
+
 /**
- * 路由表组成结构：
+ * 路由表组成结构Main：
  * 【[基础路由]+[动态路由]+[末尾路由]】
  */
 
@@ -20,10 +23,14 @@ Vue.use(Router)
  *
  * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中（如：401，403，login等页面）
  *
- * meta: {。
- *  noCache: true         // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
- *  icon: '',             // 设置该路由的图标，如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
- *  title: ''             // 设置该路由在侧边栏和面包屑中展示的名字
+ * isKeepAlive            // 是否缓存组件状态
+ * isKeepAlive            // 是否缓存组件状态
+ * isIframe               // 是否内嵌窗口，开启条件，`1、isIframe:true 2、isLink：链接地址不为空`
+ *
+ * meta: {
+ *   noCache: true        // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+ *   icon: '',            // 设置该路由的图标，如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
+ *   title: ''            // 设置该路由在侧边栏和面包屑中展示的名字
  * }
  *
  */
@@ -36,11 +43,11 @@ Vue.use(Router)
 export const constantRoutes = [
   {
     path: '/',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     redirect: 'home',
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: () => import('@/views/homepage'),
         meta: { icon: 's-home', title: '首页' },
@@ -49,7 +56,7 @@ export const constantRoutes = [
   },
   {
     path: '/redirect',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     hidden: true,
     children: [
       {
@@ -113,12 +120,12 @@ export const asyncRoutes = [
   {
     path: '/custom-component',
     name: 'custom-component',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     meta: { icon: 'question', title: '自定义组件' },
     redirect: 'index',
     children: [
       {
-        path: 'index',
+        path: '/custom-component/index',
         name: 'CustomComponent',
         meta: { icon: 'guide', title: '自定义组件' },
         component: () => import('@/views/custom-component/index'),
@@ -128,13 +135,13 @@ export const asyncRoutes = [
   // echarts、图表、可视化
   {
     path: '/echarts',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     redirect: 'index',
     alwaysShow: true,
     meta: { title: '可视化', icon: 'svg-droplet' },
     children: [
       {
-        path: 'index',
+        path: '/echarts/index',
         name: '数量统计',
         component: () => import('@/views/echarts'),
         meta: { title: '数量统计', icon: 'svg-heart' },
@@ -144,37 +151,37 @@ export const asyncRoutes = [
   // 表格菜单
   {
     path: '/excel',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     redirect: 'export-excel',
     alwaysShow: true,
     meta: { title: '表格', icon: 'date' },
     children: [
       {
-        path: 'dynamic-table',
+        path: '/excel/dynamic-table',
         name: 'DynamicTable',
         component: () => import('@/views/excel/dynamic-table/index'),
         meta: { icon: 'set-up', title: '动态表格' },
       },
       {
-        path: 'export-excel',
+        path: '/excel/export-excel',
         name: '导出表格',
         component: () => import('@/views/excel/export-excel'),
         meta: { icon: 'download', title: '导出表格' },
       },
       {
-        path: 'upload-excel',
+        path: '/excel/upload-excel',
         name: '上传表格',
         component: () => import('@/views/excel/upload-excel'),
         meta: { icon: 'upload', title: '上传表格' },
       },
       {
-        path: 'merge-count',
+        path: '/excel/merge-count',
         name: '合并&统计',
         component: () => import('@/views/excel/merge-count'),
         meta: { icon: 'upload', title: '合并&统计' },
       },
       {
-        path: 'custom-design',
+        path: '/excel/custom-design',
         name: '自定义表格',
         component: () => import('@/views/excel/custom-excel'),
         meta: { icon: 's-promotion', title: '自定义表格' },
@@ -184,18 +191,18 @@ export const asyncRoutes = [
   // 更多功能
   {
     path: '/futures',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     alwaysShow: true,
     meta: { icon: 's-grid', title: '更多功能' },
     children: [
       {
-        path: 'draggable',
+        path: '/futures/draggable',
         name: 'draggable',
         meta: { icon: 'thumb', title: '拖拽' },
         component: () => import('@/views/futures/draggable'),
       },
       {
-        path: 'clipboard',
+        path: '/futures/clipboard',
         name: 'clipBoard',
         meta: { title: '剪切板示例', icon: 'document' },
         component: () => import('@/views/clipboard'),
@@ -205,11 +212,11 @@ export const asyncRoutes = [
   // 简述
   {
     path: '/introduction',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     meta: { icon: 'svg-aperture', title: '简述' },
     children: [
       {
-        path: '/index',
+        path: '/introduction/index',
         name: 'Introduction',
         component: () => import('@/views/introduction/index'),
         meta: { icon: 'svg-aperture', title: '简述' },
@@ -220,29 +227,29 @@ export const asyncRoutes = [
   {
     path: '/nested',
     meta: { icon: 'svg-layers', title: '路由嵌套' },
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     children: [
       {
-        path: 'menu1',
+        path: '/nested/menu1',
         name: 'Menu1',
         meta: { icon: 'share', title: '嵌套路由1' },
         component: () => import('@/views/nested/menu1/index'),
         children: [
           {
-            path: 'menu1-1',
+            path: '/nested/menu1/menu1-1',
             name: 'Menu1-1',
             meta: { icon: 'success', title: '嵌套路由1-1' },
             component: () => import('@/views/introduction/index'),
           },
           {
-            path: 'menu1-2',
+            path: '/nested/menu1/menu1-2',
             name: 'Menu1-2',
             alwaysShow: true,
             meta: { icon: 'error', title: '嵌套路由1-2' },
             component: () => import('@/views/nested/menu1/menu1-2/index'),
             children: [
               {
-                path: 'menu1-2-1',
+                path: '/nested/menu1/menu1-2/menu1-2-1',
                 name: 'Menu1-2-1',
                 meta: { icon: 'warning', title: '嵌套路由1-2-1' },
                 component: () => import('@/views/introduction/index'),
@@ -252,7 +259,7 @@ export const asyncRoutes = [
         ],
       },
       {
-        path: 'menu2',
+        path: '/nested/menu2',
         name: 'Menu2',
         meta: { icon: 'star-on', title: '嵌套路由2' },
         component: () => import('@/views/user/add'),
@@ -262,19 +269,19 @@ export const asyncRoutes = [
   // 富文本
   {
     path: '/rich-editor',
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     alwaysShow: true,
     meta: { icon: 's-order', title: '富文本' },
     redirect: 'quill',
     children: [
       {
-        path: 'quill',
+        path: '/rich-editor/quill',
         name: 'QuillEditor',
         meta: { icon: 's-order', title: 'quill' },
         component: () => import('@/views/rich-editor/quill'),
       },
       {
-        path: 'tinymce',
+        path: '/rich-editor/tinymce',
         name: 'TinyMCE',
         meta: { icon: 'svg-type', title: 'tinymce' },
         component: () => import('@/views/rich-editor/tinymce'),
@@ -285,10 +292,10 @@ export const asyncRoutes = [
   {
     path: '/theme',
     meta: { icon: 'document', title: 'theme' },
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     children: [
       {
-        path: 'index',
+        path: '/theme/index',
         name: 'Theme',
         meta: { title: '主题', icon: 'svg-pifu' },
         component: () => import('@/views/theme/index'),
@@ -300,10 +307,10 @@ export const asyncRoutes = [
     path: '/user',
     hidden: true,
     meta: { icon: 'tickets', title: '个人中心' },
-    component: () => import('@/layout/main-layout'),
+    component: MainLayout,
     children: [
       {
-        path: 'profile',
+        path: '/user/profile',
         name: 'Profile',
         meta: { icon: 'warning', title: '个人中心' },
         component: () => import('@/views/user/profile'),

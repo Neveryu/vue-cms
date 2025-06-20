@@ -31,26 +31,33 @@ router.beforeEach(async (to, from, next) => {
   if (hasToken) {
     console.log('1-有token，处于登录态')
     if (to.path === '/login') {
+      console.log(101)
       // if is logged in, redirect to the home page     // 有token访问login页面，就跳到首页
       next({ path: '/', replace: true })
     } else {
+      console.log(102)
       // 如果动态路由不存在
       if (store.getters.addRoutes.length === 0) {
+        console.log(1021)
         // 再次尝试加载动态路由
         if (loadFromSession('userRoutes', []).length < 1) {
+          console.log(10211)
+
           // session中存储的路由权限表不存在，可能有问题，退出登录，让用户重新登录
           await store.dispatch('user/resetToken')
           next(`/login?redirect=${to.path}`)
           return
         }
         try {
-          console.log(loadFromSession('userRoutes', []), 1111)
+          console.log(loadFromSession('userRoutes', []), '--session中存的用户权限路由')
 
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', loadFromSession('userRoutes', []))
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
+
+          console.log({ ...to, replace: true })
 
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
@@ -63,7 +70,7 @@ router.beforeEach(async (to, from, next) => {
           next(`/login?redirect=${to.path}`)
         }
       } else {
-        console.log(2222)
+        console.log(1022)
         next()
       }
     }

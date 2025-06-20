@@ -1,48 +1,48 @@
 <template>
-  <div class="top-navbar">
-    <el-menu mode="horizontal" text-color="#fff" active-text-color="#fff">
-      <router-link to="/home" style="display: table">
-        <el-menu-item index="1" class="title-name">{{ $t('navbar.title') }}</el-menu-item>
-      </router-link>
+  <el-header class="layout-header" v-show="!isTagsViewCurrenFull">
+    <i class="el-icon-s-fold"></i>
 
-      <change-theme class="theme-container"></change-theme>
+    <div class="top-navbar">
+      <el-menu mode="horizontal" text-color="#fff" active-text-color="#fff">
+        <router-link to="/home" style="display: table">
+          <el-menu-item index="1" class="title-name">{{ $t('navbar.title') }}</el-menu-item>
+        </router-link>
 
-      <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
-        <screenfull class="screenfull"></screenfull>
-      </el-tooltip>
+        <change-theme class="theme-container"></change-theme>
 
-      <div class="lang-select">
-        <lang-select></lang-select>
-      </div>
+        <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
+          <screenfull class="screenfull"></screenfull>
+        </el-tooltip>
 
-      <div class="avatar-container">
-        <el-dropdown trigger="click">
-          <div class="avatar-wrapper">
-            <img class="user-avatar" :src="avatar" />
-            <div class="username-wrapper">
-              <span class="user-name">{{ name }}</span>
-              <i class="el-icon-caret-bottom"></i>
+        <div class="lang-select">
+          <lang-select></lang-select>
+        </div>
+
+        <div class="avatar-container">
+          <el-dropdown trigger="click">
+            <div class="avatar-wrapper">
+              <img class="user-avatar" :src="avatar" />
+              <div class="username-wrapper">
+                <span class="user-name">{{ name }}</span>
+                <i class="el-icon-caret-bottom"></i>
+              </div>
             </div>
-          </div>
-          <el-dropdown-menu class="user-dropdown" slot="dropdown">
-            <router-link class="inlineBlock" to="/user/profile">
+            <el-dropdown-menu class="user-dropdown" slot="dropdown">
               <el-dropdown-item>
-                {{ $t('navbar.profile') }}
+                <router-link class="inlineBlock" to="/user/profile">{{ $t('navbar.profile') }}</router-link>
               </el-dropdown-item>
-            </router-link>
-            <a target="_blank" href="https://github.com/Neveryu/vue-cms">
               <el-dropdown-item>
-                {{ $t('navbar.github') }}
+                <a target="_blank" href="https://github.com/Neveryu/vue-cms">{{ $t('navbar.github') }}</a>
               </el-dropdown-item>
-            </a>
-            <el-dropdown-item @click.native="logout">
-              <span style="display: block">{{ $t('navbar.logOut') }}</span>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-    </el-menu>
-  </div>
+              <el-dropdown-item divided @click.native="logout">
+                {{ $t('navbar.logOut') }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </el-menu>
+    </div>
+  </el-header>
 </template>
 <script>
 import { confirm } from '@/decorator/confirm'

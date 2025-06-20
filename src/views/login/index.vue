@@ -18,16 +18,22 @@
       </div>
       <el-form :rules="rules" :model="loginForm" ref="loginForm" label-width="80px">
         <el-form-item :label="$t('login.account')" prop="username" style="position: relative">
-          <el-input type="text" v-model.trim="loginForm.username" @keyup.enter.native="goToPwdInput" maxlength="20" />
-          <span class="svg-container svg-container_user">
-            <svg-icon icon-class="user" />
-          </span>
+          <el-input type="text" v-model.trim="loginForm.username" @keyup.enter.native="goToPwdInput" maxlength="20" clearable autocomplete="off">
+            <template #prefix>
+              <span class="svg-container svg-container_user">
+                <svg-icon icon-class="user" />
+              </span>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item :label="$t('login.password')" prop="pwd">
-          <el-input ref="pwd" type="password" v-model.trim="loginForm.pwd" @keyup.enter.native="onLogin" maxlength="20" />
-          <span class="svg-container svg-container_password">
-            <svg-icon icon-class="password" />
-          </span>
+          <el-input ref="pwd" type="password" v-model.trim="loginForm.pwd" @keyup.enter.native="onLogin" maxlength="20">
+            <template #prefix>
+              <span class="svg-container svg-container_password">
+                <svg-icon icon-class="password" />
+              </span>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item :label="$t('login.remember')" label-width="80px">
           <el-switch v-model="remember"></el-switch>
@@ -169,6 +175,7 @@ export default {
 <style scoped lang="scss">
 @use 'sass:color';
 .login-container {
+  display: block;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -182,6 +189,12 @@ export default {
   .bg-switch {
     width: 180px;
     margin: 10px;
+    ::v-deep .el-switch__label {
+      color: #fff;
+      &.is-active {
+        color: #409eff;
+      }
+    }
   }
   .show-account-info {
     position: absolute;
@@ -211,19 +224,18 @@ export default {
     }
 
     ::v-deep .el-input__inner {
-      text-indent: 12px;
+      text-indent: 10px;
     }
 
     .svg-container {
       position: absolute;
       top: 0;
-      left: 5px;
+      left: 4px;
       color: var(--gray);
       &_user {
         font-size: 20px;
       }
       &_password {
-        left: 7px;
         font-size: 16px;
       }
     }
