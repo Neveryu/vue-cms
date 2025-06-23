@@ -6,23 +6,28 @@
   <el-container class="layout-container">
     <SideBar />
     <el-container class="main-container">
-      <el-scrollbar class="app-main-layout">
+      <el-scrollbar class="container-wrapper">
         <LayoutHeader />
-        <main-container></main-container>
+        <tabs-view></tabs-view>
+
+        <!-- <main-container></main-container> -->
       </el-scrollbar>
       <!-- <Settings /> -->
     </el-container>
   </el-container>
 </template>
 <script>
-import LayoutHeader from '@/layout/header'
 import SideBar from '@/layout/sidebar/index'
+import LayoutHeader from '@/layout/header'
+import TabsView from '@/layout/tabs-view'
 import MainContainer from '@/layout/main-container'
 // import Settings from '@/layout/settings/index'
 export default {
   components: {
-    LayoutHeader,
     SideBar,
+    LayoutHeader,
+    TabsView,
+    MainContainer,
     // Settings,
   },
 }
@@ -34,6 +39,10 @@ export default {
   border: 1px solid red;
   .main-container {
     background-color: #fefefe;
+    height: 100% !important;
+    .container-wrapper {
+      width: 100%;
+    }
   }
 }
 </style>

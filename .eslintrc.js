@@ -48,12 +48,8 @@ module.exports = {
         after: true,
       },
     ],
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['index'], // Vue 官方风格指南建议组件名使用多个单词，这里忽略名为 index 的组件
-      },
-    ],
+    //关闭组件命名规则
+    'vue/multi-word-component-names': 'off', // Vue 官方风格指南建议组件名使用多个单词，这里忽略
   },
   // overrides 字段的作用是为特定文件或目录定义独立的规则，允许你对不同文件类型或路径应用不同的代码检查规则
   overrides: [

@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .layout-aside-wrapper {
   background: #fff;
-  box-shadow: 2px 0 6px #00152903;
+  box-shadow: 2px 0 6px #152903;
   width: 220px !important;
   height: 100% !important;
   // height: inherit;
@@ -54,10 +54,15 @@ export default {
   overflow-x: hidden !important;
   transition: width 0.3s ease;
   border-right: 1px solid #ebeef5;
+  outline: none !important;
 }
 .flex-auto {
   flex: 1;
   overflow: hidden;
+  ::v-deep .el-scrollbar__wrap {
+    margin: 0 !important;
+    scrollbar-width: none;
+  }
 }
 
 .el-menu {
