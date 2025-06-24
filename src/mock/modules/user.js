@@ -18,7 +18,7 @@ const userMap = {
       age: 10,
       sex: 1,
       // 绝对地址
-      avatar: './static/image/avatar/0.jpg',
+      avatar: '/static/image/avatar/0.jpg',
       type: ['Vue', '小程序'],
       desc: '我是admin账号',
     },
