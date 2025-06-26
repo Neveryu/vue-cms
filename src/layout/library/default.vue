@@ -9,8 +9,7 @@
       <el-scrollbar class="container-wrapper">
         <LayoutHeader />
         <tabs-view></tabs-view>
-
-        <!-- <main-container></main-container> -->
+        <main-container></main-container>
       </el-scrollbar>
       <!-- <Settings /> -->
     </el-container>

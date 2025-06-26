@@ -67,12 +67,18 @@ export default {
 
 <style scoped lang="scss">
 .tabs-view-container {
+  display: flex;
   height: 40px;
-  padding: 5px;
+  padding: 0 15px;
+  align-items: center;
   border-bottom: 1px solid #dfdfdf;
   .tags-view-item {
     .el-tag {
       margin: 0 3px;
+      height: 28px;
+      line-height: 28px;
+      background-color: transparent;
+      color: var(--gray);
       &:first-child {
         margin-left: 0;
       }
@@ -80,15 +86,15 @@ export default {
 
     &.active {
       .el-tag {
-        background-color: #00b4aa;
-        color: #fff;
+        // background-color: #00b4aa;
+        color: var(--dark);
         .el-icon-close {
           color: #fff;
         }
         &:before {
           position: relative;
           content: '';
-          background: #fff;
+          background: var(--primary);
           display: inline-block;
           width: 6px;
           height: 6px;

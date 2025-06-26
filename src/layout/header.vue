@@ -133,9 +133,10 @@ export default {
   padding: 0;
   align-items: center;
   background-color: #fff;
-  border-bottom: 1px solid var(--light);
+  // border-bottom: 1px solid var(--light);
+  border-bottom: 1px solid #000;
   height: 50px !important;
-  box-sizing: content-box;
+  box-sizing: border-box;
   // background-image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
   // background-image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
   // background-image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
