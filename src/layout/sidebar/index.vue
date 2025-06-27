@@ -43,7 +43,6 @@ export default {
 <style lang="scss" scoped>
 .layout-aside-wrapper {
   background: #fff;
-  box-shadow: 2px 0 6px #152903;
   width: 220px !important;
   height: 100% !important;
   // height: inherit;
@@ -67,6 +66,5 @@ export default {
 
 .el-menu {
   height: 100%;
-  background-color: var(--light);
 }
 </style>

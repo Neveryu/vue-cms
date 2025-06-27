@@ -1,8 +1,19 @@
 <template>
   <div id="app">
     <router-view />
+    <Setings />
   </div>
 </template>
+
+<script>
+import Setings from '@/layout/settings/index.vue'
+
+export default {
+  components: {
+    Setings,
+  },
+}
+</script>
 
 <style scoped lang="scss">
 #app {

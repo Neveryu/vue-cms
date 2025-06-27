@@ -35,12 +35,16 @@ export default {
 .layout-container {
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  background-color: var(--light);
   .main-container {
     background-color: #fefefe;
     height: 100% !important;
     .container-wrapper {
       width: 100%;
+      height: 100%;
+      ::v-deep .el-scrollbar__wrap {
+        overflow: auto;
+      }
     }
   }
 }
