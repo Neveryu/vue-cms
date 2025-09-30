@@ -9,7 +9,7 @@ import store from './store'
 // 处理/解决浏览器默认样式不一致的问题
 import 'normalize.css/normalize.css'
 // 自定义的全局样式（主要是全局变量，全局格式化样式）
-import './assets/style/index.css'
+import '@/assets/style/index.scss'
 // animate动画库
 import 'animate.css'
 

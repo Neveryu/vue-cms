@@ -1,10 +1,12 @@
 <template>
   <div class="tabs-view-container">
-    <router-link class="tags-view-item" :class="isActive(tag) ? 'active' : ''" v-for="(tag, index) in visitedTabsView" :to="tag.path" :key="index">
-      <el-tag closable :disable-transitions="false" @close.prevent.stop="handleClose(tag)">
-        {{ tag.name }}
-      </el-tag>
-    </router-link>
+    <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
+      <router-link class="tags-view-item" :class="isActive(tag) ? 'active' : ''" v-for="(tag, index) in visitedTabsView" :to="tag.path" :key="index">
+        <el-tag closable :disable-transitions="false" @close.prevent.stop="handleClose(tag)">
+          {{ tag.name }}
+        </el-tag>
+      </router-link>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -55,6 +57,10 @@ export default {
         }
       })
     },
+    // 鼠标滚轮滚动
+    onHandleScroll(e) {
+      scrollbarRef.value.$refs.wrapRef.scrollLeft += e.wheelDelta / 4
+    },
   },
   watch: {
     $route() {
@@ -68,15 +74,32 @@ export default {
 <style scoped lang="scss">
 .tabs-view-container {
   display: flex;
-  height: 40px;
-  padding: 0 15px;
   align-items: center;
-  border-bottom: 1px solid #dfdfdf;
+  background-color: #fff;
+  border-bottom: 1px solid #f1f2f3;
+  :deep(.el-scrollbar) {
+    width: 100%;
+    height: 100%;
+  }
+  :deep(.el-scrollbar__wrap) {
+    margin: 0 !important;
+    overflow-x: auto !important;
+    .el-scrollbar__view {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      color: var(--el-text-color-regular);
+      padding: 0 12px;
+    }
+  }
   .tags-view-item {
+    display: inline-block;
     .el-tag {
-      margin: 0 3px;
+      margin: 0 5px;
+      padding: 0 12px;
       height: 28px;
       line-height: 28px;
+      border-radius: 2px;
       background-color: transparent;
       color: var(--gray);
       &:first-child {
@@ -103,6 +126,15 @@ export default {
         }
       }
     }
+
+    &:hover {
+      .el-tag {
+        background-color: #ecf5ff;
+      }
+    }
   }
+}
+.layout-navbars-tagsview-shadow {
+  box-shadow: rgb(0 21 41 / 4%) 0px 1px 4px;
 }
 </style>

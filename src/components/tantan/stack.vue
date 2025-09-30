@@ -3,6 +3,7 @@
     <li
       class="stack-item"
       v-for="(item, index) in pages"
+      :key="index"
       :style="[transformIndex(index), transform(index)]"
       @touchmove.stop.capture.prevent="touchmove"
       @touchstart.stop.capture.prevent="touchstart"
@@ -24,11 +25,15 @@ export default {
   props: {
     stackinit: {
       type: Object,
-      default: {},
+      default() {
+        return {}
+      }
     },
     pages: {
       type: Array,
-      default: [],
+      default() {
+        return []
+      }
     },
   },
   data() {

@@ -1,7 +1,7 @@
 <template>
   <el-header class="layout-header" v-show="!isTagsViewCurrenFull">
     <div class="header-left-wrapper">
-      <i class="collapse-icon el-icon-s-fold" @click="onThemeConfigChange"></i>
+      <i class="collapse-icon" :class="getIconName" @click="onSideBarCollapseChange"></i>
       <el-breadcrumb class="layout-navbars-breadcrumb-hide">
         <transition-group name="breadcrumb">
           <!-- <el-breadcrumb-item v-for="(v, k) in state.breadcrumbList" :key="v.path">
@@ -37,11 +37,11 @@
       </el-breadcrumb>
     </div>
     <div class="header-right-wrapper">
-      <div class="setting-item" @click="onLayoutSetingClick">
+      <div class="setting-item" @click="onOpenSettingClick">
         <i class="el-icon-setting" title="设置"></i>
       </div>
 
-      <div class="setting-item" @click="onLayoutSetingClick">
+      <div class="setting-item" @click="onLayoutSettingClick">
         <screenfull class="screenfull"></screenfull>
       </div>
 
@@ -52,9 +52,9 @@
       <div class="setting-item avatar-container">
         <el-dropdown :show-timeout="70" :hide-timeout="50">
           <div class="avatar-wrapper">
-            <img class="user-avatar" :src="avatar" />
+            <img class="user-avatar" :src="userAvatar" />
             <div class="username-wrapper">
-              <span class="user-name">{{ name }}</span>
+              <span class="user-name">{{ userName }}</span>
               <i class="el-icon-caret-bottom"></i>
             </div>
           </div>
@@ -88,7 +88,10 @@ export default {
     ChangeTheme
   },
   computed: {
-    ...mapGetters(['name', 'avatar'])
+    ...mapGetters(['userName', 'userAvatar', 'sidebarCollapse']),
+    getIconName() {
+      return this.sidebarCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
+    }
   },
   data() {
     return {
@@ -97,12 +100,22 @@ export default {
   },
   methods: {
     ...mapActions({
-      userLogout: 'user/logout'
+      userLogout: 'user/logout',
+      toggleCollapse: 'setting/toggleCollapse',
+      toggleSettingPanel: 'setting/toggleSettingPanel'
     }),
     // 展开/收起左侧菜单点击
-    onThemeConfigChange() {
-      themeConfig.value.isCollapse = !themeConfig.value.isCollapse
-      setLocalThemeConfig()
+    onSideBarCollapseChange() {
+      this.toggleCollapse()
+    },
+    /**
+     * 点击Header中的设置图标按钮
+     */
+    onOpenSettingClick() {
+      this.toggleSettingPanel()
+    },
+    onLayoutSettingClick() {
+      //
     },
     @confirm('退出系统？')
     logout() {
@@ -121,12 +134,10 @@ export default {
           loading.close()
         })
     },
-    onLayoutSetingClick() {
-
-    }
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .layout-header {
   display: flex;
@@ -154,7 +165,11 @@ export default {
       color: var(--gray);
       height: 100%;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 16px;
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
   .header-right-wrapper {
@@ -172,15 +187,21 @@ export default {
       // line-height: 50px;
       display: flex;
       align-items: center;
+      &:hover {
+        background: var(--next-color-user-hover);
+        i {
+          display: inline-block;
+          animation: logoAnimation 0.3s ease-in-out;
+        }
+      }
     }
     .el-icon-setting {
-      font-size: 20px;
+      font-size: 16px;
     }
     .avatar-container {
-      padding: 0 10px;
-      cursor: pointer;
-      color: var(--secondary);
-      height: 100%;
+      .avatar-wrapper {
+        display: flex;
+      }
     }
     // .lang-select ::v-deep .el-dropdown {
     //   font-size: 20px;

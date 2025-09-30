@@ -8,20 +8,23 @@ import DefaultLayout from '@/layout/library/default.vue'
 // import TransverseLayout from '@/layout/main/transverse.vue'
 // import ColumnsLayout from '@/layout/main/columns.vue'
 
-// import { useThemeConfig } from '/@/stores/themeConfig'
 // import { Local } from '/@/utils/storage'
+
+import { mapGetters } from 'vuex'
 
 const layouts = {
   defaults: DefaultLayout,
 }
 
 export default {
+  computed: {
+    ...mapGetters({
+      themeConfig: 'setting',
+    }),
+  },
   data() {
     return {
       layouts,
-      themeConfig: {
-        layout: 'defaults',
-      },
     }
   },
 }

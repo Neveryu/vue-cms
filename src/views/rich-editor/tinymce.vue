@@ -2,14 +2,14 @@
   <div class="components-container main-container">
     <h2>新增内容</h2>
     <div>
-      <textarea id="tinymceId" :value="content" class="tinymce-textarea"/>
+      <textarea id="tinymceId" :value="content" class="tinymce-textarea" />
     </div>
 
     <el-divider content-position="left">富文本内容</el-divider>
 
     <div class="editor-content" v-html="content" />
 
-    <div style="height: 50px;"></div>
+    <div style="height: 50px"></div>
 
     <el-divider content-position="center">End</el-divider>
   </div>
@@ -34,11 +34,12 @@ export default {
       toolbar: [],
       menubar: 'file edit insert view format table',
       languageTypeList: {
-        'en': 'en',
-        'zh': 'zh_CN'
+        en: 'en',
+        zh: 'zh_CN',
       },
       // 富文本内容
-      content: '<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><a href="//shang.qq.com/wpa/qunwpa?idkey=32da7a18744756b0d8ffdd05b84999afecb5265dbad0fb119033e122abe803f3" target="_blank" rel="noopener"><img title="TinyMCE Logo" src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" alt="TinyMCE Logo" width="120" /></a></p><p>请书写你的内容</p>'
+      content:
+        '<h1 style="text-align: center;">TinyMCE</h1><p style="text-align: center; font-size: 15px;"><a href="//shang.qq.com/wpa/qunwpa?idkey=32da7a18744756b0d8ffdd05b84999afecb5265dbad0fb119033e122abe803f3" target="_blank" rel="noopener"><img title="TinyMCE Logo" src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" alt="TinyMCE Logo" width="120" /></a></p><p>请书写你的内容</p>',
     }
   },
   watch: {
@@ -46,7 +47,7 @@ export default {
       if (!this.hasChange && this.hasInit) {
         this.$nextTick(() => window.tinymce.get(this.tinymceId).setContent(val || ''))
       }
-    }
+    },
   },
   methods: {
     init() {
@@ -80,7 +81,7 @@ export default {
         default_link_target: '_blank',
         link_title: false,
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
-        init_instance_callback: editor => {
+        init_instance_callback: (editor) => {
           if (_this.content) {
             editor.setContent(_this.content)
           }
@@ -94,7 +95,7 @@ export default {
           editor.on('FullscreenStateChanged', (e) => {
             _this.fullscreen = e.state
           })
-        }
+        },
       })
     },
     destroyTinymce() {
@@ -105,7 +106,7 @@ export default {
       if (tinymce) {
         tinymce.destroy()
       }
-    }
+    },
   },
   mounted() {
     this.init()
@@ -114,13 +115,13 @@ export default {
     this.destroyTinymce()
   },
   activated() {
-    if(window.tinymce) {
+    if (window.tinymce) {
       this.initTinymce()
     }
   },
   deactivated() {
     this.destroyTinymce()
-  }
+  },
 }
 </script>
 
@@ -133,7 +134,7 @@ export default {
   position: relative;
   line-height: normal;
 }
-.tinymce-container>>>.mce-fullscreen {
+.tinymce-container >>> .mce-fullscreen {
   z-index: 10000;
 }
 .tinymce-textarea {

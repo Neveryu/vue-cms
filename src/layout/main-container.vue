@@ -1,10 +1,16 @@
 <template>
   <div class="main-app">
-    <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
-      <keep-alive>
-        <router-view :key="key"></router-view>
-      </keep-alive>
-    </transition>
+    <el-scrollbar
+      ref="layoutMainScrollbarRef"
+      class="layout-main-scroll layout-backtop-header-fixed"
+      wrap-class="layout-main-scroll"
+      view-class="layout-main-scroll">
+      <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
+        <keep-alive>
+          <router-view :key="key"></router-view>
+        </keep-alive>
+      </transition>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -26,6 +32,6 @@ export default {
 
 <style scoped lang="scss">
 .main-app {
-  padding: 15px !important;
+  overflow: hidden;
 }
 </style>

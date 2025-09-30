@@ -1,29 +1,42 @@
 <template>
-  <div class="layout-logo" v-if="setShowLogo" @click="changeThemeConfig">
+  <div class="layout-logo" v-if="setShowLogo" @click="onLogoClick">
     <img :src="logoMini" class="layout-logo-medium-img" />
-    <span class="my-line-1">{{ themeConfig.globalTitle }}</span>
+    <span class="my-line-1">{{ globalTitle }}</span>
   </div>
-  <div class="layout-logo-size" v-else @click="changeThemeConfig">
+  <div class="layout-logo-size" v-else @click="onLogoClick">
     <img :src="logoMini" class="layout-logo-size-img" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data() {
     return {
       logoMini: '/static/image/logo/logo.png',
-      setShowLogo: true,
-      themeConfig: {
-        globalTitle: 'vue-cms',
-      },
+      globalTitle: 'vue-cms',
     }
   },
+  computed: {
+    ...mapGetters({
+      // routers: 'routers',
+      themeConfig: 'setting',
+    }),
+    // 设置 logo 的显示。classic 经典布局默认显示 logo
+    setShowLogo() {
+      let { isCollapse, layout } = this.themeConfig
+      return !isCollapse || layout === 'classic'
+    },
+  },
   methods: {
-    // logo 点击实现菜单展开/收起
-    changeThemeConfig() {
-      if (themeConfig.layout === 'transverse') return false
-      themeConfig.isCollapse = !themeConfig.isCollapse
+    ...mapActions({
+      toggleCollapse: 'setting/toggleCollapse',
+    }),
+    // 点击logo图标实现菜单展开/收起
+    onLogoClick() {
+      if (this.themeConfig.layout === 'transverse') return false
+      this.toggleCollapse()
     },
   },
 }

@@ -29,7 +29,7 @@ router.beforeEach(async (to, from, next) => {
   let hasToken = getToken()
 
   if (hasToken) {
-    console.log('1-有token，处于登录态')
+    console.log('1 - 有token，处于登录态')
     if (to.path === '/login') {
       console.log(101)
       // if is logged in, redirect to the home page     // 有token访问login页面，就跳到首页
@@ -76,7 +76,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     console.log('2 - has no token')
-    /* has no token*/
+    /* has no token */
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()

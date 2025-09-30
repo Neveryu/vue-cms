@@ -80,7 +80,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .introduction {
-  padding-bottom: 300px;
   overflow: hidden;
 }
 .stack-wrapper {

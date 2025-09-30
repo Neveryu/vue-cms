@@ -1,6 +1,6 @@
 <template>
   <div class="upload-container">
-    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">
+    <el-button :style="{ background: color, borderColor: color }" icon="el-icon-upload" size="mini" type="primary" @click="dialogVisible = true">
       upload
     </el-button>
     <el-dialog :visible.sync="dialogVisible">
@@ -13,18 +13,11 @@
         :before-upload="beforeUpload"
         class="editor-slide-upload"
         action="https://httpbin.org/post"
-        list-type="picture-card"
-      >
-        <el-button size="small" type="primary">
-          Click upload
-        </el-button>
+        list-type="picture-card">
+        <el-button size="small" type="primary">Click upload</el-button>
       </el-upload>
-      <el-button @click="dialogVisible = false">
-        Cancel
-      </el-button>
-      <el-button type="primary" @click="handleSubmit">
-        Confirm
-      </el-button>
+      <el-button @click="dialogVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="handleSubmit">Confirm</el-button>
     </el-dialog>
   </div>
 </template>
@@ -37,24 +30,26 @@ export default {
   props: {
     color: {
       type: String,
-      default: '#1890ff'
-    }
+      default: '#1890ff',
+    },
   },
   data() {
     return {
       dialogVisible: false,
       listObj: {},
-      fileList: []
+      fileList: [],
     }
   },
   methods: {
     checkAllSuccess() {
-      return Object.keys(this.listObj).every(item => this.listObj[item].hasSuccess)
+      return Object.keys(this.listObj).every((item) => this.listObj[item].hasSuccess)
     },
     handleSubmit() {
-      const arr = Object.keys(this.listObj).map(v => this.listObj[v])
+      const arr = Object.keys(this.listObj).map((v) => this.listObj[v])
       if (!this.checkAllSuccess()) {
-        this.$message('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
+        this.$message(
+          'Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!',
+        )
         return
       }
       this.$emit('successCBK', arr)
@@ -91,13 +86,13 @@ export default {
       return new Promise((resolve, reject) => {
         const img = new Image()
         img.src = _URL.createObjectURL(file)
-        img.onload = function() {
+        img.onload = function () {
           _self.listObj[fileName] = { hasSuccess: false, uid: file.uid, width: this.width, height: this.height }
         }
         resolve(true)
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -25,11 +25,11 @@ const getters = {
   // tabsview-页面标签
   visitedTabsView: (state) => state.tabsview.visitedTabsView,
   // 用户信息
-  allInfo: (state) => state.user.userInfo,
+  userInfo: (state) => state.user.userInfo,
   // 用户名
-  name: (state) => state.user.userInfo.name,
+  userName: (state) => state.user.userInfo.name,
   // 头像
-  avatar: (state) => state.user.userInfo.avatar,
+  userAvatar: (state) => state.user.userInfo.avatar,
   // 语言
   language: (state) => state.language.language,
   // addRoutes 是动态遍历出来的，和系统内置的静态路由，组成用户的完整录音
@@ -38,6 +38,12 @@ const getters = {
   permissions: (state) => state.user.permissions,
   // 用户的路由菜单权限（完整的）
   routers: (state) => state.permission.routes,
+  // 是否开启侧边栏菜单水平折叠效果
+  sidebarCollapse: (state) => state.setting.isCollapse,
+  // 是否打开系统设置面板抽屉
+  showSettingPanel: (state) => state.setting.showSettingPanel,
+  // 系统设置
+  setting: (state) => state.setting,
 }
 
 export default new Vuex.Store({

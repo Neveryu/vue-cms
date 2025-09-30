@@ -4,7 +4,9 @@
       <div slot="header">
         <span>换主题</span>
         <!-- <el-button style="float: right; padding: 3px 0" type="text">更换主题文档</el-button> -->
-        <el-link type="primary" style="float: right;" href="https://blog.csdn.net/csdn_yudong/article/details/97621471" target="_blank">更换文档主题</el-link>
+        <el-link type="primary" style="float: right" href="https://blog.csdn.net/csdn_yudong/article/details/97621471" target="_blank">
+          更换文档主题
+        </el-link>
       </div>
       <div class="box-item">
         <!-- <span class="field-label">换肤 : </span> -->
@@ -12,7 +14,10 @@
         <el-radio v-model="themeModel" :label="1" border>默认(可定制)</el-radio>
 
         <el-radio v-model="themeModel" :label="2" border>夏日心情</el-radio>
-        <aside style="margin-top:15px;">Tips: 这里与 navbar 中的更换皮肤有明显的区别，它们是两种不同的换肤方法，各自有不同的应用场景；这里主要是对ElementUI的颜色做一些改变以及自定义，详情请参考文档。</aside>
+        <aside style="margin-top: 15px">
+          Tips: 这里与 navbar
+          中的更换皮肤有明显的区别，它们是两种不同的换肤方法，各自有不同的应用场景；这里主要是对ElementUI的颜色做一些改变以及自定义，详情请参考文档。
+        </aside>
       </div>
 
       <el-color-picker
@@ -20,32 +25,19 @@
         class="color-picker"
         popper-class="theme-picker-dropdown"
         v-model="color"
-        :predefine="predefineColors">
-      </el-color-picker>
+        :predefine="predefineColors"></el-color-picker>
     </el-card>
 
     <div class="block">
-      <el-button type="primary">
-        Primary
-      </el-button>
-      <el-button type="success">
-        Success
-      </el-button>
-      <el-button type="info">
-        Info
-      </el-button>
-      <el-button type="warning">
-        Warning
-      </el-button>
-      <el-button type="danger">
-        Danger
-      </el-button>
+      <el-button type="primary">Primary</el-button>
+      <el-button type="success">Success</el-button>
+      <el-button type="info">Info</el-button>
+      <el-button type="warning">Warning</el-button>
+      <el-button type="danger">Danger</el-button>
       <el-button type="primary" icon="el-icon-edit" />
       <el-button type="primary" icon="el-icon-share" />
       <el-button type="primary" icon="el-icon-delete" />
-      <el-button type="primary" icon="el-icon-search">
-        Search
-      </el-button>
+      <el-button type="primary" icon="el-icon-search">Search</el-button>
       <el-button type="primary">
         Upload
         <i class="el-icon-upload el-icon-right" />
@@ -60,17 +52,11 @@
 
     <div class="block">
       <el-radio-group v-model="radio">
-        <el-radio :label="3">
-          Option A
-        </el-radio>
-        <el-radio :label="6">
-          Option B
-        </el-radio>
-        <el-radio :label="9">
-          Option C
-        </el-radio>
+        <el-radio :label="3">Option A</el-radio>
+        <el-radio :label="6">Option B</el-radio>
+        <el-radio :label="9">Option C</el-radio>
       </el-radio-group>
-      <span style="margin-left: 25px;"></span> 
+      <span style="margin-left: 25px"></span>
       <el-checkbox v-model="checked1" label="备选项1" border></el-checkbox>
       <el-checkbox v-model="checked2" label="备选项2" border></el-checkbox>
     </div>
@@ -91,7 +77,8 @@
 
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
+          点我查看
+          <i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item class="clearfix">
@@ -111,30 +98,10 @@
     </div>
 
     <div class="block">
-      <el-alert
-        class="item-alert"
-        title="成功提示的文案"
-        type="success"
-        effect="dark">
-      </el-alert>
-      <el-alert
-        class="item-alert"
-        title="消息提示的文案"
-        type="info"
-        effect="dark">
-      </el-alert>
-      <el-alert
-        class="item-alert"
-        title="警告提示的文案"
-        type="warning"
-        effect="dark">
-      </el-alert>
-      <el-alert
-        class="item-alert"
-        title="错误提示的文案"
-        type="error"
-        effect="dark">
-      </el-alert>
+      <el-alert class="item-alert" title="成功提示的文案" type="success" effect="dark"></el-alert>
+      <el-alert class="item-alert" title="消息提示的文案" type="info" effect="dark"></el-alert>
+      <el-alert class="item-alert" title="警告提示的文案" type="warning" effect="dark"></el-alert>
+      <el-alert class="item-alert" title="错误提示的文案" type="error" effect="dark"></el-alert>
     </div>
   </div>
 </template>
@@ -158,18 +125,18 @@ export default {
         { name: 'Tag Two', type: 'info' },
         { name: 'Tag Three', type: 'success' },
         { name: 'Tag Four', type: 'warning' },
-        { name: 'Tag Five', type: 'danger' }
+        { name: 'Tag Five', type: 'danger' },
       ],
       slideValue: 50,
       radio: 3,
       checked1: true,
-      checked2: false
+      checked2: false,
     }
   },
   watch: {
     themeModel(val) {
       toggleClass(document.body, 'theme-summer')
-      if(val === 1) {
+      if (val === 1) {
         this.showColorPicker = true
       } else {
         this.showColorPicker = false
@@ -210,18 +177,17 @@ export default {
       chalkHandler()
 
       // 过滤当前整个页面的样式文件，找到含有oldVal颜色的样式文件
-      const styles = [].slice.call(document.querySelectorAll('style'))
-        .filter(style => {
-          const text = style.innerText
-          return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
-        })
+      const styles = [].slice.call(document.querySelectorAll('style')).filter((style) => {
+        const text = style.innerText
+        return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+      })
       // 然后，将其中oldVal的颜色，全部换成我们颜色选择器中选择的新的颜色
-      styles.forEach(style => {
+      styles.forEach((style) => {
         const { innerText } = style
         if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })
-    }
+    },
   },
   methods: {
     /* 更新样式 - 使用新的颜色变量替换之前的 */
@@ -234,7 +200,7 @@ export default {
     },
     // 创建xhr，远程获取css文件，并给chalk赋值
     getCSSString(url, variable) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const xhr = new XMLHttpRequest()
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -258,7 +224,8 @@ export default {
         let green = parseInt(color.slice(2, 4), 16)
         let blue = parseInt(color.slice(4, 6), 16)
 
-        if (tint === 0) { // when primary color is in its rgb space
+        if (tint === 0) {
+          // when primary color is in its rgb space
           return [red, green, blue].join(',')
         } else {
           red += Math.round(tint * (255 - red))
@@ -295,13 +262,13 @@ export default {
       }
       clusters.push(shadeColor(theme, 0.1))
       return clusters
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
-.field-label{
+.field-label {
   vertical-align: middle;
 }
 .box-card {

@@ -15,6 +15,7 @@
     </el-container>
   </el-container>
 </template>
+
 <script>
 import SideBar from '@/layout/sidebar/index'
 import LayoutHeader from '@/layout/header'
@@ -31,19 +32,24 @@ export default {
   },
 }
 </script>
+
 <style scoped lang="scss">
 .layout-container {
   width: 100%;
   height: 100%;
   background-color: var(--light);
   .main-container {
-    background-color: #fefefe;
+    background-color: var(--next-bg-main-color);
     height: 100% !important;
     .container-wrapper {
       width: 100%;
       height: 100%;
-      ::v-deep .el-scrollbar__wrap {
+      :deep(.el-scrollbar__wrap) {
+        scrollbar-width: none;
         overflow: auto;
+        .el-scrollbar__view {
+          // height: 100%;
+        }
       }
     }
   }

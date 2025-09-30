@@ -1,6 +1,6 @@
 <template>
   <div class="layout-breadcrumb-seting">
-    <el-drawer title="布局配置" :visible.sync="themeConfig.isDrawer" direction="rtl" destroy-on-close size="280px" @close="onDrawerClose">
+    <el-drawer title="布局配置" :visible.sync="showSettingPanel" direction="rtl" destroy-on-close size="280px" @close="onDrawerClose">
       <el-scrollbar class="layout-breadcrumb-seting-bar">
         <!-- 全局主题 -->
         <el-divider content-position="left">全局主题</el-divider>
@@ -345,7 +345,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters({
+      showSettingPanel: 'showSettingPanel',
+    }),
+  },
   data() {
     return {
       // theme: this.$store.state.settings.theme,
@@ -356,7 +363,9 @@ export default {
     }
   },
   methods: {
-    onDrawerClose() {},
+    onDrawerClose() {
+      this.$store.dispatch('setting/toggleSettingPanel')
+    },
   },
 }
 </script>

@@ -73,6 +73,7 @@
     "@vue/cli-service": "5.0.8",
     "@vue/eslint-config-prettier": "7.1.0",
     "@vue/test-utils": "^1.0.3",
+    "@vue/vue2-jest": "^27.0.0",
     "eslint": "7.32.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-vue": "8.7.1",
@@ -80,6 +81,9 @@
     "sass-loader": "16.0.5",
     "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "2.7.16"
+  },
+  "bugs": {
+    "url": "https://github.com/NeverYu/vue-cms/issues"
   },
   "engines": {
     "node": ">= 6.0.0",

@@ -17,13 +17,13 @@ export default {
         },
         action() {
           return binding.arg === 'cut' ? 'cut' : 'copy'
-        }
+        },
       })
-      clipboard.on('success', e => {
+      clipboard.on('success', (e) => {
         const callback = el._v_clipboard_success
         callback && callback(e)
       })
-      clipboard.on('error', e => {
+      clipboard.on('error', (e) => {
         const callback = el._v_clipboard_error
         callback && callback(e)
       })
@@ -36,10 +36,10 @@ export default {
     } else if (binding.arg === 'error') {
       el._v_clipboard_error = binding.value
     } else {
-      el._v_clipboard.text = function() {
+      el._v_clipboard.text = function () {
         return binding.value
       }
-      el._v_clipboard_action = function() {
+      el._v_clipboard_action = function () {
         return binding.arg === 'cut' ? 'cut' : 'copy'
       }
     }
@@ -53,5 +53,5 @@ export default {
       el._v_clipboard.destroy()
       delete el._v_clipboard
     }
-  }
+  },
 }

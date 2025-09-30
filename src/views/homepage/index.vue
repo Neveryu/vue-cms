@@ -265,7 +265,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .homepage-container {
-  min-width: 580px;
 }
 
 .home-total {

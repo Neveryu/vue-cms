@@ -1,39 +1,37 @@
 <template>
   <div v-if="!item.hidden">
-    <template>
-      <!-- 这个路由对象 item 只有一个子路由的时候，会把子路由放到一级菜单来 -->
-      <!-- 除非这个路由对象有属性 alwaysShow: true 这个属性 -->
-      <!-- 所以这里的意思是：这个只有一个子路由，子路由没有children，这个路由没有属性 alwaysShow: true -->
-      <!-- 那么就将他的唯一子路由放到一级菜单来 -->
-      <!-- 20190707 note: 那么这里的icon和title就用子路由的吧 -->
-      <router-link
-        v-if="hasOneShowingChildren(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChild) && !item.alwaysShow"
-        :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="item.path">
-          <item :icon="item.children[0].meta.icon" :title="item.children[0].meta.title"></item>
-        </el-menu-item>
-      </router-link>
+    <!-- 这个路由对象 item 只有一个子路由的时候，会把子路由放到一级菜单来 -->
+    <!-- 除非这个路由对象有属性 alwaysShow: true 这个属性 -->
+    <!-- 所以这里的意思是：这个只有一个子路由，子路由没有children，这个路由没有属性 alwaysShow: true -->
+    <!-- 那么就将他的唯一子路由放到一级菜单来 -->
+    <!-- 20190707 note: 那么这里的icon和title就用子路由的吧 -->
+    <router-link
+      v-if="hasOneShowingChildren(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChild) && !item.alwaysShow"
+      :to="resolvePath(onlyOneChild.path)">
+      <el-menu-item :index="item.path">
+        <item :icon="item.children[0].meta.icon" :title="item.children[0].meta.title"></item>
+      </el-menu-item>
+    </router-link>
 
-      <el-submenu v-else :index="item.path">
-        <template slot="title">
-          <item :icon="item.meta.icon" :title="item.meta.title"></item>
-        </template>
+    <el-submenu v-else :index="item.path">
+      <template slot="title">
+        <item :icon="item.meta.icon" :title="item.meta.title"></item>
+      </template>
 
-        <template v-for="child of item.children">
-          <sidebar-item
-            v-if="!child.hidden && child.children && child.children.length > 0"
-            :item="child"
-            :base-path="resolvePath(child.path)"
-            :key="child.path + '-item'" />
-          <!-- 虽然 child.path 本身可能是唯一的，但 Vue 要求相邻的条件分支必须使用完全不同的 key，即使它们位于 v-for 循环中 -->
-          <router-link v-else :to="resolvePath(child.path)" :key="child.path + '-link'">
-            <el-menu-item :index="child.path">
-              <item :icon="child.meta.icon" :title="child.meta.title"></item>
-            </el-menu-item>
-          </router-link>
-        </template>
-      </el-submenu>
-    </template>
+      <template v-for="child of item.children">
+        <sidebar-item
+          v-if="!child.hidden && child.children && child.children.length > 0"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+          :key="child.path + '-item'" />
+        <!-- 虽然 child.path 本身可能是唯一的，但 Vue 要求相邻的条件分支必须使用完全不同的 key，即使它们位于 v-for 循环中 -->
+        <router-link v-else :to="resolvePath(child.path)" :key="child.path + '-link'">
+          <el-menu-item :index="child.path">
+            <item :icon="child.meta.icon" :title="child.meta.title"></item>
+          </el-menu-item>
+        </router-link>
+      </template>
+    </el-submenu>
   </div>
 </template>
 
