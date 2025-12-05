@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="content-wrapper">
     <el-upload
       class="upload-demo"
       drag
@@ -93,6 +93,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.content-wrapper {
+  padding: 15px !important;
+}
 .upload-demo {
   text-align: center;
   ::v-deep .el-upload-list {

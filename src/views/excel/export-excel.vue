@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="content-wrapper">
     <el-input
       style="width: 350px"
       v-model="filename"
@@ -17,7 +17,7 @@
     </div>
     <!-- <el-button class="timer" icon="el-icon-time" type="text">加载中</el-button> -->
 
-    <el-table v-loading="tableDataLoading" :data="tableData" style="width: 100%" height="700">
+    <el-table v-loading="tableDataLoading" :data="tableData" style="width: 100%">
       <el-table-column fixed prop="movieName" label="影片" width="200"></el-table-column>
       <el-table-column prop="attribute[1].attrValue" label="上映天数" width="120"></el-table-column>
       <el-table-column prop="attribute[2].attrValue" label="累计票房" width="120"></el-table-column>
@@ -27,7 +27,7 @@
       <el-table-column prop="attribute[6].attrValue" label="上座率" width="120"></el-table-column>
       <el-table-column prop="attribute[7].attrValue" label="排座占比" width="120"></el-table-column>
       <el-table-column prop="attribute[8].attrValue" label="场次" width="120"></el-table-column>
-      <el-table-column prop="attribute[9].attrValue" label="人次" width="120"></el-table-column>
+      <el-table-column prop="attribute[9].attrValue" label="人次" width="100"></el-table-column>
       <el-table-column prop="attribute[10].attrValue" label="场均人次" width="120"></el-table-column>
       <el-table-column prop="attribute[11].attrValue" label="场均收入" width="120"></el-table-column>
       <el-table-column prop="attribute[12].attrValue" label="平均票价" width="120"></el-table-column>
@@ -151,6 +151,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.content-wrapper {
+  padding: 15px !important;
+}
 .fresh {
   float: right;
   width: 350px;

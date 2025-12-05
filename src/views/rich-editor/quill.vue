@@ -1,5 +1,5 @@
 <template>
-  <div class="components-container main-container">
+  <div class="main-container">
     <div class="tips">
       <el-link class="font" type="primary" href="https://quilljs.com/docs/configuration/" target="_blank">quill</el-link>
       算是现在一个常见富文本器的选择，它支持 CDN，也支持 npm 的方式；
@@ -190,12 +190,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .main-container {
   max-width: 80%;
   min-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #fff;
 }
 .tips {
   width: 600px;

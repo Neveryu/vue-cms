@@ -14,6 +14,7 @@ import '@/assets/style/index.scss'
 import 'animate.css'
 
 import ElementUI from 'element-ui'
+// 引入样式
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 全局图标
@@ -23,7 +24,12 @@ import i18n from './language'
 
 import './permission' // permission control
 
-// 开发环境引入mock，如果开发环境要连接真实接口，注释掉下面三行即可。
+// 自定义的全局组件
+import Notification from '@/components/notification'
+
+/**
+ * 目前：开发环境引入了本地的mock数据，如果开发环境要连接真实接口，注释掉下面三行即可；
+ */
 if (process.env.NODE_ENV === 'development') {
   require('@/mock/index2.js')
 }
@@ -33,6 +39,8 @@ Vue.use(ElementUI, {
   zIndex: 2000,
   i18n: (key, value) => i18n.t(key, value),
 })
+
+Vue.use(Notification)
 
 // 全局配置，它的作用是禁止 Vue 在启动时生成生产环境提示。
 Vue.config.productionTip = false

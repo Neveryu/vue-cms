@@ -1,6 +1,6 @@
 /**
  * index2.js文件使用的是modules文件夹中的文件
- * 本项目使用的就是这种形式
+ * 本项目使用的就是这种形式，它可以自动从modules文件夹中引入mock文件，并注册生效
  */
 import Mock from 'mockjs'
 

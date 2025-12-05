@@ -1,11 +1,11 @@
 <template>
-  <div class="app-container">
+  <div class="content-wrapper">
     <el-card class="box-card" shadow="hover">
       <div slot="header">
         <span>换主题</span>
         <!-- <el-button style="float: right; padding: 3px 0" type="text">更换主题文档</el-button> -->
         <el-link type="primary" style="float: right" href="https://blog.csdn.net/csdn_yudong/article/details/97621471" target="_blank">
-          更换文档主题
+          详细文档
         </el-link>
       </div>
       <div class="box-item">
@@ -142,6 +142,7 @@ export default {
         this.showColorPicker = false
       }
     },
+    // 在默认（可定制）的情况下，可以修改主色调，也就是处于Element-UI默认的theme-chalk样式下
     async color(val) {
       // 如果存在chalk，oldVal就是当前颜色(颜色选择器中选取的就是新颜色)
       // 否则，oldVal就是element-ui默认的蓝色
@@ -168,10 +169,10 @@ export default {
 
       // 如果没有chalk就是第一次换颜色，需要远程获取css文件
       // 后面的换色，就不用再次远程获取了
-      if (!this.chalk) {
-        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-        await this.getCSSString(url, 'chalk')
-      }
+      // if (!this.chalk) {
+      //   const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+      //   await this.getCSSString(url, 'chalk')
+      // }
 
       const chalkHandler = getHandler('chalk', 'chalk-style')
       chalkHandler()
@@ -267,7 +268,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="css">
+.content-wrapper {
+  padding: 15px !important;
+}
 .field-label {
   vertical-align: middle;
 }

@@ -45,6 +45,11 @@ export default {
 
 <style scoped lang="scss">
 .app-container {
+  height: 200px;
   padding: 20px;
+  overflow: hidden;
+  .filter-container {
+    margin-bottom: 10px;
+  }
 }
 </style>

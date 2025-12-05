@@ -1,7 +1,7 @@
 <template>
   <div class="homepage-container">
     <el-row class="home-total">
-      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6" class="home-total-item" v-for="(item, index) of homeTotalData" :key="'line-' + index">
+      <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6" class="home-card-item" v-for="(item, index) of homeTotalData" :key="'line-' + index">
         <div class="wrapper-item">
           <p class="title">{{ item.title }}</p>
           <p class="value digital-number" ref="countup">{{ item.value }}</p>
@@ -25,7 +25,7 @@
         <div class="home-detail-item" :style="{ background: item.color }" v-for="item of homeDetailItem" :key="item.id">
           <div class="name">{{ item.name }}</div>
           <div class="value">
-            <span class="num">{{ (item.value / 10000).toFixed(2) }}</span>
+            <span class="num">{{ item.value }}</span>
             万
           </div>
         </div>
@@ -33,7 +33,7 @@
       <el-col :xs="8" :sm="8" :md="8" :lg="4" :xl="4">
         <div class="rank">
           <div class="title">
-            <p class="title-value">投资龙虎榜</p>
+            <p class="title-value">投资龙虎榜（鼠标滚动/拖动均可）</p>
           </div>
           <div class="content" ref="rankContent">
             <ul class="wrapper-user">
@@ -209,18 +209,21 @@ export default {
     },
     _initScroll() {
       if (!this.scroll) {
-        this.scroll = new BScroll(this.$refs.rankContent, {
-          scrollY: true,
-          click: true,
-          scrollbar: {
-            fade: false,
-            interactive: true, // 1.8.0 新增
-          },
-          mouseWheel: {
-            speed: 20,
-            invert: false,
-            easeTime: 300,
-          },
+        // 确保DOM元素完全加载后初始化
+        this.$nextTick(() => {
+          this.scroll = new BScroll(this.$refs.rankContent, {
+            scrollY: true, // 允许垂直滚动
+            click: true, // 允许点击
+            scrollbar: {
+              fade: false,
+              interactive: true, // 1.8.0 新增
+            },
+            mouseWheel: {
+              speed: 20,
+              invert: false,
+              easeTime: 300,
+            },
+          })
         })
       } else {
         this.scroll.refresh()
@@ -240,7 +243,12 @@ export default {
     // 获取 detailItem
     getHomeDetailItem()
       .then((resp) => {
-        this.homeDetailItem = resp.data
+        if (resp && resp.data) {
+          this.homeDetailItem = resp.data.map((item) => {
+            item.value = (item.value / 10000).toFixed(2)
+            return item
+          })
+        }
       })
       .catch(() => {
         console.log('获取detailItem出现异常')
@@ -256,6 +264,11 @@ export default {
       })
   },
   mounted() {},
+  beforeDestroy() {
+    if (this.scroll) {
+      this.scroll.destroy() // 销毁实例以避免内存泄漏
+    }
+  },
   updated() {
     // this.$nextTick(function() {
     //   this.initCountUp()
@@ -265,20 +278,22 @@ export default {
 </script>
 <style scoped lang="scss">
 .homepage-container {
+  padding: 15px !important;
 }
 
 .home-total {
   width: 100%;
   height: 160px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--next-border-color-light);
   border-radius: 4px;
   margin: 0 0 15px 0;
-  .home-total-item {
+  .home-card-item {
     box-sizing: border-box;
     display: inline-block;
     height: 100%;
     padding: 15px 0;
     vertical-align: top;
+    background-color: var(--next-color-white);
     .wrapper-item {
       height: 100%;
       padding: 0 20px;
@@ -303,8 +318,9 @@ export default {
 .home-part1 {
   margin: 0 !important;
   .near-six-month {
-    border: 1px solid #eee;
     height: 300px;
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
     .title {
       background: #dde3ef;
       padding: 10px 0;
@@ -338,13 +354,14 @@ export default {
     justify-content: space-around;
     align-content: space-around;
     padding: 0 10px;
-    color: #fff;
+    color: var(--next-color-white);
     .home-detail-item {
       flex: 0 0 48%;
       height: 145px;
       border: 1px solid #eee;
       background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3)) !important;
       cursor: pointer;
+      border-radius: 4px;
     }
     .home-detail-item:hover {
       background-image: none !important;
@@ -368,6 +385,8 @@ export default {
     }
   }
   .rank {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
     .title {
       background: #dde3ef;
       padding: 10px 0;
@@ -423,8 +442,8 @@ export default {
 .home-part2 {
   margin-top: 15px;
   .financing-sprinkled {
-    border: 1px solid #eee;
-    height: 350px;
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
     .title {
       background: #dde3ef;
       padding: 10px 0;
@@ -447,9 +466,8 @@ export default {
     .content {
       display: inline-flex;
       width: 100%;
-      height: 310px;
       .investment {
-        height: 310px;
+        height: 330px;
         width: 50%;
         .title {
           display: inherit;
@@ -458,7 +476,6 @@ export default {
           padding-top: 20px;
         }
         .detail {
-          margin-left: 10px;
           text-align: center;
           .detail-item {
             display: inline-block;
@@ -471,7 +488,7 @@ export default {
         }
       }
       .financing {
-        height: 310px;
+        height: 330px;
         width: 50%;
         .title {
           display: inherit;
@@ -480,7 +497,6 @@ export default {
           padding-top: 20px;
         }
         .detail {
-          margin-left: 10px;
           text-align: center;
           .detail-item {
             display: inline-block;
@@ -495,10 +511,9 @@ export default {
     }
   }
   .bad-debt {
-    height: 350px;
     margin-left: 10px;
-    border: 1px solid #eee;
-
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
     .title {
       background: #dde3ef;
       padding: 10px 0;
@@ -561,8 +576,9 @@ export default {
             position: relative;
             font-size: 70px;
             left: 20px;
-            top: -70px;
+            top: -30px;
             color: #ddd;
+            line-height: 0;
           }
         }
       }
@@ -607,8 +623,9 @@ export default {
             position: relative;
             font-size: 70px;
             left: 20px;
-            top: -70px;
+            top: -30px;
             color: #ddd;
+            line-height: 0;
           }
         }
       }

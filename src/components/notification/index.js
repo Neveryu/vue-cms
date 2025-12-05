@@ -114,5 +114,5 @@ const notify = (options) => {
 
 export default (Vue) => {
   Vue.component(Notification.name, Notification)
-  Vue.prototype.$my_notify = notify
+  Vue.prototype.$custom_notify = notify
 }

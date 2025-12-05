@@ -1,17 +1,17 @@
 <template>
-  <div class="components-container main-container">
-    <h2>新增内容</h2>
-    <div>
-      <textarea id="tinymceId" :value="content" class="tinymce-textarea" />
+  <div class="content-wrapper">
+    <div class="main-content">
+      <h2>新增内容</h2>
+      <div style="max-width: 80%; min-width: 800px">
+        <textarea id="tinymceId" :value="content" class="tinymce-textarea" />
+      </div>
+
+      <el-divider content-position="left">↑↑↑富文本内容↓↓↓</el-divider>
+
+      <div class="editor-content" v-html="content" />
+
+      <el-divider content-position="center">End</el-divider>
     </div>
-
-    <el-divider content-position="left">富文本内容</el-divider>
-
-    <div class="editor-content" v-html="content" />
-
-    <div style="height: 50px"></div>
-
-    <el-divider content-position="center">End</el-divider>
   </div>
 </template>
 
@@ -125,10 +125,18 @@ export default {
 }
 </script>
 
-<style scoped>
-.main-container {
-  max-width: 80%;
-  min-width: 800px;
+<style scoped lang="scss">
+.content-wrapper {
+  padding: 15px !important;
+  .main-content {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    border-radius: 3px;
+    padding: 15px;
+    .el-divider {
+      margin: 80px 0 0 0;
+    }
+  }
 }
 .tinymce-container {
   position: relative;

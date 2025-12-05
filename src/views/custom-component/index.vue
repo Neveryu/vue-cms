@@ -1,10 +1,10 @@
 <template>
-  <div class="wrapper">
+  <div class="custom-wrapper">
     <el-alert
       title="自定义的通知(notify)组件"
       type="success"
       description="自定义的通知组件支持在全局使用 <notification /> 以及使用 api 的形式来调用"></el-alert>
-    <el-form :inline="true">
+    <el-form :inline="true" class="animate-set">
       <el-form-item label="进入动画：">
         <el-select v-model="enterAnimated" filterable placeholder="请选择(可搜索)">
           <el-option v-for="item of options" :key="item" :label="item" :value="item"></el-option>
@@ -70,13 +70,15 @@ export default {
   methods: {
     // 触发自定义通知
     emitNotify(enterAnimated, leaveAnimated) {
-      console.log({
-        autoClose: 3000,
-        content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
-        enterAnimated,
-        leaveAnimated,
-      })
-      this.$my_notify({
+      // console.log({
+      //   autoClose: 3000,
+      //   content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
+      //   enterAnimated,
+      //   leaveAnimated,
+      // })
+
+      // 自定义消息通知组件
+      this.$custom_notify({
         autoClose: 3000,
         content: '<a href="https://github.com/Neveryu/vue-cms" target="_blank">项目仓库地址</a>',
         enterAnimated,
@@ -125,6 +127,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.custom-wrapper {
+  padding: 15px !important;
+  .animate-set {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    padding: 15px 10px;
+  }
+}
 ::v-deep .el-alert__title {
   font-size: 1em;
 }

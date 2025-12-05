@@ -4,6 +4,8 @@
  * 2、不写没必要的
  */
 
+import { userMap } from '@/mock/modules/user'
+
 /**
  * 登录时的用户名验证
  * @Author   Author
@@ -12,7 +14,7 @@
  * @return   {Boolean}                    [description]
  */
 export const validateUsername = (rule, value, callback) => {
-  const usernameMap = ['admin', 'lucy']
+  const usernameMap = Object.keys(userMap)
   if (!usernameMap.includes(value.trim())) {
     callback(new Error('请输入正确的用户名'))
   } else {

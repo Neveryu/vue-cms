@@ -73,8 +73,6 @@ export default {
 
 <style scoped lang="scss">
 .tabs-view-container {
-  display: flex;
-  align-items: center;
   background-color: #fff;
   border-bottom: 1px solid #f1f2f3;
   :deep(.el-scrollbar) {
@@ -87,7 +85,7 @@ export default {
     .el-scrollbar__view {
       display: flex;
       align-items: center;
-      height: 40px;
+      height: 40px !important;
       color: var(--el-text-color-regular);
       padding: 0 12px;
     }
