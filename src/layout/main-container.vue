@@ -32,7 +32,7 @@ export default {
       // const { isTagsview, layout } = themeConfig.value
       // if (isTagsview && layout !== 'classic') return '85px'
       // else return '51px'
-      return '95px'
+      return '92px'
 
       if (isTagsview && layout !== 'classic') {
         return '85px'

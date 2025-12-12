@@ -1,26 +1,28 @@
 <template>
-  <div class="content-wrapper">
-    <el-upload
-      class="upload-demo"
-      drag
-      action=""
-      :auto-upload="false"
-      :limit="3"
-      :multiple="false"
-      accept=".xlsx, .xls"
-      :on-change="handleFileChange"
-      :on-preview="handleFilePreview"
-      list-type="text">
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">
-        将文件拖到此处，或
-        <em>点击上传</em>
-      </div>
-    </el-upload>
+  <div class="content-layout">
+    <div class="content-wrapper">
+      <el-upload
+        class="upload-demo"
+        drag
+        action=""
+        :auto-upload="false"
+        :limit="3"
+        :multiple="false"
+        accept=".xlsx, .xls"
+        :on-change="handleFileChange"
+        :on-preview="handleFilePreview"
+        list-type="text">
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">
+          将文件拖到此处，或
+          <em>点击上传</em>
+        </div>
+      </el-upload>
 
-    <el-table :data="tableData" border highlight-current-row style="width: 100%; margin-top: 20px">
-      <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item.id"></el-table-column>
-    </el-table>
+      <el-table :data="tableData" border highlight-current-row class="data-table">
+        <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item.id"></el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
@@ -93,25 +95,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.content-wrapper {
-  padding: 15px !important;
-}
-.upload-demo {
-  text-align: center;
-  ::v-deep .el-upload-list {
-    width: 600px;
-    margin: 0 auto;
-  }
-  ::v-deep .el-upload--text {
-    width: 600px;
-    margin: 0 auto;
-  }
-  ::v-deep .el-upload--picture {
-    width: 600px;
-    margin: 0 auto;
-  }
-  ::v-deep .el-upload-dragger {
-    width: 100%;
+.content-layout {
+  // padding: 15px !important;
+  .content-wrapper {
+    // background-color: var(--next-color-white);
+    border-radius: 4px;
+    padding: 0 5px 25px 5px;
+    .upload-demo {
+      padding-top: 20px;
+      text-align: center;
+      ::v-deep .el-upload-list {
+        width: 600px;
+        margin: 0 auto;
+      }
+      ::v-deep .el-upload--text {
+        width: 600px;
+        margin: 0 auto;
+      }
+      ::v-deep .el-upload--picture {
+        width: 600px;
+        margin: 0 auto;
+      }
+      ::v-deep .el-upload-dragger {
+        width: 100%;
+      }
+    }
+    .data-table {
+      width: 100%;
+      margin-top: 20px;
+    }
   }
 }
 </style>

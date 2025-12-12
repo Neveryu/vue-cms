@@ -1,23 +1,22 @@
 <template>
   <div class="content-wrapper">
-    <el-input
-      style="width: 350px"
-      v-model="filename"
-      autosize
-      prefix-icon="el-icon-document"
-      placeholder="请输入导出的文件名（默认excel-list）"></el-input>
-    <el-button style="margin: 0 0 20px 20px" type="primary" icon="document" @click="handleDownload" :loading="downloadLoading">
-      export excel
-    </el-button>
-    <div class="fresh">
-      <el-progress class="progress" :text-inside="true" :stroke-width="18" :percentage="percentageNum" status="success"></el-progress>
-      <span>{{ updateTime }}</span>
-      <el-button v-show="refresh" class="timer" icon="el-icon-refresh" type="text" @click="updateData">更新数据</el-button>
-      <el-button v-show="!refresh" class="timer" icon="el-icon-refresh" type="text" disabled>更新数据</el-button>
+    <div class="top-tools">
+      <el-input
+        style="width: 350px"
+        v-model="filename"
+        autosize
+        prefix-icon="el-icon-document"
+        placeholder="请输入导出的文件名（默认excel-list）"></el-input>
+      <el-button style="margin-left: 20px" type="primary" icon="document" @click="handleDownload" :loading="downloadLoading">export excel</el-button>
+      <div class="fresh">
+        <el-progress class="progress" :text-inside="true" :stroke-width="18" :percentage="percentageNum" status="success"></el-progress>
+        <span>{{ updateTime }}</span>
+        <el-button v-show="refresh" class="timer" icon="el-icon-refresh" type="text" @click="updateData">更新数据</el-button>
+        <el-button v-show="!refresh" class="timer" icon="el-icon-refresh" type="text" disabled>更新数据</el-button>
+      </div>
     </div>
-    <!-- <el-button class="timer" icon="el-icon-time" type="text">加载中</el-button> -->
 
-    <el-table v-loading="tableDataLoading" :data="tableData" style="width: 100%">
+    <el-table v-loading="tableDataLoading" :data="tableData" class="data-table">
       <el-table-column fixed prop="movieName" label="影片" width="200"></el-table-column>
       <el-table-column prop="attribute[1].attrValue" label="上映天数" width="120"></el-table-column>
       <el-table-column prop="attribute[2].attrValue" label="累计票房" width="120"></el-table-column>
@@ -153,6 +152,15 @@ export default {
 <style scoped lang="scss">
 .content-wrapper {
   padding: 15px !important;
+  .top-tools {
+    background-color: var(--next-color-white);
+    border-radius: 4px;
+    padding: 20px 0 20px 5px;
+  }
+  .data-table {
+    width: 100%;
+    margin-top: 15px;
+  }
 }
 .fresh {
   float: right;

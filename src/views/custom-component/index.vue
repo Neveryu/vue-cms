@@ -3,7 +3,7 @@
     <el-alert
       title="自定义的通知(notify)组件"
       type="success"
-      description="自定义的通知组件支持在全局使用 <notification /> 以及使用 api 的形式来调用"></el-alert>
+      description="自定义的通知组件支持在全局使用 <notification /> 以及使用 api 的形式（this.$custom_notify({ ... })）来调用"></el-alert>
     <el-form :inline="true" class="animate-set">
       <el-form-item label="进入动画：">
         <el-select v-model="enterAnimated" filterable placeholder="请选择(可搜索)">
@@ -133,6 +133,7 @@ export default {
     background-color: var(--next-color-white);
     border: 1px solid var(--next-border-color-light);
     padding: 15px 10px;
+    margin-top: 10px;
   }
 }
 ::v-deep .el-alert__title {

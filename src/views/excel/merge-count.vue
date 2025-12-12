@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" :max-height="maxHeight" show-summary :summary-method="getSummaries" style="width: 100%">
+    <el-table :data="tableData" show-summary :summary-method="getSummaries" style="width: 100%">
       <el-table-column align="center" label="发起人">
         <el-table-column type="selection" width="60" align="center"></el-table-column>
         <el-table-column property="name" align="center" label="发起人" show-overflow-tooltip></el-table-column>

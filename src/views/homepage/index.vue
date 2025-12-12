@@ -283,7 +283,6 @@ export default {
 
 .home-total {
   width: 100%;
-  height: 160px;
   border: 1px solid var(--next-border-color-light);
   border-radius: 4px;
   margin: 0 0 15px 0;
