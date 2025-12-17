@@ -78,7 +78,7 @@ router.beforeEach(async (to, from, next) => {
     /* has no token */
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
-      console.log('201 - 没token，但是跳转到白名单中的页面')
+      console.log('201 - 没token，但是跳转到白名单中的页面', to.path)
       next()
     } else {
       console.log('202 - 跳转到登录页面重新登录')

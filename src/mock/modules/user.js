@@ -10,6 +10,7 @@ const userMap = {
   // permissions 是用户的权限，包括菜单、页面、按钮权限，3类
   // 相比于用role来做权限，permissions这样可以定制每一个用户的权限
   // permissions不能为空，最少
+  // Bearer 本身不是 token 的一部分，而是对令牌使用方式的描述。它强调令牌的“无状态”特性，即服务器只需验证令牌的有效性（如签名和有效期），而不需要维护会话状态。‌
   admin: {
     account: 'admin',
     token: 'admin',

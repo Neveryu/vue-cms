@@ -1,6 +1,6 @@
 <template>
-  <div class="components-container">
-    <div class="container">
+  <div class="content-layout">
+    <div class="content-wrapper">
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <!-- 基本信息 -->
         <el-tab-pane label="基本信息" name="first">
@@ -74,12 +74,58 @@
           <el-col :span="1"></el-col>
           <!-- 右侧内容 -->
           <el-col :span="16">
-            <div>
-              <el-select v-model="departType" placeholder="部门类型选择">
-                <el-option v-for="item in departOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
-              </el-select>
-              <el-input v-model="content" width="auto" placeholder="请输入内容"></el-input>
-            </div>
+            <el-card shadow="hover" class="mt15 personal-edit" header="更新信息">
+              <div class="personal-edit-title">基本信息</div>
+              <el-form :model="state.personalForm" label-width="40px" class="mt35 mb35">
+                <el-row :gutter="35">
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="昵称">
+                      <el-input v-model="state.personalForm.name" placeholder="请输入昵称" clearable></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="邮箱">
+                      <el-input v-model="state.personalForm.email" placeholder="请输入邮箱" clearable></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="签名">
+                      <el-input v-model="state.personalForm.autograph" placeholder="请输入签名" clearable></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="职业">
+                      <el-select v-model="state.personalForm.occupation" placeholder="请选择职业" clearable class="w100">
+                        <el-option label="计算机 / 互联网 / 通信" value="1"></el-option>
+                        <el-option label="生产 / 工艺 / 制造" value="2"></el-option>
+                        <el-option label="医疗 / 护理 / 制药" value="3"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="手机">
+                      <el-input v-model="state.personalForm.phone" placeholder="请输入手机" clearable></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
+                    <el-form-item label="性别">
+                      <el-select v-model="state.personalForm.sex" placeholder="请选择性别" clearable class="w100">
+                        <el-option label="男" value="1"></el-option>
+                        <el-option label="女" value="2"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                    <el-form-item>
+                      <el-button type="primary">
+                        <i class="el-icon-edit"></i>
+                        更新个人信息
+                      </el-button>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+              </el-form>
+            </el-card>
           </el-col>
         </el-tab-pane>
       </el-tabs>
@@ -170,14 +216,17 @@ export default {
         children: 'children',
         label: 'label',
       },
-      departType: '',
-      departOptions: [
-        {
-          label: '我们',
-          value: 1,
+      // 部门管理
+      state: {
+        personalForm: {
+          name: '',
+          email: '',
+          autograph: '',
+          occupation: '',
+          phone: '',
+          sex: '',
         },
-      ],
-      content: '',
+      },
       // 基本信息验证规则
       rules: {
         name: [
@@ -278,6 +327,37 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.content-layout {
+  padding: 15px !important;
+  .content-wrapper {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    padding: 15px !important;
+    .el-tab-pane {
+      .personal-edit-title {
+        position: relative;
+        padding-left: 10px;
+        color: var(--el-text-color-regular);
+        &::after {
+          content: '';
+          width: 2px;
+          height: 10px;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          background: red;
+        }
+      }
+      .mt35 {
+        margin-top: 35px;
+      }
+      .mb35 {
+        margin-bottom: 35px;
+      }
+    }
+  }
+}
 .basic-form {
   width: 500px;
 }

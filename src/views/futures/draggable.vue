@@ -1,5 +1,5 @@
 <template>
-  <div class="mode-wrapper">
+  <div class="content-layout">
     <!-- content -->
     <draggable tag="div" class="content my_scrollbar" :list="dataList" v-bind="dragOptions" handle=".handle" @end="onEnd">
       <transition-group type="transition" :name="'flip-list'">
@@ -24,7 +24,6 @@
               <el-checkbox class="checkbox" v-model="file.isChecked" @change="handleCheckbox"></el-checkbox>
               <span class="file-name" :title="file.title">{{ file.title }}</span>
             </div>
-
             <!-- 文件大小 -->
             <div class="size-wrapper">
               <span class="size-value">时长： {{ file.durations }}</span>
@@ -69,7 +68,6 @@
 </template>
 
 <script>
-// import { mixin } from './_mixin'
 import { getFileList } from '@/api/draggable'
 import draggable from 'vuedraggable'
 export default {
@@ -190,6 +188,8 @@ export default {
           // 执行预加载(延迟3s再预加载，以免影响主屏的缩略图加载)
           if (respData.length > 0) {
             this.preloadTimer = setTimeout(() => {
+              /* 父组件滚动条更新 */
+              this.$parent.$parent.$refs.layoutMainScrollbarRef.update()
               this.handlerPreload()
               folderLoading.close()
             }, 1000)
@@ -201,17 +201,9 @@ export default {
           folderLoading.close()
         })
     },
-    /* eslint-disable no-unused-vars */
-    scrollFunc() {
-      let contentDiv = document.querySelector('.content')
-      let scrollTop = contentDiv.scrollTop || contentDiv.pageYOffset || contentDiv.scrollTop
-    },
   },
   mounted() {
     this.imgView = document.getElementById('imgViewWrapper')
-    // 滚动监听
-    // document.addEventListener('DOMMouseScroll', this.scrollFunc, false)
-    // window.onmousewheel = document.onmousewheel = this.scrollFunc
   },
   created() {
     this.getDataList()
@@ -236,26 +228,13 @@ export default {
 </script>
 
 <style scoped>
-.mode-wrapper {
-  height: 100%;
+.content-layout {
+  padding: 15px !important;
 }
 .toolbar {
   /*border: 1px solid green;*/
   height: 8vh;
   min-height: 70px;
-}
-.btn-wrapper {
-  display: inline-block;
-  width: 7.5vh;
-  min-width: 60px;
-  height: 32%;
-  background: transparent;
-  border: 1px solid #7eb5f4;
-  /*box-shadow: inset 0.3vh 0.3vh 10px 0 #7eb5f4, inset -0.3vh -0.3vh 10px 0 #7eb5f4;*/
-  border-radius: 4px;
-}
-.btn-wrapper.del {
-  margin-left: 1vh;
 }
 .btn {
   display: flex; /*设置为弹性容器*/

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="content-layout">
     <div class="tips">
       <el-link class="font" type="primary" href="https://quilljs.com/docs/configuration/" target="_blank">quill</el-link>
       算是现在一个常见富文本器的选择，它支持 CDN，也支持 npm 的方式；
@@ -8,26 +8,28 @@
       <p>3、简约实用（多了也麻烦）</p>
     </div>
 
-    <h2>新增文章</h2>
+    <div class="content-wrapper">
+      <h2>新增文章</h2>
 
-    <el-upload
-      id="img-upload"
-      action="https://httpbin.org/post"
-      :multiple="false"
-      :show-file-list="false"
-      :on-success="richUploadSuccess"
-      style="height: 10px"></el-upload>
-    <div id="quill-editor" ref="quill-editor"></div>
-    <!-- quill字数统计 -->
-    <div class="quill-count">
-      <span class="number">{{ richCurrentLength }}/{{ richMaxLength }}</span>
+      <el-upload
+        id="img-upload"
+        action="https://httpbin.org/post"
+        :multiple="false"
+        :show-file-list="false"
+        :on-success="richUploadSuccess"
+        style="height: 10px"></el-upload>
+      <div id="quill-editor" ref="quill-editor"></div>
+      <!-- quill字数统计 -->
+      <div class="quill-count">
+        <span class="number">{{ richCurrentLength }}/{{ richMaxLength }}</span>
+      </div>
+
+      <el-divider content-position="left">富文本内容</el-divider>
+
+      <div class="ql-editor" v-html="content"></div>
+
+      <el-divider content-position="center">End</el-divider>
     </div>
-
-    <el-divider content-position="left">富文本内容</el-divider>
-
-    <div class="ql-editor" v-html="content"></div>
-
-    <el-divider content-position="center">End</el-divider>
   </div>
 </template>
 
@@ -191,18 +193,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-container {
-  max-width: 80%;
-  min-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #fff;
+.content-layout {
+  padding: 15px !important;
 }
 .tips {
   width: 600px;
   padding: 15px 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   line-height: 2;
+  background-color: var(--next-color-white);
+  border: 1px solid var(--next-border-color-light);
+}
+.content-wrapper {
+  margin-top: 15px;
+  background-color: var(--next-color-white);
+  border: 1px solid var(--next-border-color-light);
+  padding: 15px !important;
 }
 .font {
   font-size: 18px;

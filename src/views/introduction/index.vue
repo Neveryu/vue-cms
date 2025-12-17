@@ -1,32 +1,34 @@
 <template>
-  <div class="introduction">
-    {{ $t('author.name') }}：
-    <ul>
-      <li>{{ $t('introduction.item1') }}</li>
-      <li>{{ $t('introduction.item2') }}</li>
-      <li>{{ $t('introduction.item3') }}</li>
-      <li>{{ $t('introduction.item4.title') }}</li>
+  <div class="content-layout">
+    <div class="content-wrapper">
+      {{ $t('author.name') }}：
       <ul>
-        <li>{{ $t('introduction.item4.contents[0]') }}</li>
-        <li>{{ $t('introduction.item4.contents[1]') }}</li>
+        <li>{{ $t('introduction.item1') }}</li>
+        <li>{{ $t('introduction.item2') }}</li>
+        <li>{{ $t('introduction.item3') }}</li>
+        <li>{{ $t('introduction.item4.title') }}</li>
+        <ul>
+          <li>{{ $t('introduction.item4.contents[0]') }}</li>
+          <li>{{ $t('introduction.item4.contents[1]') }}</li>
+        </ul>
+        <li>{{ $t('introduction.item5') }}</li>
+        <li>{{ $t('introduction.item6') }}</li>
       </ul>
-      <li>{{ $t('introduction.item5') }}</li>
-      <li>{{ $t('introduction.item6') }}</li>
-    </ul>
 
-    <div class="mid-center">
-      <div class="stack-wrapper">
-        <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
-      </div>
-      <div class="controls">
-        <button @click="prev" class="button">
-          <i class="prev"></i>
-          <span class="text-hidden">prev</span>
-        </button>
-        <button @click="next" class="button">
-          <i class="next"></i>
-          <span class="text-hidden">next</span>
-        </button>
+      <div class="mid-center">
+        <div class="stack-wrapper">
+          <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
+        </div>
+        <div class="controls">
+          <button @click="prev" class="button">
+            <i class="prev"></i>
+            <span class="text-hidden">prev</span>
+          </button>
+          <button @click="next" class="button">
+            <i class="next"></i>
+            <span class="text-hidden">next</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -60,7 +62,7 @@ export default {
   created() {
     this.isDev = process.env.NODE_ENV === 'development'
     getImage().then((resp) => {
-      console.log(resp, '*********')
+      console.log(resp, '--结果')
       let movieData
       movieData = [...resp[0].subjects, ...resp[1].subjects]
       movieData.forEach((v, i, _this) => {
@@ -79,8 +81,16 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.introduction {
-  overflow: hidden;
+.content-layout {
+  padding: 15px !important;
+  .content-wrapper {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    font-size: 18px;
+    li {
+      line-height: 1.5;
+    }
+  }
 }
 .stack-wrapper {
   margin: 0 auto;

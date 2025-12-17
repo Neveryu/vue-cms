@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden">
+  <div class="expand-model-wrapper">
     <!-- 勾选所有 -->
     <div class="top-bar">
       <el-checkbox class="all-checkbox" v-model="checkAll" @change="allChange"></el-checkbox>
@@ -364,8 +364,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.expand-model-wrapper {
+  background-color: var(--next-color-white);
+  border: 1px solid var(--next-border-color-light);
+  overflow-x: hidden;
+  padding: 10px;
+}
+
 .file-wrapper {
-  padding: 5px 0 0 15px;
   overflow-x: hidden;
 }
 .file-item {
@@ -463,10 +469,11 @@ export default {
   background-size: auto 100%;
   background-image: url('~@/assets/image/test/icon_misc.png');
 }
+
 .top-bar {
-  border-bottom: 1px solid #eee;
-  padding: 5px 0 4px 16px;
+  margin-bottom: 15px;
 }
+
 .top-bar .all-checkbox {
   margin-right: 4px;
 }

@@ -8,6 +8,7 @@ export default {
     url: '/login/login',
     method: 'post',
     result: (userInfo) => {
+      console.log(userInfo, 'ppppp')
       let { username } = JSON.parse(userInfo.body)
       return responseFormat(userMap[username])
     },

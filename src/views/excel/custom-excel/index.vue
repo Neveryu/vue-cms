@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="content-layout">
     <!-- 功能，工具栏 -->
     <div class="btns-group">
       <el-button type="primary" plain size="mini" icon="el-icon-download" @click="handlerDown">下载</el-button>
@@ -143,23 +143,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.btns-group {
-  padding: 5px 20px 5px 0;
-}
-.tool-bar {
-  margin-bottom: 2px;
-  .txt {
-    font-size: 15px;
-    font-weight: 500;
+.content-layout {
+  padding: 15px !important;
+  .btns-group {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    padding: 15px 10px;
+    margin-bottom: 10px;
   }
 }
-.overflow-bar {
-  margin-top: 5px;
-}
-.file-path {
-  padding: 0 20px 0 15px;
-  font-size: 14px;
-}
+
 .model-change.active {
   color: #3a8ee6;
   font-weight: bold;

@@ -1,6 +1,6 @@
 <template>
-  <div class="profile-wrapper">
-    <el-row :gutter="40">
+  <div class="content-layout">
+    <el-row class="content-wrapper" :gutter="40">
       <el-col :xs="24" :sm="24" :md="14" :lg="14" :xl="14">
         <el-form ref="form" :model="form" :rules="rules" label-width="100px">
           <h3>个人中心</h3>
@@ -149,7 +149,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.profile-wrapper {
-  padding: 10px 20px;
+.content-layout {
+  padding: 15px !important;
+  .content-wrapper {
+    background-color: var(--next-color-white);
+    border: 1px solid var(--next-border-color-light);
+    margin: 0 !important;
+  }
 }
 </style>
