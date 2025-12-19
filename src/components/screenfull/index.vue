@@ -1,5 +1,5 @@
 <template>
-  <i class="el-icon-full-screen" title="全屏"></i>
+  <i class="el-icon-full-screen" title="全屏" @click="click"></i>
 </template>
 
 <script>

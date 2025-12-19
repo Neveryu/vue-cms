@@ -370,4 +370,156 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss">
+.layout-breadcrumb-seting {
+  :deep(.el-drawer) {
+    .el-drawer__header {
+      padding: 0 15px !important;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0 !important;
+      border-bottom: 1px solid var(--el-border-color);
+      color: var(--el-text-color-primary);
+    }
+  }
+}
+
+.layout-breadcrumb-seting-bar {
+  height: calc(100vh - 50px);
+  padding: 0 15px;
+  :deep(.el-scrollbar__view) {
+    overflow-x: hidden !important;
+  }
+  .layout-breadcrumb-seting-bar-flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    &-label {
+      flex: 1;
+      color: var(--el-text-color-primary);
+    }
+  }
+  .layout-drawer-content-flex {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 -5px;
+    .layout-drawer-content-item {
+      width: 50%;
+      height: 70px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      position: relative;
+      padding: 5px;
+      .el-container {
+        height: 100%;
+        .el-aside-dark {
+          background-color: var(--next-color-seting-header);
+        }
+        .el-aside {
+          background-color: var(--next-color-seting-aside);
+        }
+        .el-header {
+          background-color: var(--next-color-seting-header);
+        }
+        .el-main {
+          background-color: var(--next-color-seting-main);
+        }
+      }
+      .el-circular {
+        border-radius: 2px;
+        overflow: hidden;
+        border: 1px solid transparent;
+        transition: all 0.3s ease-in-out;
+      }
+      .drawer-layout-active {
+        border: 1px solid;
+        border-color: var(--el-color-primary);
+      }
+      .layout-tips-warp,
+      .layout-tips-warp-active {
+        transition: all 0.3s ease-in-out;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid;
+        border-color: var(--el-color-primary-light-5);
+        border-radius: 100%;
+        padding: 4px;
+        .layout-tips-box {
+          transition: inherit;
+          width: 30px;
+          height: 30px;
+          z-index: 9;
+          border: 1px solid;
+          border-color: var(--el-color-primary-light-5);
+          border-radius: 100%;
+          .layout-tips-txt {
+            transition: inherit;
+            position: relative;
+            top: 5px;
+            font-size: 12px;
+            line-height: 1;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            color: var(--el-color-primary-light-5);
+            text-align: center;
+            transform: rotate(30deg);
+            left: -1px;
+            background-color: var(--next-color-seting-main);
+            width: 32px;
+            height: 17px;
+            line-height: 17px;
+          }
+        }
+      }
+      .layout-tips-warp-active {
+        border: 1px solid;
+        border-color: var(--el-color-primary);
+        .layout-tips-box {
+          border: 1px solid;
+          border-color: var(--el-color-primary);
+          .layout-tips-txt {
+            color: var(--el-color-primary) !important;
+            background-color: var(--next-color-seting-main) !important;
+          }
+        }
+      }
+      &:hover {
+        .el-circular {
+          transition: all 0.3s ease-in-out;
+          border: 1px solid;
+          border-color: var(--el-color-primary);
+        }
+        .layout-tips-warp {
+          transition: all 0.3s ease-in-out;
+          border-color: var(--el-color-primary);
+          .layout-tips-box {
+            transition: inherit;
+            border-color: var(--el-color-primary);
+            .layout-tips-txt {
+              transition: inherit;
+              color: var(--el-color-primary) !important;
+              background-color: var(--next-color-seting-main) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .copy-config {
+    margin: 10px 0;
+    .copy-config-btn {
+      width: 100%;
+      margin-top: 15px;
+    }
+    .copy-config-btn-reset {
+      width: 100%;
+      margin: 10px 0 0;
+    }
+  }
+}
+</style>

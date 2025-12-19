@@ -7,7 +7,7 @@ import store from './store'
 
 import { Message } from 'element-ui'
 
-import { loadFromSession } from '@/common/session-storage'
+import { loadFromSession, clearAllSession } from '@/common/session-storage'
 import { getToken } from '@/common/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
@@ -75,6 +75,8 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     console.log('2 - no token')
+    /* 没有token就把session清空掉吧 */
+    clearAllSession()
     /* has no token */
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly

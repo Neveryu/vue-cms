@@ -13,14 +13,17 @@ const SET_INFO = 'SET_INFO'
 const state = {
   token: getToken(),
   account: '',
-  userInfo: {
-    name: '',
-    age: 0,
-    sex: 1,
-    avatar: '',
-    type: [],
-    desc: '',
-  },
+  userInfo: Object.assign(
+    {
+      name: '',
+      age: 0,
+      sex: 1,
+      avatar: '',
+      type: [],
+      desc: '',
+    },
+    loadFromSession('userInfo'),
+  ),
   // 原始的用户permissions数据
   permissions: [],
 }
@@ -38,7 +41,6 @@ const mutations = {
   [SET_PERMISSIONS](state, permissions) {
     state.permissions = permissions
   },
-
   [SET_ALL](state, userInfo) {
     state.userInfo = Object.assign(state.userInfo, userInfo)
   },

@@ -41,7 +41,7 @@
         <i class="el-icon-setting" title="设置"></i>
       </div>
 
-      <div class="setting-item" @click="onLayoutSettingClick">
+      <div class="setting-item">
         <screenfull class="screenfull"></screenfull>
       </div>
 
@@ -76,7 +76,7 @@
 </template>
 <script>
 import { confirm } from '@/decorator/confirm'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import LangSelect from '@/components/lang-select'
 import Screenfull from '@/components/screenfull'
 import ChangeTheme from '@/components/theme'
@@ -113,9 +113,6 @@ export default {
      */
     onOpenSettingClick() {
       this.toggleSettingPanel()
-    },
-    onLayoutSettingClick() {
-      //
     },
     @confirm('退出系统？')
     logout() {
@@ -201,22 +198,19 @@ export default {
     .avatar-container {
       .avatar-wrapper {
         display: flex;
-      }
-    }
-    // .lang-select ::v-deep .el-dropdown {
-    //   font-size: 20px;
-    //   color: #fff;
-    // }
-    ::v-deep .user-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      vertical-align: middle;
-      .username-wrapper {
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        color: #fff;
+        align-items: center;
+        .user-avatar {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          vertical-align: middle;
+        }
+        .username-wrapper {
+          display: inline-block;
+          height: 30px;
+          line-height: 30px;
+          margin-left: 5px;
+        }
       }
     }
   }
