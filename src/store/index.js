@@ -30,6 +30,19 @@ const getters = {
   userName: (state) => state.user.userInfo.name,
   // 头像
   userAvatar: (state) => state.user.userInfo.avatar,
+  // 用户账号
+  account: (state) => state.user.account,
+  // 用户完整信息（用于个人中心表单）
+  allInfo: (state) => ({
+    account: state.user.account,
+    name: state.user.userInfo.name,
+    sex: state.user.userInfo.sex,
+    age: state.user.userInfo.age,
+    type: state.user.userInfo.type || [],
+    desc: state.user.userInfo.desc,
+  }),
+  // 头像（兼容别名）
+  avatar: (state) => state.user.userInfo.avatar,
   // 语言
   language: (state) => state.language.language,
   // addRoutes 是动态遍历出来的，和系统内置的静态路由，组成用户的完整录音

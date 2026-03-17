@@ -8,7 +8,7 @@
         <el-input type="textarea" v-model="outputData" :rows="10" style="width: 400px"></el-input>
       </el-tab-pane>
 
-      <el-tab-pane label="用clipboard插件" name="directly" @click="console.log('s')">
+      <el-tab-pane label="用clipboard插件" name="directly">
         <el-input v-model="inputData" placeholder="Please input" ref="input2" style="width: 400px"></el-input>
         <el-button type="primary" @click="handleCopy2(inputData, $event)">copy</el-button>
         <p class="title">粘贴一下：</p>

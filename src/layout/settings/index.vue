@@ -1,370 +1,305 @@
 <template>
   <div class="layout-breadcrumb-seting">
-    <el-drawer title="布局配置" :visible.sync="showSettingPanel" direction="rtl" destroy-on-close size="280px" @close="onDrawerClose">
-      <el-scrollbar class="layout-breadcrumb-seting-bar">
+    <el-drawer :title="$t('settings.title')" :visible.sync="showSettingPanel" direction="rtl" destroy-on-close size="280px" @close="onDrawerClose">
+      <el-scrollbar class="layout-breadcrumb-seting-bar" wrap-style="overflow-x: hidden;">
         <!-- 全局主题 -->
-        <el-divider content-position="left">全局主题</el-divider>
+        <el-divider content-position="left">{{ $t('settings.globalTheme') }}</el-divider>
         <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">主题颜色</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.primaryColor') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <!-- <el-color-picker v-model="getThemeConfig.primary" :predefine="predefinePrimaryColors" @change="onColorPickerChange"></el-color-picker> -->
+            <el-color-picker v-model="themeConfig.primary" :predefine="predefineColors" @change="onPrimaryChange"></el-color-picker>
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">深色模式</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.darkMode') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <!-- <el-switch v-model="getThemeConfig.isDark" @change="onAddDarkChange"></el-switch> -->
+            <el-switch v-model="themeConfig.isDark" @change="onDarkChange"></el-switch>
           </div>
         </div>
-
-        <!-- 顶栏设置 -->
-        <el-divider content-position="left">顶栏设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoTopBar') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.topBar"
-              :predefine="predefineTopBarBgColors"
-              @change="onBgColorPickerChange('topBar')"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoTopBarColor') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.topBarColor"
-              :predefine="predefineFontColors"
-              @change="onBgColorPickerChange('topBarColor')"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt10">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoIsTopBarColorGradual') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isTopBarColorGradual" @change="onTopBarGradualChange"></el-switch>
-          </div>
-        </div> -->
-
-        <!-- 菜单设置 -->
-        <el-divider content-position="left">菜单设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoMenuBar') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.menuBar"
-              :predefine="predefineMenuBarBgColors"
-              @change="onBgColorPickerChange('menuBar')"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoMenuBarColor') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.menuBarColor"
-              :predefine="predefineFontColors"
-              @change="onBgColorPickerChange('menuBarColor')"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoMenuBarActiveColor') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.menuBarActiveColor"
-              show-alpha
-              :predefine="predefineActiveBgColors"
-              @change="onBgColorPickerChange('menuBarActiveColor')" />
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoIsMenuBarColorGradual') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isMenuBarColorGradual" @change="onMenuBarGradualChange"></el-switch>
-          </div>
-        </div> -->
-
-        <!-- 分栏设置 -->
-        <el-divider content-position="left">分栏设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoColumnsMenuBar') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.columnsMenuBar"
-              :predefine="predefineColumnsMenuBarBgColors"
-              @change="onBgColorPickerChange('columnsMenuBar')"
-              :disabled="getThemeConfig.layout !== 'columns'"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoColumnsMenuBarColor') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.columnsMenuBarColor"
-              :predefine="predefineFontColors"
-              @change="onBgColorPickerChange('columnsMenuBarColor')"
-              :disabled="getThemeConfig.layout !== 'columns'"></el-color-picker>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoIsColumnsMenuBarColorGradual') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isColumnsMenuBarColorGradual"
-              @change="onColumnsMenuBarGradualChange"
-              :disabled="getThemeConfig.layout !== 'columns'"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.twoIsColumnsMenuHoverPreload') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isColumnsMenuHoverPreload"
-              @change="onColumnsMenuHoverPreloadChange"
-              :disabled="getThemeConfig.layout !== 'columns'"></el-switch>
-          </div>
-        </div> -->
 
         <!-- 界面设置 -->
-        <el-divider content-position="left">界面设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex" :style="{ opacity: getThemeConfig.layout === 'transverse' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeIsCollapse') }}</div>
+        <el-divider content-position="left">{{ $t('settings.interfaceSettings') }}</el-divider>
+        <div class="layout-breadcrumb-seting-bar-flex">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.sidebarCollapse') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isCollapse"
-              :disabled="getThemeConfig.layout === 'transverse'"
-              @change="onThemeConfigChange"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15" :style="{ opacity: getThemeConfig.layout === 'transverse' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeIsUniqueOpened') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isUniqueOpened"
-              :disabled="getThemeConfig.layout === 'transverse'"
-              @change="setLocalThemeConfig"></el-switch>
+            <el-switch v-model="themeConfig.isCollapse" @change="onCollapseChange"></el-switch>
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeIsFixedHeader') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.menuAccordion') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isFixedHeader" @change="onIsFixedHeaderChange"></el-switch>
+            <el-switch v-model="themeConfig.isUniqueOpened" @change="onUniqueOpenedChange"></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15" :style="{ opacity: getThemeConfig.layout !== 'classic' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeIsClassicSplitMenu') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isClassicSplitMenu"
-              :disabled="getThemeConfig.layout !== 'classic'"
-              @change="onClassicSplitMenuChange"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeIsLockScreen') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isLockScreen" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt11">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.threeLockScreenTime') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-input-number
-              v-model="getThemeConfig.lockScreenTime"
-              controls-position="right"
-              :min="1"
-              :max="9999"
-              @change="setLocalThemeConfig"
-              style="width: 110px"></el-input-number>
-          </div>
-        </div> -->
 
-        <!-- 界面显示 -->
-        <el-divider content-position="left">界面设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsShowLogo') }}</div>
+        <!-- 面包屑设置 -->
+        <el-divider content-position="left">{{ $t('settings.breadcrumbSettings') }}</el-divider>
+        <div class="layout-breadcrumb-seting-bar-flex">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.enableBreadcrumb') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isShowLogo" @change="onIsShowLogoChange"></el-switch>
-          </div>
-        </div>
-        <div
-          class="layout-breadcrumb-seting-bar-flex mt15"
-          :style="{ opacity: getThemeConfig.layout === 'classic' || getThemeConfig.layout === 'transverse' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsBreadcrumb') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isBreadcrumb"
-              :disabled="getThemeConfig.layout === 'classic' || getThemeConfig.layout === 'transverse'"
-              @change="onIsBreadcrumbChange"></el-switch>
+            <el-switch v-model="themeConfig.isBreadcrumb" @change="onBreadcrumbChange"></el-switch>
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsBreadcrumbIcon') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.breadcrumbIcon') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isBreadcrumbIcon" @change="setLocalThemeConfig"></el-switch>
+            <el-switch v-model="themeConfig.isBreadcrumbIcon" @change="onBreadcrumbIconChange"></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsTagsview') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isTagsview" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsTagsviewIcon') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isTagsviewIcon" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsCacheTagsView') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isCacheTagsView" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15" :style="{ opacity: state.isMobile ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsSortableTagsView') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isSortableTagsView"
-              :disabled="state.isMobile ? true : false"
-              @change="onSortableTagsViewChange"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsShareTagsView') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isShareTagsView" @change="onShareTagsViewChange"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsFooter') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isFooter" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsGrayscale') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isGrayscale" @change="onAddFilterChange('grayscale')"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsInvert') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isInvert" @change="onAddFilterChange('invert')"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourIsWatermark') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isWatermark" @change="onWatermarkChange"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fourWatermarkText') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-input v-model="getThemeConfig.watermarkText" style="width: 110px" @input="onWatermarkTextInput"></el-input>
-          </div>
-        </div> -->
 
-        <!-- 其它设置 -->
-        <el-divider content-position="left">其他设置</el-divider>
-        <!-- <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fiveTagsStyle') }}</div>
+        <!-- 标签页设置 -->
+        <el-divider content-position="left">{{ $t('settings.tabsSettings') }}</el-divider>
+        <div class="layout-breadcrumb-seting-bar-flex">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.enableTabs') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-select v-model="getThemeConfig.tagsStyle" placeholder="请选择" style="width: 110px" @change="setLocalThemeConfig">
-              <el-option label="卡片" value="tags-style-one"></el-option>
-              <el-option label="简约" value="tags-style-four"></el-option>
-              <el-option label="圆滑" value="tags-style-five"></el-option>
-            </el-select>
+            <el-switch v-model="themeConfig.isTagsview" @change="onTagsviewChange"></el-switch>
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fiveAnimation') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.tabsIcon') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-select
-              v-model="getThemeConfig.animation"
-              placeholder="请选择"
-              placement="bottom-end"
-              style="width: 110px"
-              @change="setLocalThemeConfig">
-              <el-option label="右滑动" value="slide-right"></el-option>
-              <el-option label="左滑动" value="slide-left"></el-option>
-              <el-option label="淡入淡出" value="opacitys"></el-option>
+            <el-switch v-model="themeConfig.isTagsviewIcon" @change="onTagsviewIconChange"></el-switch>
+          </div>
+        </div>
+        <div class="layout-breadcrumb-seting-bar-flex mt15">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.cacheTabs') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-value">
+            <el-switch v-model="themeConfig.isCacheTagsView" @change="onCacheTagsViewChange"></el-switch>
+          </div>
+        </div>
+        <div class="layout-breadcrumb-seting-bar-flex mt15">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.tabsStyle') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-value">
+            <el-select v-model="themeConfig.tagsStyle" :placeholder="$t('settings.pleaseSelect')" style="width: 110px" @change="onTagsStyleChange">
+              <el-option :label="$t('settings.cardStyle')" value="tags-style-one"></el-option>
+              <el-option :label="$t('settings.simpleStyle')" value="tags-style-four"></el-option>
+              <el-option :label="$t('settings.smoothStyle')" value="tags-style-five"></el-option>
             </el-select>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fiveColumnsAsideStyle') }}</div>
+
+        <!-- 其他设置 -->
+        <el-divider content-position="left">{{ $t('settings.otherSettings') }}</el-divider>
+        <div class="layout-breadcrumb-seting-bar-flex">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.showLogo') }}</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-select
-              v-model="getThemeConfig.columnsAsideStyle"
-              placeholder="请选择"
-              style="width: 110px"
-              :disabled="getThemeConfig.layout !== 'columns' ? true : false"
-              @change="setLocalThemeConfig">
-              <el-option label="圆角" value="columns-round"></el-option>
-              <el-option label="卡片" value="columns-card"></el-option>
+            <el-switch v-model="themeConfig.isShowLogo" @change="onShowLogoChange"></el-switch>
+          </div>
+        </div>
+        <div class="layout-breadcrumb-seting-bar-flex mt15">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.showFooter') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-value">
+            <el-switch v-model="themeConfig.isFooter" @change="onFooterChange"></el-switch>
+          </div>
+        </div>
+        <div class="layout-breadcrumb-seting-bar-flex mt15">
+          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('settings.pageAnimation') }}</div>
+          <div class="layout-breadcrumb-seting-bar-flex-value">
+            <el-select v-model="themeConfig.animation" :placeholder="$t('settings.pleaseSelect')" style="width: 110px" @change="onAnimationChange">
+              <el-option :label="$t('settings.slideRight')" value="slide-right"></el-option>
+              <el-option :label="$t('settings.slideLeft')" value="slide-left"></el-option>
+              <el-option :label="$t('settings.fadeInOut')" value="opacitys"></el-option>
             </el-select>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15 mb27" :style="{ opacity: getThemeConfig.layout !== 'columns' ? 0.5 : 1 }">
-          <div class="layout-breadcrumb-seting-bar-flex-label">{{ $t('message.layout.fiveColumnsAsideLayout') }}</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-select
-              v-model="getThemeConfig.columnsAsideLayout"
-              placeholder="请选择"
-              style="width: 110px"
-              :disabled="getThemeConfig.layout !== 'columns' ? true : false"
-              @change="setLocalThemeConfig">
-              <el-option label="水平" value="columns-horizontal"></el-option>
-              <el-option label="垂直" value="columns-vertical"></el-option>
-            </el-select>
-          </div>
-        </div> -->
 
         <!-- 布局切换 -->
-        <el-divider content-position="left">布局切换</el-divider>
+        <el-divider content-position="left">{{ $t('settings.layoutSwitch') }}</el-divider>
+        <div class="layout-drawer-content-flex">
+          <div
+            class="layout-drawer-content-item"
+            :class="{ 'drawer-layout-active': themeConfig.layout === 'defaults' }"
+            @click="onLayoutChange('defaults')">
+            <el-container class="el-circular">
+              <el-aside width="40px" class="el-aside-dark"></el-aside>
+              <el-container>
+                <el-header height="20px"></el-header>
+                <el-main></el-main>
+              </el-container>
+            </el-container>
+            <div class="layout-tips-warp" :class="{ 'layout-tips-warp-active': themeConfig.layout === 'defaults' }">
+              <div class="layout-tips-box">
+                <div class="layout-tips-txt">{{ $t('settings.defaultLayout') }}</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="layout-drawer-content-item"
+            :class="{ 'drawer-layout-active': themeConfig.layout === 'classic' }"
+            @click="onLayoutChange('classic')">
+            <el-container class="el-circular">
+              <el-header height="20px"></el-header>
+              <el-container>
+                <el-aside width="40px" class="el-aside-dark"></el-aside>
+                <el-main></el-main>
+              </el-container>
+            </el-container>
+            <div class="layout-tips-warp" :class="{ 'layout-tips-warp-active': themeConfig.layout === 'classic' }">
+              <div class="layout-tips-box">
+                <div class="layout-tips-txt">{{ $t('settings.classicLayout') }}</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="layout-drawer-content-item"
+            :class="{ 'drawer-layout-active': themeConfig.layout === 'transverse' }"
+            @click="onLayoutChange('transverse')">
+            <el-container class="el-circular">
+              <el-header height="20px" class="el-aside-dark"></el-header>
+              <el-main></el-main>
+            </el-container>
+            <div class="layout-tips-warp" :class="{ 'layout-tips-warp-active': themeConfig.layout === 'transverse' }">
+              <div class="layout-tips-box">
+                <div class="layout-tips-txt">{{ $t('settings.transverseLayout') }}</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="layout-drawer-content-item"
+            :class="{ 'drawer-layout-active': themeConfig.layout === 'columns' }"
+            @click="onLayoutChange('columns')">
+            <el-container class="el-circular">
+              <el-aside width="16px" class="el-aside-dark"></el-aside>
+              <el-aside width="24px"></el-aside>
+              <el-container>
+                <el-header height="20px"></el-header>
+                <el-main></el-main>
+              </el-container>
+            </el-container>
+            <div class="layout-tips-warp" :class="{ 'layout-tips-warp-active': themeConfig.layout === 'columns' }">
+              <div class="layout-tips-box">
+                <div class="layout-tips-txt">{{ $t('settings.columnsLayout') }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- <div class="copy-config">
-          <el-alert :title="$t('message.layout.tipText')" type="warning" :closable="false"></el-alert>
-          <el-button class="copy-config-btn" type="primary" ref="copyConfigBtnRef" @click="onCopyConfigClick">
-            <el-icon class="mr5">
-              <ele-CopyDocument />
-            </el-icon>
-            {{ $t('message.layout.copyText') }}
+        <!-- 重置按钮 -->
+        <div class="copy-config">
+          <el-button class="copy-config-btn-reset" type="danger" @click="onResetClick">
+            <i class="el-icon-refresh-right mr5"></i>
+            {{ $t('settings.restoreDefault') }}
           </el-button>
-          <el-button class="copy-config-btn-reset" type="info" @click="onResetConfigClick">
-            <el-icon class="mr5">
-              <ele-RefreshRight />
-            </el-icon>
-            {{ $t('message.layout.resetText') }}
-          </el-button>
-        </div> -->
+        </div>
       </el-scrollbar>
     </el-drawer>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
       showSettingPanel: 'showSettingPanel',
     }),
+    themeConfig() {
+      return this.$store.state.setting
+    },
   },
   data() {
     return {
-      // theme: this.$store.state.settings.theme,
-      // sideTheme: this.$store.state.settings.sideTheme,
-      themeConfig: {
-        isDrawer: true,
-      },
+      predefineColors: ['#409EFF', '#1890ff', '#304156', '#212121', '#11a983', '#13c2c2', '#6959CD', '#f5222d'],
     }
   },
   methods: {
+    ...mapActions({
+      toggleSettingPanel: 'setting/toggleSettingPanel',
+      setCollapse: 'setting/setCollapse',
+      setLayout: 'setting/setLayout',
+      setBreadcrumb: 'setting/setBreadcrumb',
+      setBreadcrumbIcon: 'setting/setBreadcrumbIcon',
+      setPrimary: 'setting/setPrimary',
+      setDark: 'setting/setDark',
+      setUniqueOpened: 'setting/setUniqueOpened',
+      setTagsview: 'setting/setTagsview',
+      setTagsviewIcon: 'setting/setTagsviewIcon',
+      setCacheTagsView: 'setting/setCacheTagsView',
+      setTagsStyle: 'setting/setTagsStyle',
+      setAnimation: 'setting/setAnimation',
+      setShowLogo: 'setting/setShowLogo',
+      setFooter: 'setting/setFooter',
+      resetSetting: 'setting/resetSetting',
+    }),
     onDrawerClose() {
-      this.$store.dispatch('setting/toggleSettingPanel')
+      this.toggleSettingPanel()
+    },
+    // 主题色变更
+    onPrimaryChange(color) {
+      this.setPrimary(color)
+      this.setThemeColor(color)
+    },
+    // 设置主题色
+    setThemeColor(color) {
+      if (!color) return
+      document.documentElement.style.setProperty('--primary', color)
+    },
+    // 深色模式变更
+    onDarkChange(value) {
+      this.setDark(value)
+      if (value) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
+    },
+    // 侧边栏折叠变更
+    onCollapseChange(value) {
+      this.setCollapse(value)
+    },
+    // 菜单手风琴变更
+    onUniqueOpenedChange(value) {
+      this.setUniqueOpened(value)
+    },
+    // 面包屑开关变更
+    onBreadcrumbChange(value) {
+      this.setBreadcrumb(value)
+    },
+    // 面包屑图标变更
+    onBreadcrumbIconChange(value) {
+      this.setBreadcrumbIcon(value)
+    },
+    // 标签页开关变更
+    onTagsviewChange(value) {
+      this.setTagsview(value)
+    },
+    // 标签页图标变更
+    onTagsviewIconChange(value) {
+      this.setTagsviewIcon(value)
+    },
+    // 缓存标签页变更
+    onCacheTagsViewChange(value) {
+      this.setCacheTagsView(value)
+    },
+    // 标签页样式变更
+    onTagsStyleChange(value) {
+      this.setTagsStyle(value)
+    },
+    // Logo显示变更
+    onShowLogoChange(value) {
+      this.setShowLogo(value)
+    },
+    // 页脚显示变更
+    onFooterChange(value) {
+      this.setFooter(value)
+    },
+    // 页面动画变更
+    onAnimationChange(value) {
+      this.setAnimation(value)
+    },
+    // 布局切换
+    onLayoutChange(layout) {
+      this.setLayout(layout)
+    },
+    // 重置设置
+    onResetClick() {
+      this.resetSetting()
+      // 重置主题色
+      this.setThemeColor('#409EFF')
+      // 移除深色模式
+      document.documentElement.removeAttribute('data-theme')
+      this.$message.success('已恢复默认设置')
     },
   },
 }
@@ -379,65 +314,110 @@ export default {
       display: flex;
       align-items: center;
       margin-bottom: 0 !important;
-      border-bottom: 1px solid var(--el-border-color);
-      color: var(--el-text-color-primary);
+      border-bottom: 1px solid #ebeef5;
+      color: #303133;
+    }
+    .el-drawer__body {
+      padding: 0;
+      overflow: hidden !important;
+      height: calc(100vh - 50px);
     }
   }
 }
 
 .layout-breadcrumb-seting-bar {
-  height: calc(100vh - 50px);
-  padding: 0 15px;
-  :deep(.el-scrollbar__view) {
+  height: 100%;
+
+  // 隐藏水平滚动条，美化垂直滚动条
+  :deep(.el-scrollbar__wrap) {
     overflow-x: hidden !important;
+    scrollbar-width: thin;
+    scrollbar-color: #c0c4cc transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #c0c4cc;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #909399;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
   }
+
+  // 防止内容溢出导致水平滚动条
+  :deep(.el-scrollbar__view) {
+    overflow-x: hidden;
+    padding: 0 15px;
+  }
+
   .layout-breadcrumb-seting-bar-flex {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+
     &-label {
       flex: 1;
-      color: var(--el-text-color-primary);
+      color: #606266;
+      font-size: 14px;
     }
   }
+
   .layout-drawer-content-flex {
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    margin: 0 -5px;
+    gap: 10px;
+
     .layout-drawer-content-item {
-      width: 50%;
+      width: calc(50% - 5px);
       height: 70px;
       cursor: pointer;
       border: 1px solid transparent;
       position: relative;
       padding: 5px;
+
       .el-container {
         height: 100%;
+
         .el-aside-dark {
-          background-color: var(--next-color-seting-header);
+          background-color: #191a23;
         }
+
         .el-aside {
-          background-color: var(--next-color-seting-aside);
+          background-color: #e9eef3;
         }
+
         .el-header {
-          background-color: var(--next-color-seting-header);
+          background-color: #fff;
+          border-bottom: 1px solid #ebeef5;
         }
+
         .el-main {
-          background-color: var(--next-color-seting-main);
+          background-color: #f5f7fa;
         }
       }
+
       .el-circular {
         border-radius: 2px;
         overflow: hidden;
         border: 1px solid transparent;
         transition: all 0.3s ease-in-out;
       }
+
       .drawer-layout-active {
-        border: 1px solid;
-        border-color: var(--el-color-primary);
+        border: 1px solid #409eff;
       }
+
       .layout-tips-warp,
       .layout-tips-warp-active {
         transition: all 0.3s ease-in-out;
@@ -445,18 +425,18 @@ export default {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        border: 1px solid;
-        border-color: var(--el-color-primary-light-5);
+        border: 1px solid #409eff;
         border-radius: 100%;
         padding: 4px;
+
         .layout-tips-box {
           transition: inherit;
           width: 30px;
           height: 30px;
           z-index: 9;
-          border: 1px solid;
-          border-color: var(--el-color-primary-light-5);
+          border: 1px solid #409eff;
           border-radius: 100%;
+
           .layout-tips-txt {
             transition: inherit;
             position: relative;
@@ -465,61 +445,67 @@ export default {
             line-height: 1;
             letter-spacing: 2px;
             white-space: nowrap;
-            color: var(--el-color-primary-light-5);
+            color: #409eff;
             text-align: center;
             transform: rotate(30deg);
             left: -1px;
-            background-color: var(--next-color-seting-main);
+            background-color: #f5f7fa;
             width: 32px;
             height: 17px;
             line-height: 17px;
           }
         }
       }
+
       .layout-tips-warp-active {
-        border: 1px solid;
-        border-color: var(--el-color-primary);
+        border-color: #409eff;
+
         .layout-tips-box {
-          border: 1px solid;
-          border-color: var(--el-color-primary);
+          border-color: #409eff;
+
           .layout-tips-txt {
-            color: var(--el-color-primary) !important;
-            background-color: var(--next-color-seting-main) !important;
+            color: #409eff !important;
+            background-color: #f5f7fa !important;
           }
         }
       }
+
       &:hover {
         .el-circular {
-          transition: all 0.3s ease-in-out;
-          border: 1px solid;
-          border-color: var(--el-color-primary);
+          border-color: #409eff;
         }
+
         .layout-tips-warp {
-          transition: all 0.3s ease-in-out;
-          border-color: var(--el-color-primary);
+          border-color: #409eff;
+
           .layout-tips-box {
-            transition: inherit;
-            border-color: var(--el-color-primary);
+            border-color: #409eff;
+
             .layout-tips-txt {
-              transition: inherit;
-              color: var(--el-color-primary) !important;
-              background-color: var(--next-color-seting-main) !important;
+              color: #409eff !important;
+              background-color: #f5f7fa !important;
             }
           }
         }
       }
     }
   }
+
   .copy-config {
-    margin: 10px 0;
-    .copy-config-btn {
-      width: 100%;
-      margin-top: 15px;
-    }
+    margin: 20px 0;
+    padding-bottom: 20px;
+
     .copy-config-btn-reset {
       width: 100%;
-      margin: 10px 0 0;
     }
   }
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.mr5 {
+  margin-right: 5px;
 }
 </style>

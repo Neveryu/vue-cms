@@ -65,7 +65,7 @@ export default {
         }
         if (index === 4 || index === 9) {
           const values = data.map((item) => item[column.property])
-          console.log(values)
+          // console.log(values)
           // 分子
           let s1 = values.reduce((prev, curr) => {
             const value = Number(curr.split('/')[0])

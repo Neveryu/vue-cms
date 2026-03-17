@@ -39,7 +39,7 @@ export default {
     handleFilePreview(f) {
       this.handleFileChange(f)
     },
-    handleFileChange(f, fileList) {
+    handleFileChange(f) {
       this.readerData(f.raw)
     },
     readerData(file) {

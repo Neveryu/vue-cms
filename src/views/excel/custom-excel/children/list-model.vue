@@ -56,7 +56,7 @@
         </template>
       </el-table-column>
       <el-table-column property="downloadCount" align="center" label="下载量" width="90">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <el-popover placement="top-start" width="90" trigger="hover" content="新闻稿统计为打印量">
             <span slot="reference">
               下载量
@@ -120,7 +120,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="">
-        <el-button @click="">下 载</el-button>
+        <el-button @click="handleDownload">下 载</el-button>
         <el-button @click="delOne()">删 除</el-button>
       </div>
     </el-dialog>
@@ -190,7 +190,7 @@ export default {
   },
   methods: {
     // 排序
-    doSortChange({ column, prop, order }) {
+    doSortChange({ prop, order }) {
       let _order
       if (order === 'ascending') {
         _order = 0

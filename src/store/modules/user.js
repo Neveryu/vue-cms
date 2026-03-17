@@ -62,6 +62,7 @@ const actions = {
           // 存用户信息
           saveToSession('userInfo', data.userInfo)
           commit(SET_TOKEN, data.token)
+          commit(SET_ACCOUNT, data.account)
           commit(SET_INFO, data.userInfo)
           commit(SET_PERMISSIONS, data.permissions)
           resolve()
@@ -94,6 +95,7 @@ const actions = {
         .then(() => {
           removeToken()
           commit(SET_TOKEN, '')
+          commit(SET_ACCOUNT, '')
           commit(SET_INFO, {})
           commit(SET_PERMISSIONS, [])
           // sessionStorage里面存储的是跟用户本次登录的一次性数据，每次退出时都要清除

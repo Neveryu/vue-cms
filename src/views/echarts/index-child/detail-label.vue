@@ -98,7 +98,7 @@ export default {
             trigger: 'none',
             position: ['72%', '50%'],
             formatter: function (name) {
-              let _index = _this.itemValueDetail.findIndex((v, i, _this) => {
+              let _index = _this.itemValueDetail.findIndex((v) => {
                 return v.name === name.name
               })
               if (_index > -1 && name.name !== ' ') {
@@ -229,7 +229,7 @@ export default {
     generateNewItem(itemDetail) {
       let legendArr = []
       let valArr = []
-      itemDetail.forEach((v, i, _this) => {
+      itemDetail.forEach((v, i) => {
         legendArr.push(v.quesName)
         valArr.push(
           {

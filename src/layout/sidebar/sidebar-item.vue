@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     hasOneShowingChildren(children, parent) {
-      console.log(children, parent, 111)
       // 把 children 里面没有 hidden 属性的元素，收集起来，看看有哪些
       // 1、后面要来判断，children 里面是不是只有一个
       // 2、亦或者没有 【比如 '/login' 这个 route 就没有 children】

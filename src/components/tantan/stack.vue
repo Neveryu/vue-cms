@@ -27,13 +27,13 @@ export default {
       type: Object,
       default() {
         return {}
-      }
+      },
     },
     pages: {
       type: Array,
       default() {
         return []
-      }
+      },
     },
   },
   data() {
@@ -145,7 +145,8 @@ export default {
         this.temporaryData.rotate = rotateDirection * this.offsetWidthRatio * 15 * angleRatio
       }
     },
-    touchend(e) {
+    touchend() {
+      // eslint-disable-next-line no-unused-vars
       this.temporaryData.tracking = false
       this.temporaryData.animation = true
       // 滑动结束，触发判断

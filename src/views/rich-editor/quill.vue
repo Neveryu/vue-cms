@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     // 富文本中的图片上传
-    richUploadSuccess(response, file, fileList) {
+    richUploadSuccess(response) {
       /**
        * 如果上传成功
        * ps：不同的上传接口，判断是否成功的标志也不一样，需要看后端的返回
@@ -107,7 +107,7 @@ export default {
         this.$message.error('图片插入失败')
       }
     },
-    onEditorChange(eventName, ...args) {
+    onEditorChange(eventName) {
       if (eventName === 'text-change') {
         // args[0] will be delta
         // 获取富文本内容

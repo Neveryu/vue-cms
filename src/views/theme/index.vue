@@ -109,7 +109,7 @@
 <script>
 import { toggleClass } from '@/utils'
 import('@/assets/custom-theme/theme-summer.css')
-const version = require('element-ui/package.json').version // element-ui version from node_modules
+// const version = require('element-ui/package.json').version // element-ui version from node_modules
 const ORIGINAL_THEME = '#409EFF' // default color (blue)
 export default {
   name: 'Theme',

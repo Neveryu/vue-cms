@@ -1,9 +1,14 @@
 <template>
-  <div class="tabs-view-container">
+  <div class="tabs-view-container" :class="themeConfig.tagsStyle">
     <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
       <router-link class="tags-view-item" :class="isActive(tag) ? 'active' : ''" v-for="(tag, index) in visitedTabsView" :to="tag.path" :key="index">
         <el-tag closable :disable-transitions="false" @close.prevent.stop="handleClose(tag)">
-          {{ tag.name }}
+          <i
+            v-if="themeConfig.isTagsviewIcon && tag.meta && tag.meta.icon && !tag.meta.icon.startsWith('svg-')"
+            :class="tag.meta.icon"
+            class="tags-view-icon"></i>
+          <svg-icon v-else-if="themeConfig.isTagsviewIcon && tag.meta && tag.meta.icon" :icon-class="tag.meta.icon" class="tags-view-icon" />
+          {{ $t(tag.name) }}
         </el-tag>
       </router-link>
     </el-scrollbar>
@@ -21,6 +26,9 @@ export default {
   },
   computed: {
     ...mapGetters(['visitedTabsView']),
+    themeConfig() {
+      return this.$store.state.setting
+    },
   },
   methods: {
     ...mapActions({
@@ -59,12 +67,14 @@ export default {
     },
     // 鼠标滚轮滚动
     onHandleScroll(e) {
-      scrollbarRef.value.$refs.wrapRef.scrollLeft += e.wheelDelta / 4
+      const scrollbarRef = this.$refs.scrollbarRef
+      if (scrollbarRef && scrollbarRef.$refs.wrapRef) {
+        scrollbarRef.$refs.wrapRef.scrollLeft += e.wheelDelta / 4
+      }
     },
   },
   watch: {
     $route() {
-      // console.log(this.$route)
       this.addTabsView()
     },
   },
@@ -73,8 +83,8 @@ export default {
 
 <style scoped lang="scss">
 .tabs-view-container {
-  background-color: #fff;
-  border-bottom: 1px solid #f1f2f3;
+  background-color: var(--next-bg-topBar, #fff);
+  border-bottom: 1px solid var(--next-border-color-light, #f1f2f3);
   :deep(.el-scrollbar) {
     width: 100%;
     height: 100%;
@@ -104,10 +114,13 @@ export default {
         margin-left: 0;
       }
     }
+    .tags-view-icon {
+      margin-right: 4px;
+      font-size: 12px;
+    }
 
     &.active {
       .el-tag {
-        // background-color: #00b4aa;
         color: var(--dark);
         .el-icon-close {
           color: #fff;
@@ -132,6 +145,63 @@ export default {
     }
   }
 }
+
+// 标签页样式 - 卡片
+.tags-style-one {
+  .tags-view-item {
+    .el-tag {
+      border-radius: 4px;
+      border: 1px solid #d9d9d9;
+    }
+    &.active .el-tag {
+      background-color: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+// 标签页样式 - 简约
+.tags-style-four {
+  .tags-view-item {
+    .el-tag {
+      border: none;
+      border-radius: 0;
+      background-color: transparent;
+    }
+    &.active .el-tag {
+      background-color: transparent;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+// 标签页样式 - 圆滑
+.tags-style-five {
+  .tags-view-item {
+    .el-tag {
+      border-radius: 20px;
+      border: 1px solid #d9d9d9;
+      padding: 0 15px;
+    }
+    &.active .el-tag {
+      background-color: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      &:before {
+        background: #fff;
+      }
+    }
+  }
+}
+
 .layout-navbars-tagsview-shadow {
   box-shadow: rgb(0 21 41 / 4%) 0px 1px 4px;
 }

@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+import { responseFormat } from '@/mock/index'
 
 const homeTotalData = [
   {
@@ -77,7 +78,7 @@ export default {
     url: '/homepage/hometotal',
     method: 'post',
     result: () => {
-      return homeTotalData
+      return responseFormat(homeTotalData)
     },
   },
   getHomeDetailItem: {
@@ -85,7 +86,7 @@ export default {
     url: '/homepage/detailItem',
     method: 'post',
     result: () => {
-      return [
+      return responseFormat([
         {
           name: '注册用户数',
           value: Mock.mock('@natural(0, 999999)'),
@@ -106,13 +107,13 @@ export default {
           value: Mock.mock('@natural(0, 999999)'),
           color: '#009688',
         },
-      ]
+      ])
     },
   },
   normalRecycleInfo: {
     state: true,
     url: '/homepage/investmentRank',
     method: 'post',
-    result: () => rankList,
+    result: () => responseFormat(rankList),
   },
 }

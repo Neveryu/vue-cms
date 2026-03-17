@@ -10,7 +10,12 @@ const mutations = {
     if (state.visitedTabsView.find((n) => n.path === view.path)) {
       return
     }
-    state.visitedTabsView.push({ name: view.meta.title, path: view.path })
+    // 保存标题翻译键、路径和meta信息
+    state.visitedTabsView.push({
+      name: view.meta.title,
+      path: view.path,
+      meta: view.meta,
+    })
   },
   [DEL_TABSVIEW](state, view) {
     for (let [i, v] of state.visitedTabsView.entries()) {
@@ -28,7 +33,7 @@ const actions = {
   },
   // 关闭一个tabsView
   delVisitedTabsView({ commit, state }, view) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       commit(DEL_TABSVIEW, view)
       resolve([...state.visitedTabsView])
     })

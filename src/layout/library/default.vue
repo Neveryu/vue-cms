@@ -8,7 +8,7 @@
     <el-container class="main-container">
       <el-scrollbar class="container-wrapper" ref="layoutScrollbarRef">
         <LayoutHeader />
-        <tabs-view></tabs-view>
+        <tabs-view v-if="themeConfig.isTagsview"></tabs-view>
         <main-container ref="mainContainer"></main-container>
       </el-scrollbar>
       <!-- <Settings /> -->
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SideBar from '@/layout/sidebar/index'
 import LayoutHeader from '@/layout/header'
 import TabsView from '@/layout/tabs-view'
@@ -30,17 +31,19 @@ export default {
     MainContainer,
     // Settings,
   },
+  computed: {
+    ...mapGetters({
+      themeConfig: 'setting',
+    }),
+  },
   watch: {
     // 监听路由的变化，切换界面时，滚动条置顶
     $route() {
-      console.log('route 变化，页面滚动条更新')
+      // route 变化，页面滚动条更新
       // 确保DOM更新完成后操作，由于组件是异步引入的，加上延时器
       this.$nextTick(() => {
         setTimeout(() => {
           this.updateScrollbar()
-          // updateScrollbar()
-          // if (layoutScrollbarRef.value) layoutScrollbarRef.value.wrapRef.scrollTop = 0
-          // if (layoutMainRef.value) layoutMainRef.value!.layoutMainScrollbarRef.wrapRef.scrollTop = 0
         }, 500)
       })
     },

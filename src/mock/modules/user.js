@@ -1,4 +1,5 @@
 import { getToken } from '@/common/auth'
+import { responseFormat } from '@/mock/index'
 
 /**
  * 用户列表list
@@ -196,7 +197,7 @@ export default {
     url: '/user/getInfo',
     method: 'post',
     result: () => {
-      return userMap[getToken()]
+      return responseFormat(userMap[getToken()])
     },
   },
 }

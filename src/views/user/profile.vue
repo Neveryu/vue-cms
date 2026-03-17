@@ -3,44 +3,44 @@
     <el-row class="content-wrapper" :gutter="40">
       <el-col :xs="24" :sm="24" :md="14" :lg="14" :xl="14">
         <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-          <h3>个人中心</h3>
-          <el-divider content-position="left">个人资料</el-divider>
-          <el-form-item label="账号" prop="account">
+          <h3>{{ $t('profile.title') }}</h3>
+          <el-divider content-position="left">{{ $t('profile.personalInfo') }}</el-divider>
+          <el-form-item :label="$t('profile.account')" prop="account">
             <el-input v-model="form.account" disabled></el-input>
           </el-form-item>
-          <el-form-item label="用户名" prop="name">
+          <el-form-item :label="$t('profile.username')" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="性别" prop="sex">
+          <el-form-item :label="$t('profile.gender')" prop="sex">
             <el-radio-group v-model="form.sex">
-              <el-radio :label="1">男</el-radio>
-              <el-radio :label="2">女</el-radio>
+              <el-radio :label="1">{{ $t('profile.male') }}</el-radio>
+              <el-radio :label="2">{{ $t('profile.female') }}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="年龄" prop="age">
+          <el-form-item :label="$t('profile.age')" prop="age">
             <el-input-number v-model="form.age" :min="1" :max="100"></el-input-number>
           </el-form-item>
 
-          <el-divider content-position="left">详细介绍</el-divider>
-          <el-form-item label="技术选择" prop="type">
+          <el-divider content-position="left">{{ $t('profile.detailInfo') }}</el-divider>
+          <el-form-item :label="$t('profile.techStack')" prop="type">
             <el-checkbox-group v-model="form.type">
               <el-checkbox v-for="(item, index) of skills" :key="'skill' + index" :label="item"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="备注/说明" prop="desc">
+          <el-form-item :label="$t('profile.remark')" prop="desc">
             <el-input type="textarea" v-model="form.desc" maxlength="100" show-word-limit></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click.stop="save">保存</el-button>
-            <el-button @click.stop="reset">重置</el-button>
+            <el-button type="primary" @click.stop="save">{{ $t('profile.save') }}</el-button>
+            <el-button @click.stop="reset">{{ $t('profile.reset') }}</el-button>
           </el-form-item>
         </el-form>
       </el-col>
       <el-col class="hidden-sm-and-down" :md="8" :lg="8" :xl="8" style="margin-top: 34px">
-        <el-divider content-position="left">头像</el-divider>
+        <el-divider content-position="left">{{ $t('profile.avatar') }}</el-divider>
         <img :src="avatar" class="image" />
         <br />
-        <el-link :underline="false" type="primary" @click="toggleShow">修改</el-link>
+        <el-link :underline="false" type="primary" @click="toggleShow">{{ $t('profile.modify') }}</el-link>
       </el-col>
     </el-row>
     <my-upload
@@ -64,6 +64,8 @@ export default {
     return {
       show: false,
       currentDate: '',
+      // 保存初始数据，用于重置
+      initialForm: null,
       form: {
         account: '',
         name: '',
@@ -96,7 +98,8 @@ export default {
   },
   created() {
     this.skills = skills
-    this.reset()
+    // 初始化表单数据
+    this.initForm()
   },
   methods: {
     ...mapActions({
@@ -116,7 +119,7 @@ export default {
           // 调用保存api
           this.doUpdateUser(this.form)
             .then(() => {
-              this.$message.success('修改成功')
+              this.$message.success(this.$t('profile.modifySuccess'))
             })
             .finally(() => {
               loading.close()
@@ -126,11 +129,35 @@ export default {
         }
       })
     },
+    // 初始化表单
+    initForm() {
+      const userData = this.allInfo
+      this.form = {
+        account: userData.account || '',
+        name: userData.name || '',
+        sex: userData.sex || 1,
+        age: userData.age || 1,
+        type: userData.type || [],
+        desc: userData.desc || '',
+      }
+      // 保存初始数据用于重置
+      this.initialForm = JSON.parse(JSON.stringify(this.form))
+    },
     // 重置
     reset() {
-      this.form = Object.assign(this.form, this.allInfo)
+      if (this.initialForm) {
+        this.form = JSON.parse(JSON.stringify(this.initialForm))
+      } else {
+        this.initForm()
+      }
+      // 清除表单验证状态
+      this.$nextTick(() => {
+        if (this.$refs.form) {
+          this.$refs.form.clearValidate()
+        }
+      })
     },
-    cropSuccess(imgDataUrl, field) {
+    cropSuccess(imgDataUrl) {
       const loading = this.$loading({
         lock: true,
       })
@@ -138,11 +165,11 @@ export default {
         loading.close()
       })
     },
-    cropUploadSuccess(resData, field, ki) {
-      this.$message.success('上次成功')
+    cropUploadSuccess() {
+      this.$message.success(this.$t('profile.uploadSuccess'))
     },
-    cropUploadFail(ts, field, ki) {
-      this.$message.error('上次失败')
+    cropUploadFail() {
+      this.$message.error(this.$t('profile.uploadFailed'))
     },
   },
 }

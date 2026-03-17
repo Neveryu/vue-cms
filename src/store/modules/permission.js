@@ -95,6 +95,7 @@ export function filterAsyncRoutes(asyncRoutes, routes) {
  * @param {String} topPKeyValue 顶级节点的父级外键的值，如''，默认用空
  * @returns {*}
  */
+// eslint-disable-next-line no-unused-vars
 function formatTree(list, key, pKey, topPKeyValue) {
   return list.filter((parent) => {
     let findChildren = list.filter((child) => {
@@ -112,6 +113,7 @@ function formatTree(list, key, pKey, topPKeyValue) {
  * @param asyncRoutes - 前端动态路由表
  * @param path -前端静态配置的路由表具体路由对象
  */
+// eslint-disable-next-line no-unused-vars
 function getPermissionOfAsyncRoutes(asyncRoutes, id) {
   for (let index = 0; index < asyncRoutes.length; index++) {
     const element = asyncRoutes[index]

@@ -134,7 +134,7 @@ export default {
     },
     formatMovieData(srcData) {
       srcData.forEach((item) => {
-        Object.values(item.attribute).forEach((v, i, t) => {
+        Object.values(item.attribute).forEach((v) => {
           // console.log(v)
           item[v.attrName] = v.attrValue
         })

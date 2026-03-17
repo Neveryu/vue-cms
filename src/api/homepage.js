@@ -1,13 +1,22 @@
-import axios from 'axios'
+import request from '@/utils/request'
 
 export function getHomeTotal() {
-  return axios.post('/homepage/hometotal')
+  return request({
+    url: '/homepage/hometotal',
+    method: 'post',
+  })
 }
 
 export function getHomeDetailItem() {
-  return axios.post('/homepage/detailItem')
+  return request({
+    url: '/homepage/detailItem',
+    method: 'post',
+  })
 }
 
 export function getRank() {
-  return axios.post('/homepage/investmentRank')
+  return request({
+    url: '/homepage/investmentRank',
+    method: 'post',
+  })
 }

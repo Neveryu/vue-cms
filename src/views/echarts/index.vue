@@ -97,7 +97,7 @@ export default {
         this.catelogData = respData.sort((a, b) => {
           return b.all - a.all
         })
-        respData.forEach((v, i, _this) => {
+        respData.forEach((v) => {
           this.catelogYData.push(v.all)
           this.catelogXData.push({
             value: v.quesName,
@@ -121,7 +121,7 @@ export default {
         _respData2.sort((a, b) => {
           return (b.done * 100) / b.all - (a.done * 100) / a.all
         })
-        _respData2.forEach((v, i, _this) => {
+        _respData2.forEach((v) => {
           this.rateYData.push(v.deptName)
           let _percentage = ((v.done * 100) / v.all).toFixed(2)
           this.rateXData.push({ value: _percentage, id: v.deptId })

@@ -103,12 +103,12 @@ export default {
           _ids.push(item.id)
         })
       }
-      delFiles(_ids).then(res => {
+      delFiles(_ids).then(() => {
         this.$message.success('删除成功')
         this.getDataList()
 
       }).catch(err => {
-        console.log('删除', err)
+        console.error('删除', err)
       })
     },
     // 取消删除

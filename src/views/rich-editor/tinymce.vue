@@ -142,7 +142,7 @@ export default {
   position: relative;
   line-height: normal;
 }
-.tinymce-container >>> .mce-fullscreen {
+.tinymce-container :deep(.mce-fullscreen) {
   z-index: 10000;
 }
 .tinymce-textarea {

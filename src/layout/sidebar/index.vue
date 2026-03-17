@@ -1,8 +1,14 @@
 <template>
   <el-aside class="layout-aside-wrapper" :class="setCollapseStyle">
-    <Logo />
+    <Logo v-if="themeConfig.isShowLogo" />
     <el-scrollbar class="flex-auto" ref="layoutAsideScrollbarRef" @mouseenter="onAsideEnterLeave(true)" @mouseleave="onAsideEnterLeave(false)">
-      <el-menu mode="vertical" unique-opened @open="handleOpen" @close="handleClose" background-color="" :collapse="themeConfig.isCollapse">
+      <el-menu
+        mode="vertical"
+        :unique-opened="themeConfig.isUniqueOpened"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color=""
+        :collapse="themeConfig.isCollapse">
         <sidebar-item v-for="router of routers" :key="router.path" :item="router" :base-path="router.path"></sidebar-item>
       </el-menu>
     </el-scrollbar>
@@ -31,8 +37,6 @@ export default {
     setCollapseStyle() {
       const { layout, isCollapse } = this.themeConfig
 
-      console.log(11, layout, isCollapse, 22)
-
       const asideBrColor = !isCollapse ? 'layout-el-aside-br-color' : ''
       if (layout === 'columns' || layout === 'classic') {
         // 分栏布局、经典布局，菜单收起时宽度给 1px，防止切换动画消失
@@ -43,43 +47,21 @@ export default {
         if (isCollapse) return [asideBrColor, 'layout-aside-pc-64']
         else return [asideBrColor, 'layout-aside-pc-220']
       }
-      // 判断是否是手机端
-      // if (state.clientWidth <= 1000) {
-      //   if (layout === 'columns' || layout === 'classic') {
-      //     // 分栏布局、经典布局，菜单收起时宽度给 1px，防止切换动画消失
-      //     if (isCollapse) return [asideBrColor, 'layout-aside-pc-1']
-      //     else return [asideBrColor, 'layout-aside-pc-220']
-      //   } else {
-      //     // 其它布局给 64px
-      //     if (isCollapse) return [asideBrColor, 'layout-aside-pc-64']
-      //     else return [asideBrColor, 'layout-aside-pc-220']
-      //   }
-      // } else {
-      //   if (layout === 'columns' || layout === 'classic') {
-      //     // 分栏布局、经典布局，菜单收起时宽度给 1px，防止切换动画消失
-      //     if (isCollapse) return [asideBrColor, 'layout-aside-pc-1']
-      //     else return [asideBrColor, 'layout-aside-pc-220']
-      //   } else {
-      //     // 其它布局给 64px
-      //     if (isCollapse) return [asideBrColor, 'layout-aside-pc-64']
-      //     else return [asideBrColor, 'layout-aside-pc-220']
-      //   }
-      // }
     },
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log('handle menu Open', key, keyPath)
+    handleOpen() {
+      // handle menu Open
     },
-    handleClose(key, keyPath) {
-      console.log('handle menu Close', key, keyPath)
+    handleClose() {
+      // handle menu Close
     },
   },
 }
 </script>
 <style lang="scss" scoped>
 .layout-aside-wrapper {
-  background: #fff;
+  background: var(--next-bg-menuBar, #fff);
   height: 100% !important;
   // height: inherit;
   position: relative;
@@ -117,6 +99,29 @@ export default {
 .el-menu {
   height: 100%;
   border-right: none !important;
+  background-color: transparent !important;
+}
+
+// 深色模式菜单样式
+::v-deep .el-menu {
+  background-color: transparent !important;
+
+  .el-menu-item,
+  .el-submenu__title {
+    color: var(--next-bg-menuBarColor, #303133);
+
+    &:hover {
+      background-color: var(--next-color-menu-hover, rgba(0, 0, 0, 0.05)) !important;
+    }
+  }
+
+  .el-menu-item.is-active {
+    color: var(--primary, #409eff) !important;
+  }
+
+  .el-submenu.is-active > .el-submenu__title {
+    color: var(--next-bg-menuBarColor, #303133) !important;
+  }
 }
 
 /*由于 element-ui 的<el-menu>标签本身希望里面嵌套的是<el-menu-item>,<el-submenu>,<el-menu-item-group>之一，但是却嵌套了<div>,而导致收折就隐藏不了文字*/

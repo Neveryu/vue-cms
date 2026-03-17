@@ -2,35 +2,32 @@
   <el-header class="layout-header" v-show="!isTagsViewCurrenFull">
     <div class="header-left-wrapper">
       <i class="collapse-icon" :class="getIconName" @click="onSideBarCollapseChange"></i>
-      <el-breadcrumb class="layout-navbars-breadcrumb-hide">
+      <!-- 面包屑导航：根据设置显示/隐藏 -->
+      <el-breadcrumb v-if="themeConfig.isBreadcrumb" class="layout-navbars-breadcrumb-hide">
         <transition-group name="breadcrumb">
-          <!-- <el-breadcrumb-item v-for="(v, k) in state.breadcrumbList" :key="v.path">
-          <span v-if="k === state.breadcrumbList.length - 1" class="layout-navbars-breadcrumb-span">
-            <SvgIcon :name="v.meta.icon" class="layout-navbars-breadcrumb-iconfont" v-if="themeConfig.isBreadcrumbIcon" />
-            <div v-if="v.meta.title">{{ $t(v.meta.title) }}</div>
-            <div v-else>{{ v.meta.tagsViewName }}</div>
-          </span>
-          <a v-else @click.prevent="onBreadcrumbClick(v)">
-            <SvgIcon :name="v.meta.icon" class="layout-navbars-breadcrumb-iconfont" v-if="themeConfig.isBreadcrumbIcon" />
-            {{ $t(v.meta.title) }}
-          </a>
-        </el-breadcrumb-item> -->
-          <el-breadcrumb-item key="a">
-            <a @click.prevent="onBreadcrumbClick(v)">
-              <svg-icon class="sidebar-icon" icon-class="svg-user" />
-              路由菜单
-            </a>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item key="b">
-            <a @click.prevent="onBreadcrumbClick(v)">
-              <svg-icon class="sidebar-icon" icon-class="svg-user" />
-              路由菜单
-            </a>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item key="c">
-            <a @click.prevent="onBreadcrumbClick(v)">
-              <svg-icon class="sidebar-icon" icon-class="svg-user" />
-              路由菜单
+          <el-breadcrumb-item v-for="(v, k) in breadcrumbList" :key="v.path">
+            <span v-if="k === breadcrumbList.length - 1" class="layout-navbars-breadcrumb-span">
+              <i
+                v-if="themeConfig.isBreadcrumbIcon && v.meta.icon && !v.meta.icon.startsWith('svg-')"
+                :class="v.meta.icon"
+                class="layout-navbars-breadcrumb-iconfont"></i>
+              <svg-icon
+                v-else-if="themeConfig.isBreadcrumbIcon && v.meta.icon"
+                :icon-class="v.meta.icon"
+                class="layout-navbars-breadcrumb-iconfont" />
+              <span v-if="v.meta.title">{{ $t(v.meta.title) }}</span>
+              <span v-else>{{ v.meta.tagsViewName }}</span>
+            </span>
+            <a v-else @click.prevent="onBreadcrumbClick(v)">
+              <i
+                v-if="themeConfig.isBreadcrumbIcon && v.meta.icon && !v.meta.icon.startsWith('svg-')"
+                :class="v.meta.icon"
+                class="layout-navbars-breadcrumb-iconfont"></i>
+              <svg-icon
+                v-else-if="themeConfig.isBreadcrumbIcon && v.meta.icon"
+                :icon-class="v.meta.icon"
+                class="layout-navbars-breadcrumb-iconfont" />
+              <span>{{ $t(v.meta.title) }}</span>
             </a>
           </el-breadcrumb-item>
         </transition-group>
@@ -76,26 +73,37 @@
 </template>
 <script>
 import { confirm } from '@/decorator/confirm'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import LangSelect from '@/components/lang-select'
 import Screenfull from '@/components/screenfull'
-import ChangeTheme from '@/components/theme'
+
 export default {
   name: 'NavBar',
   components: {
     LangSelect,
-    Screenfull,
-    ChangeTheme
+    Screenfull
   },
   computed: {
-    ...mapGetters(['userName', 'userAvatar', 'sidebarCollapse']),
+    ...mapGetters(['userName', 'userAvatar', 'sidebarCollapse', 'routers']),
+    themeConfig() {
+      return this.$store.state.setting
+    },
     getIconName() {
       return this.sidebarCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     }
   },
   data() {
     return {
-      isTagsViewCurrenFull: false
+      isTagsViewCurrenFull: false,
+      breadcrumbList: []
+    }
+  },
+  watch: {
+    $route: {
+      handler() {
+        this.getBreadcrumb()
+      },
+      immediate: true
     }
   },
   methods: {
@@ -114,6 +122,30 @@ export default {
     onOpenSettingClick() {
       this.toggleSettingPanel()
     },
+    /**
+     * 获取面包屑数据
+     */
+    getBreadcrumb() {
+      if (!this.themeConfig.isBreadcrumb) {
+        this.breadcrumbList = []
+        return
+      }
+      // 直接使用路由匹配结果，展示真实的路由层级
+      this.breadcrumbList = this.$route.matched.filter(item => {
+        return item.meta && item.meta.title && !item.hidden
+      })
+    },
+    /**
+     * 点击面包屑跳转
+     */
+    onBreadcrumbClick(route) {
+      const { path, redirect } = route
+      if (redirect) {
+        this.$router.push(redirect)
+        return
+      }
+      this.$router.push(path)
+    },
     @confirm('退出系统？')
     logout() {
       const loading = this.$loading({
@@ -125,12 +157,13 @@ export default {
           location.reload()
         })
         .catch(err => {
-          console.log(err)
+          // eslint-disable-next-line no-console
+          console.error(err)
         })
         .finally(() => {
           loading.close()
         })
-    },
+    }
   }
 }
 </script>
@@ -140,9 +173,8 @@ export default {
   display: flex;
   padding: 0;
   align-items: center;
-  background-color: #fff;
-  // border-bottom: 1px solid var(--light);
-  border-bottom: 1px solid #000;
+  background-color: var(--next-bg-topBar, #fff);
+  border-bottom: 1px solid var(--next-border-color-light, #ebeef5);
   height: 50px !important;
   box-sizing: border-box;
   // background-image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
@@ -167,6 +199,20 @@ export default {
       &:hover {
         opacity: 1;
       }
+    }
+    // 面包屑样式
+    .el-breadcrumb {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    .layout-navbars-breadcrumb-span {
+      display: flex;
+      align-items: center;
+    }
+    .layout-navbars-breadcrumb-iconfont {
+      margin-right: 6px;
+      font-size: 14px;
     }
   }
   .header-right-wrapper {

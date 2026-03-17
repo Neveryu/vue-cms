@@ -103,13 +103,13 @@ export default {
   },
   methods: {
     handleCheckbox() {},
-    onEnd(e) {
+    onEnd() {
       let params = []
       if (this.dataList.length > 1) {
         this.dataList.forEach((item) => {
           params.push(item.id)
         })
-        console.log('拖拽完成后的序列：', params)
+        // console.log('拖拽完成后的序列：', params)
       }
     },
     showViewer(index) {

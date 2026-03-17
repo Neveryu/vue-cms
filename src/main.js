@@ -28,11 +28,10 @@ import './permission' // permission control
 import Notification from '@/components/notification'
 
 /**
- * 目前：开发环境引入了本地的mock数据，如果开发环境要连接真实接口，注释掉下面三行即可；
+ * 引入 mock 数据（开发和生产环境都使用）
+ * 如需连接真实后端接口，注释掉下面一行即可
  */
-if (process.env.NODE_ENV === 'development') {
-  require('@/mock/index2.js')
-}
+require('@/mock/index.js')
 
 Vue.use(ElementUI, {
   size: Cookies.get('size') || 'medium',

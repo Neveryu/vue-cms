@@ -159,7 +159,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="">
-        <el-button type="primary" @click="">确 定</el-button>
+        <el-button type="primary" @click="showEditFolderDialog = false">确 定</el-button>
         <el-button @click="showEditFolderDialog = !showEditFolderDialog">取 消</el-button>
       </div>
     </el-dialog>
@@ -256,13 +256,13 @@ export default {
     // 全选按钮的点击
     allChange(val) {
       if (val) {
-        this.tableData.forEach((v, i, _this) => {
+        this.tableData.forEach((v) => {
           v.hasChecked = true
         })
         this.multipleSelection = this.tableData
         this.$parent.$data.checkList = this.tableData
       } else {
-        this.tableData.forEach((v, i, _this) => {
+        this.tableData.forEach((v) => {
           v.hasChecked = false
         })
         this.multipleSelection = []
@@ -313,9 +313,9 @@ export default {
       }
     },
     /* 单个勾选框的点击，切换 */
-    toggleItem(item) {
+    toggleItem() {
       let _selected = []
-      this.tableData.forEach((v, i, _this) => {
+      this.tableData.forEach((v) => {
         if (v.hasChecked) {
           _selected.push(v)
         }
@@ -333,12 +333,12 @@ export default {
     },
     /* 勾选项同步 */
     toggleSelection(rows) {
-      this.tableData.forEach((v, i, _this) => {
+      this.tableData.forEach((v) => {
         v.hasChecked = false
       })
       if (rows && rows.length > 0) {
         rows.forEach((row) => {
-          this.tableData.forEach((v, i, _this) => {
+          this.tableData.forEach((v) => {
             if (v.id === row.id) {
               v.hasChecked = true
             }

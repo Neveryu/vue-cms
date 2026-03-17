@@ -34,7 +34,7 @@ export default {
     url: '/draggable/getFile',
     method: 'post',
     result: () => {
-      return fileList
+      return { data: fileList, code: 200 }
     },
   },
 }

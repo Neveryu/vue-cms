@@ -1,24 +1,12 @@
-import jsonp from '@/common/jsonp'
+import request from '@/utils/request'
 
+/**
+ * 获取电影图片列表
+ * 使用 mock 数据，避免豆瓣 API 跨域问题
+ */
 export function getImage() {
-  let url = 'https://movie.douban.com/j/new_search_subjects'
-  // let url = 'https://movie.douban.com/j/new_search_subjects?sort=U&range=0,10&tags=&start=0'
-
-  let option = {
-    param: 'callback',
-  }
-
-  let data = {
-    // sort: 'U',
-    // // range: '0,10',
-    // tags: '',
-    // start: 0
-  }
-
-  // jsonp(url, data, option).then((res) => {
-  //   console.log(res, 'opopop')
-  // })
-
-  // console.log([jsonp(url, data, option)], 9999)
-  return Promise.all([jsonp(url, data, option)])
+  return request({
+    url: '/introduction/getMovieImages',
+    method: 'get',
+  })
 }

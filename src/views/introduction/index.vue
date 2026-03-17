@@ -61,22 +61,25 @@ export default {
   },
   created() {
     this.isDev = process.env.NODE_ENV === 'development'
-    getImage().then((resp) => {
-      console.log(resp, '--结果')
-      let movieData
-      movieData = [...resp[0].subjects, ...resp[1].subjects]
-      movieData.forEach((v, i, _this) => {
-        // v.images.large
-        this.imgUrl.push({
-          html: `<img src='${v.images.large}'>`,
+    getImage()
+      .then((resp) => {
+        const movieData = resp.data?.subjects || []
+        movieData.forEach((v) => {
+          if (v && v.images && v.images.large) {
+            this.imgUrl.push({
+              html: `<img src='${v.images.large}'>`,
+            })
+          }
         })
+        // 异步完成后设置 someList
+        this.someList = this.imgUrl
       })
-    })
+      .catch((err) => {
+        console.error('获取图片失败:', err)
+      })
   },
   mounted() {
-    this.$nextTick(() => {
-      this.someList = this.imgUrl
-    })
+    // someList 会在 getImage 异步完成后设置
   },
 }
 </script>

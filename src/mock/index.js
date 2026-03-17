@@ -1,44 +1,37 @@
 /**
- * index.js文件中引入的文件都是当前文件夹下的
+ * index2.js文件使用的是modules文件夹中的文件
+ * 本项目使用的就是这种形式，它可以自动从modules文件夹中引入mock文件，并注册生效
  */
 import Mock from 'mockjs'
-import * as loginAPI from './login'
-import * as userAPI from './user'
-import * as homepageAPI from './homepage'
-import * as excel from './excel'
-import * as echarts from './echarts'
-import * as draggable from './draggable'
+
+// 定义一个通用的响应格式
+const responseFormat = (data) => {
+  return {
+    code: 200,
+    message: 'success',
+    data: data,
+  }
+}
 
 Mock.setup({
-  timeout: '300-600',
+  timeout: '300-600', // 响应延时
 })
 
-// 登录相关接口
-Mock.mock('/login/login', 'post', loginAPI.login)
-Mock.mock('/login/logout', 'post', loginAPI.logout)
+const modulesFiles = require.context('./modules', true, /\.js$/)
+const mockList = modulesFiles.keys().reduce((modules, modulePath) => {
+  const value = modulesFiles(modulePath)
+  modules.push(value.default)
+  return modules
+}, [])
 
-// 用户信息相关接口
-Mock.mock('/user/getInfo', 'post', userAPI.pullUserInfo)
+mockList.forEach((b) => {
+  for (let key in b) {
+    let { state, url, method, result } = b[key]
+    if (state) {
+      Mock.mock(RegExp(url + '??.*'), method, result)
+    }
+  }
+})
 
-// 首页 homepage 相关的接口
-Mock.mock('/homepage/hometotal', 'post', homepageAPI.getHomeTotal)
-// 首页 homepageDetailItem 接口
-Mock.mock('/homepage/detailItem', 'post', homepageAPI.getHomeDetailItem)
-// 首页 investmentRank 接口
-Mock.mock('/homepage/investmentRank', 'post', homepageAPI.getHomeInvestmentRank)
-
-// 表格部分【导出表格中的票房数据】
-Mock.mock('/api/getmoviepiaofang-mock', 'post', excel.piaofang)
-Mock.mock('/excel/getMergeTableData', 'post', excel.mergeTableData)
-// 自定义表格
-Mock.mock('/excel/getFiles', 'post', excel.getFileList)
-Mock.mock('/excel/delFiles', 'post', excel.delFiles)
-
-// echarts菜单
-Mock.mock('/echarts/getCateData', 'get', echarts.getCateData)
-Mock.mock('/echarts/getDepartTop', 'post', echarts.getDepartTop)
-
-// 拖拽
-Mock.mock('/draggable/getFiles', 'post', draggable.getFileList)
-
+export { responseFormat }
 export default Mock

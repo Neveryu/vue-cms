@@ -1,9 +1,9 @@
-import axios from 'axios'
+import request from '@/utils/request'
 // import jsonp from '@/common/jsonp'
-import { isDev } from '@/utils'
+// import { isDev } from '@/utils'
 
 export function getTable() {
-  return axios({
+  return request({
     method: 'post',
     url: '/excel/getmoviepiaofang-mock',
   })
@@ -11,7 +11,7 @@ export function getTable() {
 
 // 合并&统计 - 表格内容
 export function getMergeTable() {
-  return axios({
+  return request({
     method: 'post',
     url: '/excel/getMergeTableData',
   })
@@ -22,15 +22,15 @@ export function getMergeTable() {
  */
 // 获取文件列表
 export function getFiles() {
-  return axios({
+  return request({
     method: 'post',
     url: '/excel/getFiles',
   })
 }
 
 // 删除选择的文件
-export function delFiles(ids) {
-  return axios({
+export function delFiles() {
+  return request({
     method: 'post',
     url: '/excel/delFiles',
   })

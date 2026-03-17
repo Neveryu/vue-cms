@@ -14,7 +14,7 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="near-six-month">
           <div class="title">
-            <p class="title-value">平台近6个月的交易记录</p>
+            <p class="title-value">{{ $t('home.transactionRecords') }}</p>
           </div>
           <div class="content" ref="near-six-month-chart">
             <near-six-month width="100%" height="100%"></near-six-month>
@@ -33,7 +33,7 @@
       <el-col :xs="8" :sm="8" :md="8" :lg="4" :xl="4">
         <div class="rank">
           <div class="title">
-            <p class="title-value">投资龙虎榜（鼠标滚动/拖动均可）</p>
+            <p class="title-value">{{ $t('home.investmentRanking') }}</p>
           </div>
           <div class="content" ref="rankContent">
             <ul class="wrapper-user">
@@ -54,12 +54,12 @@
       <el-col :span="12">
         <div class="financing-sprinkled">
           <div class="title">
-            <p class="title-value">投资金额及融资期限分布图示</p>
+            <p class="title-value">{{ $t('home.investmentDistribution') }}</p>
           </div>
           <div class="content" ref="">
             <!-- 投资 -->
             <div class="investment">
-              <span class="title">投资金额比例</span>
+              <span class="title">{{ $t('home.investmentAmount') }}</span>
               <investment-pie width="100%" height="50%"></investment-pie>
               <div class="detail">
                 <span class="detail-item">
@@ -86,7 +86,7 @@
             </div>
             <!-- 融资 -->
             <div class="financing">
-              <span class="title">融资期限</span>
+              <span class="title">{{ $t('home.financingTerm') }}</span>
               <financing-pie width="100%" height="50%"></financing-pie>
               <div class="detail">
                 <span class="detail-item">

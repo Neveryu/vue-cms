@@ -250,7 +250,7 @@ export default {
   //   }
   // },
   watch: {
-    'basicForm.sysMark': function (newVal, oldVal) {
+    'basicForm.sysMark': function (newVal) {
       if (this.basicForm.sysMarkType === '2') {
         this.basicForm.accountMark = newVal
       }
@@ -287,21 +287,21 @@ export default {
     submitbasicForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let params = {
-            province: this.basicForm.region1,
-            city: this.basicForm.region2,
-            customer_name: this.basicForm.name,
-            customer_type: this.basicForm.type,
-            sys_sign: this.basicForm.sysMark,
-            sign_type: this.basicForm.sysMarkType,
-            account_sign: this.basicForm.accountMark,
-            contact: this.basicForm.concat,
-            dept: this.basicForm.depart,
-            phone: this.basicForm.tel,
-            email: this.basicForm.email,
-            remark: this.basicForm.remarks,
-          }
-          console.log(params)
+          // let params = {
+          //   province: this.basicForm.region1,
+          //   city: this.basicForm.region2,
+          //   customer_name: this.basicForm.name,
+          //   customer_type: this.basicForm.type,
+          //   sys_sign: this.basicForm.sysMark,
+          //   sign_type: this.basicForm.sysMarkType,
+          //   account_sign: this.basicForm.accountMark,
+          //   contact: this.basicForm.concat,
+          //   dept: this.basicForm.depart,
+          //   phone: this.basicForm.tel,
+          //   email: this.basicForm.email,
+          //   remark: this.basicForm.remarks,
+          // }
+          // console.log(params)
           // addOrg(_data).then( res => {
           //   console.log(res)
           // })
@@ -315,7 +315,7 @@ export default {
       this.$refs['basicForm'].resetFields()
     },
     // tab切换点击事件
-    handleClick(tab, e) {
+    handleClick(tab) {
       if (tab.name === 'second') {
         // nothing
       }

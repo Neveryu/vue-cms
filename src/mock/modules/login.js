@@ -1,5 +1,5 @@
 // import Mock from 'mockjs'
-import { responseFormat } from '@/mock/index2'
+import { responseFormat } from '@/mock/index'
 import { userMap } from './user'
 
 export default {
