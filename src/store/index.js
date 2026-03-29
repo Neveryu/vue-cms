@@ -22,13 +22,26 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
  * （PS：至于state，mutations，actions就由每个modules文件夹里面的文件，自己去管理和实现）
  */
 const getters = {
-  // tabsview
+  // tabsview-页面标签
   visitedTabsView: (state) => state.tabsview.visitedTabsView,
   // 用户信息
-  allInfo: (state) => state.user.userInfo,
+  userInfo: (state) => state.user.userInfo,
   // 用户名
-  name: (state) => state.user.userInfo.name,
+  userName: (state) => state.user.userInfo.name,
   // 头像
+  userAvatar: (state) => state.user.userInfo.avatar,
+  // 用户账号
+  account: (state) => state.user.account,
+  // 用户完整信息（用于个人中心表单）
+  allInfo: (state) => ({
+    account: state.user.account,
+    name: state.user.userInfo.name,
+    sex: state.user.userInfo.sex,
+    age: state.user.userInfo.age,
+    type: state.user.userInfo.type || [],
+    desc: state.user.userInfo.desc,
+  }),
+  // 头像（兼容别名）
   avatar: (state) => state.user.userInfo.avatar,
   // 语言
   language: (state) => state.language.language,
@@ -38,6 +51,12 @@ const getters = {
   permissions: (state) => state.user.permissions,
   // 用户的路由菜单权限（完整的）
   routers: (state) => state.permission.routes,
+  // 是否开启侧边栏菜单水平折叠效果
+  sidebarCollapse: (state) => state.setting.isCollapse,
+  // 是否打开系统设置面板抽屉
+  showSettingPanel: (state) => state.setting.showSettingPanel,
+  // 系统设置
+  setting: (state) => state.setting,
 }
 
 export default new Vuex.Store({

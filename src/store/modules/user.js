@@ -1,6 +1,6 @@
 import { login, userInfo, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/auth'
-import { saveToSession } from '@/common/session-storage'
+import { saveToSession, loadFromSession } from '@/common/session-storage'
 import { resetRouter } from '@/router'
 
 const SET_ACCOUNT = 'SET_ACCOUNT'
@@ -13,14 +13,17 @@ const SET_INFO = 'SET_INFO'
 const state = {
   token: getToken(),
   account: '',
-  userInfo: {
-    name: '',
-    age: 0,
-    sex: 1,
-    avatar: '',
-    type: [],
-    desc: '',
-  },
+  userInfo: Object.assign(
+    {
+      name: '',
+      age: 0,
+      sex: 1,
+      avatar: '',
+      type: [],
+      desc: '',
+    },
+    loadFromSession('userInfo'),
+  ),
   // 原始的用户permissions数据
   permissions: [],
 }
@@ -38,7 +41,6 @@ const mutations = {
   [SET_PERMISSIONS](state, permissions) {
     state.permissions = permissions
   },
-
   [SET_ALL](state, userInfo) {
     state.userInfo = Object.assign(state.userInfo, userInfo)
   },
@@ -60,6 +62,7 @@ const actions = {
           // 存用户信息
           saveToSession('userInfo', data.userInfo)
           commit(SET_TOKEN, data.token)
+          commit(SET_ACCOUNT, data.account)
           commit(SET_INFO, data.userInfo)
           commit(SET_PERMISSIONS, data.permissions)
           resolve()
@@ -92,6 +95,7 @@ const actions = {
         .then(() => {
           removeToken()
           commit(SET_TOKEN, '')
+          commit(SET_ACCOUNT, '')
           commit(SET_INFO, {})
           commit(SET_PERMISSIONS, [])
           // sessionStorage里面存储的是跟用户本次登录的一次性数据，每次退出时都要清除
@@ -130,7 +134,7 @@ const actions = {
 
   // remove token
   resetToken({ commit }) {
-    console.log('resetToken')
+    console.log('store/modules/user/resetToken')
     return new Promise((resolve) => {
       removeToken()
       commit('SET_TOKEN', '')

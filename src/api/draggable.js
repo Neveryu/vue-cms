@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from '@/utils/request'
 // import jsonp from '@/common/jsonp'
 
 // function getFileListOld() {
@@ -25,7 +25,7 @@ import axios from 'axios'
  * @DateTime 2020-10-23T15:42:19+0800
  */
 function getFileList() {
-  return axios({
+  return request({
     method: 'post',
     url: '/draggable/getFile',
   })

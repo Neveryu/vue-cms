@@ -1,4 +1,5 @@
 import { getToken } from '@/common/auth'
+import { responseFormat } from '@/mock/index'
 
 /**
  * 用户列表list
@@ -10,6 +11,7 @@ const userMap = {
   // permissions 是用户的权限，包括菜单、页面、按钮权限，3类
   // 相比于用role来做权限，permissions这样可以定制每一个用户的权限
   // permissions不能为空，最少
+  // Bearer 本身不是 token 的一部分，而是对令牌使用方式的描述。它强调令牌的“无状态”特性，即服务器只需验证令牌的有效性（如签名和有效期），而不需要维护会话状态。‌
   admin: {
     account: 'admin',
     token: 'admin',
@@ -18,11 +20,11 @@ const userMap = {
       age: 10,
       sex: 1,
       // 绝对地址
-      avatar: './static/image/avatar/0.jpg',
+      avatar: '/static/image/avatar/0.jpg',
       type: ['Vue', '小程序'],
       desc: '我是admin账号',
     },
-    // address里面请填写完整的路径
+    // address里面请填写完整的菜单/页面/路由路径
     permissions: [
       {
         type: 1,
@@ -150,7 +152,40 @@ const userMap = {
       type: ['Vue', 'React'],
       desc: '我是lucy',
     },
-    permissions: '/excel,/theme',
+    permissions: [
+      {
+        type: 1,
+        address: '/excel',
+      },
+      {
+        type: 2,
+        address: '/excel/dynamic-table',
+      },
+      {
+        type: 2,
+        address: '/excel/export-excel',
+      },
+      {
+        type: 2,
+        address: '/excel/upload-excel',
+      },
+      {
+        type: 2,
+        address: '/excel/merge-count',
+      },
+      {
+        type: 2,
+        address: '/excel/custom-design',
+      },
+      {
+        type: 1,
+        address: '/theme',
+      },
+      {
+        type: 2,
+        address: '/theme/index',
+      },
+    ],
   },
 }
 
@@ -162,7 +197,7 @@ export default {
     url: '/user/getInfo',
     method: 'post',
     result: () => {
-      return userMap[getToken()]
+      return responseFormat(userMap[getToken()])
     },
   },
 }

@@ -60,7 +60,7 @@ npm start
 
 ## 构建发布
 
-```
+```bash
 # build for production with minification
 npm run build
 
@@ -73,7 +73,7 @@ bash ./deploy.sh
 
 ## 功能
 
-```
+```bash
 - 登录/注销
 - 权限验证
 - 多环境发布
@@ -97,7 +97,7 @@ bash ./deploy.sh
 
 ## 目录结构说明
 
-```
+```bash
 vue-cms/  项目名称
 |-- node_modules         #存放第三方依赖包（例如，执行npm i安装的依赖包）
 |-- public/              #静态资源目录
@@ -133,10 +133,10 @@ vue-cms/  项目名称
 
 ## 截图
 
-![](./resource/screenhot3.png)
-![](./resource/screenhot1.png)
-![](./resource/screenhot2.png)
-![](./resource/screenhot4.png)
+![](./screenshot/screenhot3.png)
+![](./screenshot/screenhot1.png)
+![](./screenshot/screenhot2.png)
+![](./screenshot/screenhot4.png)
 
 ## Online Demo
 

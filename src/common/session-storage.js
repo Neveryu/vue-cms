@@ -1,4 +1,5 @@
 /**
+ * window.sessionStorage 浏览器临时缓存
  * 存储内容到sessionStorage中，__vue_cms__
  * 为了数据安全隔离，单独建了一个变量 “__vue_cms__”
  * @Author   Author
@@ -6,6 +7,15 @@
  * @param    {[string]}                 key   [description]
  * @param    {[string]}                 value [description]
  */
+
+/**
+ *
+ * @method saveToSession 设置临时缓存
+ * @method loadFromSession 获取临时缓存
+ * @method remove 移除临时缓存
+ * @method clear 移除全部临时缓存
+ */
+
 function saveToSession(key, value) {
   let vue_cms = window.sessionStorage.__vue_cms__
   if (!vue_cms) {
@@ -30,4 +40,8 @@ function loadFromSession(key, def) {
   return result || def
 }
 
-export { saveToSession, loadFromSession }
+function clearAllSession() {
+  window.sessionStorage.clear()
+}
+
+export { saveToSession, loadFromSession, clearAllSession }

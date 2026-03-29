@@ -3,6 +3,7 @@
     <li
       class="stack-item"
       v-for="(item, index) in pages"
+      :key="index"
       :style="[transformIndex(index), transform(index)]"
       @touchmove.stop.capture.prevent="touchmove"
       @touchstart.stop.capture.prevent="touchstart"
@@ -24,11 +25,15 @@ export default {
   props: {
     stackinit: {
       type: Object,
-      default: {},
+      default() {
+        return {}
+      },
     },
     pages: {
       type: Array,
-      default: [],
+      default() {
+        return []
+      },
     },
   },
   data() {
@@ -140,7 +145,8 @@ export default {
         this.temporaryData.rotate = rotateDirection * this.offsetWidthRatio * 15 * angleRatio
       }
     },
-    touchend(e) {
+    touchend() {
+      // eslint-disable-next-line no-unused-vars
       this.temporaryData.tracking = false
       this.temporaryData.animation = true
       // 滑动结束，触发判断

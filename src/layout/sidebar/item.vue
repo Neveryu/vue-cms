@@ -1,0 +1,47 @@
+<script>
+export default {
+  name: 'MenuItem',
+  functional: true,
+  props: {
+    icon: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+  },
+  render(h, context) {
+    const { icon, title } = context.props
+    const vnodes = []
+    // 获取翻译方法
+    const $t = context.parent.$t.bind(context.parent)
+
+    if (icon) {
+      // 在路由中，如果 `icon` 是以 `svg-` 开头的话，就加载 svg 图标
+      // 否则就默认使用 `Element-UI` 图标
+      if (icon.startsWith('svg-')) {
+        const _icon = icon.substr(4)
+        vnodes.push(<svg-icon class="sidebar-icon" icon-class={_icon} />)
+      } else {
+        vnodes.push(<i class={'el-icon-' + icon}></i>)
+      }
+    }
+    if (title) {
+      // 使用 $t 进行国际化翻译
+      vnodes.push(<span slot="title">{$t(title)}</span>)
+    }
+    return vnodes
+  },
+}
+</script>
+
+<style scoped lang="scss">
+.sidebar-icon {
+  font-size: 1.1em;
+  margin-right: 8px;
+  margin-left: 4px;
+  vertical-align: -0.3em;
+}
+</style>

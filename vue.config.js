@@ -102,16 +102,17 @@ module.exports = defineConfig({
       .end()
 
     config.when(process.env.NODE_ENV !== 'development', (config) => {
-      config
-        .plugin('ScriptExtHtmlWebpackPlugin')
-        .after('html')
-        .use('script-ext-html-webpack-plugin', [
-          {
-            // `runtime` must same as runtimeChunk name. default is `runtime`
-            inline: /runtime\..*\.js$/,
-          },
-        ])
-        .end()
+      // 移除 script-ext-html-webpack-plugin（不兼容 Webpack 5）
+      // config
+      //   .plugin('ScriptExtHtmlWebpackPlugin')
+      //   .after('html')
+      //   .use('script-ext-html-webpack-plugin', [
+      //     {
+      //       // `runtime` must same as runtimeChunk name. default is `runtime`
+      //       inline: /runtime\..*\.js$/,
+      //     },
+      //   ])
+      //   .end()
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {

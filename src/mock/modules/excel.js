@@ -17,7 +17,7 @@ for (let i = 0; i < count; i++) {
       voertime: '@natural(1, 100)',
       getover: '@natural(100, 200)',
       implementRatio: '',
-    })
+    }),
   )
 }
 
@@ -48,7 +48,7 @@ for (let i = 0; i < fileCount; i++) {
       updateTime: '@datetime()',
       updateUserName: '@cname()',
       downloadCount: '@natural(10, 100)',
-    })
+    }),
   )
 }
 
@@ -60,7 +60,7 @@ export default {
     url: '/excel/getmoviepiaofang-mock',
     method: 'post',
     result: () => {
-      return piaofang
+      return { data: piaofang, code: 200 }
     },
   },
   getMergeTable: {
@@ -68,7 +68,7 @@ export default {
     url: '/excel/getMergeTableData',
     method: 'post',
     result: () => {
-      return mergeTableData
+      return { data: mergeTableData, code: 200 }
     },
   },
   getFileList: {
@@ -76,7 +76,7 @@ export default {
     url: '/excel/getFiles',
     method: 'post',
     result: () => {
-      return fileList
+      return { data: fileList, code: 200 }
     },
   },
   delFiles: {
@@ -86,7 +86,7 @@ export default {
     result: (ids) => {
       let length = ids?.length ?? 0
       fileCount -= length
-      return true
+      return { data: true, code: 200 }
     },
   },
 }

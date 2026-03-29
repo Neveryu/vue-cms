@@ -177,7 +177,7 @@ export default {
     url: '/echarts/getCateData',
     method: 'get',
     result: () => {
-      return cateData
+      return { ...cateData, code: 200 }
     },
   },
   getDepartTop: {
@@ -185,7 +185,7 @@ export default {
     url: '/echarts/getDepartTop',
     method: 'post',
     result: () => {
-      return departData
+      return { ...departData, code: 200 }
     },
   },
 }

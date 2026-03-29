@@ -20,7 +20,7 @@ for (let i = 0; i < count; i++) {
       durations: formatDuration(Mock.Random.natural(4000, 7000)),
       directors: '@cname()',
       mainland_pubdate: '@date()',
-    })
+    }),
   )
 }
 
@@ -34,7 +34,7 @@ export default {
     url: '/draggable/getFile',
     method: 'post',
     result: () => {
-      return fileList
+      return { data: fileList, code: 200 }
     },
   },
 }
