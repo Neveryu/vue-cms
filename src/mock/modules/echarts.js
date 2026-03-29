@@ -1,3 +1,5 @@
+import { responseFormat } from '@/mock/index'
+
 const cateData = {
   data: [
     {
@@ -177,7 +179,7 @@ export default {
     url: '/echarts/getCateData',
     method: 'get',
     result: () => {
-      return { ...cateData, code: 200 }
+      return responseFormat(cateData.data)
     },
   },
   getDepartTop: {
@@ -185,7 +187,7 @@ export default {
     url: '/echarts/getDepartTop',
     method: 'post',
     result: () => {
-      return { ...departData, code: 200 }
+      return responseFormat(departData.data)
     },
   },
 }

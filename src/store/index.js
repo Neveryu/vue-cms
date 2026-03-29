@@ -29,7 +29,15 @@ const getters = {
   // 用户名
   userName: (state) => state.user.userInfo.name,
   // 头像
-  userAvatar: (state) => state.user.userInfo.avatar,
+  userAvatar: (state) => {
+    const avatar = state.user.userInfo.avatar
+    if (!avatar) return ''
+    // 处理子目录部署时的路径问题：将以 /static/ 开头的绝对路径转换为相对路径
+    if (avatar.startsWith('/static/')) {
+      return process.env.BASE_URL + avatar.slice(1)
+    }
+    return avatar
+  },
   // 用户账号
   account: (state) => state.user.account,
   // 用户完整信息（用于个人中心表单）

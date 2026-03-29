@@ -92,41 +92,77 @@ export default {
     },
     // 获取数量以及详情数据
     _getCateData() {
-      getData().then((resp) => {
-        let respData = resp.data.data
-        this.catelogData = respData.sort((a, b) => {
-          return b.all - a.all
-        })
-        respData.forEach((v) => {
-          this.catelogYData.push(v.all)
-          this.catelogXData.push({
-            value: v.quesName,
-            id: v.quesId,
+      getData()
+        .then((resp) => {
+          console.log('分类数据响应:', resp)
+          let respData = resp.data // Mock返回: { data: [...], code: 200 }
+          console.log('分类数据:', respData)
+
+          // 清空之前的数据
+          this.catelogData = []
+          this.catelogXData = []
+          this.catelogYData = []
+
+          // 排序数据
+          let sortedData = respData.sort((a, b) => {
+            return b.all - a.all
           })
+
+          this.catelogData = sortedData
+
+          sortedData.forEach((v) => {
+            this.catelogYData.push(v.all)
+            this.catelogXData.push({
+              value: v.quesName,
+              id: v.quesId,
+            })
+          })
+
+          console.log('处理后的catelogData:', this.catelogData)
+          console.log('处理后的catelogXData:', this.catelogXData)
+          console.log('处理后的catelogYData:', this.catelogYData)
         })
-      })
+        .catch((error) => {
+          console.error('获取分类数据失败:', error)
+        })
     },
     // top10&率
     _getDepartTop() {
-      getDepartTop().then((resp) => {
-        let respData = resp.data.data
-        // clone
-        let _respData1 = deepClone(respData)
-        let _respData2 = deepClone(respData)
-        // 总数排行
-        this.departData = _respData1.sort((a, b) => {
-          return b.all - a.all
+      getDepartTop()
+        .then((resp) => {
+          console.log('部门数据响应:', resp)
+          let respData = resp.data // Mock返回: { data: [...], code: 200 }
+          console.log('部门数据:', respData)
+
+          // 清空之前的数据
+          this.departData = []
+          this.rateXData = []
+          this.rateYData = []
+
+          // clone
+          let _respData1 = deepClone(respData)
+          let _respData2 = deepClone(respData)
+          // 总数排行
+          this.departData = _respData1.sort((a, b) => {
+            return b.all - a.all
+          })
+          // 完成率排行
+          _respData2.sort((a, b) => {
+            return (b.done * 100) / b.all - (a.done * 100) / a.all
+          })
+          _respData2.forEach((v) => {
+            this.rateYData.push(v.deptName)
+            let _percentage = ((v.done * 100) / v.all).toFixed(2)
+            this.rateXData.push({ value: _percentage, id: v.deptId })
+          })
+
+          console.log('处理后的departData:', this.departData)
+          console.log('处理后的rateXData:', this.rateXData)
+          console.log('处理后的rateYData:', this.rateYData)
         })
-        // 完成率排行
-        _respData2.sort((a, b) => {
-          return (b.done * 100) / b.all - (a.done * 100) / a.all
+        .catch((error) => {
+          console.error('获取部门数据失败:', error)
         })
-        _respData2.forEach((v) => {
-          this.rateYData.push(v.deptName)
-          let _percentage = ((v.done * 100) / v.all).toFixed(2)
-          this.rateXData.push({ value: _percentage, id: v.deptId })
-        })
-      })
     },
   },
   created() {

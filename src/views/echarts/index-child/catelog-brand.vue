@@ -65,7 +65,12 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: true,
-          data: this.xData,
+          data: this.xData.map((item) => {
+            if (typeof item === 'object' && item.value !== undefined) {
+              return item.value
+            }
+            return item
+          }),
           // 刻度标签文字颜色
           axisLabel: {
             color: '#fff',

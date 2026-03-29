@@ -47,6 +47,14 @@ export default {
     },
     initChart() {
       this.chart = echarts.init(this.$el)
+      // 处理xData格式，提取数值
+      const processedXData = this.xData.map((item) => {
+        if (typeof item === 'object' && item.value !== undefined) {
+          return parseFloat(item.value)
+        }
+        return parseFloat(item) || 0
+      })
+
       this.chart.setOption({
         // tooltip: {},
         // color: ['#61a8ff'],
@@ -82,7 +90,12 @@ export default {
           {
             type: 'category',
             inverse: true,
-            data: this.xData,
+            data: this.xData.map((item) => {
+              if (typeof item === 'object' && item.value !== undefined) {
+                return item.value
+              }
+              return item
+            }),
             axisLabel: {
               color: '#fff',
               fontSize: 16,
@@ -109,7 +122,7 @@ export default {
           },
           {
             type: 'bar',
-            data: this.xData,
+            data: processedXData,
             barWidth: '40%',
             label: {
               normal: {

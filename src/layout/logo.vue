@@ -14,7 +14,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      logoMini: '/static/image/logo/logo.png',
+      logoMini: process.env.BASE_URL + 'static/image/logo/logo.png',
       globalTitle: 'vue-cms',
     }
   },
