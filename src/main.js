@@ -44,9 +44,29 @@ Vue.use(Notification)
 // 全局配置，它的作用是禁止 Vue 在启动时生成生产环境提示。
 Vue.config.productionTip = false
 
+// 初始化主题设置（深色模式、主题色）
+const initTheme = () => {
+  const setting = store.state.setting
+  if (setting) {
+    // 应用深色模式
+    if (setting.isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark')
+    } else {
+      document.documentElement.removeAttribute('data-theme')
+    }
+    // 应用主题色
+    if (setting.primary) {
+      document.documentElement.style.setProperty('--primary', setting.primary)
+    }
+  }
+}
+
 new Vue({
   router,
   store,
   i18n,
+  created() {
+    initTheme()
+  },
   render: (h) => h(App),
 }).$mount('#app')

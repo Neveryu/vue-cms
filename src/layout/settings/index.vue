@@ -192,8 +192,20 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      showSettingPanel: 'showSettingPanel',
+      showSettingPanelGetter: 'showSettingPanel',
     }),
+    // 使用 getter/setter 来支持 .sync 修饰符
+    showSettingPanel: {
+      get() {
+        return this.showSettingPanelGetter
+      },
+      set(value) {
+        // 只有当值发生变化时才切换
+        if (value !== this.showSettingPanelGetter) {
+          this.toggleSettingPanel()
+        }
+      },
+    },
     themeConfig() {
       return this.$store.state.setting
     },
@@ -223,7 +235,7 @@ export default {
       resetSetting: 'setting/resetSetting',
     }),
     onDrawerClose() {
-      this.toggleSettingPanel()
+      // 由 setter 处理关闭逻辑，这里不需要再调用 toggle
     },
     // 主题色变更
     onPrimaryChange(color) {

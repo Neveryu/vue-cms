@@ -4,16 +4,17 @@
 
 <script>
 import DefaultLayout from '@/layout/library/default.vue'
-// import ClassicLayout from '@/layout/main/classic.vue'
-// import TransverseLayout from '@/layout/main/transverse.vue'
-// import ColumnsLayout from '@/layout/main/columns.vue'
-
-// import { Local } from '/@/utils/storage'
+import ClassicLayout from '@/layout/library/classic.vue'
+import TransverseLayout from '@/layout/library/transverse.vue'
+import ColumnsLayout from '@/layout/library/columns.vue'
 
 import { mapGetters } from 'vuex'
 
 const layouts = {
   defaults: DefaultLayout,
+  classic: ClassicLayout,
+  transverse: TransverseLayout,
+  columns: ColumnsLayout,
 }
 
 export default {

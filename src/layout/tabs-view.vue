@@ -5,9 +5,12 @@
         <el-tag closable :disable-transitions="false" @close.prevent.stop="handleClose(tag)">
           <i
             v-if="themeConfig.isTagsviewIcon && tag.meta && tag.meta.icon && !tag.meta.icon.startsWith('svg-')"
-            :class="tag.meta.icon"
+            :class="'el-icon-' + tag.meta.icon"
             class="tags-view-icon"></i>
-          <svg-icon v-else-if="themeConfig.isTagsviewIcon && tag.meta && tag.meta.icon" :icon-class="tag.meta.icon" class="tags-view-icon" />
+          <svg-icon
+            v-else-if="themeConfig.isTagsviewIcon && tag.meta && tag.meta.icon"
+            :icon-class="tag.meta.icon.replace(/^svg-/, '')"
+            class="tags-view-icon" />
           {{ $t(tag.name) }}
         </el-tag>
       </router-link>
@@ -92,13 +95,19 @@ export default {
   :deep(.el-scrollbar__wrap) {
     margin: 0 !important;
     overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
     .el-scrollbar__view {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       height: 40px !important;
       color: var(--el-text-color-regular);
       padding: 0 12px;
     }
+  }
+  // 隐藏垂直滚动条
+  :deep(.el-scrollbar__bar.is-vertical) {
+    display: none !important;
   }
   .tags-view-item {
     display: inline-block;

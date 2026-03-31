@@ -132,10 +132,100 @@
     }
   }
 
+  // 横向布局菜单深色适配
+  .layout-transverse .header-menu .el-menu {
+    .el-menu-item,
+    .el-submenu__title {
+      color: var(--next-color-bar) !important;
+      background-color: transparent !important;
+      &:hover {
+        background-color: var(--next-color-menu-hover) !important;
+      }
+    }
+    .el-menu-item.is-active {
+      color: var(--primary, #409eff) !important;
+      border-bottom-color: var(--primary, #409eff) !important;
+    }
+  }
+
+  // 经典布局顶部一级菜单深色适配
+  .layout-classic .header-menu .el-menu {
+    .el-menu-item,
+    .el-submenu__title {
+      color: var(--next-color-bar) !important;
+      background-color: transparent !important;
+      &:hover {
+        background-color: var(--next-color-menu-hover) !important;
+      }
+    }
+    .el-menu-item.is-active {
+      color: var(--primary, #409eff) !important;
+      border-bottom-color: var(--primary, #409eff) !important;
+    }
+  }
+
+  // 经典布局左侧二级菜单深色适配
+  .layout-classic .sub-aside {
+    background-color: var(--next-color-disabled) !important;
+    .sub-aside-title {
+      color: var(--next-color-bar) !important;
+      border-bottom-color: var(--next-border-color) !important;
+    }
+  }
+
+  // 分栏布局二级菜单深色适配
+  .layout-columns .columns-sub-aside {
+    background-color: var(--next-color-disabled) !important;
+    .columns-sub-title {
+      color: var(--next-color-bar) !important;
+      border-bottom-color: var(--next-border-color) !important;
+    }
+  }
+
   // 菜单弹出层
   .el-menu--popup {
     background-color: var(--next-color-primary) !important;
     border: 1px solid var(--next-border-color) !important;
+  }
+
+  // 横向布局菜单弹出层
+  .transverse-menu-popper {
+    .el-menu {
+      background-color: var(--next-color-primary) !important;
+      border-color: var(--next-border-color) !important;
+    }
+    .el-menu-item,
+    .el-submenu__title {
+      color: var(--next-color-bar) !important;
+      background-color: transparent !important;
+      &:hover {
+        background-color: var(--next-color-menu-hover) !important;
+      }
+    }
+    .el-menu-item.is-active {
+      color: var(--primary, #409eff) !important;
+      background-color: var(--next-color-menu-hover) !important;
+    }
+  }
+
+  // 经典布局菜单弹出层
+  .classic-menu-popper {
+    .el-menu {
+      background-color: var(--next-color-primary) !important;
+      border-color: var(--next-border-color) !important;
+    }
+    .el-menu-item,
+    .el-submenu__title {
+      color: var(--next-color-bar) !important;
+      background-color: transparent !important;
+      &:hover {
+        background-color: var(--next-color-menu-hover) !important;
+      }
+    }
+    .el-menu-item.is-active {
+      color: var(--primary, #409eff) !important;
+      background-color: var(--next-color-menu-hover) !important;
+    }
   }
 
   // ==================== Element UI 表格深色适配 ====================

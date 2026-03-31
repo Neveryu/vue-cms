@@ -1,14 +1,12 @@
 <template>
-  <div class="layout-main" :style="isFixedHeader ? `height: calc(100% - ${setMainHeight})` : `minHeight: calc(100% - ${setMainHeight})`">
-    <el-scrollbar ref="layoutMainScrollbarRef" class="layout-main-scroll" wrap-class="layout-main-scroll" view-class="layout-main-scroll">
-      <transition :name="animationName" mode="out-in">
-        <keep-alive :include="cachedViews">
-          <router-view :key="key"></router-view>
-        </keep-alive>
-      </transition>
+  <div class="layout-main" :style="mainStyle">
+    <transition :name="animationName" mode="out-in">
+      <keep-alive :include="cachedViews">
+        <router-view :key="key"></router-view>
+      </keep-alive>
+    </transition>
 
-      <!-- <LayoutFooter v-if="isFooter" /> -->
-    </el-scrollbar>
+    <!-- <LayoutFooter v-if="isFooter" /> -->
   </div>
 </template>
 
@@ -29,14 +27,33 @@ export default {
     key() {
       return this.$route.path
     },
-    // 设置主内容区的高度
-    setMainHeight() {
-      // 根据是否显示标签页调整高度
-      const { isTagsview } = this.themeConfig
-      if (isTagsview) {
-        return '92px' // header + tabs-view
+    // 根据布局类型计算主内容区样式
+    mainStyle() {
+      const { isTagsview, layout } = this.themeConfig
+      const headerHeight = 50
+      const tabsViewHeight = isTagsview ? 40 : 0
+
+      // 所有布局都使用 min-height，让内容自然流动
+      // 外层的 el-scrollbar 会负责滚动
+      switch (layout) {
+        case 'defaults':
+          return {
+            minHeight: `calc(100vh - ${headerHeight + tabsViewHeight}px)`,
+          }
+        case 'transverse':
+        case 'classic':
+          return {
+            minHeight: `calc(100vh - ${tabsViewHeight}px)`,
+          }
+        case 'columns':
+          return {
+            minHeight: `calc(100vh - ${headerHeight + tabsViewHeight}px)`,
+          }
+        default:
+          return {
+            minHeight: `calc(100vh - ${headerHeight + tabsViewHeight}px)`,
+          }
       }
-      return '52px' // only header
     },
     // 页面切换动画名称
     animationName() {
@@ -60,12 +77,7 @@ export default {
 <style scoped lang="scss">
 .layout-main {
   width: 100%;
-  overflow: hidden;
   background-color: var(--next-bg-main-color);
-  .layout-main-scroll {
-    width: 100%;
-    height: 100%;
-  }
 }
 
 // 页面切换动画

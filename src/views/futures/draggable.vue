@@ -188,8 +188,6 @@ export default {
           // 执行预加载(延迟3s再预加载，以免影响主屏的缩略图加载)
           if (respData.length > 0) {
             this.preloadTimer = setTimeout(() => {
-              /* 父组件滚动条更新 */
-              this.$parent.$parent.$refs.layoutMainScrollbarRef.update()
               this.handlerPreload()
               folderLoading.close()
             }, 1000)

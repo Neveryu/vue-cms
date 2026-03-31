@@ -81,7 +81,7 @@ export default {
   name: 'NavBar',
   components: {
     LangSelect,
-    Screenfull,
+    Screenfull
   },
   computed: {
     ...mapGetters(['userName', 'userAvatar', 'sidebarCollapse', 'routers']),
@@ -90,12 +90,12 @@ export default {
     },
     getIconName() {
       return this.sidebarCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
-    },
+    }
   },
   data() {
     return {
       isTagsViewCurrenFull: false,
-      breadcrumbList: [],
+      breadcrumbList: []
     }
   },
   watch: {
@@ -103,14 +103,14 @@ export default {
       handler() {
         this.getBreadcrumb()
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
     ...mapActions({
       userLogout: 'user/logout',
       toggleCollapse: 'setting/toggleCollapse',
-      toggleSettingPanel: 'setting/toggleSettingPanel',
+      toggleSettingPanel: 'setting/toggleSettingPanel'
     }),
     // 展开/收起左侧菜单点击
     onSideBarCollapseChange() {
@@ -131,20 +131,20 @@ export default {
         return
       }
       // 直接使用路由匹配结果，展示真实的路由层级
-      this.breadcrumbList = this.$route.matched.filter((item) => {
+      this.breadcrumbList = this.$route.matched.filter(item => {
         return item.meta && item.meta.title && !item.hidden
       })
-
-      // 调试信息
-      console.log('面包屑配置:', this.themeConfig)
-      console.log('当前路由:', this.$route)
-      console.log('面包屑列表:', this.breadcrumbList)
     },
     /**
      * 点击面包屑跳转
      */
     onBreadcrumbClick(route) {
       const { path, redirect } = route
+      // 如果跳转目标就是当前路由，就不跳转（避免重复导航错误）
+      const targetPath = redirect || path
+      if (this.$route.path === targetPath) {
+        return
+      }
       if (redirect) {
         this.$router.push(redirect)
         return
@@ -154,22 +154,22 @@ export default {
     @confirm('退出系统？')
     logout() {
       const loading = this.$loading({
-        lock: true,
+        lock: true
       })
       this.userLogout()
         .then(() => {
           // 为了重新实例化vue-router对象 避免bug
           location.reload()
         })
-        .catch((err) => {
+        .catch(err => {
           // eslint-disable-next-line no-console
           console.error(err)
         })
         .finally(() => {
           loading.close()
         })
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -182,10 +182,6 @@ export default {
   border-bottom: 1px solid var(--next-border-color-light, #ebeef5);
   height: 50px !important;
   box-sizing: border-box;
-  // background-image: -webkit-gradient(linear, left top, right top, from(#1278f6), to(#00b4aa));
-  // background-image: -webkit-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
-  // background-image: -moz-linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
-  // background-image: linear-gradient(45deg, #1278f6, #00b4aa 50%, #1278f6);
   .header-left-wrapper {
     flex: 1;
     height: inherit;
@@ -232,7 +228,6 @@ export default {
       cursor: pointer;
       color: var(--secondary);
       height: 100%;
-      // line-height: 50px;
       display: flex;
       align-items: center;
       &:hover {

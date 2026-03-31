@@ -1,9 +1,11 @@
 /**
  * 布局配置
- * 修改配置时：
- * 1、需要每次都清理 `window.localStorage` 浏览器永久缓存
- * 2、或者点击布局配置最底部 `一键恢复默认` 按钮即可看到效果
+ * 配置会自动持久化到 localStorage，刷新后恢复
+ * 点击布局配置最底部 `一键恢复默认` 按钮可恢复默认设置
  */
+
+// localStorage key
+const SETTING_KEY = 'vue-cms-setting'
 
 const getDefaultState = () => ({
   /**
@@ -65,7 +67,41 @@ const getDefaultState = () => ({
   isFooter: false,
 })
 
-const state = getDefaultState()
+// 从 localStorage 加载设置
+const loadSettingFromStorage = () => {
+  try {
+    const stored = localStorage.getItem(SETTING_KEY)
+    if (stored) {
+      return JSON.parse(stored)
+    }
+  } catch (e) {
+    console.error('Failed to load setting from localStorage:', e)
+  }
+  return null
+}
+
+// 保存设置到 localStorage
+const saveSettingToStorage = (setting) => {
+  try {
+    // 不保存 showSettingPanel 状态
+    const { showSettingPanel, ...settingToSave } = setting
+    localStorage.setItem(SETTING_KEY, JSON.stringify(settingToSave))
+  } catch (e) {
+    console.error('Failed to save setting to localStorage:', e)
+  }
+}
+
+// 合并默认设置和存储的设置
+const getInitialState = () => {
+  const defaultState = getDefaultState()
+  const storedState = loadSettingFromStorage()
+  if (storedState) {
+    return { ...defaultState, ...storedState }
+  }
+  return defaultState
+}
+
+const state = getInitialState()
 
 const mutations = {
   TOGGLE_COLLAPSE(state) {
@@ -191,4 +227,14 @@ export default {
   state,
   mutations,
   actions,
+}
+
+// 订阅 store 变化，自动保存设置到 localStorage
+export const settingPlugin = (store) => {
+  store.subscribe((mutation, state) => {
+    // 只监听 setting 模块的 mutation
+    if (mutation.type.startsWith('setting/')) {
+      saveSettingToStorage(state.setting)
+    }
+  })
 }

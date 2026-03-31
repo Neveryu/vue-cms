@@ -221,6 +221,13 @@ export default {
     downloadOne(id) {
       this.$emit('downloadOne', id)
     },
+    // 下载详情中的文件
+    handleDownload() {
+      if (this.detailForm && this.detailForm.id) {
+        this.downloadOne(this.detailForm.id)
+      }
+      this.showDetailDialog = false
+    },
     /* 勾选项同步 */
     toggleSelection(rows) {
       if (rows && rows.length > 0) {
@@ -233,22 +240,9 @@ export default {
     },
     // 表格勾选项
     handleSelectionChange(val) {
-      // this.tableData.forEach(item => {
-      //   item.hasChecked = false
-      // })
-      // if(val.length > 0) {
-      //   val.forEach(item => {
-      //     this.tableData.forEach((v, i, _this) => {
-      //       if(v.id === row.id) {
-      //         v.hasChecked = true
-      //       }
-      //     })
-      //   })
-      // }
       this.multipleSelection = val
       this.$parent.$data.checkList = val
       console.log(this.$parent.$data.checkList)
-      // this.$parent.$data.fileList = this.tableData
     },
     // 点击文件名
     clickFileName(row) {
@@ -456,7 +450,6 @@ export default {
   border-bottom: 1px solid #eee;
   padding: 0 30px 0 15px;
   color: #333;
-  /*margin-bottom: 5px;*/
 }
 .el-icon-close {
   position: absolute;

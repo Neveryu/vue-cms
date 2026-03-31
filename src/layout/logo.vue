@@ -12,6 +12,12 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       logoMini: process.env.BASE_URL + 'static/image/logo/logo.png',
@@ -20,13 +26,20 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // routers: 'routers',
       themeConfig: 'setting',
     }),
-    // 设置 logo 的显示。classic 经典布局默认显示 logo
+    // 设置 logo 的显示
     setShowLogo() {
       let { isCollapse, layout } = this.themeConfig
-      return !isCollapse || layout === 'classic'
+      // 分栏布局时，只显示图标，不显示标题
+      if (layout === 'columns') {
+        return false
+      }
+      // 优先使用传入的 isCollapse prop
+      if (this.isCollapse) {
+        return false
+      }
+      return !isCollapse || layout === 'classic' || layout === 'transverse'
     },
   },
   methods: {
@@ -44,7 +57,6 @@ export default {
 
 <style scoped lang="scss">
 .layout-logo {
-  // width: 220px;
   width: 100%;
   height: 50px;
   display: flex;
@@ -54,7 +66,6 @@ export default {
   color: var(--primary);
   font-size: 16px;
   cursor: pointer;
-  // animation: logoAnimation 0.3s ease-in-out;
   span {
     white-space: nowrap;
     display: inline-block;
@@ -74,15 +85,9 @@ export default {
   height: 50px;
   display: flex;
   cursor: pointer;
-  // animation: logoAnimation 0.3s ease-in-out;
   &-img {
     width: 20px;
     margin: auto;
   }
-  // &:hover {
-  //   img {
-  //     animation: logoAnimation 0.3s ease-in-out;
-  //   }
-  // }
 }
 </style>

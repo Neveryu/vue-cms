@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { settingPlugin } from './modules/setting'
 
 Vue.use(Vuex)
 
@@ -70,4 +71,5 @@ const getters = {
 export default new Vuex.Store({
   modules,
   getters,
+  plugins: [settingPlugin],
 })

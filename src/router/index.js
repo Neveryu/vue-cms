@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// 系统主要内容页面布局Layout（支持布局结构调整）
+// 处理/解决浏览器默认样式不一致的问题
 import MainLayout from '@/layout/index'
 
 /**
- * 路由表组成结构Main：
+ * 路由表组成结构 Main：
  * 【[基础路由]+[动态路由]+[末尾路由]】
  */
 
@@ -13,23 +13,23 @@ Vue.use(Router)
 
 /**
  * 关于 route 的配置属性说明：
- * 不管是父路由，还是子路由，path字段必须是完整的路径
+ * 不管是父路由，还是子路由，path 字段必须是完整的路径
  *
  * alwaysShow: true       // if set true, will always show the root menu, whatever its child routes length
  *                        // if not set alwaysShow, only more than ont route under the children
  *                        // it will becomes nested mode, otherwise not show the root menu
- *                        // 如果设置为true,它将总是出现在根目录。如果不设置的话，当它只有1个子路由的时候，会把
+ *                        // 如果设置为 true，它将总是出现在根目录。如果不设置的话，当它只有 1 个子路由的时候，会把
  *                        // 它的唯一子路由放到跟目录上来，而不显示它自己本身。
  *
- * hidden: true           // 如果设置为true, 将不会出现在左侧菜单栏中（如：401，403，login等页面）
+ * hidden: true           // 如果设置为 true, 将不会出现在左侧菜单栏中（如：401，403，login 等页面）
  *
  * isKeepAlive            // 是否缓存组件状态
  * isKeepAlive            // 是否缓存组件状态
  * isIframe               // 是否内嵌窗口，开启条件，`1、isIframe:true 2、isLink：链接地址不为空`
  *
  * meta: {
- *   noCache: true        // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
- *   icon: '',            // 设置该路由的图标，如果hidden设置为false，那么这个路由的meta中的icon可以不填（因为不会在菜单中展示）
+ *   noCache: true        // 如果设置为 true，则不会被 <keep-alive> 缓存 (默认 false)
+ *   icon: '',            // 设置该路由的图标，如果 hidden 设置为 false，那么这个路由的 meta 中的 icon 可以不填（因为不会在菜单中展示）
  *   title: ''            // 设置该路由在侧边栏和面包屑中展示的名字
  * }
  *
@@ -44,7 +44,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: MainLayout,
-    redirect: 'home',
+    redirect: '/home',
     children: [
       {
         path: '/home',
@@ -75,10 +75,10 @@ export const constantRoutes = [
 ]
 
 /**
- * 末尾路由：总是需要在VueRouter最末尾的路由；添加到动态路由的后面
+ * 末尾路由：总是需要在 VueRouter 最末尾的路由；添加到动态路由的后面
  */
 export const endBasicRoutes = [
-  // 404页面
+  // 404 页面
   {
     path: '/404',
     name: '404',
@@ -111,7 +111,7 @@ export const endBasicRoutes = [
 ]
 
 /**
- * 动态路由： 根据用户角色
+ * 动态路由：根据用户角色
  * @type {Array}
  */
 
@@ -122,7 +122,7 @@ export const asyncRoutes = [
     name: 'custom-component',
     component: MainLayout,
     meta: { icon: 'question', title: 'route.customComponent' },
-    redirect: 'index',
+    redirect: '/custom-component/index',
     children: [
       {
         path: '/custom-component/index',
@@ -136,7 +136,7 @@ export const asyncRoutes = [
   {
     path: '/echarts',
     component: MainLayout,
-    redirect: 'index',
+    redirect: '/echarts/index',
     alwaysShow: true,
     meta: { title: 'route.visualization', icon: 'svg-droplet' },
     children: [
@@ -152,7 +152,7 @@ export const asyncRoutes = [
   {
     path: '/excel',
     component: MainLayout,
-    redirect: 'export-excel',
+    redirect: '/excel/export-excel',
     alwaysShow: true,
     meta: { title: 'route.excel', icon: 'date' },
     children: [
@@ -272,7 +272,7 @@ export const asyncRoutes = [
     component: MainLayout,
     alwaysShow: true,
     meta: { icon: 's-order', title: 'route.richEditor' },
-    redirect: 'quill',
+    redirect: '/rich-editor/quill',
     children: [
       {
         path: '/rich-editor/quill',
@@ -302,7 +302,7 @@ export const asyncRoutes = [
       },
     ],
   },
-  // 用户-个人中心
+  // 用户 - 个人中心
   {
     path: '/user',
     hidden: true,
@@ -321,7 +321,7 @@ export const asyncRoutes = [
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support（去掉url中的#）
+    // mode: 'history', // require service support（去掉 url 中的#）
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes,
   })
