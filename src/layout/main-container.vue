@@ -6,14 +6,19 @@
       </keep-alive>
     </transition>
 
-    <!-- <LayoutFooter v-if="isFooter" /> -->
+    <LayoutFooter v-if="themeConfig.isFooter" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import LayoutFooter from '@/layout/footer'
+
 export default {
   name: 'layout-main',
+  components: {
+    LayoutFooter,
+  },
   data() {
     return {
       desc: '这里是右侧主界面',
@@ -78,6 +83,14 @@ export default {
 .layout-main {
   width: 100%;
   background-color: var(--next-bg-main-color);
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+
+  // 确保内容区域占据剩余空间，将 footer 推到底部
+  > *:first-child {
+    flex: 1;
+  }
 }
 
 // 页面切换动画

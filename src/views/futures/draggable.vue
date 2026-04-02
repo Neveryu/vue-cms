@@ -277,7 +277,7 @@ export default {
   flex-wrap: wrap;
   /*justify-content: space-between;*/
   padding-right: 1%;
-  height: 72vh;
+  min-height: calc(100vh - 180px);
   margin-left: -15px;
   margin-right: -15px;
 }
