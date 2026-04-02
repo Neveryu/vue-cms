@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkvue_cms"]=self["webpackChunkvue_cms"]||[]).push([[892],{7892:function(u,e,n){n.r(e),n.d(e,{default:function(){return f}});var r=function(){var u=this,e=u._self._c;return e("div",[e("router-view")],1)},t=[],l=n(1656),s={},c=(0,l.A)(s,r,t,!1,null,null,null),f=c.exports}}]);

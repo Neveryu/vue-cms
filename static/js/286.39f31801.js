@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkvue_cms"]=self["webpackChunkvue_cms"]||[]).push([[286],{7286:function(e,u,r){r.r(u),r.d(u,{default:function(){return p}});var t,n,s={created(){const{params:e,query:u}=this.$route,{path:r}=e;this.$router.replace({path:"/"+r,query:u})},render:function(e){return e()}},c=s,a=r(1656),l=(0,a.A)(c,t,n,!1,null,null,null),p=l.exports}}]);

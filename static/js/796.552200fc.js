@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkvue_cms"]=self["webpackChunkvue_cms"]||[]).push([[796],{2415:function(u,t,e){e.r(t),e.d(t,{default:function(){return a}});var n=function(){var u=this,t=u._self._c;return t("div",{staticClass:"content-layout"},[t("router-view")],1)},s=[],l=e(1656),c={},r=(0,l.A)(c,n,s,!1,null,null,null),a=r.exports}}]);
