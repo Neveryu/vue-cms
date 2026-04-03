@@ -98,7 +98,6 @@
 </template>
 
 <script>
-import { confirm } from '@/decorator/confirm'
 import { mapGetters, mapActions } from 'vuex'
 import Logo from '@/layout/logo'
 import TabsView from '@/layout/tabs-view'
@@ -203,20 +202,20 @@ export default {
       }
       this.$router.push(path)
     },
-    @confirm('退出系统？')
     logout() {
-      const loading = this.$loading({ lock: true })
-      this.userLogout()
-        .then(() => {
-          // 为了重新实例化vue-router对象 避免bug
-          location.reload()
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-        .finally(() => {
-          loading.close()
-        })
+      if (confirm('退出系统？')) {
+        const loading = this.$loading({ lock: true })
+        this.userLogout()
+          .then(() => {
+            location.reload()
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+          .finally(() => {
+            loading.close()
+          })
+      }
     },
   },
 }

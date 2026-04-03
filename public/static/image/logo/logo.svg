@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#42b883"/>
+      <stop offset="100%" style="stop-color:#409EFF"/>
+    </linearGradient>
+  </defs>
+  <!-- 背景圆角矩形 -->
+  <rect x="2" y="2" width="44" height="44" rx="10" ry="10" fill="url(#logoGradient)"/>
+  <!-- V 字母 - 代表 Vue -->
+  <path d="M12 14 L24 36 L36 14" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- CMS 文字用三个点表示 -->
+  <circle cx="16" cy="40" r="2" fill="white" opacity="0.8"/>
+  <circle cx="24" cy="40" r="2" fill="white" opacity="0.8"/>
+  <circle cx="32" cy="40" r="2" fill="white" opacity="0.8"/>
+</svg>

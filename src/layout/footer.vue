@@ -31,9 +31,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--next-bg-topBar, #ffffff) 0%, var(--next-bg-main-color, #f5f7fa) 100%);
-  border-top: 1px solid var(--next-border-color-light, #ebeef5);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+  background-color: transparent;
 }
 
 .layout-footer-content {
@@ -99,7 +97,6 @@ export default {
 // 深色模式适配
 :deep([data-theme='dark']) {
   .layout-footer {
-    background: linear-gradient(135deg, var(--next-bg-topBar, #1d1e1f) 0%, var(--next-bg-main-color, #141414) 100%);
     border-top-color: var(--next-border-color-light, #2c2c2c);
   }
 }

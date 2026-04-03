@@ -40,9 +40,25 @@
               <transition-group name="breadcrumb">
                 <el-breadcrumb-item v-for="(v, k) in breadcrumbList" :key="v.path">
                   <span v-if="k === breadcrumbList.length - 1" class="layout-navbars-breadcrumb-span">
+                    <i
+                      v-if="themeConfig.isBreadcrumbIcon && v.meta.icon && !v.meta.icon.startsWith('svg-')"
+                      :class="'el-icon-' + v.meta.icon"
+                      class="layout-navbars-breadcrumb-iconfont"></i>
+                    <svg-icon
+                      v-else-if="themeConfig.isBreadcrumbIcon && v.meta.icon"
+                      :icon-class="v.meta.icon.replace('svg-', '')"
+                      class="layout-navbars-breadcrumb-iconfont" />
                     <span v-if="v.meta.title">{{ $t(v.meta.title) }}</span>
                   </span>
                   <a v-else @click.prevent="onBreadcrumbClick(v)">
+                    <i
+                      v-if="themeConfig.isBreadcrumbIcon && v.meta.icon && !v.meta.icon.startsWith('svg-')"
+                      :class="'el-icon-' + v.meta.icon"
+                      class="layout-navbars-breadcrumb-iconfont"></i>
+                    <svg-icon
+                      v-else-if="themeConfig.isBreadcrumbIcon && v.meta.icon"
+                      :icon-class="v.meta.icon.replace('svg-', '')"
+                      class="layout-navbars-breadcrumb-iconfont" />
                     <span>{{ $t(v.meta.title) }}</span>
                   </a>
                 </el-breadcrumb-item>
@@ -358,6 +374,14 @@ export default {
     }
     .header-breadcrumb {
       margin-left: 10px;
+      .layout-navbars-breadcrumb-span {
+        display: flex;
+        align-items: center;
+      }
+      .layout-navbars-breadcrumb-iconfont {
+        margin-right: 6px;
+        font-size: 14px;
+      }
     }
   }
   .header-right {

@@ -12,6 +12,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import getPageTitle from '@/utils/get-page-title'
+
 export default {
   name: 'LangSelect',
   computed: {
@@ -26,6 +28,10 @@ export default {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.setLanguage(lang)
+      // 更新页面标题
+      const route = this.$route
+      const pageTitle = route.meta.title ? this.$t(route.meta.title) : ''
+      document.title = getPageTitle(pageTitle)
     },
   },
 }

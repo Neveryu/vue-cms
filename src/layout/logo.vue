@@ -20,8 +20,8 @@ export default {
   },
   data() {
     return {
-      logoMini: process.env.BASE_URL + 'static/image/logo/logo.png',
-      globalTitle: 'vue-cms',
+      logoMini: process.env.BASE_URL + 'static/image/logo/logo.svg',
+      globalTitle: 'Vue CMS',
     }
   },
   computed: {
@@ -65,10 +65,12 @@ export default {
   box-shadow: rgb(0 21 41 / 2%) 0px 1px 4px;
   color: var(--primary);
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   span {
     white-space: nowrap;
     display: inline-block;
+    letter-spacing: 0.5px;
   }
   &:hover {
     span {
@@ -76,8 +78,9 @@ export default {
     }
   }
   &-medium-img {
-    width: 20px;
-    margin-right: 5px;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
   }
 }
 .layout-logo-size {
@@ -86,7 +89,8 @@ export default {
   display: flex;
   cursor: pointer;
   &-img {
-    width: 20px;
+    width: 28px;
+    height: 28px;
     margin: auto;
   }
 }

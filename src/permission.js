@@ -10,6 +10,7 @@ import { Message } from 'element-ui'
 import { loadFromSession, clearAllSession } from '@/common/session-storage'
 import { getToken } from '@/common/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
+import i18n from '@/language'
 
 // 进度条
 import NProgress from 'nprogress'
@@ -21,8 +22,9 @@ const whiteList = ['/login', '/auth-redirect', '/singleLogion', '/files'] // no 
 
 // 路由全局前置守卫
 router.beforeEach(async (to, from, next) => {
-  // set page title
-  document.title = getPageTitle(to.meta.title)
+  // set page title - 使用国际化翻译标题
+  const pageTitle = to.meta.title ? i18n.t(to.meta.title) : ''
+  document.title = getPageTitle(pageTitle)
   NProgress.start() // start progress bar
 
   // determine whether the user has logged in
