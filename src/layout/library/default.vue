@@ -165,9 +165,26 @@ export default {
       toggleCollapse: 'setting/toggleCollapse',
       toggleSettingPanel: 'setting/toggleSettingPanel',
     }),
-    // 重置滚动条高度
+    // 重置滚动条高度并置顶
     updateScrollbar() {
-      this.$refs.layoutScrollbarRef.update()
+      const scrollbar = this.$refs.layoutScrollbarRef
+      if (!scrollbar) return
+      // 先触发更新（兼容 el-scrollbar），再将滚动位置置顶
+      if (typeof scrollbar.update === 'function') {
+        scrollbar.update()
+      }
+      this.$nextTick(() => {
+        try {
+          const wrap = scrollbar.wrap || (scrollbar.$el && scrollbar.$el.querySelector('.el-scrollbar__wrap'))
+          if (wrap) {
+            wrap.scrollTop = 0
+          } else if (scrollbar.$el) {
+            scrollbar.$el.scrollTop = 0
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      })
     },
     // 展开/收起左侧菜单点击
     onSideBarCollapseChange() {
