@@ -130,10 +130,13 @@ export default {
 .custom-wrapper {
   padding: 15px !important;
   .animate-set {
-    background-color: var(--next-color-white);
-    border: 1px solid var(--next-border-color-light);
+    background-color: var(--next-bg-color);
+    border: 1px solid var(--next-border-color);
     padding: 15px 10px;
     margin-top: 10px;
+  }
+  .el-form-item__label {
+    color: var(--next-color-bar);
   }
 }
 ::v-deep .el-alert__title {

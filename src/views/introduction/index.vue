@@ -87,7 +87,7 @@ export default {
 .content-layout {
   padding: 15px !important;
   .content-wrapper {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
     font-size: 18px;
     li {
@@ -127,7 +127,7 @@ export default {
   z-index: 100;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   border-radius: 50%;
-  background: #fff;
+  background: var(--next-bg-color);
   outline: none;
 }
 .button .next {

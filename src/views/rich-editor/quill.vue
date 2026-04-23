@@ -201,12 +201,12 @@ export default {
   padding: 15px 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   line-height: 2;
-  background-color: var(--next-color-white);
+  background-color: var(--next-bg-color);
   border: 1px solid var(--next-border-color-light);
 }
 .content-wrapper {
   margin-top: 15px;
-  background-color: var(--next-color-white);
+  background-color: var(--next-bg-color);
   border: 1px solid var(--next-border-color-light);
   padding: 15px !important;
 }
@@ -219,14 +219,14 @@ export default {
 }
 /*字数统计*/
 .quill-count {
-  border: 1px solid #ccc;
+  border: 1px solid var(--next-border-color, #ccc);
   border-top: none;
   height: 30px;
   line-height: 30px;
   text-align: right;
   padding-right: 10px;
   font-size: 14px;
-  color: #666;
+  color: var(--next-text-color-regular, #666);
 }
 /* 内容返显 */
 .ql-editor {

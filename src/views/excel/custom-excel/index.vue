@@ -146,8 +146,8 @@ export default {
 .content-layout {
   padding: 15px !important;
   .btns-group {
-    background-color: var(--next-color-white);
-    border: 1px solid var(--next-border-color-light);
+    background-color: var(--next-bg-color);
+    border: 1px solid var(--next-border-color);
     padding: 15px 10px;
     margin-bottom: 10px;
   }

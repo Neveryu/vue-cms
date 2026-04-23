@@ -32,8 +32,12 @@
 :root {
   --next-color-white: #ffffff;
   --next-bg-main-color: #f8f8f8;
-  --next-bg-color: #f5f5ff;
+  --next-bg-color: #ffffff; /* 改为纯白色，更适合作为模块背景色 */
+  --next-color-primary: #ffffff; /* light theme surface/background */
   --next-border-color-light: #f1f2f3;
+  --next-color-bar: #2c3e50; /* 默认主要文字颜色（白天主题） */
+  --next-text-color-regular: #606266; /* 默认次要文字颜色（白天主题） */
+  --next-divider: rgba(0, 0, 0, 0.06); /* 默认分隔线颜色（白天主题） */
   --next-color-primary-lighter: #ecf5ff;
   --next-color-success-lighter: #f0f9eb;
   --next-color-warning-lighter: #fdf6ec;
@@ -44,6 +48,10 @@
   --next-color-setting-main: #e9eef3;
   --next-color-setting-aside: #d3dce6;
   --next-color-setting-header: #b3c0d1;
+  --next-color-hover: #f5f5f5; /* 白色主题的悬停色 */
+  --next-color-disabled: #fafafa; /* 白色主题的禁用背景色 */
+  --next-border-color: #e4e7ed; /* 白色主题的边框色 */
+  --next-text-color-placeholder: #c0c4cc; /* 白色主题的占位文字色 */
 }
 
 body {
@@ -69,6 +77,60 @@ html {
 /* 机器数字 */
 .digital-number {
   font-family: digital;
+}
+
+/* 白色模式表格样式覆盖 */
+:not([data-theme]) .el-table {
+  background-color: #ffffff !important;
+
+  th.el-table__cell {
+    background-color: #fafafa !important;
+    color: #606266 !important;
+    border-bottom-color: #ebeef5 !important;
+  }
+
+  td.el-table__cell {
+    background-color: #ffffff !important;
+    color: #606266 !important;
+    border-bottom-color: #ebeef5 !important;
+  }
+
+  tr {
+    background-color: #ffffff !important;
+
+    &:hover > td.el-table__cell {
+      background-color: #f5f7fa !important;
+    }
+  }
+
+  .el-table__body tr.hover-row > td.el-table__cell {
+    background-color: #f5f7fa !important;
+  }
+
+  /* 斑马纹 */
+  &.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background-color: #fafafa !important;
+  }
+
+  /* 表格边框 */
+  &.el-table--border {
+    border-color: #ebeef5 !important;
+    th.el-table__cell {
+      border-right-color: #ebeef5 !important;
+    }
+    td.el-table__cell {
+      border-right-color: #ebeef5 !important;
+    }
+  }
+
+  /* 表格固定列 */
+  .el-table__fixed,
+  .el-table__fixed-right {
+    background-color: #ffffff !important;
+    &::before {
+      background-color: #ebeef5 !important;
+    }
+  }
 }
 
 *,

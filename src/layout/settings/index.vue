@@ -185,7 +185,6 @@
     </el-drawer>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
@@ -326,8 +325,8 @@ export default {
       display: flex;
       align-items: center;
       margin-bottom: 0 !important;
-      border-bottom: 1px solid #ebeef5;
-      color: #303133;
+      border-bottom: 1px solid var(--next-border-color-light, #ebeef5);
+      color: var(--next-bg-topBarColor, #303133);
     }
     .el-drawer__body {
       padding: 0;
@@ -344,7 +343,7 @@ export default {
   :deep(.el-scrollbar__wrap) {
     overflow-x: hidden !important;
     scrollbar-width: thin;
-    scrollbar-color: #c0c4cc transparent;
+    scrollbar-color: var(--next-border-color, #c0c4cc) transparent;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -352,11 +351,11 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #c0c4cc;
+      background-color: var(--next-border-color, #c0c4cc);
       border-radius: 3px;
 
       &:hover {
-        background-color: #909399;
+        background-color: var(--next-text-color-regular, #909399);
       }
     }
 
@@ -378,7 +377,7 @@ export default {
 
     &-label {
       flex: 1;
-      color: #606266;
+      color: var(--next-text-color-regular, #606266);
       font-size: 14px;
     }
   }
@@ -402,20 +401,20 @@ export default {
         height: 100%;
 
         .el-aside-dark {
-          background-color: #191a23;
+          background-color: var(--next-bg-menuBar, #191a23);
         }
 
         .el-aside {
-          background-color: #e9eef3;
+          background-color: var(--next-color-white, #e9eef3);
         }
 
         .el-header {
-          background-color: #fff;
-          border-bottom: 1px solid #ebeef5;
+          background-color: var(--next-bg-topBar, #fff);
+          border-bottom: 1px solid var(--next-border-color-light, #ebeef5);
         }
 
         .el-main {
-          background-color: #f5f7fa;
+          background-color: var(--next-bg-color, #f5f7fa);
         }
       }
 
@@ -427,7 +426,7 @@ export default {
       }
 
       .drawer-layout-active {
-        border: 1px solid #409eff;
+        border: 1px solid var(--primary, #409eff);
       }
 
       .layout-tips-warp,
@@ -437,7 +436,7 @@ export default {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        border: 1px solid #409eff;
+        border: 1px solid var(--primary, #409eff);
         border-radius: 100%;
         padding: 4px;
 
@@ -446,7 +445,7 @@ export default {
           width: 30px;
           height: 30px;
           z-index: 9;
-          border: 1px solid #409eff;
+          border: 1px solid var(--primary, #409eff);
           border-radius: 100%;
 
           .layout-tips-txt {
@@ -457,11 +456,11 @@ export default {
             line-height: 1;
             letter-spacing: 2px;
             white-space: nowrap;
-            color: #409eff;
+            color: var(--primary, #409eff);
             text-align: center;
             transform: rotate(30deg);
             left: -1px;
-            background-color: #f5f7fa;
+            background-color: var(--next-bg-color, #f5f7fa);
             width: 32px;
             height: 17px;
             line-height: 17px;
@@ -473,11 +472,11 @@ export default {
         border-color: #409eff;
 
         .layout-tips-box {
-          border-color: #409eff;
+          border-color: var(--primary, #409eff);
 
           .layout-tips-txt {
-            color: #409eff !important;
-            background-color: #f5f7fa !important;
+            color: var(--primary, #409eff) !important;
+            background-color: var(--next-bg-color, #f5f7fa) !important;
           }
         }
       }
@@ -488,14 +487,14 @@ export default {
         }
 
         .layout-tips-warp {
-          border-color: #409eff;
+          border-color: var(--primary, #409eff);
 
           .layout-tips-box {
-            border-color: #409eff;
+            border-color: var(--primary, #409eff);
 
             .layout-tips-txt {
-              color: #409eff !important;
-              background-color: #f5f7fa !important;
+              color: var(--primary, #409eff) !important;
+              background-color: var(--next-bg-color, #f5f7fa) !important;
             }
           }
         }

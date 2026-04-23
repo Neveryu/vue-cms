@@ -34,6 +34,10 @@ export default {
   },
   methods: {
     drawPie(id) {
+      const theme = getComputedStyle(document.documentElement)
+      const muted = (theme.getPropertyValue('--next-text-color-regular') || '#9aa8b6').trim()
+      const divider = (theme.getPropertyValue('--next-divider') || 'rgba(255,255,255,0.06)').trim()
+
       this.charts = echarts.init(document.getElementById(id))
       this.charts.setOption({
         grid: {
@@ -44,10 +48,11 @@ export default {
         },
         xAxis: {
           type: 'category',
-          // show: false,
+          boundaryGap: false,
+          axisLine: { lineStyle: { color: divider } },
+          axisLabel: { color: muted },
         },
         yAxis: {
-          // type: 'value',
           show: false,
         },
         series: [
@@ -79,8 +84,16 @@ export default {
 </script>
 <style scoped lang="scss">
 .color-line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .wrapper {
-    margin: 0 auto;
+    /* 宽度由组件 mounted 时的行内样式控制（支持百分比） */
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
   }
 }
 </style>

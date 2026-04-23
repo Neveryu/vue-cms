@@ -118,7 +118,7 @@ export default {
       line-height: 28px;
       border-radius: 2px;
       background-color: transparent;
-      color: var(--gray);
+      color: var(--next-text-color-regular, var(--gray));
       &:first-child {
         margin-left: 0;
       }
@@ -130,9 +130,9 @@ export default {
 
     &.active {
       .el-tag {
-        color: var(--dark);
+        color: var(--next-bg-topBarColor, var(--dark));
         .el-icon-close {
-          color: #fff;
+          color: var(--next-color-white, #fff);
         }
         &:before {
           position: relative;
@@ -149,7 +149,7 @@ export default {
 
     &:hover {
       .el-tag {
-        background-color: #ecf5ff;
+        background-color: var(--next-color-primary-lighter, #ecf5ff);
       }
     }
   }
@@ -160,11 +160,11 @@ export default {
   .tags-view-item {
     .el-tag {
       border-radius: 4px;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--next-border-color, #d9d9d9);
     }
     &.active .el-tag {
       background-color: var(--primary);
-      color: #fff;
+      color: var(--next-color-white, #fff);
       border-color: var(--primary);
       &:before {
         display: none;
@@ -197,15 +197,15 @@ export default {
   .tags-view-item {
     .el-tag {
       border-radius: 20px;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--next-border-color, #d9d9d9);
       padding: 0 15px;
     }
     &.active .el-tag {
       background-color: var(--primary);
-      color: #fff;
+      color: var(--next-color-white, #fff);
       border-color: var(--primary);
       &:before {
-        background: #fff;
+        background: var(--next-color-white, #fff);
       }
     }
   }

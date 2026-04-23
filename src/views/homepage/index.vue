@@ -5,7 +5,7 @@
         <div class="wrapper-item">
           <p class="title">{{ item.title }}</p>
           <p class="value digital-number" ref="countup">{{ item.value }}</p>
-          <color-line :id="'main' + index" :color="item.color" :optionData="item.data" width="180px" height="70px"></color-line>
+          <color-line :id="'main' + index" :color="item.color" :optionData="item.data" width="70%" height="70px"></color-line>
         </div>
       </el-col>
     </el-row>
@@ -56,8 +56,7 @@
           <div class="title">
             <p class="title-value">{{ $t('home.investmentDistribution') }}</p>
           </div>
-          <div class="content" ref="">
-            <!-- 投资 -->
+          <div class="content">
             <div class="investment">
               <span class="title">{{ $t('home.investmentAmount') }}</span>
               <investment-pie width="100%" height="50%"></investment-pie>
@@ -84,7 +83,6 @@
                 </span>
               </div>
             </div>
-            <!-- 融资 -->
             <div class="financing">
               <span class="title">{{ $t('home.financingTerm') }}</span>
               <financing-pie width="100%" height="50%"></financing-pie>
@@ -199,11 +197,19 @@ export default {
   methods: {
     initCountUp() {
       this.$nextTick(() => {
-        let countupLength = this.$refs.countup.length
-        let i = 0
-        for (i; i < countupLength; i++) {
-          this.numAnim = new CountUp(this.$refs.countup[i], 0, this.$refs.countup[i].innerText, 2, 1.5)
-          this.numAnim.start()
+        const countupEls = this.$refs.countup || []
+        for (let i = 0; i < countupEls.length; i++) {
+          const el = countupEls[i]
+          const endValRaw = (this.homeTotalData && this.homeTotalData[i] && this.homeTotalData[i].value) || (el && el.innerText) || '0'
+          const endVal = parseFloat(String(endValRaw).replace(/,/g, '')) || 0
+          const decimals = 2
+          const options = { useGrouping: true, separator: ',', decimal: '.' }
+          this.numAnim = new CountUp(el, 0, endVal, decimals, 1.5, options)
+          if (!this.numAnim.error) {
+            this.numAnim.start()
+          } else {
+            console.error('CountUp error:', this.numAnim.error)
+          }
         }
       })
     },
@@ -269,11 +275,7 @@ export default {
       this.scroll.destroy() // 销毁实例以避免内存泄漏
     }
   },
-  updated() {
-    // this.$nextTick(function() {
-    //   this.initCountUp()
-    // })
-  },
+  updated() {},
 }
 </script>
 <style scoped lang="scss">
@@ -283,67 +285,139 @@ export default {
 
 .home-total {
   width: 100%;
-  border: 1px solid var(--next-border-color-light);
-  border-radius: 4px;
   margin: 0 0 15px 0;
-  .home-card-item {
+
+  /* 使用 flex 布局强制一行显示，使用 gap 控制卡片间距；项可收缩以避免出现横向滚动条 */
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+
+  .el-col {
+    /* 允许每列平分剩余空间并收缩，保证四卡始终在一行且自适应 */
+    flex: 1 1 0%;
+    min-width: 0;
+    padding: 0;
     box-sizing: border-box;
-    display: inline-block;
-    height: 100%;
-    padding: 15px 0;
-    vertical-align: top;
-    background-color: var(--next-color-white);
+  }
+
+  .home-card-item {
+    min-height: 110px;
+    padding: 12px;
+    background-color: var(--next-bg-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: 1px solid var(--next-divider);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.12s ease;
+    will-change: transform;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+    /* 通过父容器的 gap 控制间距，移除单个卡片的 margin 避免重复 */
+    margin: 0;
+
+    /* 顶部卡片：标题、数字、图表居中显示，数字增大并有跳动动画 */
     .wrapper-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 100%;
-      padding: 0 20px;
-      border-right: 1px solid #ccc;
       text-align: center;
-      .title {
-        margin: 0px 0;
-      }
-      .value {
-        margin: 5px 0;
+    }
+
+    /* 顶部卡片的标题（居中、无左侧装饰），优化中文字样式 */
+    .title {
+      background: transparent;
+      padding: 6px 0 4px;
+      margin: 0;
+      color: var(--next-text-color-regular);
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.3px;
+      font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      display: block;
+    }
+
+    /* 动画数字样式：金色数值与响应式字号（略小） */
+    .digital-number {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--stat-number, #f5b041) !important;
+      margin: 6px 0;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+    }
+
+    @media (max-width: 1200px) {
+      .digital-number {
         font-size: 34px;
-        color: #ffc107;
       }
     }
-    &:last-child {
-      .wrapper-item {
-        border: none;
+    @media (max-width: 768px) {
+      .digital-number {
+        font-size: 28px;
       }
+    }
+
+    /* 微调图表位置 */
+    color-line {
+      margin-top: 8px;
+      display: block;
     }
   }
 }
+
 .home-part1 {
   margin: 0 !important;
+
   .near-six-month {
     height: 300px;
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
+
     .title {
-      background: #dde3ef;
+      background: var(--next-title-bg);
       padding: 10px 0;
       .title-value {
         margin-left: 4px;
         text-indent: 4px;
-        color: #666;
+        color: var(--next-text-color-regular);
         &:before {
           display: inline-block;
           content: '';
           width: 4px;
           height: 16px;
-          background: purple;
+          background: var(--primary, purple);
           margin-right: 4px;
           border-radius: 4px;
           vertical-align: middle;
         }
       }
     }
+
     .content {
       width: 100%;
       height: 260px;
     }
   }
+
   .detail-item-wrapper {
     display: flex;
     height: 300px;
@@ -354,22 +428,15 @@ export default {
     align-content: space-around;
     padding: 0 10px;
     color: var(--next-color-white);
+
     .home-detail-item {
       flex: 0 0 48%;
       height: 145px;
-      border: 1px solid #eee;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3)) !important;
+      border: 1px solid var(--next-border-color);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04)) !important;
       cursor: pointer;
       border-radius: 4px;
-    }
-    .home-detail-item:hover {
-      background-image: none !important;
-    }
-    .home-detail-item:nth-child(3),
-    .home-detail-item:nth-child(4) {
-      margin-top: 10px;
-    }
-    .home-detail-item {
+
       .name {
         padding: 30px 0 10px 0;
         text-align: center;
@@ -381,44 +448,59 @@ export default {
           font-size: 28px;
         }
       }
+
+      &:hover {
+        background-image: none !important;
+      }
+    }
+
+    .home-detail-item:nth-child(3),
+    .home-detail-item:nth-child(4) {
+      margin-top: 10px;
     }
   }
+
   .rank {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
+
     .title {
-      background: #dde3ef;
+      background: var(--next-title-bg);
       padding: 10px 0;
       .title-value {
         margin-left: 4px;
         text-indent: 4px;
-        color: #666;
+        color: var(--next-text-color-regular);
         &:before {
           display: inline-block;
           content: '';
           width: 4px;
           height: 16px;
-          background: purple;
+          background: var(--primary, purple);
           margin-right: 4px;
           border-radius: 4px;
           vertical-align: middle;
         }
       }
     }
+
     .content {
       position: relative;
       width: 100%;
       height: 260px;
       overflow: hidden;
+
       .wrapper-user {
         margin: 0;
         list-style: none;
         padding-left: 0;
+
         .user-item {
           height: 50px;
           padding: 5px;
+
           .avatar {
-            border: 1px solid #888;
+            border: 1px solid var(--next-border-color);
             border-radius: 100px;
             vertical-align: bottom;
           }
@@ -426,11 +508,11 @@ export default {
             display: inline-block;
             padding-left: 5px;
             .name {
-              color: #999;
+              color: var(--next-text-color-placeholder);
               font-size: 14px;
             }
             .value {
-              color: red;
+              color: var(--primary, #409eff);
             }
           }
         }
@@ -438,63 +520,50 @@ export default {
     }
   }
 }
+
 .home-part2 {
   margin-top: 15px;
+
   .financing-sprinkled {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
+
     .title {
-      background: #dde3ef;
+      background: var(--next-title-bg);
       padding: 10px 0;
       .title-value {
         margin-left: 4px;
         text-indent: 4px;
-        color: #666;
+        color: var(--next-text-color-regular);
         &:before {
           display: inline-block;
           content: '';
           width: 4px;
           height: 16px;
-          background: purple;
+          background: var(--primary, purple);
           margin-right: 4px;
           border-radius: 4px;
           vertical-align: middle;
         }
       }
     }
+
     .content {
       display: inline-flex;
       width: 100%;
-      .investment {
-        height: 330px;
-        width: 50%;
-        .title {
-          display: inherit;
-          text-align: center;
-          background: transparent;
-          padding-top: 20px;
-        }
-        .detail {
-          text-align: center;
-          .detail-item {
-            display: inline-block;
-            width: 40%;
-            margin: 5px;
-            padding-left: 5px;
-            border-left: 5px solid #ccc;
-            color: #666;
-          }
-        }
-      }
+
+      .investment,
       .financing {
         height: 330px;
         width: 50%;
+
         .title {
           display: inherit;
           text-align: center;
           background: transparent;
           padding-top: 20px;
         }
+
         .detail {
           text-align: center;
           .detail-item {
@@ -502,128 +571,86 @@ export default {
             width: 40%;
             margin: 5px;
             padding-left: 5px;
-            border-left: 5px solid #ccc;
-            color: #666;
+            border-left: 5px solid var(--next-divider);
+            color: var(--next-text-color-regular);
           }
         }
       }
     }
   }
+
   .bad-debt {
     margin-left: 10px;
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
+
     .title {
-      background: #dde3ef;
+      background: var(--next-title-bg);
       padding: 10px 0;
       .title-value {
         margin-left: 4px;
         text-indent: 4px;
-        color: #666;
+        color: var(--next-text-color-regular);
         &:before {
           display: inline-block;
           content: '';
           width: 4px;
           height: 16px;
-          background: purple;
+          background: var(--primary, purple);
           margin-right: 4px;
           border-radius: 4px;
           vertical-align: middle;
         }
       }
     }
+
     .content {
       height: inherit;
-      .bad {
-        height: 50%;
-        padding: 20px 15px;
-        .total {
-          display: inline-block;
-          width: 30%;
-          color: #666;
-          vertical-align: top;
-          .total1 {
-            text-align: center;
-            .num {
-              font-size: 24px;
-            }
-          }
-          .total2 {
-            text-align: center;
-            margin-top: 20px;
-            .num {
-              font-size: 24px;
-            }
-          }
-        }
-        .chart {
-          display: inline-block;
-          width: 68%;
-          .title {
-            background: none;
-            border-bottom: 1px solid #ccc;
-          }
-          .line {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 30px;
-            &:last-child {
-              border-bottom-color: #000;
-            }
-          }
-          &:after {
-            content: '0';
-            position: relative;
-            font-size: 70px;
-            left: 20px;
-            top: -30px;
-            color: #ddd;
-            line-height: 0;
-          }
-        }
-      }
+
+      .bad,
       .overdue {
         padding: 20px 15px;
         height: 50%;
+
         .total {
           display: inline-block;
           width: 30%;
-          color: #666;
+          color: var(--next-text-color-regular);
           vertical-align: top;
-          .total1 {
-            text-align: center;
-            .num {
-              font-size: 24px;
-            }
-          }
+
+          .total1,
           .total2 {
             text-align: center;
-            margin-top: 20px;
             .num {
               font-size: 24px;
             }
           }
         }
+
         .chart {
           display: inline-block;
           width: 68%;
+
           .title {
             background: none;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--next-divider);
           }
           .line {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--next-divider);
             padding-bottom: 30px;
+
             &:last-child {
-              border-bottom-color: #000;
+              border-bottom-color: var(--next-divider);
             }
           }
+
           &:after {
             content: '0';
             position: relative;
             font-size: 70px;
             left: 20px;
             top: -30px;
-            color: #ddd;
+            color: var(--next-decor);
             line-height: 0;
           }
         }
@@ -631,6 +658,7 @@ export default {
     }
   }
 }
+
 .el-col {
   border-radius: 4px;
 }
@@ -643,10 +671,12 @@ export default {
 .bg-purple-light {
   background: #e5e9f2;
 }
+
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
 }
+
 .content ::v-deep .bscroll-vertical-scrollbar {
   z-index: 2 !important;
 }

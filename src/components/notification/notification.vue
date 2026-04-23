@@ -62,8 +62,8 @@ export default {
 <style scoped lang="scss">
 .notification {
   display: flex;
-  background-color: #303030;
-  color: rgba(255, 255, 255, 1);
+  background-color: var(--next-color-primary, #303030);
+  color: var(--next-color-bar, rgba(255, 255, 255, 1));
   align-items: center;
   padding: 18px 14px;
   position: fixed;
@@ -76,11 +76,11 @@ export default {
   .content {
     padding: 0;
     &:hover {
-      color: #42b983;
+      color: var(--primary, #42b983);
     }
   }
   .btn {
-    color: #ff4081;
+    color: var(--primary, #ff4081);
     padding-left: 24px;
     margin-left: auto;
     cursor: pointer;

@@ -129,7 +129,7 @@ export default {
 .content-wrapper {
   padding: 15px !important;
   .main-content {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
     border-radius: 3px;
     padding: 15px;

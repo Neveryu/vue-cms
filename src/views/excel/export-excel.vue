@@ -153,7 +153,7 @@ export default {
 .content-wrapper {
   padding: 15px !important;
   .top-tools {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border-radius: 4px;
     padding: 20px 0 20px 5px;
   }

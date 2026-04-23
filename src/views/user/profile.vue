@@ -179,7 +179,7 @@ export default {
 .content-layout {
   padding: 15px !important;
   .content-wrapper {
-    background-color: var(--next-color-white);
+    background-color: var(--next-bg-color);
     border: 1px solid var(--next-border-color-light);
     margin: 0 !important;
   }

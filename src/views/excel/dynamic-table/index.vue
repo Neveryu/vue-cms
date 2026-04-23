@@ -25,23 +25,19 @@ export default {
 <style scoped lang="scss">
 .content-wrapper {
   padding: 15px !important;
-  .fixed-thead-wrapper {
-    background-color: var(--next-color-white);
-    border: 1px solid var(--next-border-color-light);
+  .fixed-thead-wrapper,
+  .unfixed-thead-wrapper {
+    background-color: var(--next-bg-color);
+    border: 1px solid var(--next-border-color);
     border-radius: 3px;
     .title {
       margin: 15px 0 5px 20px;
+      color: var(--next-color-bar);
     }
   }
   .unfixed-thead-wrapper {
-    background-color: var(--next-color-white);
-    border: 1px solid var(--next-border-color-light);
-    border-radius: 3px;
     margin-top: 25px;
     overflow: hidden;
-    .title {
-      margin: 15px 0 5px 20px;
-    }
   }
 }
 </style>
