@@ -217,6 +217,28 @@ export default {
   /*width: 80%;*/
   height: 300px;
 }
+#quill-editor .ql-toolbar,
+#quill-editor .ql-container.ql-snow {
+  background-color: var(--next-color-primary) !important;
+  border: 1px solid var(--next-border-color) !important;
+  color: var(--next-color-bar) !important;
+}
+#quill-editor .ql-toolbar .ql-picker-label,
+#quill-editor .ql-toolbar .ql-picker-options,
+#quill-editor .ql-toolbar .ql-stroke,
+#quill-editor .ql-toolbar .ql-fill,
+#quill-editor .ql-toolbar .ql-picker-item,
+#quill-editor .ql-toolbar button {
+  color: var(--next-color-bar) !important;
+}
+#quill-editor .ql-editor {
+  background-color: var(--next-color-primary) !important;
+  color: var(--next-color-bar) !important;
+  min-height: 220px;
+}
+#quill-editor .ql-editor.ql-blank::before {
+  color: var(--next-color-placeholder) !important;
+}
 /*字数统计*/
 .quill-count {
   border: 1px solid var(--next-border-color, #ccc);
@@ -226,7 +248,7 @@ export default {
   text-align: right;
   padding-right: 10px;
   font-size: 14px;
-  color: var(--next-text-color-regular, #666);
+  color: var(--next-color-bar, #666);
 }
 /* 内容返显 */
 .ql-editor {

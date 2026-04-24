@@ -347,6 +347,18 @@ export default {
   transform: scale(1.1);
   vertical-align: middle;
 }
+.item-control .checkbox /deep/ .el-checkbox__inner {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-color: #909399 !important;
+}
+[data-theme='dark'] .content-layout .item-control .checkbox /deep/ .el-checkbox__input .el-checkbox__inner {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: #ffffff !important;
+}
+.item-control .checkbox.is-checked /deep/ .el-checkbox__inner {
+  background-color: var(--primary, #409eff) !important;
+  border-color: var(--primary, #409eff) !important;
+}
 .item-control .origin {
   font-size: 0;
 }

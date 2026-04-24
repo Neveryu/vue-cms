@@ -167,5 +167,11 @@ export default {
   width: 350px;
   text-align: right;
   padding-right: 20px;
+
+  ::v-deep .el-progress__text {
+    color: #ffffff !important;
+    font-weight: 600;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.35);
+  }
 }
 </style>

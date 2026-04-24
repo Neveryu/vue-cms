@@ -365,8 +365,8 @@ export default {
 
 <style scoped lang="scss">
 .expand-model-wrapper {
-  background-color: var(--next-color-white);
-  border: 1px solid var(--next-border-color-light);
+  background-color: var(--next-bg-color) !important;
+  border: 1px solid var(--next-border-color) !important;
   overflow-x: hidden;
   padding: 10px;
 }
@@ -379,15 +379,17 @@ export default {
   height: 210px;
   margin-bottom: 10px;
   font-size: 14px;
-  color: #ccc;
+  color: var(--next-color-bar) !important;
 }
 .file-item-card {
   position: relative;
   height: 100%;
+  background-color: var(--next-color-primary) !important;
+  border: 1px solid var(--next-border-color) !important;
 }
 .file-item-card.active {
-  border-color: #3a8ee6;
-  background-color: rgba(236, 245, 255, 0.3);
+  border-color: var(--primary, #409eff) !important;
+  background-color: rgba(58, 142, 230, 0.12) !important;
 }
 .file-item-card ::v-deep .el-card__body {
   padding: 10px;
@@ -401,7 +403,7 @@ export default {
 }
 .checkbox ::v-deep .el-checkbox__inner,
 .checkbox ::v-deep .el-checkbox__inner {
-  border-color: #409eff;
+  border-color: var(--primary, #409eff) !important;
 }
 
 .file-item-card:hover .checkbox {
@@ -419,16 +421,16 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #666;
+  color: var(--next-color-bar) !important;
   font-size: 13px;
 }
 .file-item-card .item.name {
-  color: #333;
+  color: var(--next-color-bar) !important;
   font-size: 14px;
   cursor: pointer;
 }
 .file-item-card .item.name:hover {
-  color: #000;
+  color: var(--primary, #409eff) !important;
   text-decoration: underline;
 }
 .file-item.card .address {
@@ -478,7 +480,7 @@ export default {
   margin-right: 4px;
 }
 .top-bar .all-tips {
-  color: #555;
+  color: var(--next-color-bar) !important;
   font-size: 14px;
 }
 
